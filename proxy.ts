@@ -58,16 +58,16 @@ export async function proxy(request: NextRequest) {
   const userAgent = request.headers.get("user-agent") || ""
   const uaLower = userAgent.toLowerCase().trim()
   
-  // Hostname verify karo loop se bachne ke liye
+  // Hostname loop check
   const host = request.headers.get("host") || ""
 
-  // 1. Agar request non-www 'upforge.org' par aati hai, toh standard protocol se handle hone do, 
-  // ya middleware se hi strict handle karo bina next.config se takraye.
+  // Strict non-www redirect to break redirect loops instantly
   if (host === "upforge.org") {
     return NextResponse.redirect(`https://www.upforge.org${pathname}${request.nextUrl.search}`, 301)
   }
 
-  const ip = request.ip || request.headers.get("x-forwarded-for")?.split(",")[0] || "unknown-ip"
+  // TypeScript Property 'ip' type error bypass using dynamic evaluation
+  const ip = (request as any).ip || request.headers.get("x-forwarded-for")?.split(",")[0] || request.headers.get("x-real-ip") || "unknown-ip"
 
   // BOT DETECTION
   if (!uaLower || uaLower.length < 12) {
@@ -83,7 +83,7 @@ export async function proxy(request: NextRequest) {
 
   // RATE LIMITING
   if (isApproved) {
-    if (isRateLimited(ip, 30, 10000)) { // Throttling slack badhai
+    if (isRateLimited(ip, 30, 10000)) {
       return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
     }
   } else {
@@ -96,15 +96,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // ADMIN PROTECT LOOP BREAKER
+  // ADMIN SECTION LOOP PROTECTION
   if (pathname.startsWith('/admin')) {
-    // Agar login page hai ya api route, toh infinite loop mat banao
     if (pathname === '/admin/login' || pathname.startsWith('/api/admin/')) {
       return NextResponse.next()
     }
     const adminAuth = request.cookies.get('admin_auth')?.value
     if (!adminAuth || adminAuth !== 'authenticated') {
-      // Loop se bachne ke liye redirect URL absolute aur precise hona chahiye
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
@@ -123,7 +121,6 @@ export async function proxy(request: NextRequest) {
 export default proxy
 
 export const config = {
-  // Static assets aur standard dynamic endpoints ko strictly ignore karo sitemap parsing ke waqt
   matcher: [
     "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.*\\.xml|ads.txt|llms.txt|llms-full.txt|.*\\.(?:png|jpg|jpeg|gif|webp|svg|css|js|woff2?|json)).*)",
   ],
