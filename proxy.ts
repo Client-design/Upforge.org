@@ -58,15 +58,7 @@ export async function proxy(request: NextRequest) {
   const userAgent = request.headers.get("user-agent") || ""
   const uaLower = userAgent.toLowerCase().trim()
   
-  // Hostname loop check
-  const host = request.headers.get("host") || ""
-
-  // Strict non-www redirect to break redirect loops instantly
-  if (host === "upforge.org") {
-    return NextResponse.redirect(`https://www.upforge.org${pathname}${request.nextUrl.search}`, 301)
-  }
-
-  // TypeScript Property 'ip' type error bypass using dynamic evaluation
+  // Dynamic TypeScript Property 'ip' bypass
   const ip = (request as any).ip || request.headers.get("x-forwarded-for")?.split(",")[0] || request.headers.get("x-real-ip") || "unknown-ip"
 
   // BOT DETECTION
@@ -96,7 +88,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // ADMIN SECTION LOOP PROTECTION
+  // ADMIN SECTION PROTECTION
   if (pathname.startsWith('/admin')) {
     if (pathname === '/admin/login' || pathname.startsWith('/api/admin/')) {
       return NextResponse.next()
@@ -121,6 +113,7 @@ export async function proxy(request: NextRequest) {
 export default proxy
 
 export const config = {
+  // Static assets aur parameters ko middleware execution layer se bypass karein
   matcher: [
     "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.*\\.xml|ads.txt|llms.txt|llms-full.txt|.*\\.(?:png|jpg|jpeg|gif|webp|svg|css|js|woff2?|json)).*)",
   ],
