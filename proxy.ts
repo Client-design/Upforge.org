@@ -1,145 +1,42 @@
 import { NextResponse, type NextRequest } from "next/server"
 
-// ── APPROVED BOTS (Allowed to crawl/fetch, subject to rate limiting) ─────────
+// APPROVED BOTS (Allowed to crawl/fetch, subject to rate limiting)
 const ALLOWED_BOTS = [
-  // Search Engines (SEO) - Only the absolute best-tier allowed
-  "googlebot",
-  "googlebot-image",
-  "googlebot-video",
-  "googlebot-news",
-  "adsbot-google",
-  "bingbot",
-  "msnbot",
-  "duckduckbot",
-  
-  // Answer Engines / AI Search (AEO) - Best level allowed
-  "gptbot",
-  "oai-searchbot",
-  "chatgpt-user",
-  "perplexitybot",
-  "claudebot",
-  "claude-web",
-  "applebot",
-  "applebot-extended",
-  
-  // Social Previews / Share Card Crawlers (Link previews for humans)
-  "facebookexternalhit",
-  "meta-externalagent",
-  "twitterbot",
-  "linkedinbot",
-  "slackbot",
-  "slack-imgproxy",
-  "discordbot",
-  "whatsapp",
-  "telegrambot",
-  "pinterest",
-  
-  // System / Developer Audit & Monitoring Tools
-  "vercel",
-  "lighthouse",
+  "googlebot", "googlebot-image", "googlebot-video", "googlebot-news", "adsbot-google",
+  "bingbot", "msnbot", "duckduckbot", "gptbot", "oai-searchbot", "chatgpt-user",
+  "perplexitybot", "claudebot", "claude-web", "applebot", "applebot-extended",
+  "facebookexternalhit", "meta-externalagent", "twitterbot", "linkedinbot",
+  "slackbot", "slack-imgproxy", "discordbot", "whatsapp", "telegrambot", "pinterest",
+  "vercel", "lighthouse"
 ]
 
-// ── BLOCKED BOT KEYWORDS (Blocked immediately) ──────────────────────────────
+// BLOCKED BOT KEYWORDS (Blocked immediately)
 const BLOCKED_KEYWORDS = [
-  // SEO Scrapers / Competitor Spying Tools (High frequency, zero search value)
-  "ahrefsbot",
-  "semrushbot",
-  "dotbot",
-  "rogerbot",
-  "mj12bot",
-  "megaindex",
-  "criteobot",
-  "petalbot",
-  "spyfu",
-  "serpstat",
-  "cognitiveseo",
-  "linkdex",
-  "seokicks",
-  "grapeshot",
-  "coccoc",
-  "mail.ru_bot",
-  "screaming frog",
-  "searchmetrics",
-  "sitecheck",
-  "backlink",
-  "keycss",
-  
-  // AI Training scrapers that do NOT drive search/AEO traffic
-  "ccbot",
-  "bytespider",
-  "amazonbot",
-  "diffbot",
-  "cohere-ai",
-  "anthropic-ai",
-  "google-extended",
-  "facebookbot",
-  
-  // Non-essential / regional search bots to save hosting limits
-  "baiduspider",
-  "yandexbot",
-  "yandexmobilebot",
-  "sogou",
-  "yahoo",
-  "yeti", // Naver Yeti
-  
-  // Scraping script clients / developer tools / libraries
-  "curl",
-  "wget",
-  "urllib",
-  "node-fetch",
-  "axios",
-  "scrapy",
-  "headlesschrome",
-  "selenium",
-  "puppeteer",
-  "playwright",
-  "postman",
-  "go-http-client",
-  "java",
-  "perl",
-  "blexbot",
-  "barkrowler",
-  "zoominfobot",
-  "exabot",
-  "python",
-  "libwww-perl",
-  "lwp-trivial",
-  "mechanize",
-  "nmap",
-  "httpclient",
-  "http-client",
+  "ahrefsbot", "semrushbot", "dotbot", "rogerbot", "mj12bot", "megaindex", "criteobot",
+  "petalbot", "spyfu", "serpstat", "cognitiveseo", "linkdex", "seokicks", "grapeshot",
+  "coccoc", "mail.ru_bot", "screaming frog", "searchmetrics", "sitecheck", "backlink",
+  "keycss", "ccbot", "bytespider", "amazonbot", "diffbot", "cohere-ai", "anthropic-ai",
+  "google-extended", "facebookbot", "baiduspider", "yandexbot", "yandexmobilebot",
+  "sogou", "yahoo", "yeti", "curl", "wget", "urllib", "node-fetch", "axios", "scrapy",
+  "headlesschrome", "selenium", "puppeteer", "playwright", "postman", "go-http-client",
+  "java", "perl", "blexbot", "barkrowler", "zoominfobot", "exabot", "python",
+  "libwww-perl", "lwp-trivial", "mechanize", "nmap", "httpclient", "http-client"
 ]
 
-// ── GENERIC CRAWLER TERMS (Blocked if not in approved list) ─────────────────
-const GENERIC_CRAWLER_KEYWORDS = [
-  "bot",
-  "spider",
-  "crawler",
-  "crawling",
-  "scraper",
-  "scraping",
-]
+const GENERIC_CRAWLER_KEYWORDS = ["bot", "spider", "crawler", "crawling", "scraper", "scraping"]
 
-// ── IN-MEMORY RATE LIMITER FOR ALLOWED BOTS / CLIENTS ────────────────────────
 interface RateLimitBucket {
   count: number
   resetTime: number
 }
-
 const rateLimitMap = new Map<string, RateLimitBucket>()
 
-// Cleanup old entries from the map to prevent memory leaks
 function cleanupRateLimitMap() {
   if (rateLimitMap.size > 10000) {
     const now = Date.now()
     for (const [key, val] of rateLimitMap.entries()) {
-      if (now > val.resetTime) {
-        rateLimitMap.delete(key)
-      }
+      if (now > val.resetTime) rateLimitMap.delete(key)
     }
-  }
-  if (rateLimitMap.size > 15000) {
-    rateLimitMap.clear()
   }
 }
 
@@ -147,156 +44,87 @@ function isRateLimited(ip: string, limit: number, windowMs: number): boolean {
   cleanupRateLimitMap()
   const now = Date.now()
   const bucket = rateLimitMap.get(ip)
-  
   if (!bucket || now > bucket.resetTime) {
-    rateLimitMap.set(ip, {
-      count: 1,
-      resetTime: now + windowMs
-    })
+    rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs })
     return false
   }
-  
-  if (bucket.count >= limit) {
-    return true
-  }
-  
+  if (bucket.count >= limit) return true
   bucket.count++
   return false
 }
 
-// ── MAIN PROXY / MIDDLEWARE LOGIC ───────────────────────────────────────────
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const userAgent = request.headers.get("user-agent") || ""
   const uaLower = userAgent.toLowerCase().trim()
+  
+  // Hostname verify karo loop se bachne ke liye
+  const host = request.headers.get("host") || ""
 
-  // 1. Get Client IP for rate limiting
-  const ip = (request as any).ip || request.headers.get("x-forwarded-for")?.split(",")[0] || request.headers.get("x-real-ip") || "unknown-ip"
+  // 1. Agar request non-www 'upforge.org' par aati hai, toh standard protocol se handle hone do, 
+  // ya middleware se hi strict handle karo bina next.config se takraye.
+  if (host === "upforge.org") {
+    return NextResponse.redirect(`https://www.upforge.org${pathname}${request.nextUrl.search}`, 301)
+  }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // STEP 1: BOT DETECTION & BLOCKING
-  // ─────────────────────────────────────────────────────────────────────────
+  const ip = request.ip || request.headers.get("x-forwarded-for")?.split(",")[0] || "unknown-ip"
 
-  // Block missing or extremely short user agents (often simple scripts/scrapers)
+  // BOT DETECTION
   if (!uaLower || uaLower.length < 12) {
-    return new NextResponse(
-      JSON.stringify({ error: "Access denied. Valid browser or client agent required." }),
-      {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    return new NextResponse(JSON.stringify({ error: "Access denied." }), { status: 403, headers: { "Content-Type": "application/json" } })
   }
 
-  // Check if it is an approved bot
   const isApproved = ALLOWED_BOTS.some((bot) => uaLower.includes(bot))
-
   if (!isApproved) {
-    // Block if it matches explicit blacklisted bots/scrapers
-    const isBlocked = BLOCKED_KEYWORDS.some((kw) => uaLower.includes(kw))
-    if (isBlocked) {
-      return new NextResponse(
-        JSON.stringify({ error: "Access denied. Automated traffic from this agent is not allowed." }),
-        {
-          status: 403,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-    }
-
-    // Block any generic crawler keywords (if not explicitly allowed)
-    const isGenericBot = GENERIC_CRAWLER_KEYWORDS.some((kw) => uaLower.includes(kw))
-    if (isGenericBot) {
-      return new NextResponse(
-        JSON.stringify({ error: "Access denied. Automated web crawling is restricted." }),
-        {
-          status: 403,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+    if (BLOCKED_KEYWORDS.some((kw) => uaLower.includes(kw)) || GENERIC_CRAWLER_KEYWORDS.some((kw) => uaLower.includes(kw))) {
+      return new NextResponse(JSON.stringify({ error: "Access denied." }), { status: 403, headers: { "Content-Type": "application/json" } })
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // STEP 2: RATE LIMITING (Allowed Bots & General Traffic)
-  // ─────────────────────────────────────────────────────────────────────────
-
+  // RATE LIMITING
   if (isApproved) {
-    // Limit allowed bots/crawlers (e.g. Max 15 requests per 10 seconds)
-    if (isRateLimited(ip, 15, 10000)) {
-      return new NextResponse(
-        JSON.stringify({ error: "Rate limit exceeded. Please throttle request frequency." }),
-        {
-          status: 429,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+    if (isRateLimited(ip, 30, 10000)) { // Throttling slack badhai
+      return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
     }
   } else {
-    // Generous rate limit for normal human users (e.g. Max 100 requests per 10 seconds)
-    if (isRateLimited(ip, 100, 10000)) {
-      return new NextResponse(
-        JSON.stringify({ error: "Rate limit exceeded. Too many requests." }),
-        {
-          status: 429,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+    if (isRateLimited(ip, 150, 10000)) {
+      return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // STEP 3: PROXY / CONTEXT / REDIRECTS (Only on non-API routes)
-  // ─────────────────────────────────────────────────────────────────────────
-
-  // Skip header and auth logic for API routes
   if (pathname.startsWith('/api')) {
     return NextResponse.next()
   }
 
-  // Clone request headers to inject context headers
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-upforge-domain', 'org')
-  requestHeaders.set('x-upforge-pathname', pathname)
-
-  const response = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  })
-
-  // Set the context headers on the response as well for downstream proxying
-  response.headers.set('x-upforge-domain', 'org')
-  response.headers.set('x-upforge-pathname', pathname)
-
-  // Admin route protection (cookie check, redirects unauthenticated users)
+  // ADMIN PROTECT LOOP BREAKER
   if (pathname.startsWith('/admin')) {
+    // Agar login page hai ya api route, toh infinite loop mat banao
     if (pathname === '/admin/login' || pathname.startsWith('/api/admin/')) {
-      return response
+      return NextResponse.next()
     }
-
     const adminAuth = request.cookies.get('admin_auth')?.value
     if (!adminAuth || adminAuth !== 'authenticated') {
+      // Loop se bachne ke liye redirect URL absolute aur precise hona chahiye
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
 
-  return response
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-upforge-domain', 'org')
+  requestHeaders.set('x-upforge-pathname', pathname)
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
 }
 
-// Next.js default export compatibility
 export default proxy
 
-// Next.js 16 proxy configuration matcher
 export const config = {
+  // Static assets aur standard dynamic endpoints ko strictly ignore karo sitemap parsing ke waqt
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico, robots.txt, sitemap.xml, ads.txt, llms.txt, llms-full.txt
-     * - standard static file formats (png, jpg, jpeg, gif, webp, svg, css, js, woff2, json, xml)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|ads.txt|llms.txt|llms-full.txt|.*\\.(?:png|jpg|jpeg|gif|webp|svg|css|js|woff2?|json|xml)).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.*\\.xml|ads.txt|llms.txt|llms-full.txt|.*\\.(?:png|jpg|jpeg|gif|webp|svg|css|js|woff2?|json)).*)",
   ],
 }
