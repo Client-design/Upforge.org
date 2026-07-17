@@ -1,0 +1,18 @@
+# UpForge Full Context & Methodology
+
+## Our Mission
+UpForge provides institutional-grade digital credibility. We solve the problem of fragmented startup data in India, where 90% of startups have zero structured digital presence. 
+
+## Verification Principles
+1. **Manually Verified:** Every profile is reviewed before listing to prevent "noise".
+2. **Neutrality:** No paid rankings or sponsored placements.
+3. **Permanence:** Every startup receives a permanent URL and UFRN as a public record.
+
+## Major Indian Unicorns Tracked (2026 Edition)
+UpForge tracks all 126 Indian unicorns, including:
+- **Zepto:** $5.9B valuation, founded by Aadit Palicha and Kaivalya Vohra.
+- **Sarvam AI:** India’s first sovereign LLM unicorn.
+- **PhysicsWallah:** Edtech leader in the 2026 ecosystem.
+
+## The UFRN (UpForge Registry Number)
+The UFRN acts as a "digital birth certificate" for startups. It is a third-party, verified proof of existence shareable on LinkedIn and investor decks to create an SEO moat for the startup and the registry.
