@@ -2,7 +2,8 @@ import { MetadataRoute } from "next"
 import { fetchAllStartups } from "@/lib/google-sheets"
 
 const BASE = "https://www.upforge.org"
-const STATIC_DATE = new Date("2026-04-28")
+// String fallback format directly use karenge taaki transform crash na ho
+const STATIC_DATE_STR = "2026-04-28"
 
 // All published blog slugs — updated June 2026
 const STARTUP_BLOG_SLUGS = [
@@ -32,7 +33,8 @@ const STARTUP_BLOG_SLUGS = [
   "startup-verification-ufrn-credentials-guide",
 ]
 
-const JUNE_2026_DATE = new Date("2026-06-26")
+const JUNE_2026_STR = "2026-06-26"
+const JULY_2026_STR = "2026-07-06"
 
 // Global founder pages - high priority
 const FEATURED_FOUNDER_SLUGS = [
@@ -110,11 +112,14 @@ type BlogRow = {
   is_featured?: boolean | null
 }
 
-// Helper function jo hamesha ek valid Date object return karega
-function safeDate(value?: string | null): Date {
-  if (!value) return STATIC_DATE
+// Helper: Yeh direct ISO format ki VALID string return karega, raw object nahi
+function safeDateString(value?: string | null): string {
+  if (!value) return STATIC_DATE_STR
   const d = new Date(value)
-  return isNaN(d.getTime()) ? STATIC_DATE : d
+  if (isNaN(d.getTime())) return STATIC_DATE_STR
+  
+  // Safely format manually as YYYY-MM-DD to avoid native runtime toISOString crash loops
+  return d.toISOString().split('T')[0]
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -137,10 +142,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     blogs = []
   }
 
-  // 1. Static pages (highest priority first)
+  // 1. Static pages
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map(route => ({
     url: `${BASE}${route.path}`,
-    lastModified: STATIC_DATE,
+    lastModified: safeDateString(STATIC_DATE_STR),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }))
@@ -148,7 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Featured founder pages
   const founderEntries: MetadataRoute.Sitemap = FEATURED_FOUNDER_SLUGS.map(slug => ({
     url: `${BASE}/startup/${slug}`,
-    lastModified: STATIC_DATE,
+    lastModified: safeDateString(STATIC_DATE_STR),
     changeFrequency: "daily" as const,
     priority: 0.95,
   }))
@@ -156,7 +161,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 3. Category pages
   const categoryEntries: MetadataRoute.Sitemap = STARTUP_CATEGORIES.map(cat => ({
     url: `${BASE}/startups/${cat}`,
-    lastModified: STATIC_DATE,
+    lastModified: safeDateString(STATIC_DATE_STR),
     changeFrequency: "daily" as const,
     priority: 0.8,
   }))
@@ -164,7 +169,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 4. City-based pages
   const cityEntries: MetadataRoute.Sitemap = STARTUP_CITIES.map(city => ({
     url: `${BASE}/startups/${city}`,
-    lastModified: STATIC_DATE,
+    lastModified: safeDateString(STATIC_DATE_STR),
     changeFrequency: "weekly" as const,
     priority: 0.75,
   }))
@@ -172,7 +177,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 5. Individual startup pages
   const startupEntries: MetadataRoute.Sitemap = startups.map(s => ({
     url: `${BASE}/startup/${s.slug}`,
-    lastModified: safeDate(s.updated_at || s.created_at),
+    lastModified: safeDateString(s.updated_at || s.created_at),
     changeFrequency: "weekly" as const,
     priority: s.is_featured ? 0.9 : 0.75,
   }))
@@ -182,20 +187,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter(s => s.ufrn)
     .map(s => ({
       url: `${BASE}/ufrn/${s.ufrn}`,
-      lastModified: safeDate(s.updated_at || s.created_at),
+      lastModified: safeDateString(s.updated_at || s.created_at),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }))
 
-  // 7. Blog entries from database (startup-related only)
+  // 7. Blog entries from database
   const blogEntries: MetadataRoute.Sitemap = blogs.map(b => ({
     url: `${BASE}/blog/${b.slug}`,
-    lastModified: safeDate(b.updated_at || b.created_at),
+    lastModified: safeDateString(b.updated_at || b.created_at),
     changeFrequency: "monthly" as const,
     priority: b.is_featured ? 0.8 : 0.65,
   }))
 
-  const JULY_2026_DATE = new Date("2026-07-06")
   const JULY_BLOG_SLUGS = [
     "ai-startup-funding-exit-route-india-2026",
     "investors-rejecting-generic-ai-pitches-2026",
@@ -204,7 +208,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "startup-verification-ufrn-credentials-guide",
   ]
   
-  // 8. Curated blog slugs — use June/July dates for new posts
   const NEW_BLOG_SLUGS = [
     "best-vc-firms-india-2026",
     "startup-valuation-india-2026",
@@ -219,15 +222,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const curatedBlogEntries: MetadataRoute.Sitemap = STARTUP_BLOG_SLUGS.map(slug => ({
     url: `${BASE}/blog/${slug}`,
     lastModified: JULY_BLOG_SLUGS.includes(slug)
-      ? JULY_2026_DATE
+      ? safeDateString(JULY_2026_STR)
       : NEW_BLOG_SLUGS.includes(slug)
-      ? JUNE_2026_DATE
-      : STATIC_DATE,
+      ? safeDateString(JUNE_2026_STR)
+      : safeDateString(STATIC_DATE_STR),
     changeFrequency: "monthly" as const,
     priority: 0.75,
   }))
 
-  // Combine all entries - static pages first for priority
   return [
     ...staticEntries,
     ...founderEntries,
