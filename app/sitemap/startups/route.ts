@@ -1,39 +1,64 @@
-// app/sitemap/startups/route.ts — Google Sheets powered
-
-import { fetchAllStartups } from "@/lib/google-sheets"
 import { NextResponse } from "next/server"
+import { fetchAllStartups } from "@/lib/google-sheets"
 
-const BASE_URL = "https://www.upforge.org"
+const BASE = "https://www.upforge.org"
+const FALLBACK_DATE_STR = "2026-04-28"
 
-export const revalidate = 300
+// Helper function jo kisi bhi haal me invalid string standard se crash nahi hone degi
+function cleanISOString(dateValue: any): string {
+  if (!dateValue) return FALLBACK_DATE_STR
+  
+  const parsedDate = new Date(dateValue)
+  if (isNaN(parsedDate.getTime())) return FALLBACK_DATE_STR
+  
+  // Directly extract YYYY-MM-DD to avoid native runtime runtime errors
+  return parsedDate.toISOString().split("T")[0]
+}
 
 export async function GET() {
-  const all = await fetchAllStartups()
+  try {
+    const startups = await fetchAllStartups()
+    const approvedStartups = startups.filter(s => s.status === "approved" || !s.status)
 
-  const urls = all
-    .filter((s) => s.slug)
-    .map((s) => {
-      const date = s.updated_at ?? s.created_at ?? "2026-01-01"
-      const isoDate = new Date(date).toISOString().split("T")[0]
+    // Dynamic xml entries mapping structure
+    const sitemapEntries = approvedStartups.map((s) => {
+      const lastMod = cleanISOString(s.updated_at || s.created_at)
+      
       return `
-  <url>
-    <loc>${BASE_URL}/startup/${s.slug}</loc>
-    <lastmod>${isoDate}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${s.is_featured ? "0.9" : "0.8"}</priority>
-  </url>`
+        <url>
+          <loc>${BASE}/startup/${s.slug}</loc>
+          <lastmod>${lastMod}</lastmod>
+          <changefreq>weekly</changefreq>
+          <priority>${s.is_featured ? "0.9" : "0.75"}</priority>
+        </url>
+      `
+    }).join("")
+
+    const xmlSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      ${sitemapEntries}
+    </urlset>`
+
+    return new NextResponse(xmlSitemap, {
+      headers: {
+        "Content-Type": "application/xml",
+        "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=60",
+      },
     })
-    .join("")
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
-</urlset>`
-
-  return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml",
-      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
-    },
-  })
+  } catch (error) {
+    console.error("Error generating startups sub-sitemap route:", error)
+    
+    // Safety fallback xml block so the build NEVER blocks during prerendering
+    const fallbackXml = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>${BASE}/startup</loc>
+        <lastmod>${FALLBACK_DATE_STR}</lastmod>
+      </url>
+    </urlset>`
+    
+    return new NextResponse(fallbackXml, {
+      headers: { "Content-Type": "application/xml" },
+    })
+  }
 }
