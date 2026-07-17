@@ -110,6 +110,7 @@ type BlogRow = {
   is_featured?: boolean | null
 }
 
+// Helper function jo hamesha ek valid Date object return karega
 function safeDate(value?: string | null): Date {
   if (!value) return STATIC_DATE
   const d = new Date(value)
@@ -202,6 +203,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "tier-2-tier-3-indian-cities-producing-startups-2026",
     "startup-verification-ufrn-credentials-guide",
   ]
+  
   // 8. Curated blog slugs — use June/July dates for new posts
   const NEW_BLOG_SLUGS = [
     "best-vc-firms-india-2026",
@@ -213,6 +215,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "startup-legal-guide-india-2026",
     "india-vs-silicon-valley-startups",
   ]
+  
   const curatedBlogEntries: MetadataRoute.Sitemap = STARTUP_BLOG_SLUGS.map(slug => ({
     url: `${BASE}/blog/${slug}`,
     lastModified: JULY_BLOG_SLUGS.includes(slug)
