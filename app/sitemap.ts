@@ -31,6 +31,18 @@ const STARTUP_BLOG_SLUGS = [
   "defense-tech-startups-india-2026",
   "tier-2-tier-3-indian-cities-producing-startups-2026",
   "startup-verification-ufrn-credentials-guide",
+
+  // 10 New July 2026 Articles
+  "top-20-saas-startups-india-2026",
+  "ai-agents-for-startups-india-2026",
+  "top-startup-incubators-india-2026",
+  "gst-compliance-guide-startups-india-2026",
+  "healthtech-startups-india-2026",
+  "startup-pitch-deck-template-india-2026",
+  "d2c-startups-india-2026",
+  "esop-guide-for-startups-india-2026",
+  "climate-tech-startups-india-2026",
+  "startup-hiring-guide-india-2026",
 ]
 
 const JUNE_2026_STR = "2026-06-26"
@@ -206,6 +218,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "defense-tech-startups-india-2026",
     "tier-2-tier-3-indian-cities-producing-startups-2026",
     "startup-verification-ufrn-credentials-guide",
+    "top-20-saas-startups-india-2026",
+    "ai-agents-for-startups-india-2026",
+    "top-startup-incubators-india-2026",
+    "gst-compliance-guide-startups-india-2026",
+    "healthtech-startups-india-2026",
+    "startup-pitch-deck-template-india-2026",
+    "d2c-startups-india-2026",
+    "esop-guide-for-startups-india-2026",
+    "climate-tech-startups-india-2026",
+    "startup-hiring-guide-india-2026",
   ]
   
   const NEW_BLOG_SLUGS = [
