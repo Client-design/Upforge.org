@@ -1,15 +1,40 @@
 // data/news-gallery.ts
 // ─────────────────────────────────────────────────────────────────────────────
-// UpForge News Gallery — manually curated press coverage and media appearances.
-// To add a new entry: prepend an object to NEWS_ITEMS (newest first).
-// Fields:
-//   id          — unique slug/id string
-//   image       — absolute image URL (use og-images, screenshots, press covers)
-//   title       — headline / image caption (used for alt text + SEO)
-//   source      — publication/outlet name
-//   description — 1–2 sentence context for screen readers & SEO
-//   dateAdded   — ISO date string "YYYY-MM-DD"
-//   link        — optional external URL to the article/coverage
+// UpForge News Gallery — curates press coverage and media appearances.
+// To add a new entry: just add an object to NEWS_ITEMS at the top of the list.
+// Rest of the fields (id, source, description, dateAdded) are generated automatically.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface RawNewsItem {
+  image: string
+  title: string
+  link: string
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DAILY UPDATE LIST
+// Simply paste the image URL, headline, and link here. Newest goes at the top.
+// ─────────────────────────────────────────────────────────────────────────────
+export const NEWS_ITEMS: RawNewsItem[] = [
+  {
+    image: "https://www.upforge.org/og/registry.png",
+    title: "UpForge Launches Global Startup Registry — Verified Profiles for 100K+ Startups",
+    link: "https://www.upforge.org/registry",
+  },
+  {
+    image: "https://www.upforge.org/og/registry.png",
+    title: "How UpForge's UFRN Credentials Help Startups Get Investor Attention",
+    link: "https://www.upforge.org/blog/startup-verification-ufrn-credentials-guide",
+  },
+  {
+    image: "https://www.upforge.org/og/global-registry.png",
+    title: "The Founder Chronicle — March 2026 Edition: Zepto, Zerodha, Nykaa",
+    link: "https://www.upforge.org/archive",
+  },
+]
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AUTOMATIC GENERATION & NORMALIZATION
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface NewsItem {
@@ -19,45 +44,62 @@ export interface NewsItem {
   source: string
   description: string
   dateAdded: string
-  link?: string
+  link: string
 }
 
-// Add new items at the TOP of this array (newest first)
-export const NEWS_ITEMS: NewsItem[] = [
-  {
-    id: "upforge-global-registry-launch-2026",
-    image: "https://www.upforge.org/og/registry.png",
-    title: "UpForge Launches Global Startup Registry — Verified Profiles for 100K+ Startups",
-    source: "UpForge Editorial",
-    description:
-      "UpForge officially launches its global startup registry, offering free UFRN (UpForge Registry Number) credentials to verified startups across 30+ sectors worldwide.",
-    dateAdded: "2026-07-01",
-    link: "https://www.upforge.org/registry",
-  },
-  {
-    id: "upforge-founder-chronicle-march-2026",
-    image: "https://www.upforge.org/og/global-registry.png",
-    title: "The Founder Chronicle — March 2026 Edition: Zepto, Zerodha, Nykaa",
-    source: "UpForge Chronicle",
-    description:
-      "The March 2026 edition of The Founder Chronicle profiles India's most consequential startup builders — including Nithin Kamath of Zerodha and Falguni Nayar of Nykaa.",
-    dateAdded: "2026-03-01",
-    link: "https://www.upforge.org/archive",
-  },
-  {
-    id: "upforge-ufrn-credential-guide",
-    image: "https://www.upforge.org/og/registry.png",
-    title: "How UpForge's UFRN Credentials Help Startups Get Investor Attention",
-    source: "UpForge Editorial",
-    description:
-      "A deep-dive into how the UpForge Registry Number works, why investors trust it, and how founders use it during due diligence to establish institutional credibility.",
-    dateAdded: "2026-06-15",
-    link: "https://www.upforge.org/blog/startup-verification-ufrn-credentials-guide",
-  },
-]
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+}
 
-// Sorted newest first — used by the gallery page
-export const getSortedNewsItems = (): NewsItem[] =>
-  [...NEWS_ITEMS].sort(
-    (a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
-  )
+function extractSource(link: string): string {
+  try {
+    const url = new URL(link)
+    const host = url.hostname.replace("www.", "").toLowerCase()
+    const mapping: Record<string, string> = {
+      "economictimes.indiatimes.com": "The Economic Times",
+      "moneycontrol.com": "Moneycontrol",
+      "yourstory.com": "YourStory",
+      "inc42.com": "Inc42",
+      "techcrunch.com": "TechCrunch",
+      "vccircle.com": "VCCircle",
+      "livemint.com": "Livemint",
+      "business-standard.com": "Business Standard",
+      "forbesindia.com": "Forbes India",
+      "forbes.com": "Forbes",
+      "upforge.org": "UpForge Journal",
+      "upforge.in": "UpForge Journal",
+      "news.google.com": "Google News",
+      "timesofindia.indiatimes.com": "Times of India",
+      "thehindu.com": "The Hindu",
+      "businessworld.in": "Businessworld",
+    }
+    return mapping[host] || host
+  } catch {
+    return "Press Coverage"
+  }
+}
+
+export const getSortedNewsItems = (): NewsItem[] => {
+  const baseDate = new Date()
+
+  return NEWS_ITEMS.map((item, i) => {
+    // Subtract i days for each item down the list to simulate daily posts
+    const dateObj = new Date(baseDate.getTime() - i * 24 * 60 * 60 * 1000)
+    const dateAdded = dateObj.toISOString().split("T")[0]
+    const source = extractSource(item.link)
+    const id = `${slugify(item.title)}-${i}`
+
+    return {
+      id,
+      image: item.image,
+      title: item.title,
+      source,
+      description: `Read the latest press coverage and ecosystem updates from ${source}: "${item.title}". Click through to view the full report.`,
+      dateAdded,
+      link: item.link,
+    }
+  })
+}
