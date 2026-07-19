@@ -17,19 +17,19 @@ export interface RawNewsItem {
 // ─────────────────────────────────────────────────────────────────────────────
 export const NEWS_ITEMS: RawNewsItem[] = [
   {
-    image: "https://www.upforge.org/og/registry.png",
-    title: "UpForge Launches Global Startup Registry — Verified Profiles for 100K+ Startups",
-    link: "https://www.upforge.org/registry",
+    image: "https://media.licdn.com/dms/image/v2/D5622AQEwkJcZfnbxxA/feedshare-shrink_800/B56Z97Vvt1G0Ac-/0/1784480726105?e=1785974400&v=beta&t=A8pai1IUrVIPrX062e61TLaZPnwRiPEgVlhURz75csI",
+    title: "https://media.licdn.com/dms/image/v2/D5622AQEwkJcZfnbxxA/feedshare-shrink_800/B56Z97Vvt1G0Ac-/0/1784480726105?e=1785974400&v=beta&t=A8pai1IUrVIPrX062e61TLaZPnwRiPEgVlhURz75csI",
+    link: "https://www.linkedin.com/posts/upforge-india_upforge-vorflux-rippling-activity-7484654654832726016-YZnB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-mH6gBQ_9gtMF5dq1uoRS-amoy9RUPz20",
   },
   {
-    image: "https://www.upforge.org/og/registry.png",
-    title: "How UpForge's UFRN Credentials Help Startups Get Investor Attention",
-    link: "https://www.upforge.org/blog/startup-verification-ufrn-credentials-guide",
+    image: "https://media.licdn.com/dms/image/v2/D5622AQGHEMqOsEI4ZQ/feedshare-shrink_800/B56Z96ez6XGgAc-/0/1784466325375?e=1785974400&v=beta&t=5n5S8eMsr3Vc1TYNAz8_q_lycy2-vngM9uPSraolxXA",
+    title: "Marc Lore doesn't build small. 🍽️",
+    link: "https://www.linkedin.com/posts/upforge-india_upforge-wonder-marclore-activity-7484594252505710592-Gduy?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-mH6gBQ_9gtMF5dq1uoRS-amoy9RUPz20",
   },
   {
-    image: "https://www.upforge.org/og/global-registry.png",
-    title: "The Founder Chronicle — March 2026 Edition: Zepto, Zerodha, Nykaa",
-    link: "https://www.upforge.org/archive",
+    image: "https://media.licdn.com/dms/image/v2/D5622AQERFhu6bUzS0Q/feedshare-shrink_800/B56Z92cSZLJoAc-/0/1784398554961?e=1785974400&v=beta&t=oiX7XSiHrIhunS1VKxFh4XDch0hhllBLRqvTEjN40V8",
+    title: "Every single company must own their own intelligence",
+    link: "https://www.linkedin.com/posts/upforge-india_upforge-aistartups-fireworks-activity-7484310002258632704-JTGQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-mH6gBQ_9gtMF5dq1uoRS-amoy9RUPz20",
   },
 ]
 
