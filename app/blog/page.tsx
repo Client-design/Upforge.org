@@ -1,283 +1,22 @@
-import type { Metadata } from "next"
+// app/blog/page.tsx
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
-
-export const metadata: Metadata = {
-  title: "Startup Intelligence Journal — In-Depth Reports & Founder Insights | UpForge",
-  description: "Data-driven articles on Global startup trends, VC funding guides, unicorn profiles, founder strategies, fintech rankings, and legal guides for Indian founders.",
-  keywords: [
-    "Indian startup blog",
-    "startup funding India 2026",
-    "Indian unicorns list",
-    "startup founder stories",
-    "AI startups India",
-    "fintech startups India",
-    "VC firms India",
-    "startup legal guide India",
-    "bootstrapped startups India",
-    "women founders India",
-  ],
-  alternates: { canonical: "https://www.upforge.org/blog" },
-  openGraph: {
-    title: "Startup Intelligence Journal | UpForge",
-    description: "Global startup analysis, funding guides, VC rankings, and founder insights — updated regularly.",
-    url: "https://www.upforge.org/blog",
-    siteName: "UpForge",
-    type: "website",
-  },
-  robots: { index: true, follow: true },
-}
-
-const BLOG_POSTS = [
-  {
-    title: "Top 20 SaaS Startups in India 2026: Ranked & Profiled",
-    slug: "top-20-saas-startups-india-2026",
-    category: "SAAS RANKINGS",
-    excerpt: "India's SaaS sector is on track to hit $37 billion in annual recurring revenue by the end of 2026, driven by a new wave of vertical AI-native platforms.",
-    date: "July 2026",
-    readTime: "15 min",
-    featured: true,
-  },
-  {
-    title: "How Indian Startups Are Using AI Agents to Cut Operating Costs by 40% in 2026",
-    slug: "ai-agents-for-startups-india-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "In 2026, Indian early-stage companies are integrating autonomous AI agents to automate customer support, lead sourcing, and data processing, achieving up to 40% savings in overhead.",
-    date: "July 2026",
-    readTime: "14 min",
-  },
-  {
-    title: "Best Startup Incubators & Accelerators in India 2026: Complete List",
-    slug: "top-startup-incubators-india-2026",
-    category: "FOUNDER RESOURCES",
-    excerpt: "Navigating the startup ecosystem in 2026 requires more than capital. Here is the ranked list of the top 15 Indian incubators offering mentorship and grants.",
-    date: "July 2026",
-    readTime: "15 min",
-  },
-  {
-    title: "GST & Tax Compliance Guide for Indian Startups 2026",
-    slug: "gst-compliance-guide-startups-india-2026",
-    category: "LEGAL & COMPLIANCE",
-    excerpt: "Failing to file monthly returns can result in severe penalties. This guide provides a detailed operational compliance roadmap for Indian startups in 2026.",
-    date: "July 2026",
-    readTime: "16 min",
-  },
-  {
-    title: "Top HealthTech Startups in India 2026: The Digital Health Boom",
-    slug: "healthtech-startups-india-2026",
-    category: "HEALTHTECH REPORT",
-    excerpt: "Driven by AI diagnostics and telehealth expansion, India's digital health sector is projected to reach $18 billion by the end of 2026.",
-    date: "July 2026",
-    readTime: "15 min",
-  },
-  {
-    title: "How to Build a Pitch Deck That Gets Funded in 2026 (Slide-by-Slide)",
-    slug: "startup-pitch-deck-template-india-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "Raising capital in 2026 demands proof of capital efficiency. Here is the exact slide-by-slide template that secured over $80 million for seed-stage startups.",
-    date: "July 2026",
-    readTime: "15 min",
-  },
-  {
-    title: "D2C Brands in India 2026: Winners, Funding & Growth Playbook",
-    slug: "d2c-startups-india-2026",
-    category: "D2C & RETAIL",
-    excerpt: "India's direct-to-consumer (D2C) market is set to touch $100 billion by December 2026, driven by omnichannel expansion and quick commerce partnerships.",
-    date: "July 2026",
-    readTime: "14 min",
-  },
-  {
-    title: "ESOPs Explained: A Founder's Guide to Employee Stock Options in 2026",
-    slug: "esop-guide-for-startups-india-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "Attracting premium talent in 2026 requires more than cash. Here is the structural guide to designing an ESOP pool that retains key contributors.",
-    date: "July 2026",
-    readTime: "15 min",
-  },
-  {
-    title: "Climate Tech & GreenTech Startups in India 2026: The Next Big Wave",
-    slug: "climate-tech-startups-india-2026",
-    category: "CLIMATE TECH",
-    excerpt: "Venture funding for Indian climate tech startups surged to $1.4 billion in Q1 2026, driven by advancements in battery chemistry and grid storage solutions.",
-    date: "July 2026",
-    readTime: "14 min",
-  },
-  {
-    title: "Startup Hiring Trends 2026: How to Build Your First 10-Person Team",
-    slug: "startup-hiring-guide-india-2026",
-    category: "HIRING & TEAM",
-    excerpt: "Building a startup team in 2026 requires balancing cost and execution speed. Here is the operational hiring guide to securing your first 10 core contributors.",
-    date: "July 2026",
-    readTime: "16 min",
-  },
-  {
-    title: "AI Startup Funding & Exit Routes in India 2026: The Consolidation Wave",
-    slug: "ai-startup-funding-exit-route-india-2026",
-    category: "INVESTMENT ANALYSIS",
-    excerpt: "Indian AI startups raised $676M in H1 2026, but the landscape is shifting from early funding rounds to strategic M&A exits. Learn about key exit routes, valuation multiples, and the consolidation wave.",
-    date: "July 2026",
-    readTime: "12 min",
-    featured: true,
-  },
-  {
-    title: "Why Investors Are Rejecting Generic AI Pitches in 2026: The Moat Requirement",
-    slug: "investors-rejecting-generic-ai-pitches-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "Simple API wrappers are getting rejected. Discover the deep proprietary tech and data pipelines VCs now demand.",
-    date: "July 2026",
-    readTime: "12 min",
-  },
-  {
-    title: "How Indian Space & Defense Tech Startups Are Winning Government Contracts in 2026",
-    slug: "defense-tech-startups-india-2026",
-    category: "STRATEGIC ANALYSIS",
-    excerpt: "National defense is no longer the exclusive domain of state-run enterprises. Startups are securing major contracts under iDEX and space reforms.",
-    date: "July 2026",
-    readTime: "12 min",
-  },
-  {
-    title: "Why Tier-2 & Tier-3 Indian Cities Are Producing 50% of New Startups in 2026",
-    slug: "tier-2-tier-3-indian-cities-producing-startups-2026",
-    category: "ECOSYSTEM ANALYSIS",
-    excerpt: "Non-metro cities like Jaipur, Indore, Kochi and others now account for 50% of registrations. Examine the cost advantages and talent pools.",
-    date: "July 2026",
-    readTime: "12 min",
-  },
-  {
-    title: "The Founder's Guide to UFRN Verification & Registry Credentials",
-    slug: "startup-verification-ufrn-credentials-guide",
-    category: "REGISTRY GUIDE",
-    excerpt: "Learn how the UpForge Registry Number (UFRN) system validates startup legitimacy and provides verified operational metrics for VCs.",
-    date: "July 2026",
-    readTime: "12 min",
-  },
-  {
-    title: "India Startup Ecosystem 2026: Complete State of the Nation Report",
-    slug: "india-startup-ecosystem-2026",
-    category: "ECOSYSTEM REPORT",
-    excerpt: "650,000 startups. 125 unicorns. $3.44B raised in Q1. The definitive data-driven picture of India's startup landscape.",
-    date: "March 2026",
-    updated: "June 2026",
-    readTime: "20 min",
-    featured: true,
-  },
-  {
-    title: "Top Indian Unicorns 2026: Every ₹1B+ Startup Ranked & Profiled",
-    slug: "top-indian-unicorns-2026",
-    category: "UNICORN REPORT",
-    excerpt: "Complete rankings, sector breakdown, and founder profiles of all 125 Indian unicorns.",
-    date: "March 2026",
-    updated: "June 2026",
-    readTime: "15 min",
-    featured: true,
-  },
-  {
-    title: "Top 30 Venture Capital Firms in India 2026: Complete Rankings & Profiles",
-    slug: "best-vc-firms-india-2026",
-    category: "VC & INVESTORS",
-    excerpt: "The definitive ranked list of India's top VCs — investment thesis, cheque sizes, portfolio highlights, and how to pitch each one.",
-    date: "June 2026",
-    readTime: "15 min",
-    featured: true,
-  },
-  {
-    title: "India vs Silicon Valley: Why Indian Startups Are Winning Globally",
-    slug: "india-vs-silicon-valley-startups",
-    category: "GLOBAL ANALYSIS",
-    excerpt: "7 structural advantages Indian founders have in 2026 — and why the next decade of global tech will be built in India.",
-    date: "June 2026",
-    readTime: "11 min",
-    featured: true,
-  },
-  {
-    title: "How to Get Startup Funding in India 2026: Complete Founder's Guide",
-    slug: "how-to-get-startup-funding-india-2026",
-    category: "FUNDING GUIDE",
-    excerpt: "Step-by-step guide covering angel investors, VCs, government schemes, and pitch deck tips.",
-    date: "March 2026",
-    updated: "June 2026",
-    readTime: "12 min",
-  },
-  {
-    title: "Top AI Startups in India (2026 Updated List)",
-    slug: "top-ai-startups-india-2026",
-    category: "AI & DEEP TECH",
-    excerpt: "The most promising AI startups in India across generative AI, computer vision, and NLP.",
-    date: "March 2026",
-    updated: "June 2026",
-    readTime: "11 min",
-  },
-  {
-    title: "How Startup Valuation Works in India 2026: Complete Founder's Guide",
-    slug: "startup-valuation-india-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "How VCs value your startup at every stage — Berkus method, ARR multiples, benchmarks, and negotiation tips.",
-    date: "June 2026",
-    readTime: "13 min",
-  },
-  {
-    title: "Top Fintech Startups in India 2026: Complete Ranked List",
-    slug: "fintech-startups-india-2026",
-    category: "FINTECH",
-    excerpt: "The definitive guide to India's top fintechs across payments, lending, insurtech, wealthtech, and neobanks.",
-    date: "June 2026",
-    readTime: "16 min",
-  },
-  {
-    title: "25 Best Indian Startup Founders to Follow in 2026",
-    slug: "best-indian-startup-founders-to-follow-2026",
-    category: "FOUNDER PROFILES",
-    excerpt: "Philosophies, playbooks, and success patterns of India's most influential startup founders.",
-    date: "March 2026",
-    updated: "June 2026",
-    readTime: "18 min",
-  },
-  {
-    title: "Top 25 Women Founders in India Building Billion-Dollar Companies 2026",
-    slug: "women-founders-india-2026",
-    category: "FOUNDER PROFILES",
-    excerpt: "From unicorn builders to category creators — India's most inspiring women startup founders and their strategies.",
-    date: "June 2026",
-    readTime: "14 min",
-  },
-  {
-    title: "Why 90% of Indian Startups Fail: The Data, Reasons & How to Survive",
-    slug: "startup-failure-reasons-india",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "Data from 500+ post-mortems — the 12 real reasons Indian startups fail and actionable strategies to beat the odds.",
-    date: "June 2026",
-    readTime: "12 min",
-  },
-  {
-    title: "20 Bootstrapped Indian Startups That Beat Funded Rivals",
-    slug: "bootstrapped-startups-india-success-stories",
-    category: "SUCCESS STORIES",
-    excerpt: "Zerodha. Zoho. Freshworks in early days. How Indian founders built profitable empires without VC money.",
-    date: "June 2026",
-    readTime: "14 min",
-  },
-  {
-    title: "The Ultimate Legal Guide for Indian Startups 2026",
-    slug: "startup-legal-guide-india-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "Company registration, DPIIT recognition, ESOPs, FEMA compliance, IP protection — every legal milestone from founding to Series A.",
-    date: "June 2026",
-    readTime: "13 min",
-  },
-  {
-    title: "How to Start a Startup in India (Step-by-Step Guide 2026)",
-    slug: "how-to-start-startup-india-2026",
-    category: "FOUNDER PLAYBOOK",
-    excerpt: "Complete guide covering registration, compliance, funding, and go-to-market strategy.",
-    date: "March 2026",
-    updated: "June 2026",
-    readTime: "14 min",
-  },
-]
+import { BLOG_POSTS, BLOG_CATEGORIES } from "@/data/blog-posts"
+import { Filter } from "lucide-react"
 
 export default function BlogIndexPage() {
-  const featuredPosts = BLOG_POSTS.filter(p => p.featured)
-  const allPosts = BLOG_POSTS
+  const [selectedCategory, setSelectedCategory] = useState<string>("all")
+
+  // Filter posts based on selection
+  const filteredPosts = selectedCategory === "all"
+    ? BLOG_POSTS
+    : BLOG_POSTS.filter(post => post.categorySlug === selectedCategory)
+
+  const featuredPosts = filteredPosts.filter(p => p.featured)
+  const regularPosts = filteredPosts
 
   return (
     <>
@@ -304,81 +43,151 @@ export default function BlogIndexPage() {
           </div>
         </section>
 
+        {/* Category Filter and Selector */}
+        <div className="max-w-[1300px] mx-auto px-6 py-6 border-b border-border">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            {/* Category Links list */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className={`px-3 py-1 text-xs font-mono uppercase border transition-all ${
+                  selectedCategory === "all"
+                    ? "bg-foreground text-background border-foreground font-bold"
+                    : "bg-transparent text-muted-foreground border-border hover:text-foreground hover:border-foreground"
+                }`}
+              >
+                All Articles
+              </button>
+              {BLOG_CATEGORIES.map(category => (
+                <button
+                  key={category.slug}
+                  onClick={() => setSelectedCategory(category.slug)}
+                  className={`px-3 py-1 text-xs font-mono uppercase border transition-all ${
+                    selectedCategory === category.slug
+                      ? "bg-foreground text-background border-foreground font-bold"
+                      : "bg-transparent text-muted-foreground border-border hover:text-foreground hover:border-foreground"
+                  }`}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+
+            {/* Dropdown Filter for smaller screens / convenience */}
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <Filter className="w-3.5 h-3.5 text-muted-foreground" />
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="bg-background border border-border px-3 py-1.5 text-xs font-mono uppercase text-foreground focus:outline-none focus:border-foreground cursor-pointer"
+              >
+                <option value="all">Filter: All</option>
+                {BLOG_CATEGORIES.map(cat => (
+                  <option key={cat.slug} value={cat.slug}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Category description */}
+          {selectedCategory !== "all" && (
+            <p className="text-xs text-muted-foreground italic mt-3 font-serif">
+              Showing {filteredPosts.length} reports in &ldquo;{
+                BLOG_CATEGORIES.find(c => c.slug === selectedCategory)?.name
+              }&rdquo;: {
+                BLOG_CATEGORIES.find(c => c.slug === selectedCategory)?.description
+              }
+            </p>
+          )}
+        </div>
+
         {/* Main Content */}
         <div className="max-w-[1300px] mx-auto px-6 py-8">
 
-          {/* Featured Posts */}
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em]">Featured Analysis</span>
-              <div className="flex-1 h-px bg-foreground" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {featuredPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="group border-2 border-border hover:border-[#C59A2E] transition-all p-6 flex flex-col"
-                >
-                  <span className="font-mono text-[9px] font-black uppercase tracking-[0.15em] text-[#C59A2E] mb-3">
-                    {post.category}
-                  </span>
-                  <h2
-                    className="text-xl md:text-2xl font-bold leading-tight mb-3 group-hover:text-[#C59A2E] transition-colors flex-1"
-                    style={{ fontFamily: "'Georgia', serif" }}
+          {/* Featured Posts (Only show if there are featured posts in the selected category) */}
+          {featuredPosts.length > 0 && (
+            <section className="mb-12">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em]">Featured Analysis</span>
+                <div className="flex-1 h-px bg-foreground" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {featuredPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="group border-2 border-border hover:border-[#C59A2E] transition-all p-6 flex flex-col"
                   >
-                    {post.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
-                  <div className="flex items-center gap-3 pt-3 border-t border-border text-xs text-muted-foreground">
-                    <span className="font-mono uppercase">{post.updated ?? post.date}</span>
-                    <span className="w-px h-3 bg-border" />
-                    <span className="font-mono uppercase">{post.readTime} read</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          {/* All Articles */}
-          <section>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em]">All Reports</span>
-              <div className="flex-1 h-px bg-foreground" />
-              <span className="font-mono text-[9px] text-muted-foreground uppercase">{allPosts.length} articles</span>
-            </div>
-
-            <div className="divide-y-2 divide-border border-b-2 border-foreground">
-              {allPosts.map((post, idx) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="group flex items-start gap-4 py-5 hover:bg-muted/30 transition-colors -mx-2 px-2"
-                >
-                  <span className="font-mono text-sm font-bold text-[#C59A2E]/50 pt-1 w-6 text-right shrink-0">
-                    {idx + 1}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <span className="font-mono text-[9px] font-black uppercase tracking-[0.15em] text-[#C59A2E]">
+                    <span className="font-mono text-[9px] font-black uppercase tracking-[0.15em] text-[#C59A2E] mb-3">
                       {post.category}
                     </span>
                     <h2
-                      className="font-bold text-lg md:text-xl leading-tight mt-1 group-hover:text-[#C59A2E] transition-colors"
+                      className="text-xl md:text-2xl font-bold leading-tight mb-3 group-hover:text-[#C59A2E] transition-colors flex-1"
                       style={{ fontFamily: "'Georgia', serif" }}
                     >
                       {post.title}
                     </h2>
-                    <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{post.excerpt}</p>
-                    <div className="flex items-center gap-2 mt-2 text-[10px] text-muted-foreground font-mono uppercase">
-                      <span>{post.updated ? `Updated ${post.updated}` : post.date}</span>
-                      <span className="w-px h-2.5 bg-border" />
-                      <span>{post.readTime} read</span>
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
+                    <div className="flex items-center gap-3 pt-3 border-t border-border text-xs text-muted-foreground">
+                      <span className="font-mono uppercase">{post.updated ?? post.date}</span>
+                      <span className="w-px h-3 bg-border" />
+                      <span className="font-mono uppercase">{post.readTime} read</span>
                     </div>
-                  </div>
-                  <span className="text-2xl text-[#C59A2E]/30 group-hover:text-[#C59A2E] transition-colors shrink-0">→</span>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* All Articles */}
+          <section>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
+                {selectedCategory === "all" ? "All Reports" : "Category Reports"}
+              </span>
+              <div className="flex-1 h-px bg-foreground" />
+              <span className="font-mono text-[9px] text-muted-foreground uppercase">{regularPosts.length} articles</span>
             </div>
+
+            {regularPosts.length === 0 ? (
+              <div className="border border-dashed border-border p-12 text-center">
+                <p className="text-muted-foreground text-sm font-serif italic">No articles found in this category yet.</p>
+              </div>
+            ) : (
+              <div className="divide-y-2 divide-border border-b-2 border-foreground">
+                {regularPosts.map((post, idx) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="group flex items-start gap-4 py-5 hover:bg-muted/30 transition-colors -mx-2 px-2"
+                  >
+                    <span className="font-mono text-sm font-bold text-[#C59A2E]/50 pt-1 w-6 text-right shrink-0">
+                      {idx + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[9px] font-black uppercase tracking-[0.15em] text-[#C59A2E]">
+                        {post.category}
+                      </span>
+                      <h2
+                        className="font-bold text-lg md:text-xl leading-tight mt-1 group-hover:text-[#C59A2E] transition-colors"
+                        style={{ fontFamily: "'Georgia', serif" }}
+                      >
+                        {post.title}
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{post.excerpt}</p>
+                      <div className="flex items-center gap-2 mt-2 text-[10px] text-muted-foreground font-mono uppercase">
+                        <span>{post.updated ? `Updated ${post.updated}` : post.date}</span>
+                        <span className="w-px h-2.5 bg-border" />
+                        <span>{post.readTime} read</span>
+                      </div>
+                    </div>
+                    <span className="text-2xl text-[#C59A2E]/30 group-hover:text-[#C59A2E] transition-colors shrink-0">→</span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* Newsletter CTA */}
