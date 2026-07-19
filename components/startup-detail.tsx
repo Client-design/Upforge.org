@@ -45,7 +45,13 @@ function getCleanUrl(url?: string | null): string | null {
 
 function getCategorySlug(category?: string | null): string | null {
   if (!category) return null
-  return category.toLowerCase().replace(/\s+/g, "-")
+  return category
+    .toLowerCase()
+    .replace(/[/\\]/g, "-")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
 }
 
 function getCitySlug(city?: string | null): string | null {
