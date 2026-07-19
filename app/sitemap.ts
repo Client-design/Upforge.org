@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next"
 import { fetchAllStartups } from "@/lib/google-sheets"
+import { BLOG_CATEGORIES } from "@/data/blog-posts"
 
 const BASE = "https://www.upforge.org"
 // String fallback format directly use karenge taaki transform crash na ho
@@ -78,6 +79,8 @@ const STATIC_ROUTES = [
   { path: "/indian-unicorns", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/methodology", priority: 0.75, changeFrequency: "monthly" as const },
   { path: "/editorial-standards", priority: 0.7, changeFrequency: "monthly" as const },
+  { path: "/archive", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/news-gallery", priority: 0.65, changeFrequency: "weekly" as const },
 ]
 
 // Startup categories for global SEO
@@ -252,6 +255,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }))
 
+  const blogCategoryEntries: MetadataRoute.Sitemap = BLOG_CATEGORIES.map(category => ({
+    url: `${BASE}/blog/category/${category.slug}`,
+    lastModified: safeDateString(JULY_2026_STR),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }))
+
   return [
     ...staticEntries,
     ...founderEntries,
@@ -261,5 +271,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...ufrnEntries,
     ...blogEntries,
     ...curatedBlogEntries,
+    ...blogCategoryEntries,
   ]
 }
