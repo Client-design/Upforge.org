@@ -169,6 +169,21 @@ const nextConfig = {
         destination: "https://www.upforge.org/:path*",
         permanent: true,
       },
+      // ─── SECTOR URL BUG FIXES ─────────────────────────────────────────────
+      // These fix old broken slugs that had & encoded as literal chars.
+      // All redirect to the canonical slug produced by categoryToSlug().
+      { source: "/startups/ai-technology", destination: "/startups/artificial-intelligence", permanent: true },
+      { source: "/startups/ai-&-technology", destination: "/startups/artificial-intelligence", permanent: true },
+      { source: "/startups/ai-%26-technology", destination: "/startups/artificial-intelligence", permanent: true },
+      { source: "/startups/e-commerce-&-d2c", destination: "/startups/e-commerce-d2c", permanent: true },
+      { source: "/startups/e-commerce-%26-d2c", destination: "/startups/e-commerce-d2c", permanent: true },
+      { source: "/startups/ecommerce-&-d2c", destination: "/startups/e-commerce-d2c", permanent: true },
+      { source: "/startups/fintech-&-payments", destination: "/startups/fintech-payments", permanent: true },
+      { source: "/startups/fintech-%26-payments", destination: "/startups/fintech-payments", permanent: true },
+      { source: "/startups/edtech-&-language-learning", destination: "/startups/edtech-language-learning", permanent: true },
+      { source: "/startups/edtech-%26-language-learning", destination: "/startups/edtech-language-learning", permanent: true },
+      { source: "/startups/ai-design-&-creativity", destination: "/startups/ai-design-creativity", permanent: true },
+      { source: "/startups/ai-design-%26-creativity", destination: "/startups/ai-design-creativity", permanent: true },
     ]
   },
 
