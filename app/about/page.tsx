@@ -8,6 +8,7 @@ import {
   Shield, Users, TrendingUp, Award, BadgeCheck,
   Globe, ArrowRight, Sparkles, Calculator,
 } from "lucide-react"
+import { FounderFlipCard } from "@/components/founder-flip-card"
 
 export const revalidate = 600
 
@@ -144,6 +145,15 @@ const EDITORIAL_TEAM = [
     expertise: ["Deep Tech", "SaaS", "AI/ML", "Product Analysis"],
     location: "Delhi NCR, India",
   },
+  {
+    name: "Payal Mittal",
+    role: "Associate Editor & Data Lead",
+    photo: "/payal-mittal.png",
+    initials: "PM",
+    bio: "Payal oversees the verification pipeline and coordinates startup registry data audits. She has 3+ years of experience in data operations and market research, helping founders navigate structural verification requirements.",
+    expertise: ["Data Operations", "Registry Auditing", "Market Research", "Quality Assurance"],
+    location: "Delhi NCR, India",
+  },
 ]
 
 const FAQ_ITEMS = [
@@ -257,40 +267,57 @@ export default async function AboutPage() {
               <div className="flex-1 h-px bg-foreground" />
               <span className="font-mono text-[9px] text-muted-foreground uppercase">Expert Verified Content</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-[1.5px] border-foreground bg-background">
-              {EDITORIAL_TEAM.map((member, i) => (
+            {/* Tier 1: Founder Spotlight */}
+            <div className="mb-12">
+              <FounderFlipCard
+                name={EDITORIAL_TEAM[0].name}
+                role={EDITORIAL_TEAM[0].role}
+                photo={EDITORIAL_TEAM[0].photo}
+                initials={EDITORIAL_TEAM[0].initials}
+                bio={EDITORIAL_TEAM[0].bio}
+                expertise={EDITORIAL_TEAM[0].expertise}
+                location={EDITORIAL_TEAM[0].location}
+              />
+            </div>
+
+            {/* Tier 2: Employee Grid (4 columns) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-[1.5px] border-foreground bg-background">
+              {EDITORIAL_TEAM.slice(1).map((member, i) => (
                 <div
                   key={i}
-                  className={`p-6 md:p-8 flex gap-5 border-b border-foreground last:border-b-0 hover:bg-muted/30 transition-colors group ${
+                  className={`p-6 md:p-8 flex flex-col justify-between hover:bg-muted/30 transition-colors group border-b border-foreground md:border-b-[1.5px] lg:border-b-0 ${
                     i % 2 === 0 ? "md:border-r-[1.5px]" : ""
+                  } ${
+                    i < 3 ? "lg:border-r-[1.5px]" : ""
                   }`}
                 >
-                  {/* Avatar Container with Pure CSS Initial Fallback */}
-                  <div className="shrink-0">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-foreground group-hover:border-[#C59A2E] transition-colors bg-[#C59A2E20] flex items-center justify-center font-bold text-xl text-[#C59A2E]" style={{ fontFamily: "Georgia, serif" }}>
-                      {/* Initials sit in the background layer */}
-                      <span className="absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
-                      
-                      {/* Image sits contextually above it. If it fails, the background initials remain visible */}
-                      <img
-                        src={member.photo}
-                        alt={`${member.name} — UpForge Editorial Team`}
-                        className="absolute inset-0 w-full h-full object-cover z-10 bg-background"
-                      />
+                  <div>
+                    {/* Avatar Container with Pure CSS Initial Fallback */}
+                    <div className="mb-4">
+                      <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-foreground group-hover:border-[#C59A2E] transition-colors bg-[#C59A2E20] flex items-center justify-center font-bold text-xl text-[#C59A2E]" style={{ fontFamily: "Georgia, serif" }}>
+                        <span className="absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
+                        <img
+                          src={member.photo}
+                          alt={`${member.name} — UpForge Editorial Team`}
+                          className="absolute inset-0 w-full h-full object-cover z-10 bg-background"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  {/* Info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <h3 className="font-bold text-[18px] text-foreground group-hover:text-[#C59A2E] transition-colors" style={{ fontFamily: "'Georgia', serif" }}>
-                        {member.name}
-                      </h3>
-                    </div>
+                    {/* Info */}
+                    <h3 className="font-bold text-[18px] text-foreground group-hover:text-[#C59A2E] transition-colors mb-1" style={{ fontFamily: "'Georgia', serif" }}>
+                      {member.name}
+                    </h3>
                     <p className="font-mono text-[9px] font-black uppercase tracking-[0.15em] text-[#C59A2E] mb-2">{member.role}</p>
-                    <p className="text-[13px] text-muted-foreground leading-relaxed mb-3 font-serif italic">{member.bio}</p>
-                    <div className="flex flex-wrap gap-1.5 mb-2">
+                    <p className="text-[13px] text-muted-foreground leading-relaxed mb-4 font-serif italic">{member.bio}</p>
+                  </div>
+                  
+                  <div>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
                       {member.expertise.map(tag => (
-                        <span key={tag} className="bg-muted border border-border px-2 py-0.5 text-[10px] font-mono text-muted-foreground">{tag}</span>
+                        <span key={tag} className="bg-muted border border-border px-2 py-0.5 text-[9px] font-mono text-muted-foreground">{tag}</span>
                       ))}
                     </div>
                     <p className="font-mono text-[9px] text-muted-foreground">📍 {member.location}</p>
@@ -607,7 +634,7 @@ export default async function AboutPage() {
             <nav aria-label="Footer navigation">
               <ul className="flex flex-wrap gap-x-8 gap-y-3 font-mono text-[9px] font-bold uppercase tracking-[0.15em]">
                 {[
-                  { l: "The Founder Chronicle",  h: "/"                },
+                  { l: "The Founder Chronicle",  h: "/archive"         },
                   { l: "Startup Registry India", h: "/startup"         },
                   { l: "Indian Unicorns 2026",   h: "/indian-unicorns" },
                   { l: "The Forge — Blog",        h: "/blog"            },
