@@ -780,7 +780,31 @@ function FounderPhoto({
 }
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
-export default function ArchivePage() {
+export function ArchiveClientPage() {
+  const archiveJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://www.upforge.org/archive#cp",
+    name: "The Founder Chronicle — Indian Startup Origin Stories",
+    description:
+      "Deeply reported origin stories of India's most consequential startup founders. Each edition profiles one builder: their founding moment, the bet they made, and the lesson it left behind.",
+    url: "https://www.upforge.org/archive",
+    inLanguage: "en-US",
+    publisher: {
+      "@type": "Organization",
+      name: "UpForge",
+      url: "https://www.upforge.org",
+      logo: { "@type": "ImageObject", url: "https://www.upforge.org/logo.jpg" },
+    },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "UpForge", item: "https://www.upforge.org" },
+        { "@type": "ListItem", position: 2, name: "Founder Chronicle", item: "https://www.upforge.org/archive" },
+      ],
+    },
+  }
+
   // Filter state - ONLY MONTH FILTER NOW
   const [selectedMonth, setSelectedMonth] = useState<string>("All")
   const [searchQuery, setSearchQuery] = useState("")
@@ -859,11 +883,16 @@ export default function ArchivePage() {
   }, [filteredFounders])
 
   return (
-    <div
-      style={{ minHeight: "100vh", background: "#F3EFE5", fontFamily: "'Georgia','Times New Roman',serif" }}
-      role="main"
-      aria-label="The Founder Chronicle Archive — Past editions and founder stories"
-    >
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(archiveJsonLd) }}
+      />
+      <div
+        style={{ minHeight: "100vh", background: "#F3EFE5", fontFamily: "'Georgia','Times New Roman',serif" }}
+        role="main"
+        aria-label="The Founder Chronicle Archive — Past editions and founder stories"
+      >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
 
@@ -1439,5 +1468,8 @@ export default function ArchivePage() {
         </footer>
       </main>
     </div>
+    </>
   )
 }
+
+export default ArchiveClientPage
