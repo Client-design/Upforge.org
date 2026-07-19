@@ -92,9 +92,9 @@ Get yours free at **/submit**.`;
 
 export async function POST(req: Request) {
   try {
-    const apiKey = process.env.GROQ_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      console.error("GROQ_API_KEY is not configured");
+      console.error("GROQ_API_KEY or GEMINI_API_KEY is not configured");
       return NextResponse.json({ error: "Service temporarily unavailable" }, { status: 503 });
     }
 
