@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   ChevronRight,
+  ChevronDown,
   ShieldCheck,
   Search,
   Sparkles,
@@ -33,8 +34,24 @@ type Suggestion = {
   subtitle?: string;
 };
 
+const MORE_LINKS = {
+  explore: [
+    { name: "Compare Startups", href: "/compare", desc: "Side-by-side startup comparisons" },
+    { name: "Founder Archive", href: "/archive", desc: "The Founder Chronicle — origin stories" },
+    { name: "News Gallery", href: "/news-gallery", desc: "Press coverage & media moments" },
+  ],
+  resources: [
+    { name: "Founder Stories", href: "/founder-stories", desc: "In-depth founder profiles" },
+    { name: "Submit Startup", href: "/submit", desc: "Get your UFRN credential. Free." },
+    { name: "Newsletter", href: "/newsletter", desc: "Weekly startup intelligence digest" },
+  ],
+}
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
+  const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -294,11 +311,21 @@ export function Navbar() {
   const links: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "Global Registry", href: "/registry" },
-    { name: "Compare", href: "/compare" },
     { name: "Community", href: "/creators" },
     { name: "Journal", href: "/blog" },
     { name: "About", href: "/about" },
   ];
+
+  // Close More dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(e.target as Node)) {
+        setIsMoreOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -500,6 +527,58 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* MORE DROPDOWN */}
+            <div className="relative" ref={moreMenuRef}>
+              <button
+                onClick={() => setIsMoreOpen(prev => !prev)}
+                className={`relative flex items-center gap-1 px-3 py-1.5 text-[13px] font-medium tracking-wide transition-all duration-200 rounded-md ${
+                  isMoreOpen
+                    ? "text-foreground bg-accent/10 font-semibold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+                aria-expanded={isMoreOpen}
+                aria-haspopup="true"
+              >
+                More
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isMoreOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {isMoreOpen && (
+                <div className="absolute right-0 top-full mt-2 w-72 bg-background/95 backdrop-blur-xl border border-border/60 rounded-2xl shadow-2xl shadow-black/20 p-4 z-50">
+                  {/* EXPLORE group */}
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mb-2 px-1">Explore</p>
+                  <div className="space-y-0.5 mb-4">
+                    {MORE_LINKS.explore.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => { closeAll(); setIsMoreOpen(false); }}
+                        className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-muted/50 transition-colors group"
+                      >
+                        <span className="text-[13px] font-medium text-foreground group-hover:text-accent-primary transition-colors">{item.name}</span>
+                        <span className="text-[11px] text-muted-foreground mt-0.5">{item.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  {/* RESOURCES group */}
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mb-2 px-1 pt-2 border-t border-border/30">Resources</p>
+                  <div className="space-y-0.5">
+                    {MORE_LINKS.resources.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => { closeAll(); setIsMoreOpen(false); }}
+                        className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-muted/50 transition-colors group"
+                      >
+                        <span className="text-[13px] font-medium text-foreground group-hover:text-accent-primary transition-colors">{item.name}</span>
+                        <span className="text-[11px] text-muted-foreground mt-0.5">{item.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* RIGHT SIDE ACTIONS */}
@@ -763,6 +842,43 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* MOBILE MORE ACCORDION */}
+            <div className="border-t border-border/30">
+              <button
+                onClick={() => setIsMobileMoreOpen(prev => !prev)}
+                className="flex items-center justify-between w-full px-5 py-4 text-sm font-medium text-muted-foreground"
+              >
+                <span>More</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileMoreOpen ? "rotate-180" : ""}`} />
+              </button>
+              {isMobileMoreOpen && (
+                <div className="pb-2">
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-5 py-1">Explore</p>
+                  {MORE_LINKS.explore.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeAll}
+                      className="block px-5 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-5 py-2 mt-1 border-t border-border/20">Resources</p>
+                  {MORE_LINKS.resources.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeAll}
+                      className="block px-5 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* MOBILE ACTIONS */}
