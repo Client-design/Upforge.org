@@ -17,12 +17,29 @@ export async function getAIGeneratedStartupData(slug: string): Promise<Startup |
   If the startup does not exist or you cannot be reasonably sure, return a generic description saying it is an emerging business in the tech space, but fill out the JSON format exactly. ONLY return valid JSON without markdown formatting or code blocks.`;
 
   try {
-    const geminiKey = process.env.GEMINI_API_KEY;
+    const groqKey = process.env.GROQ_API_KEY || (process.env.GEMINI_API_KEY?.startsWith("gsk_") ? process.env.GEMINI_API_KEY : undefined);
+    const geminiKey = process.env.GEMINI_API_KEY && !process.env.GEMINI_API_KEY.startsWith("gsk_") ? process.env.GEMINI_API_KEY : undefined;
     const openaiKey = process.env.OPENAI_API_KEY;
 
     let jsonStr = "";
 
-    if (geminiKey) {
+    if (groqKey) {
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${groqKey}`
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.2
+        })
+      });
+      if (!res.ok) throw new Error("Groq API error");
+      const data = await res.json();
+      jsonStr = data.choices?.[0]?.message?.content || "";
+    } else if (geminiKey) {
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
