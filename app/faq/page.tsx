@@ -555,7 +555,7 @@ export default function FAQPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 mt-10 border-t-[1.5px] border-foreground divide-y lg:divide-y-0 lg:divide-x divide-foreground">
               {[
                 { label: "Global Registry",        sub: "Full verified database",   href: "/registry" },
-                { label: "Indian Startup Founders", sub: "Founder Chronicle 2026", href: "/"         },
+                { label: "Indian Startup Founders", sub: "Founder Chronicle 2026", href: "/archive"  },
                 { label: "The Forge Blog",          sub: "Startup intelligence",    href: "/blog"     },
                 { label: "Submit Your Startup",     sub: "Get listed + UFRN free",  href: "/submit"   },
               ].map(lnk => (
