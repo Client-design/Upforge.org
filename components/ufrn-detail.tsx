@@ -148,7 +148,13 @@ export function UFRNDetailView({ startup, canonicalUrl }: Props) {
   const profileUrl = `https://www.upforge.org/startup/${startup.slug}`
 
   const categorySlug = startup.category
-    ? startup.category.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
+    ? startup.category
+        .toLowerCase()
+        .replace(/[/\\]/g, "-")
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "")
     : null
 
   return (
