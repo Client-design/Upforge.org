@@ -9,6 +9,7 @@ import {
   Globe, ArrowRight, Sparkles, Calculator,
 } from "lucide-react"
 import { FounderFlipCard } from "@/components/founder-flip-card"
+import { EditorialAvatar } from "@/components/editorial-avatar"
 
 export const revalidate = 600
 
@@ -294,17 +295,11 @@ export default async function AboutPage() {
                   <div>
                     {/* Avatar Container with Pure CSS Initial Fallback */}
                     <div className="mb-4">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-foreground group-hover:border-[#C59A2E] transition-colors bg-[#C59A2E20] flex items-center justify-center font-bold text-xl text-[#C59A2E]" style={{ fontFamily: "Georgia, serif" }}>
-                        <span className="absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
-                        <img
-                          src={member.photo}
-                          alt={`${member.name} — UpForge Editorial Team`}
-                          className="absolute inset-0 w-full h-full object-cover z-10 bg-background"
-                          onError={(e) => {
-                            (e.target as HTMLElement).style.display = 'none';
-                          }}
-                        />
-                      </div>
+                      <EditorialAvatar
+                        photo={member.photo}
+                        initials={member.initials}
+                        alt={`${member.name} — UpForge Editorial Team`}
+                      />
                     </div>
                     {/* Info */}
                     <h3 className="font-bold text-[18px] text-foreground group-hover:text-[#C59A2E] transition-colors mb-1" style={{ fontFamily: "'Georgia', serif" }}>
