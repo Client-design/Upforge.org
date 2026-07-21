@@ -270,6 +270,20 @@ export default async function RootLayout({
           strategy="afterInteractive"
         />
 
+        {/* Monetag: In-Page Push (Banner) */}
+        <Script id="monetag-inpage-push" strategy="afterInteractive">
+          {`
+            (function(s){s.dataset.zone='11365992',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+          `}
+        </Script>
+
+        {/* Monetag: Vignette Banner */}
+        <Script id="monetag-vignette" strategy="afterInteractive">
+          {`
+            (function(s){s.dataset.zone='11366013',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+          `}
+        </Script>
+
         <ClientLayout domainContext={ctx}>{children}</ClientLayout>
 
         <CookieBanner />
