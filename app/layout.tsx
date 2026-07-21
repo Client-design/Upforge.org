@@ -1,12 +1,10 @@
 // app/layout.tsx
-
 import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { ClientLayout } from "../components/client-layout"
 import { CookieBanner } from "../components/cookie-banner"
 import Script from "next/script"
-
 import { getDomainContext } from "@/lib/domain.server"
 import { fetchAllStartups } from "@/lib/google-sheets"
 
@@ -15,7 +13,6 @@ const inter = Inter({
   variable: "--font-sans",
   display: "swap",
 })
-
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
@@ -47,27 +44,21 @@ async function getLatestStartupDate(): Promise<string> {
       return new Date(maxDateStr).toISOString()
     }
   } catch {}
-
   return new Date().toISOString()
 }
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = "https://www.upforge.org"
-
   return {
     metadataBase: new URL(baseUrl),
-
     title: {
       default:
         "UpForge — Global Startup Registry & Emerging Market Intelligence 2026",
       template: "%s | UpForge",
     },
-
     description:
       "UpForge is the world's independent verified startup registry. Discover global startups, unicorn founders, funding intelligence, and emerging market insights.",
-
     applicationName: "UpForge",
-
     keywords: [
       "global startup registry",
       "startup database worldwide",
@@ -78,26 +69,24 @@ export async function generateMetadata(): Promise<Metadata> {
       "emerging market startups",
       "UFRN lookup",
     ],
-
     authors: [
       {
         name: "UpForge Editorial",
         url: `${baseUrl}/about`,
       },
     ],
-
     creator: "UpForge",
     publisher: "UpForge",
-
     alternates: {
       canonical: baseUrl,
     },
-
     verification: {
       // Add your actual Google Search Console verification token here
-       google: "google4fca56100e982c53",
+      google: "google4fca56100e982c53",
+      other: {
+        monetag: "11a060c13bb08c2111f804101cc133b9",
+      },
     },
-
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -105,11 +94,8 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
       apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
     },
-
     manifest: "/site.webmanifest",
-
     referrer: "origin-when-cross-origin",
-
     openGraph: {
       type: "website",
       locale: "en_US",
@@ -127,7 +113,6 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
     },
-
     twitter: {
       card: "summary_large_image",
       site: "@upforge_in",
@@ -135,7 +120,6 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "UpForge — Global Startup Registry",
       images: [`${baseUrl}/og/global-registry.png`],
     },
-
     robots: {
       index: true,
       follow: true,
@@ -147,7 +131,6 @@ export async function generateMetadata(): Promise<Metadata> {
         "max-video-preview": -1,
       },
     },
-
     other: {
       // Add your Bing verification token here when ready
       // "msvalidate.01": "YOUR_BING_TOKEN",
@@ -233,34 +216,6 @@ export default async function RootLayout({
       data-domain={ctx}
     >
       <head>
-        {/* Ezoic: Privacy Scripts - must load before header script */}
-        <Script
-          data-cfasync="false"
-          src="https://cmp.gatekeeperconsent.com/min.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          data-cfasync="false"
-          src="https://the.gatekeeperconsent.com/cmp.min.js"
-          strategy="beforeInteractive"
-        />
-
-        {/* Ezoic: Header Script */}
-        <Script
-          src="//www.ezojs.com/ezoic/sa.min.js"
-          strategy="beforeInteractive"
-        />
-        <Script id="ezstandalone-init" strategy="beforeInteractive">
-          {`
-            window.ezstandalone = window.ezstandalone || {};
-            ezstandalone.cmd = ezstandalone.cmd || [];
-          `}
-        </Script>
-        <Script
-          src="//ezoicanalytics.com/analytics.js"
-          strategy="beforeInteractive"
-        />
-
         {/* Performance: Preconnect to critical origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -268,7 +223,6 @@ export default async function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
