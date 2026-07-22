@@ -69,7 +69,7 @@ export default function NewsGalleryPage() {
       <Navbar />
 
       {/* ── HERO HEADER ── */}
-      <div className="relative border-b border-white/10 bg-black/60 backdrop-blur-2xl py-14 px-6 overflow-hidden">
+      <div className="relative border-b border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-2xl py-14 px-6 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent-primary/10 rounded-full blur-[120px]" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-secondary/10 rounded-full blur-[120px]" />
@@ -94,7 +94,7 @@ export default function NewsGalleryPage() {
 
       {/* ── AUTO-SCROLL MARQUEE STRIP ── */}
       {marqueeItems.length > 0 && (
-        <div className="border-b border-white/10 bg-black/40 overflow-hidden py-6">
+        <div className="border-b border-[var(--glass-border)] bg-[var(--glass-bg)] overflow-hidden py-6">
           <div
             className="flex gap-4"
             style={{
@@ -107,7 +107,7 @@ export default function NewsGalleryPage() {
             {[...marqueeItems, ...marqueeItems].map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
-                className="relative flex-shrink-0 w-64 h-40 rounded-xl overflow-hidden border border-white/10 group"
+                className="relative flex-shrink-0 w-64 h-40 rounded-xl overflow-hidden border border-[var(--glass-border)] group"
               >
                 <Image
                   src={item.image}
@@ -117,6 +117,9 @@ export default function NewsGalleryPage() {
                   priority={idx < 2}
                   sizes="256px"
                 />
+                {/* Dark gradient overlay so text stays readable regardless of theme —
+                    this sits ON TOP of the image, not the page background, so
+                    text-white here is intentional and safe. */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-accent-primary mb-1">
@@ -141,7 +144,7 @@ export default function NewsGalleryPage() {
 
       {/* ── MAIN GRID ── */}
       <main className="max-w-6xl mx-auto px-6 py-16">
-        <div className="flex items-center justify-between mb-10 pb-4 border-b border-white/10">
+        <div className="flex items-center justify-between mb-10 pb-4 border-b border-[var(--glass-border)]">
           <div className="flex items-center gap-3">
             <Newspaper className="w-5 h-5 text-accent-primary" />
             <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
@@ -152,7 +155,7 @@ export default function NewsGalleryPage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="glass-panel rounded-3xl p-16 text-center border-dashed border-white/20">
+          <div className="glass-panel rounded-3xl p-16 text-center border-dashed border-[var(--glass-border)]">
             <span className="text-4xl text-muted-foreground mb-4 block">📰</span>
             <h3 className="text-xl font-bold text-foreground mb-2">Gallery coming soon</h3>
             <p className="text-muted-foreground">Press coverage and media moments will appear here.</p>
@@ -173,6 +176,7 @@ export default function NewsGalleryPage() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
+                  {/* Overlay sits on the image itself, not page bg — safe to keep black/60 */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-3 left-3">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-accent-primary px-2 py-1 rounded-full bg-black/60 border border-accent-primary/30 backdrop-blur-sm">
@@ -217,7 +221,7 @@ export default function NewsGalleryPage() {
         )}
 
         {/* ── CTA ── */}
-        <div className="mt-16 glass-panel rounded-3xl p-10 text-center border border-white/10">
+        <div className="mt-16 glass-panel rounded-3xl p-10 text-center border border-[var(--glass-border)]">
           <h3 className="text-xl font-bold text-foreground mb-3">
             Covering UpForge or India&apos;s startup ecosystem?
           </h3>
