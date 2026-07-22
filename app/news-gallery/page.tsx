@@ -80,10 +80,10 @@ export default function NewsGalleryPage() {
               Media &amp; Press
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-4">
             News Gallery
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl font-light leading-relaxed">
+          <p className="text-base md:text-lg text-foreground max-w-2xl font-light leading-relaxed">
             Press coverage, media appearances, and notable moments from UpForge — India&apos;s
             independent verified startup registry. We track the ecosystem, and occasionally the
             ecosystem tracks us back. Below is a curated visual record of coverage, partnerships,
@@ -218,7 +218,7 @@ export default function NewsGalleryPage() {
 
         {/* ── CTA ── */}
         <div className="mt-16 glass-panel rounded-3xl p-10 text-center border border-white/10">
-          <h3 className="text-xl font-bold text-white mb-3">
+          <h3 className="text-xl font-bold text-foreground mb-3">
             Covering UpForge or India&apos;s startup ecosystem?
           </h3>
           <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
@@ -227,7 +227,7 @@ export default function NewsGalleryPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-accent-primary hover:bg-blue-600 text-white px-8 py-3 font-bold text-sm uppercase tracking-wider rounded-full transition-colors shadow-[0_0_15px_rgba(59,130,246,0.4)]"
+            className="inline-flex items-center gap-2 bg-accent-primary hover:bg-blue-600 text-white px-8 py-3 font-bold text-sm uppercase tracking-wider rounded-full transition-colors shadow-[0_4px_12px_rgba(51,_102,_255,_0.4)]"
           >
             Contact Editorial →
           </Link>

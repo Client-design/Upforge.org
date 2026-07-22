@@ -25,7 +25,7 @@ export function FounderHero({ featuredFounders }: FounderHeroProps) {
               src={mainFounder.imageUrl}
               alt={mainFounder.name}
               fill
-              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              className="object-cover transition-all duration-500 group-hover:scale-105"
               priority
             />
             <div className="absolute top-4 left-4 z-20">
@@ -77,7 +77,7 @@ export function FounderHero({ featuredFounders }: FounderHeroProps) {
                   src={founder.imageUrl}
                   alt={founder.nameShort}
                   fill
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all"
+                  className="object-cover transition-all group-hover:scale-105"
                 />
               </div>
               <div className="flex-1">
