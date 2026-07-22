@@ -28,8 +28,20 @@ export const NEWS_ITEMS: RawNewsItem[] = [
   },
   {
     image: "https://media.licdn.com/dms/image/v2/D5622AQERFhu6bUzS0Q/feedshare-shrink_800/B56Z92cSZLJoAc-/0/1784398554961?e=1785974400&v=beta&t=oiX7XSiHrIhunS1VKxFh4XDch0hhllBLRqvTEjN40V8",
-    title: "Every single company must own their own intelligence",
+    title: "Microagi - Ex-F1 Engineer's Al Startup Teaching Factory Robots New Skills, 2026",
     link: "https://www.linkedin.com/posts/upforge-india_upforge-aistartups-fireworks-activity-7484310002258632704-JTGQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-mH6gBQ_9gtMF5dq1uoRS-amoy9RUPz20",
+  },
+
+    {
+    image: "https://i.pinimg.com/736x/94/dd/eb/94ddeb894228e2ed7468eb7a4ebbe71f.jpg",
+    title: "L'Oréal Acquires Majority Stake in Indian D2C Beauty Startup Innovist - 2026",
+    link: "https://www.linkedin.com/posts/upforge-india_upforge-loreal-innovist-activity-7484937191685541888-v3at?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-mH6gBQ_9gtMF5dq1uoRS-amoy9RUPz20",
+  },
+
+    {
+    image: "https://i.pinimg.com/736x/4c/dd/62/4cdd625a81ac1fb8e182fbed3875b664.jpg",
+    title: "Odyssey Raises $310M Series B for World-Models Al - $1.45B Valuation 2026",
+    link: "https://www.linkedin.com/posts/upforge-india_upforge-odyssey-aistartups-activity-7484837677213696000-3tQb?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-mH6gBQ_9gtMF5dq1uoRS-amoy9RUPz20",
   },
 ]
 
