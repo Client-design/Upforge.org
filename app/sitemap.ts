@@ -75,11 +75,11 @@ const STATIC_ROUTES = [
   { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.5, changeFrequency: "yearly" as const },
   { path: "/founders", priority: 0.85, changeFrequency: "weekly" as const },
+  { path: "/founder-stories", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/ufrn", priority: 0.8, changeFrequency: "daily" as const },
   { path: "/indian-unicorns", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/methodology", priority: 0.75, changeFrequency: "monthly" as const },
   { path: "/editorial-standards", priority: 0.7, changeFrequency: "monthly" as const },
-  { path: "/archive", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/news-gallery", priority: 0.65, changeFrequency: "weekly" as const },
 ]
 
@@ -274,4 +274,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogCategoryEntries,
   ]
 }
-
