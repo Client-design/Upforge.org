@@ -37,7 +37,6 @@ type Suggestion = {
 const MORE_LINKS = {
   explore: [
     { name: "Compare Startups", href: "/compare", desc: "Side-by-side startup comparisons" },
-    { name: "Founder Archive", href: "/archive", desc: "The Founder Chronicle — origin stories" },
     { name: "News Gallery", href: "/news-gallery", desc: "Press coverage & media moments" },
   ],
   resources: [
