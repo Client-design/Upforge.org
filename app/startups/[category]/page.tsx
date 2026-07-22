@@ -157,7 +157,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
       <Navbar />
 
       {/* Header Container */}
-      <div className="relative border-b border-white/10 bg-black/60 backdrop-blur-2xl py-12 px-6">
+      <div className="relative border-b border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-2xl py-12 px-6">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent-primary/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-secondary/10 rounded-full blur-[100px]" />
@@ -171,7 +171,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
               </span>
               <span className="text-xs text-muted-foreground tracking-widest uppercase">/ {displayName}</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60">
               {displayName}
             </h1>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl font-light">
@@ -179,7 +179,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
             </p>
           </div>
           
-          <div className="glass-panel p-6 rounded-2xl border-white/10 flex flex-col gap-2 min-w-[200px]">
+          <div className="glass-panel p-6 rounded-2xl border border-[var(--glass-border)] flex flex-col gap-2 min-w-[200px]">
              <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Total Verified Listings</span>
              <span className="text-4xl font-mono font-bold text-accent-gold text-glow">{total.toLocaleString()}</span>
           </div>
@@ -187,7 +187,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
       </div>
 
       {/* Search Toolbar */}
-      <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-white/10">
+      <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-[var(--glass-border)]">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <form action={`/startups/${slug}`} method="GET" className="relative group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-accent-primary transition-colors" />
@@ -195,7 +195,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
               type="search"
               name="q"
               defaultValue={q}
-              className="w-full bg-white/5 border border-white/10 rounded-full pl-12 pr-32 py-3.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent-primary/50 focus:border-accent-primary/50 transition-all font-light"
+              className="w-full bg-muted/40 border border-[var(--glass-border)] rounded-full pl-12 pr-32 py-3.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent-primary/50 focus:border-accent-primary/50 transition-all font-light"
               placeholder={`Search ${total.toLocaleString()} ${displayName} records by name, keyword, or location...`}
             />
             <button type="submit" className="absolute right-1.5 top-1.5 bottom-1.5 bg-accent-primary hover:bg-blue-600 text-white text-xs font-bold uppercase tracking-wider px-6 rounded-full transition-colors shadow-[0_0_15px_rgba(59,130,246,0.5)]">
@@ -210,7 +210,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
         
         {/* Results Stream */}
         <div className="lg:col-span-8">
-          <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--glass-border)]">
              <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
                {q ? `Search Results for "${q}"` : "Verified Directory"}
              </h2>
@@ -221,7 +221,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
             <div className="space-y-4">
               {startups.map((s, idx) => (
                 <Link key={s.id} href={`/startup/${s.slug}`} className="glass-card group flex flex-col sm:flex-row items-start sm:items-center p-5 gap-6">
-                  <div className="w-16 h-16 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:border-accent-primary/50 transition-colors">
+                  <div className="w-16 h-16 rounded-xl bg-muted/40 border border-[var(--glass-border)] flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:border-accent-primary/50 transition-colors">
                      {s.logo_url 
                        ? <Image src={s.logo_url} alt={s.name} width={64} height={64} className="object-contain" />
                        : <span className="font-bold text-xl text-muted-foreground">{s.name.charAt(0)}</span>
@@ -241,14 +241,14 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                     </div>
                   </div>
                   
-                  <div className="hidden sm:flex flex-shrink-0 w-12 h-12 rounded-full border border-white/10 items-center justify-center group-hover:bg-accent-primary group-hover:text-white text-muted-foreground transition-all">
+                  <div className="hidden sm:flex flex-shrink-0 w-12 h-12 rounded-full border border-[var(--glass-border)] items-center justify-center group-hover:bg-accent-primary group-hover:text-white text-muted-foreground transition-all">
                     <ArrowRight className="w-5 h-5 -rotate-45" />
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <div className="glass-panel rounded-2xl p-16 text-center border-dashed border-white/20">
+            <div className="glass-panel rounded-2xl p-16 text-center border-dashed border-[var(--glass-border)]">
                <span className="text-4xl text-muted-foreground mb-4 block">∅</span>
                <h3 className="text-xl font-bold text-foreground mb-2">No profiles found</h3>
                <p className="text-muted-foreground">Try adjusting your search criteria or clear the filters to see all registry records.</p>
@@ -257,12 +257,12 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-12 pt-8 border-t border-white/10">
-              <Link href={pgHref(page - 1)} className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-full border border-white/10 transition-colors ${page === 1 ? 'opacity-50 pointer-events-none' : 'hover:bg-white/10 hover:text-white'} text-muted-foreground`}>Prev</Link>
+            <div className="flex items-center justify-center gap-2 mt-12 pt-8 border-t border-[var(--glass-border)]">
+              <Link href={pgHref(page - 1)} className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-full border border-[var(--glass-border)] transition-colors ${page === 1 ? 'opacity-50 pointer-events-none' : 'hover:bg-muted/40 hover:text-foreground'} text-muted-foreground`}>Prev</Link>
               {pgNums.map(p => (
-                <Link key={p} href={pgHref(p)} className={`w-10 h-10 flex items-center justify-center text-sm font-bold rounded-full transition-all ${p === page ? 'bg-accent-primary text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'border border-white/10 text-muted-foreground hover:bg-white/10 hover:text-white'}`}>{p}</Link>
+                <Link key={p} href={pgHref(p)} className={`w-10 h-10 flex items-center justify-center text-sm font-bold rounded-full transition-all ${p === page ? 'bg-accent-primary text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'border border-[var(--glass-border)] text-muted-foreground hover:bg-muted/40 hover:text-foreground'}`}>{p}</Link>
               ))}
-              <Link href={pgHref(page + 1)} className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-full border border-white/10 transition-colors ${page === totalPages ? 'opacity-50 pointer-events-none' : 'hover:bg-white/10 hover:text-white'} text-muted-foreground`}>Next</Link>
+              <Link href={pgHref(page + 1)} className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-full border border-[var(--glass-border)] transition-colors ${page === totalPages ? 'opacity-50 pointer-events-none' : 'hover:bg-muted/40 hover:text-foreground'} text-muted-foreground`}>Next</Link>
             </div>
           )}
         </div>
@@ -270,23 +270,23 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-8">
           
-          <div className="glass-panel p-8 rounded-3xl relative overflow-hidden text-center bg-black/40">
+          <div className="glass-panel p-8 rounded-3xl relative overflow-hidden text-center bg-[var(--glass-bg)]">
             <div className="absolute inset-0 bg-gradient-neon opacity-10 blur-2xl pointer-events-none" />
             <h3 className="text-sm font-bold uppercase tracking-widest text-accent-gold mb-2 relative z-10">Free Listing</h3>
-            <h4 className="text-xl font-bold text-white mb-4 relative z-10">Add your {displayName} startup to the registry</h4>
-            <Link href="/submit" className="inline-block bg-white text-black font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-full hover:bg-accent-gold transition-colors relative z-10">
+            <h4 className="text-xl font-bold text-foreground mb-4 relative z-10">Add your {displayName} startup to the registry</h4>
+            <Link href="/submit" className="inline-block bg-foreground text-background font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-full hover:bg-accent-gold hover:text-white transition-colors relative z-10">
               Submit Directory →
             </Link>
           </div>
 
-          <div className="border border-white/10 p-6 rounded-3xl bg-white/5">
+          <div className="border border-[var(--glass-border)] p-6 rounded-3xl bg-muted/40">
              <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Registry Intelligence</h3>
              <ul className="space-y-4">
-               <li className="flex justify-between items-center pb-4 border-b border-white/5">
+               <li className="flex justify-between items-center pb-4 border-b border-border">
                  <span className="text-sm text-foreground">Verified Coverage</span>
                  <span className="text-sm font-bold text-accent-primary">100%</span>
                </li>
-               <li className="flex justify-between items-center pb-4 border-b border-white/5">
+               <li className="flex justify-between items-center pb-4 border-b border-border">
                  <span className="text-sm text-foreground">Pricing</span>
                  <span className="text-sm font-bold text-accent-primary">Free forever</span>
                </li>
@@ -298,11 +298,11 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
           </div>
 
           {related.length > 0 && (
-            <div className="border border-white/10 p-6 rounded-3xl bg-white/5">
+            <div className="border border-[var(--glass-border)] p-6 rounded-3xl bg-muted/40">
                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Related Sectors</h3>
                <div className="flex flex-col gap-2">
                  {related.map(c => (
-                   <Link key={c} href={`/startups/${catSlug(c)}`} className="text-sm text-foreground hover:text-accent-secondary py-2 border-b border-white/5 last:border-0 flex items-center justify-between group transition-colors">
+                   <Link key={c} href={`/startups/${catSlug(c)}`} className="text-sm text-foreground hover:text-accent-secondary py-2 border-b border-border last:border-0 flex items-center justify-between group transition-colors">
                      <span>{getDisplayName(c)}</span>
                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                    </Link>
