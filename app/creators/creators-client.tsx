@@ -35,7 +35,6 @@ const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000
 type SortKey = "recent" | "motivation" | "followers" | "alpha"
 type FollowerFilter = "all" | "under1k" | "1k-10k" | "10k-100k" | "100k+"
 
-// Get or compute the 5 promoted creators (persisted 24hrs in localStorage)
 function getPromotedCreators(all: SheetCreator[]): SheetCreator[] {
   if (typeof window === "undefined" || all.length === 0) return []
 
@@ -52,7 +51,6 @@ function getPromotedCreators(all: SheetCreator[]): SheetCreator[] {
     }
   }
 
-  // Pick 5 random creators
   const shuffled = [...all].sort(() => Math.random() - 0.5)
   const selected = shuffled.slice(0, Math.min(5, shuffled.length))
   localStorage.setItem(PROMOTED_KEY, JSON.stringify(selected.map((c) => c.id)))
@@ -77,19 +75,16 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
-  // Auto-suggest state
   const [suggestions, setSuggestions] = useState<SheetCreator[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const searchRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Filters
   const [selectedNiche, setSelectedNiche] = useState("all")
   const [followerFilter, setFollowerFilter] = useState<FollowerFilter>("all")
   const [sortBy, setSortBy] = useState<SortKey>("recent")
 
-  // Load creators from Google Sheets
   const loadCreators = useCallback(async () => {
     setIsLoading(true)
     setError(null)
@@ -117,8 +112,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     }
   }, [creators, promotedCreators.length])
 
-
-  // Profile modal action triggers & URL query string synchronization
   const handleOpenProfile = useCallback((creator: SheetCreator) => {
     setSelectedCreator(creator)
     if (typeof window !== "undefined") {
@@ -137,7 +130,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     }
   }, [])
 
-  // Check URL query parameters for creator deep link
   useEffect(() => {
     if (creators.length > 0 && typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search)
@@ -153,7 +145,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     }
   }, [creators])
 
-  // Generate dynamic JSON-LD Structured Data Schema for Google indexing SEO
   const jsonLdData = useMemo(() => {
     if (creators.length === 0) return null
     return {
@@ -178,7 +169,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     }
   }, [creators])
 
-  // Responsive detection
   useEffect(() => {
     const check = () => {
       const mobile = window.innerWidth < 768
@@ -190,7 +180,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     return () => window.removeEventListener("resize", check)
   }, [])
 
-  // Close suggestions on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
@@ -201,7 +190,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     return () => document.removeEventListener("mousedown", handler)
   }, [])
 
-  // Handle search input change — update suggestions
   const handleSearchChange = (value: string) => {
     setSearchQuery(value)
     setHighlightedIndex(-1)
@@ -263,23 +251,19 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
     )
   }
 
-  // Unique niches from data
   const niches = useMemo(() => {
     const set = new Set(creators.map((c) => c.niche).filter(Boolean))
     return ["all", ...Array.from(set).sort()]
   }, [creators])
 
-  // Promoted IDs set for quick lookup
   const promotedIds = useMemo(
     () => new Set(promotedCreators.map((c) => c.id)),
     [promotedCreators]
   )
 
-  // Filtered + sorted creators (excluding promoted from main grid)
   const filteredCreators = useMemo(() => {
     let list = creators.filter((c) => !promotedIds.has(c.id))
 
-    // Search
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase()
       list = list.filter(
@@ -290,17 +274,14 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
       )
     }
 
-    // Niche filter
     if (selectedNiche !== "all") {
       list = list.filter((c) => c.niche === selectedNiche)
     }
 
-    // Follower filter
     if (followerFilter !== "all") {
       list = list.filter((c) => getFollowerBucket(c.followerCount) === followerFilter)
     }
 
-    // Sort
     switch (sortBy) {
       case "recent":
         list = [...list].sort((a, b) => b.joinedAt.getTime() - a.joinedAt.getTime())
@@ -324,7 +305,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Inject SEO Schema */}
       {jsonLdData && (
         <script
           type="application/ld+json"
@@ -334,10 +314,8 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
 
       {/* HERO */}
       <section className="border-b border-border relative overflow-hidden">
-        {/* Subtle gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/20 via-transparent to-pink-50/10 dark:from-slate-900 dark:to-slate-950 pointer-events-none" />
         <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-10 md:py-16 text-center relative">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-55 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#e6683c] animate-pulse" />
             <span className="text-[10px] font-bold text-slate-700 dark:text-slate-350 uppercase tracking-widest">
@@ -347,7 +325,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
 
           <h1
             className="text-4xl md:text-6xl font-black leading-[1.08] mb-4 text-slate-900 dark:text-white"
-            style={{ fontFamily: "'Georgia', serif" }}
+            style={{ fontFamily: "Georgia, serif" }}
           >
             UpForge Creator{" "}
             <span className="bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#dc2743] bg-clip-text text-transparent">
@@ -359,7 +337,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             The official trust index of verified digital creators. Showcasing audience reach, professional niches, and verified identity badges issued by UpForge.
           </p>
 
-          {/* Stats Bar */}
           <div className="flex items-center justify-center gap-6 md:gap-10 mb-8 max-w-lg mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 py-3.5 px-6 rounded-2xl shadow-sm">
             <div className="text-center">
               <div className="font-serif font-black text-xl md:text-2xl text-slate-850 dark:text-white">{creators.length}</div>
@@ -377,7 +354,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </div>
           </div>
 
-          {/* Action buttons */}
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <button
               onClick={() => setIsModalOpen(true)}
@@ -427,9 +403,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
       {/* MAIN CONTENT */}
       <div className="max-w-[1300px] mx-auto px-4 md:px-8">
 
-        {/* SEARCH + FILTER BAR */}
         <div className="py-4 border-b border-border space-y-3">
-          {/* Search with auto-suggest */}
           {(isSearchOpen || !isMobile) && (
             <div ref={searchRef} className="relative max-w-2xl mx-auto">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
@@ -452,7 +426,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 </button>
               )}
 
-              {/* Auto-suggest dropdown */}
               {showSuggestions && suggestions.length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-1.5 bg-background border border-border rounded-2xl shadow-xl z-50 overflow-hidden">
                   {suggestions.map((creator, idx) => (
@@ -463,7 +436,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                         idx === highlightedIndex ? "bg-muted" : "hover:bg-muted/60"
                       }`}
                     >
-                      {/* Avatar */}
                       <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 ring-2 ring-slate-100 ring-offset-1 ring-offset-background bg-slate-50">
                         {creator.profilePicture ? (
                           // eslint-disable-next-line @next/next/no-img-element
@@ -484,7 +456,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                         )}
                       </div>
 
-                      {/* Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1">
                           <span className="text-xs font-semibold truncate text-slate-800 dark:text-white">
@@ -499,7 +470,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                         </p>
                       </div>
 
-                      {/* Niche */}
                       <span className="text-[9px] font-bold uppercase text-amber-700 shrink-0 hidden sm:block">
                         {creator.niche}
                       </span>
@@ -510,7 +480,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </div>
           )}
 
-          {/* Filter toggle */}
           <div className="flex items-center gap-2 flex-wrap justify-between">
             <div className="flex items-center gap-1.5 flex-wrap">
               <button
@@ -526,7 +495,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 )}
               </button>
 
-              {/* Sort */}
               <div className="flex items-center gap-1.5 ml-2">
                 <SortAsc className="w-3 h-3 text-muted-foreground" />
                 {(["recent", "motivation", "followers", "alpha"] as SortKey[]).map((key) => (
@@ -545,7 +513,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               </div>
             </div>
 
-            {/* Refresh button */}
             <button
               onClick={loadCreators}
               disabled={isLoading}
@@ -556,7 +523,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </button>
           </div>
 
-          {/* Filter panel */}
           <AnimatePresence>
             {isFilterOpen && (
               <motion.div
@@ -566,7 +532,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 className="overflow-hidden"
               >
                 <div className="p-4 bg-muted/20 rounded-2xl space-y-4 border border-border">
-                  {/* Niche */}
                   <div>
                     <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">
                       Niche / Category
@@ -588,7 +553,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                     </div>
                   </div>
 
-                  {/* Followers */}
                   <div>
                     <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1">
                       <Users className="w-3 h-3" /> Follower Reach
@@ -610,7 +574,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                     </div>
                   </div>
 
-                  {/* Reset */}
                   {(selectedNiche !== "all" || followerFilter !== "all") && (
                     <button
                       onClick={() => { setSelectedNiche("all"); setFollowerFilter("all") }}
@@ -624,7 +587,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             )}
           </AnimatePresence>
 
-          {/* Result count */}
           <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
             <span>
               {searchQuery || selectedNiche !== "all" || followerFilter !== "all"
@@ -639,7 +601,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         </div>
 
-        {/* LOADING STATE */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <Loader2 className="w-8 h-8 animate-spin text-slate-700" />
@@ -647,7 +608,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        {/* ERROR STATE */}
         {error && !isLoading && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <p className="text-sm text-red-500">{error}</p>
@@ -660,7 +620,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        {/* EMPTY STATE */}
         {!isLoading && !error && filteredCreators.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
             <Search className="w-10 h-10 text-muted-foreground/40" />
@@ -674,7 +633,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        {/* MOBILE VIEW (2-column card deck grid) */}
         {!isLoading && !error && isMobile && (
           <div className="grid grid-cols-2 gap-3 py-6">
             {displayedCreators.map((creator) => (
@@ -688,7 +646,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        {/* DESKTOP VIEW */}
         {!isLoading && !error && !isMobile && (
           <div className="grid grid-cols-4 gap-4 py-8">
             {displayedCreators.map((creator) => (
@@ -702,7 +659,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        {/* LOAD MORE */}
         {!isLoading && hasMore && (
           <div className="text-center py-8">
             <button
@@ -718,7 +674,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        {/* FOOTER NOTE */}
         <div className="text-center py-8 mt-8 border-t border-border/40 bg-muted/20 rounded-xl mb-4">
           <p className="text-[10px] text-muted-foreground mb-2">
             The UpForge Creator Registry is an independent database. Identity verification is conducted based on submission compliance, audience footprint, and trust rating scores.
@@ -729,14 +684,12 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
         </div>
       </div>
 
-      {/* APPLY MODAL */}
       <ApplyModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formUrl={GOOGLE_FORM_URL}
       />
 
-      {/* DYNAMIC PROFILE MODAL */}
       <CreatorProfileModal
         creator={selectedCreator}
         isOpen={selectedCreator !== null}
