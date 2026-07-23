@@ -15,6 +15,7 @@ import { CreatorCardMobile } from "@/components/creators/creator-card-mobile"
 import { PromotedSection } from "@/components/creators/promoted-section"
 import { ApplyModal } from "@/components/creators/apply-modal"
 import { CreatorProfileModal } from "@/components/creators/creator-profile-modal"
+import { PartnerProgramSection } from "@/components/creators/partner-program-section"
 import {
   fetchCreatorsFromSheet,
   SheetCreator,
@@ -390,7 +391,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             >
               Contact Registry Board
             </Link>
-            <a
+            
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
@@ -411,6 +412,9 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         </div>
       </section>
+
+      {/* PARTNER PROGRAM SECTION */}
+      <PartnerProgramSection />
 
       {/* PROMOTED SECTION */}
       {!isLoading && promotedCreators.length > 0 && (
