@@ -69,7 +69,7 @@ export function PartnerProgramSection() {
               ))}
             </ol>
 
-            
+            <a
               href={APPLY_LINK}
               target="_blank"
               rel="noopener noreferrer"
