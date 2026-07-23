@@ -2,13 +2,15 @@
 "use client"
 
 import { SheetCreator, formatFollowerCount } from "@/lib/sheets"
-import { Users, TrendingUp, ShieldCheck } from "lucide-react"
+import { Users, ShieldCheck, ArrowUpRight } from "lucide-react"
 
 interface CreatorCardDesktopProps {
   creator: SheetCreator
   isPromoted?: boolean
   onViewProfile: (creator: SheetCreator) => void
 }
+
+const PARTNER_APPLY_LINK = "https://sample.link"
 
 function getInitials(name: string): string {
   return name
@@ -36,31 +38,58 @@ export function CreatorCardDesktop({
   onViewProfile,
 }: CreatorCardDesktopProps) {
   const gradient = getGradient(creator.instagramHandle)
-  const registryNum = creator.id.replace("sheet-", "").padStart(5, "0")
-  const registryId = `UPF-CR-2026-${registryNum}`
+  const isPartner = creator.isPartner
+
+  const handleApplyClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    window.open(PARTNER_APPLY_LINK, "_blank", "noopener,noreferrer")
+  }
+
+  const ringClass = isPartner
+    ? "ring-2 ring-[#C59A2E]"
+    : isPromoted
+    ? "ring-2 ring-amber-400"
+    : "ring-2 ring-slate-200 dark:ring-slate-700"
 
   return (
     <div
       onClick={() => onViewProfile(creator)}
       className="group relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between h-full select-none"
     >
-      {/* Registry ID Header Tag */}
-      <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 dark:text-slate-500 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800/60">
-        <span>{registryId}</span>
-        <div className="flex items-center gap-0.5 text-emerald-600 dark:text-emerald-500 font-bold uppercase tracking-wider">
-          <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-          VERIFIED
-        </div>
+      <style jsx>{`
+        @keyframes partnerRingGlow {
+          0%, 100% {
+            box-shadow: 0 0 6px 1px rgba(197, 154, 46, 0.55), 0 0 14px 3px rgba(34, 197, 94, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 12px 3px rgba(197, 154, 46, 0.9), 0 0 22px 6px rgba(34, 197, 94, 0.55);
+          }
+        }
+        @keyframes vBadgePulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+        }
+        .partner-glow {
+          animation: partnerRingGlow 2s ease-in-out infinite;
+        }
+        .v-badge {
+          animation: vBadgePulse 1.6s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* Verified strip */}
+      <div className="flex items-center justify-center gap-1 text-[9px] font-mono text-emerald-600 dark:text-emerald-500 font-bold uppercase tracking-wider mb-3 pb-2 border-b border-slate-100 dark:border-slate-800/60">
+        <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+        Verified Creator
       </div>
 
-      {/* Profile Image with Verified double rings */}
+      {/* Profile Image */}
       <div className="relative mb-3 flex justify-center">
         <div
-          className={`
-            w-20 h-20 rounded-full overflow-hidden mx-auto
-            ring-2 ${isPromoted ? "ring-amber-400" : "ring-slate-200 dark:ring-slate-700"} ring-offset-2 ring-offset-background
-            transition-all duration-300 group-hover:scale-105
-          `}
+          className={`w-20 h-20 rounded-full overflow-hidden mx-auto ${ringClass} ${
+            isPartner ? "partner-glow" : ""
+          } ring-offset-2 ring-offset-background transition-all duration-300 group-hover:scale-105`}
         >
           {creator.profilePicture ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -73,7 +102,9 @@ export function CreatorCardDesktop({
                 target.style.display = "none"
                 const parent = target.parentElement
                 if (parent) {
-                  parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br ${gradient} text-slate-700 dark:text-slate-300 text-xl font-bold">${getInitials(creator.fullName)}</div>`
+                  parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br ${gradient} text-slate-700 dark:text-slate-300 text-xl font-bold">${getInitials(
+                    creator.fullName
+                  )}</div>`
                 }
               }}
             />
@@ -85,16 +116,27 @@ export function CreatorCardDesktop({
             </div>
           )}
         </div>
-        {/* Verification Check Badge */}
+
+        {/* Instagram-style blue verification tick */}
         <div className="absolute -bottom-0.5 right-[calc(50%-44px)] bg-background rounded-full p-0.5 shadow-sm">
-          <svg
-            className="w-5 h-5 text-[#0095F6] flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
+          <svg className="w-5 h-5 text-[#0095F6] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
           </svg>
         </div>
+
+        {/* Glowing Partner V Badge */}
+        {isPartner && (
+          <div
+            className="v-badge absolute -top-1 right-[calc(50%-46px)] w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900"
+            style={{
+              background: "linear-gradient(135deg, #C59A2E 0%, #22c55e 100%)",
+              boxShadow: "0 0 8px 2px rgba(197,154,46,0.8), 0 0 14px 4px rgba(34,197,94,0.5)",
+            }}
+            title="Verified Partner"
+          >
+            <span className="text-white text-[11px] font-black leading-none">V</span>
+          </div>
+        )}
       </div>
 
       {/* Name and Handle */}
@@ -105,40 +147,42 @@ export function CreatorCardDesktop({
         <p className="text-[11px] font-medium text-slate-400 dark:text-slate-500 mt-0.5 truncate max-w-[170px] mx-auto">
           @{creator.instagramHandle}
         </p>
+        {isPartner && (
+          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#C59A2E]/15 to-emerald-500/15 border border-[#C59A2E]/30 text-[8px] font-black text-[#A8821E] dark:text-[#C59A2E] uppercase tracking-widest">
+            Official Partner
+          </span>
+        )}
       </div>
 
-      {/* Niche Badge */}
-      <div className="mb-4">
-        <span className="inline-block px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-[9px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest">
+      {/* Compact info row */}
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <span className="px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-[9px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest">
           {creator.niche}
         </span>
-      </div>
-
-      {/* Metrics Row */}
-      <div className="border-t border-slate-100 dark:border-slate-800/60 pt-3 flex items-center justify-around gap-2 mb-3">
         {creator.followerCount > 0 && (
-          <div className="flex items-center gap-1">
-            <Users className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
-              {formatFollowerCount(creator.followerCount)} Reach
-            </span>
-          </div>
-        )}
-        <div className="w-px h-3.5 bg-slate-100 dark:bg-slate-800" />
-        {creator.motivationScore > 0 && (
-          <div className="flex items-center gap-1">
-            <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
-            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
-              {creator.motivationScore}/10 Score
-            </span>
-          </div>
+          <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 font-bold">
+            <Users className="w-3 h-3 text-slate-400" />
+            {formatFollowerCount(creator.followerCount)}
+          </span>
         )}
       </div>
 
-      {/* View Profile Action button */}
-      <div className="w-full mt-auto py-2 rounded-xl text-[11px] font-bold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-all duration-300 flex items-center justify-center gap-1">
-        <ShieldCheck className="w-3.5 h-3.5" />
-        View Credentials
+      {/* Actions */}
+      <div className="mt-auto space-y-2">
+        <div className="w-full py-2 rounded-xl text-[11px] font-bold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-all duration-300 flex items-center justify-center gap-1">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          View Profile
+        </div>
+
+        {!isPartner && (
+          <button
+            onClick={handleApplyClick}
+            className="w-full py-2 rounded-xl text-[11px] font-bold text-white bg-[#C59A2E] hover:bg-[#A8821E] transition-colors flex items-center justify-center gap-1"
+          >
+            Apply for Partner Program
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
     </div>
   )
