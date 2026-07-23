@@ -10,7 +10,7 @@ interface CreatorCardMobileProps {
   onViewProfile: (creator: SheetCreator) => void
 }
 
-const PARTNER_APPLY_LINK = "https://sample.link"
+const PARTNER_APPLY_LINK = "https://payments.cashfree.com/forms/UpForge-Partners-Program"
 
 function getInitials(name: string): string {
   return name
