@@ -312,11 +312,11 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
         />
       )}
 
-      {/* HERO */}
+{/* HERO */}
       <section className="border-b border-border relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/20 via-transparent to-pink-50/10 dark:from-slate-900 dark:to-slate-950 pointer-events-none" />
         <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-10 md:py-16 text-center relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-55 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#e6683c] animate-pulse" />
             <span className="text-[10px] font-bold text-slate-700 dark:text-slate-350 uppercase tracking-widest">
               Verified Creator Registry
@@ -368,6 +368,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               Contact Registry Board
             </Link>
             
+            <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
@@ -376,6 +377,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               <MessageCircle className="w-3.5 h-3.5" />
               Request Profile Update
             </a>
+            
             <button
               onClick={() => {
                 setIsSearchOpen(!isSearchOpen)
