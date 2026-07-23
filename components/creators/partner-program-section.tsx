@@ -4,7 +4,7 @@
 import Image from "next/image"
 import { Sparkles, ShieldCheck, ArrowRight } from "lucide-react"
 
-const APPLY_LINK = "https://sample.link"
+const APPLY_LINK = "https://payments.cashfree.com/forms/UpForge-Partners-Program"
 
 export function PartnerProgramSection() {
   return (
