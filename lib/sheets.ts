@@ -18,55 +18,45 @@ export interface SheetCreator {
   joinedAt: Date
   email?: string
   city?: string
+  isPartner: boolean
 }
 
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmF9hQQC6sUOvzsYEelSYlvTgSWwGAQI_AiHKrqj3YissSynM_i_T8sVMkwUMAvvB38aqTNxvFxcsN/pub?output=csv"
 
 // Convert Google Drive sharing URL to direct viewable image URL
-// Google Form uploads store URLs like:
-//   https://drive.google.com/open?id=FILE_ID
-//   https://drive.google.com/file/d/FILE_ID/view?usp=sharing
-// We convert to: https://drive.google.com/thumbnail?id=FILE_ID&sz=w400
 function convertGoogleDriveUrl(url: string): string {
   if (!url || url.trim() === "") return ""
   const raw = url.trim()
 
-  // Already a direct/non-drive URL — use as-is
   if (!raw.includes("drive.google.com")) return raw
 
   let fileId = ""
 
-  // Format 1: /file/d/FILE_ID/view
   const fileMatch = raw.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
   if (fileMatch) fileId = fileMatch[1]
 
-  // Format 2: ?id=FILE_ID  or  open?id=FILE_ID
   if (!fileId) {
     const idMatch = raw.match(/[?&]id=([a-zA-Z0-9_-]+)/)
     if (idMatch) fileId = idMatch[1]
   }
 
-  if (!fileId) return raw // could not parse, return as-is
+  if (!fileId) return raw
 
-  // Use thumbnail endpoint — works without login for shared files
   return `https://drive.google.com/thumbnail?id=${fileId}&sz=w400`
 }
 
-// Parse follower count string to number
 function parseFollowerCount(raw: string): number {
   if (!raw) return 0
   const cleaned = raw.replace(/[,\s]/g, "").toLowerCase()
   const num = parseInt(cleaned, 10)
   if (!isNaN(num)) return num
 
-  // Handle ranges like "1000-5000" → take average
   const rangeMatch = cleaned.match(/(\d+)[-–](\d+)/)
   if (rangeMatch) {
     return Math.floor((parseInt(rangeMatch[1]) + parseInt(rangeMatch[2])) / 2)
   }
 
-  // Handle descriptive values
   if (cleaned.includes("1k") || cleaned.includes("1,000")) return 1000
   if (cleaned.includes("5k")) return 5000
   if (cleaned.includes("10k")) return 10000
@@ -78,7 +68,6 @@ function parseFollowerCount(raw: string): number {
   return 0
 }
 
-// Parse CSV line handling quoted fields with commas
 function parseCSVLine(line: string): string[] {
   const result: string[] = []
   let current = ""
@@ -104,6 +93,13 @@ function parseCSVLine(line: string): string[] {
   return result
 }
 
+// Parses "Yes" / "No" (case-insensitive, any whitespace) from the sheet.
+// Defaults to false (not a partner) for anything else, including empty cells.
+function parseIsPartner(raw: string): boolean {
+  if (!raw) return false
+  return raw.trim().toLowerCase() === "yes"
+}
+
 const fetchRawCreators = unstable_cache(
   async (): Promise<SheetCreator[]> => {
     const response = await fetch(SHEET_CSV_URL, {
@@ -121,7 +117,6 @@ const fetchRawCreators = unstable_cache(
 
     if (lines.length < 2) return []
 
-    // Skip header row (index 0), parse data rows
     const creators: SheetCreator[] = []
 
     for (let i = 1; i < lines.length; i++) {
@@ -137,13 +132,15 @@ const fetchRawCreators = unstable_cache(
       // 6: How did you hear about us
       // 7: Additional comments
       // 8: Profile Picture (URL)
+      // 9: Email
+      // 10: City
+      // 11: is_partner ("Yes" / "No") — NEW
 
       if (cols.length < 2 || !cols[1]?.trim()) continue
 
       const timestamp = cols[0]?.trim() || ""
       const fullName = cols[1]?.trim() || "Anonymous"
       const rawHandle = cols[2]?.trim() || ""
-      // Clean handle - remove @ prefix if present
       const instagramHandle = rawHandle.startsWith("@")
         ? rawHandle.slice(1)
         : rawHandle
@@ -165,6 +162,7 @@ const fetchRawCreators = unstable_cache(
 
       const email = cols[9]?.trim() || ""
       const city = cols[10]?.trim() || ""
+      const isPartner = parseIsPartner(cols[11]?.trim() || "")
 
       creators.push({
         id: `sheet-${i}`,
@@ -181,6 +179,7 @@ const fetchRawCreators = unstable_cache(
         joinedAt,
         email,
         city,
+        isPartner,
       })
     }
 
@@ -200,7 +199,6 @@ export async function fetchCreatorsFromSheet(): Promise<SheetCreator[]> {
 }
 
 
-// Follower bucket helper
 export function getFollowerBucket(count: number): string {
   if (count === 0) return "unknown"
   if (count < 1000) return "under1k"
