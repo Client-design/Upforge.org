@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import Link from "next/link"
+import { SITE_STATS } from "@/lib/site-stats"
 
 export const metadata: Metadata = {
   title: "India Startup Ecosystem 2026: Complete State of the Nation Report | UpForge",
@@ -587,7 +588,7 @@ export default function IndiaStartupEcosystem2026() {
             Your Startup Deserves to Be Seen
           </h3>
           <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-            Join 47,000+ verified startups in the UpForge global registry. Get your UFRN credential. 
+            Join {SITE_STATS.trackedStartupsText} verified startups in the UpForge global registry. Get your UFRN credential. 
             Appear in front of 2,200+ active investors. Free basic listing.
           </p>
           <Link
