@@ -165,19 +165,11 @@ export function CreatorCardMobile({
       </div>
 
       {/* Actions */}
-      <div className="mt-2.5 space-y-1.5">
+      <div className="mt-2.5">
         <div className="w-full py-1.5 rounded-lg text-[9px] font-bold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center justify-center gap-0.5">
           <ShieldCheck className="w-3 h-3" />
           View Profile
         </div>
-        {!isPartner && (
-          <button
-            onClick={handleApplyClick}
-            className="w-full py-1.5 rounded-lg text-[9px] font-bold text-white bg-[#C59A2E] hover:bg-[#A8821E] transition-colors"
-          >
-            Apply for Partner
-          </button>
-        )}
       </div>
     </div>
   )
