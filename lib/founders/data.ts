@@ -27,7 +27,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1B+",
     founded: "2022",
     
-    imageUrl: "public/images/founders/aravind-srinivas.jpg",
+    imageUrl: "https://images.forbesindia.com/blog/wp-content/uploads/2026/05/Aravind-SrinivasGettyImages2181313521-copy-2026-05-e346b495c894f887b068916e2a001fbd.jpg?im=Resize,width=600,aspect=fit,type=normal",
     accent: "#0052FF",
     accentBg: "#EBF2FF",
     accentBorder: "#99C2FF",
@@ -89,7 +89,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1.1B",
     founded: "2023",
     
-    imageUrl: "public/images/founders/arthur-mensch.jpg",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg_hmytvaKKLBuMA99yTGr_wl1kdZJvvIpufiATmLWV3deLQ6T_wjTERc&s=10",
     accent: "#FF5722",
     accentBg: "#FFEEE8",
     accentBorder: "#FFBCAB",
@@ -151,7 +151,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$3.8B",
     founded: "2017",
     
-    imageUrl: "public/images/founders/palmer-luckey.jpg",
+    imageUrl: "https://pic1.calcalist.co.il/picserver3/crop_images/2025/10/18/ry31zybCxx/ry31zybCxx_0_0_2126_1415_0_x-large.jpg",
     accent: "#1A1A1A",
     accentBg: "#F0F0F0",
     accentBorder: "#CCCCCC",
@@ -213,7 +213,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1B",
     founded: "2024",
     
-    imageUrl: "public/images/founders/ilya-sutskever.jpg",
+    imageUrl: "https://pic1.calcalist.co.il/picserver3/crop_images/2024/09/04/Bk711DJL20/Bk711DJL20_0_0_1500_855_0_x-large.jpg",
     accent: "#6B21A8",
     accentBg: "#F5F3FF",
     accentBorder: "#DDD6FE",
@@ -275,7 +275,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1B",
     founded: "2025",
     
-    imageUrl: "public/images/founders/mira-murati.jpg",
+    imageUrl: "https://s3.tradingview.com/news/image/invezz:55677ad97094b-4d0ebf8953d94793bc46bde9eaf46965-resized.webp",
     accent: "#0D9488",
     accentBg: "#F0FDFA",
     accentBorder: "#CCFBF1",
@@ -1552,7 +1552,629 @@ export const FOUNDERS: Founder[] = [
     createdAt: "2026-04-20",
     updatedAt: "2026-04-21",
     publishedAt: "2026-04-20"
+  },
+
+// 26. GUILHERME RAUCH (New Age Developer Infrastructure)
+  {
+    id: "guilherme-rauch-2026",
+    slug: "guilherme-rauch-vercel",
+    edition: 26,
+    featured: true,
+    category: "Developer Tools & Frontend",
+    
+    name: "Guilherme Rauch",
+    nameShort: "Guilherme Rauch",
+    initials: "GR",
+    company: "Vercel",
+    role: "Founder & CEO",
+    
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "Creator of Next.js & Frontend Infrastructure",
+    
+    valuation: "$3.25B",
+    funding: "$500M+",
+    founded: "2015",
+    
+    imageUrl: "https://i.insider.com/5e6ab117e4f9fe555f0b9a45?width=700",
+    accent: "#000000",
+    accentBg: "#F5F5F5",
+    accentBorder: "#CCCCCC",
+    
+    headline: "He built Next.js and Vercel to make the web instantly fast for tens of millions of developers worldwide.",
+    deck: "Guilherme Rauch transformed modern web development by building Vercel, the default deployment cloud for React and Next.js applications.",
+    
+    columns: [
+      {
+        heading: "The Creator of Next.js",
+        body: "Guilherme Rauch realized early that traditional monolithic web hosting was too complex for modern frontend engineers. By founding Vercel and creating Next.js, Rauch gave developers zero-config serverless deployments, hybrid static-server rendering, and instant global edge distribution."
+      },
+      {
+        heading: "The Default Web Infrastructure",
+        body: "Under Rauch's leadership, Next.js became the dominant meta-framework powering top tech companies including OpenAI, TikTok, Uber, and Loom. Vercel simplified developer workflows by introducing instant preview deployments and native AI SDK integrations."
+      },
+      {
+        heading: "Powering the Generative Web",
+        body: "In 2026, Vercel is valued at $3.25B+ and serves as the core deployment rail for next-generation web apps, AI agents, and dynamic frontend experiences worldwide."
+      }
+    ],
+    
+    pullQuote: "Develop. Preview. Ship. If you remove friction for builders, the entire web speeds up.",
+    pullQuoteBy: "Guilherme Rauch",
+    lesson: "Focus relentlessly on developer experience—making complex workflows feel effortless builds deep moat and loyalty.",
+    
+    stats: [
+      { label: "Valuation", value: "$3.25B" },
+      { label: "Next.js Downloads", value: "100M+/mo" },
+      { label: "Total Funding", value: "$500M+" },
+      { label: "Founded", value: "2015" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 27. ALEXANDR WANG & HUANG (Scale & Defense AI Trend)
+  {
+    id: "suraj-patel-2026",
+    slug: "shyam-sankar-palantir",
+    edition: 27,
+    featured: true,
+    category: "Defense Tech & Big Data",
+    
+    name: "Shyam Sankar",
+    nameShort: "Shyam Sankar",
+    initials: "SS",
+    company: "Palantir Technologies",
+    role: "CTO & Executive VP",
+    
+    city: "Denver",
+    country: "United States",
+    countryCode: "US",
+    countryCode: "US",
+    context: "Architect of Enterprise & Defense AIP",
+    
+    valuation: "$100B+",
+    funding: "Public (NYSE: PLTR)",
+    founded: "2003",
+    
+    imageUrl: "https://static.startuptalky.com/2025/08/Silicon-Valley-Billionaire-Shyam-Shankar-Palantir-Startuptalky.jpg",
+    accent: "#050505",
+    accentBg: "#F0F0F0",
+    accentBorder: "#B0B0B0",
+    
+    headline: "He built Palantir's Artificial Intelligence Platform (AIP) that automates defense and enterprise operations.",
+    deck: "Shyam Sankar led the development of AIP, making Palantir the core software engine for Western defense and industrial supply chains.",
+    
+    columns: [
+      {
+        heading: "From Foundry to AIP",
+        body: "Shyam Sankar spent over 18 years shaping Palantir's architecture from core ontology platforms (Gotham and Foundry) into the dominant Artificial Intelligence Platform (AIP). He proved that combining raw LLM intelligence with existing enterprise data pipelines produces massive operational efficiency."
+      },
+      {
+        heading: "AIP Bootcamps",
+        body: "Sankar spearheaded Palantir's iconic AIP Bootcamps—a strategy that enabled legacy Fortune 500 corporations and military defense teams to build functioning AI agents inside their real systems within just 5 days."
+      },
+      {
+        heading: "Operational Autonomy",
+        body: "By 2026, Palantir's stock and market presence reached historic highs, with Sankar recognized globally as a principal architect of enterprise AI implementation."
+      }
+    ],
+    
+    pullQuote: "AI without enterprise ontology is just a toy. When tied to operational actions, it changes everything.",
+    pullQuoteBy: "Shyam Sankar",
+    lesson: "Deploying AI in high-stakes environments requires zero-latency data integration and real operational guardrails.",
+    
+    stats: [
+      { label: "Market Cap", value: "$100B+" },
+      { label: "AIP Bootcamps", value: "2,000+" },
+      { label: "US DoD Partner", value: "Tier 1" },
+      { label: "Tenure", value: "18+ Yrs" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 28. DANIEL GROSS (New Trending Investor & AI Pioneer)
+  {
+    id: "daniel-gross-2026",
+    slug: "daniel-gross-ssi-cue",
+    edition: 28,
+    featured: false,
+    category: "Venture Capital & AI",
+    
+    name: "Daniel Gross",
+    nameShort: "Daniel Gross",
+    initials: "DG",
+    company: "SSI / Pioneer",
+    role: "Co-Founder (Safe Superintelligence)",
+    
+    city: "Palo Alto",
+    country: "United States",
+    countryCode: "US",
+    context: "Co-Founder of SSI & Top AI Backer",
+    
+    valuation: "$5B",
+    funding: "$1B",
+    founded: "2024",
+    
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXmgEma7LbLdQJbyJwt-su9Wa6mGXk4I37p4YS-kZieLhcWnbOoOoV7dI&s=10",
+    accent: "#4F46E5",
+    accentBg: "#EEF2FF",
+    accentBorder: "#C7D2FE",
+    
+    headline: "He built Cue at 18, sold it to Apple, and now co-founded Safe Superintelligence (SSI) with Ilya Sutskever.",
+    deck: "Daniel Gross is one of Silicon Valley's most prolific AI backers, funding the next wave of foundation models and AGI safety research.",
+    
+    columns: [
+      {
+        heading: "Teenage Prodigy to Apple Director",
+        body: "Daniel Gross entered Y Combinator at age 18 to build search engine Cue, which Apple acquired in 2013. At Apple, Gross led search and machine learning teams before transitioning into global tech venture investing."
+      },
+      {
+        heading: "The Compute Capitalist",
+        body: "Alongside Nat Friedman, Gross raised huge compute funds to buy tens of thousands of NVIDIA H100 GPUs, offering startup founders raw AI compute clusters instead of traditional venture capital cash."
+      },
+      {
+        heading: "Co-Founding SSI",
+        body: "In 2024, Gross partnered with Ilya Sutskever and Daniel Levy to co-found Safe Superintelligence Inc. (SSI), raising $1B to build superintelligence without short-term product distractions."
+      }
+    ],
+    
+    pullQuote: "Capital is commodity; compute and talent are the real bottlenecks of the intelligence age.",
+    pullQuoteBy: "Daniel Gross",
+    lesson: "Supply founders with what they actually need to win—whether that is GPU compute or unconstrained long-term focus.",
+    
+    stats: [
+      { label: "SSI Valuation", value: "$5B" },
+      { label: "Capital Raised", value: "$1B" },
+      { label: "Compute Deployed", value: "10k+ GPUs" },
+      { label: "Founded SSI", value: "2024" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 29. NAT FRIEDMAN (New Trending VC & Ex-GitHub CEO)
+  {
+    id: "nat-friedman-2026",
+    slug: "nat-friedman-ai-investor",
+    edition: 29,
+    featured: false,
+    category: "AI Investments",
+    
+    name: "Nat Friedman",
+    nameShort: "Nat Friedman",
+    initials: "NF",
+    company: "AI Grant / Ex-GitHub",
+    role: "General Partner & Former GitHub CEO",
+    
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "Ex-CEO of GitHub & Leading AI Investor",
+    
+    valuation: "$5B+ Portfolio",
+    funding: "Super Angel / VC",
+    founded: "2022",
+    
+    imageUrl: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2025/06/Screenshot-from-2025-06-19-06-53-11.png",
+    accent: "#000000",
+    accentBg: "#F4F4F5",
+    accentBorder: "#D4D4D8",
+    
+    headline: "He led GitHub through its AI transformation with Copilot. Now he backs the world's best AI founders.",
+    deck: "Nat Friedman piloted GitHub Copilot into the world's first massive commercial AI software product before becoming a top AI investor.",
+    
+    columns: [
+      {
+        heading: "Launching GitHub Copilot",
+        body: "As CEO of GitHub, Nat Friedman worked closely with OpenAI to launch GitHub Copilot, demonstrating to the global developer community that generative AI could dramatically accelerate software engineering speed."
+      },
+      {
+        heading: "The AI Grant Ecosystem",
+        body: "After stepping down from GitHub, Friedman partnered with Daniel Gross to launch AI Grant, funding dozens of early-stage AI startups including Perplexity, Suno, and ElevenLabs."
+      },
+      {
+        heading: "Vesuvius Challenge",
+        body: "Friedman also launched the Vesuvius Challenge—using high-resolution CT scans and AI algorithms to read carbonized ancient Herculaneum papyrus scrolls for the first time in 2,000 years."
+      }
+    ],
+    
+    pullQuote: "The best tech products feel like magic tricks that save you hours of effort every day.",
+    pullQuoteBy: "Nat Friedman",
+    lesson: "Move fast when platform shifts occur—being early to generative AI code generation gave GitHub an unshakeable moat.",
+    
+    stats: [
+      { label: "Portfolio AI Unicorns", value: "10+" },
+      { label: "Key Investments", value: "Perplexity, Suno" },
+      { label: "Vesuvius Prize", value: "$1M+" },
+      { label: "Ex-GitHub CEO", value: "2018-2021" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 30. MATI STANISZEWSKI (New Trending Synthetic Audio)
+  {
+    id: "mati-staniszewski-2026",
+    slug: "mati-staniszewski-elevenlabs",
+    edition: 30,
+    featured: true,
+    category: "Audio AI & Voice Synthesizer",
+    
+    name: "Mati Staniszewski",
+    nameShort: "Mati Staniszewski",
+    initials: "MS",
+    company: "ElevenLabs",
+    role: "Co-Founder & CEO",
+    
+    city: "London",
+    country: "United Kingdom",
+    countryCode: "GB",
+    context: "World Leader in Generative AI Voice",
+    
+    valuation: "$3.3B",
+    funding: "$280M",
+    founded: "2022",
+    
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6Dqj1sxweOWAJxM7oBsHBB3uQcACl1e_TJMZLbv2ub2fdYNdctr_qhBzZ&s=10",
+    accent: "#2563EB",
+    accentBg: "#EFF6FF",
+    accentBorder: "#BFDBFE",
+    
+    headline: "He built ElevenLabs to make any voice speak any language with human emotion and zero latency.",
+    deck: "Mati Staniszewski created the premier generative voice platform, powering dubbing, audiobooks, and AI conversational agents.",
+    
+    columns: [
+      {
+        heading: "Poor Dubbing Inspiration",
+        body: "Growing up in Poland watching poorly dubbed Hollywood movies inspired Mati Staniszewski and co-founder Piotr Dabkowski to build AI voice models that preserve exact human emotion, cadence, and tone across languages."
+      },
+      {
+        heading: "Ultra-Realistic Voice Models",
+        body: "ElevenLabs shocked the market with its natural voice synthesis and voice cloning APIs. Within two years of launch, it became the default voice stack for audiobooks, gaming NPCs, movie dubbing, and AI call centers globally."
+      },
+      {
+        heading: "Unicorn Status in 2 Years",
+        body: "By 2026, ElevenLabs reached a $3.3 billion valuation backed by Andreessen Horowitz, Sequoia, and Smash Capital, establishing itself as the undisputed global champion of synthetic audio."
+      }
+    ],
+    
+    pullQuote: "Language should never be a barrier to consuming stories or accessing knowledge.",
+    pullQuoteBy: "Mati Staniszewski",
+    lesson: "Solve a personal annoyance with world-class deep learning architecture to unlock global markets.",
+    
+    stats: [
+      { label: "Valuation", value: "$3.3B" },
+      { label: "Languages Supported", value: "30+" },
+      { label: "Total Raised", value: "$280M" },
+      { label: "Founded", value: "2022" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 31. MICHAEL INTRACTOR (New Age AI Creative Models)
+  {
+    id: "cristobal-valenzuela-2026",
+    slug: "cristobal-valenzuela-runway",
+    edition: 31,
+    featured: false,
+    category: "Creative Generative Video",
+    
+    name: "Cristóbal Valenzuela",
+    nameShort: "Cris Valenzuela",
+    initials: "CV",
+    company: "Runway",
+    role: "Co-Founder & CEO",
+    
+    city: "New York",
+    country: "United States",
+    countryCode: "US",
+    context: "Pioneering Generative Video & Film AI",
+    
+    valuation: "$4B",
+    funding: "$237M",
+    founded: "2018",
+    
+    imageUrl: "https://variety.com/wp-content/uploads/2025/04/Cristobal-Valenzuela-CEO-Runway.jpg?w=1000&h=667&crop=1",
+    accent: "#EC4899",
+    accentBg: "#FDF2F8",
+    accentBorder: "#FBCFE8",
+    
+    headline: "He built Runway's Gen-2 & Gen-3 models, giving artists and Hollywood studios text-to-video capabilities.",
+    deck: "Cristóbal Valenzuela transformed video creation by building AI foundation models specifically tailored for filmmakers and visual storytellers.",
+    
+    columns: [
+      {
+        heading: "NYU ITP Roots",
+        body: "Cristóbal Valenzuela co-founded Runway out of NYU's Interactive Telecommunications Program with a core belief: artificial intelligence will become an expressive camera for artists rather than just a code generator."
+      },
+      {
+        heading: "Gen-1 to Gen-3 Alpha Breakthroughs",
+        body: "Runway pioneered generative video models with Gen-1, Gen-2, and Gen-3 Alpha. Their tools enabled indie creators and major Hollywood visual effects teams to generate cinematic shots using plain text prompts and camera controls."
+      },
+      {
+        heading: "The AI Film Festival",
+        body: "Valenzuela established the annual AI Film Festival in New York, proving that generative video is ushering in an entirely new genre of independent cinema."
+      }
+    ],
+    
+    pullQuote: "Storytelling is human. AI is just a new type of camera that lets anyone visualize their imagination.",
+    pullQuoteBy: "Cristóbal Valenzuela",
+    lesson: "Build tools directly alongside creative communities to ensure your product enhances human artistry.",
+    
+    stats: [
+      { label: "Valuation", value: "$4B" },
+      { label: "Gen-3 Frames/sec", value: "10x Speed" },
+      { label: "Total Raised", value: "$237M" },
+      { label: "Founded", value: "2018" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 32. AMJAD MASAD (New Trending Coding Environments)
+  {
+    id: "amjad-masad-2026",
+    slug: "amjad-masad-replit",
+    edition: 32,
+    featured: false,
+    category: "AI Cloud IDE & Software",
+    
+    name: "Amjad Masad",
+    nameShort: "Amjad Masad",
+    initials: "AM",
+    company: "Replit",
+    role: "Founder & CEO",
+    
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "Democratizing Coding with Agentic IDEs",
+    
+    valuation: "$3B",
+    funding: "$200M+",
+    founded: "2016",
+    
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDW9AUjgDk39mrTZeIh4XSd7sW4s1gWnjNHSYs0Eft1g&s=10",
+    accent: "#F97316",
+    accentBg: "#FFF7ED",
+    accentBorder: "#FFEDD5",
+    
+    headline: "He built Replit to put an entire coding environment inside any browser. Now Replit Agent builds full apps autonomously.",
+    deck: "Amjad Masad empowered over 30 million developers worldwide by turning coding into a collaborative, browser-native AI experience.",
+    
+    columns: [
+      {
+        heading: "Coding in the Browser",
+        body: "Amjad Masad grew up in Jordan with limited hardware access, driving his mission to make software creation accessible on any device. He founded Replit to provide zero-setup cloud IDEs accessible right from a web browser."
+      },
+      {
+        heading: "The Replit Agent Revolution",
+        body: "In 2024–2026, Masad launched Replit Agent—an autonomous AI engineer that writes code, sets up databases, installs packages, and deploys full-stack apps from natural language instructions in under two minutes."
+      },
+      {
+        heading: "Billion-Developer Future",
+        body: "Masad believes AI agents will grow the number of software creators from 30 million to 1 billion people, allowing anyone with an idea to launch software products instantly."
+      }
+    ],
+    
+    pullQuote: "The next big software company will be built by a single non-technical founder giving natural language commands to AI agents.",
+    pullQuoteBy: "Amjad Masad",
+    lesson: "Eliminate setting up environments—when creation requires zero setup, millions of new builders enter the market.",
+    
+    stats: [
+      { label: "Valuation", value: "$3B" },
+      { label: "Registered Developers", value: "30M+" },
+      { label: "Apps Deployed", value: "100M+" },
+      { label: "Founded", value: "2016" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 33. HARRISON CHASE (New Trending AI Frameworks)
+  {
+    id: "harrison-chase-2026",
+    slug: "harrison-chase-langchain",
+    edition: 33,
+    featured: false,
+    category: "LLM Frameworks & Agents",
+    
+    name: "Harrison Chase",
+    nameShort: "Harrison Chase",
+    initials: "HC",
+    company: "LangChain",
+    role: "Founder & CEO",
+    
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "Creator of the LangChain AI Framework",
+    
+    valuation: "$1.2B",
+    funding: "$35M+",
+    founded: "2022",
+    
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp54uubbjqKUi6pezguEmKPB7pnV8FPbIkdiIzks-ZmyQTj1mZEjrs680&s=10",
+    accent: "#16A34A",
+    accentBg: "#F0FDF4",
+    accentBorder: "#BBF7D0",
+    
+    headline: "He built an open-source side project that became the world's most popular framework for building LLM applications.",
+    deck: "Harrison Chase created LangChain and LangGraph, orchestrating how developers connect LLMs to databases, APIs, and autonomous agents.",
+    
+    columns: [
+      {
+        heading: "Open Source Explosion",
+        body: "In late 2022, Harrison Chase released LangChain as an open-source Python library to connect large language models with external data sources. Within months, it became the fastest-growing AI repository on GitHub."
+      },
+      {
+        heading: "LangGraph & Agent Orchestration",
+        body: "As enterprises moved from simple prompts to complex multi-agent systems, Chase introduced LangGraph and LangSmith—enabling companies to debug, monitor, and deploy reliable stateful AI workflows."
+      },
+      {
+        heading: "The Standard AI Stack",
+        body: "By 2026, LangChain is an indispensable part of the enterprise AI developer stack, backed by Benchmark and Sequoia Capital."
+      }
+    ],
+    
+    pullQuote: "LLMs alone are impressive, but context and memory are what make them truly useful inside real software systems.",
+    pullQuoteBy: "Harrison Chase",
+    lesson: "Catching a wave of open-source developer enthusiasm early can build a category-defining infrastructure platform.",
+    
+    stats: [
+      { label: "Valuation", value: "$1.2B" },
+      { label: "GitHub Stars", value: "90k+" },
+      { label: "Monthly Installs", value: "10M+" },
+      { label: "Founded", value: "2022" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 34. ANTON OSIKA (New Age Open Source AI Coders)
+  {
+    id: "anton-osika-2026",
+    slug: "anton-osika-gpt-engineer",
+    edition: 34,
+    featured: false,
+    category: "Autonomous AI Engineers",
+    
+    name: "Anton Osika",
+    nameShort: "Anton Osika",
+    initials: "AO",
+    company: "GPT Engineer (Lovable)",
+    role: "Founder & CEO",
+    
+    city: "Stockholm",
+    country: "Sweden",
+    countryCode: "SE",
+    context: "Creator of GPT Engineer & Lovable.dev",
+    
+    valuation: "$500M",
+    funding: "$20M+",
+    founded: "2023",
+    
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bj4m3L7tWRqurYUC9K5TlP1JgsY5RLkU0rgmULhC5TDtpd7qQVK64a0&s=10",
+    accent: "#8B5CF6",
+    accentBg: "#F5F3FF",
+    accentBorder: "#DDD6FE",
+    
+    headline: "He created GPT Engineer, an open-source viral hit that generates complete codebases from a single prompt.",
+    deck: "Anton Osika turned an open-source experiment into Lovable.dev, allowing users to build full web applications through natural conversation.",
+    
+    columns: [
+      {
+        heading: "Viral GitHub Sensation",
+        body: "In 2023, Swedish AI researcher Anton Osika built GPT Engineer—a CLI tool designed to generate entire code repositories based on user requirements. The repo went viral instantly, accumulating 50,000 GitHub stars in record time."
+      },
+      {
+        heading: "Building Lovable.dev",
+        body: "Osika evolved the project into Lovable.dev, a full-stack platform where users can describe web software features in real-time and watch the frontend, backend, and Supabase database get generated automatically."
+      },
+      {
+        heading: "The European AI Wave",
+        body: "Operating from Stockholm, Osika represents Europe's booming new-age founder ecosystem, showing how small agile teams can build tools used by millions globally."
+      }
+    ],
+    
+    pullQuote: "Code should be written at the speed of thought. The future of programming is pure human intent.",
+    pullQuoteBy: "Anton Osika",
+    lesson: "Validate market hunger through open-source viral projects before building commercial SaaS products.",
+    
+    stats: [
+      { label: "GitHub Stars", value: "52k+" },
+      { label: "Valuation", value: "$500M" },
+      { label: "Active Builders", value: "1M+" },
+      { label: "Founded", value: "2023" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 35. COHERE - AIDAN GOMEZ (New Age Enterprise AI)
+  {
+    id: "aidan-gomez-2026",
+    slug: "aidan-gomez-cohere",
+    edition: 35,
+    featured: true,
+    category: "Enterprise Foundation Models",
+    
+    name: "Aidan Gomez",
+    nameShort: "Aidan Gomez",
+    initials: "AG",
+    company: "Cohere",
+    role: "Co-Founder & CEO",
+    
+    city: "Toronto",
+    country: "Canada",
+    countryCode: "CA",
+    context: "Co-Author of 'Attention Is All You Need'",
+    
+    valuation: "$5.5B",
+    funding: "$970M",
+    founded: "2019",
+    
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1pqcRn_8HUBR4lWarRBDAUQhwmZO_79OOT_BlfINFulSsOY0h_jqRmvLI&s=10",
+    accent: "#0D9488",
+    accentBg: "#CCFBF1",
+    accentBorder: "#99F6E4",
+    
+    headline: "At 20, he co-authored the Transformer paper that created modern AI. Now he builds Cohere for enterprise data safety.",
+    deck: "Aidan Gomez co-created the Transformer architecture at Google Brain before founding Cohere to bring secure LLMs to global enterprises.",
+    
+    columns: [
+      {
+        heading: "The Transformer Co-Author",
+        body: "In 2017, 20-year-old Aidan Gomez co-authored the landmark paper 'Attention Is All You Need' at Google Brain—the foundational research that birthed ChatGPT, Claude, and modern generative AI."
+      },
+      {
+        heading: "Enterprise Data Sovereignty",
+        body: "Gomez co-founded Cohere in Toronto to build foundation models specifically designed for enterprise deployment. Unlike consumer AI chatbots, Cohere focuses on secure, cloud-agnostic Retrieval-Augmented Generation (RAG) and data privacy."
+      },
+      {
+        heading: "The Canadian AI Anchor",
+        body: "In 2026, Cohere is valued at $5.5B with backings from NVIDIA, Salesforce Ventures, and Cisco, making Gomez one of the most respected founders in global enterprise technology."
+      }
+    ],
+    
+    pullQuote: "Enterprise AI isn't about consumer hype; it is about security, verifiable accuracy, and private data sovereignty.",
+    pullQuoteBy: "Aidan Gomez",
+    lesson: "Focusing on enterprise privacy and specialized workflows creates a resilient, high-margin enterprise software business.",
+    
+    stats: [
+      { label: "Valuation", value: "$5.5B" },
+      { label: "Total Raised", value: "$970M" },
+      { label: "Transformer Paper", value: "130k+ Citations" },
+      { label: "Founded", value: "2019" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
   }
+  
 ].sort((a, b) => b.edition - a.edition) // Sort latest first
 
 // Helper functions
