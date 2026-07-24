@@ -43,16 +43,16 @@ export function PartnerProgramSection() {
             <ol className="space-y-5 flex-1">
               {[
                 {
-                  title: "Submit your creator profile",
-                  desc: "Instant approval — takes less than 2 minutes.",
-                },
-                {
                   title: "Apply for the Partner Program",
-                  desc: "Right inside your profile card below, tap “Apply for Partner Program.”",
+                  desc: "Submit your application for immediate review.",
                 },
                 {
                   title: "Receive your Partner Kit",
-                  desc: "Within 7–14 days, your official welcome kit ships to your address.",
+                  desc: "Official welcome kit ships to your address.",
+                },
+                {
+                  title: "Make video mention UpForge",
+                  desc: "Mention UpForge in your content. Each verified video gets paid per view.",
                 },
               ].map((step, i) => (
                 <li key={i} className="flex gap-4">
@@ -77,9 +77,6 @@ export function PartnerProgramSection() {
             >
               Apply for Partner Program <ArrowRight className="w-3.5 h-3.5" />
             </a>
-            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-3">
-              Already have a profile? Apply directly from your card in the registry below.
-            </p>
           </div>
 
           {/* Kit preview */}
