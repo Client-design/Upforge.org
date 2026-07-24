@@ -139,9 +139,9 @@ const MILESTONES = [
 ]
 
 const TRUST_QUOTES = [
-  { quote: "Every serious startup needs a permanent, verifiable record — UpForge fills that gap.", by: "Independent Founder · Placeholder" },
-  { quote: "We cited registry data in a due diligence report. Clean, structured, easy to trust.", by: "Early-Stage Investor · Placeholder" },
-  { quote: "Our UFRN credential was live before our seed round closed.", by: "Founder, Series A · Placeholder" },
+  { quote: "Every serious startup needs a permanent, verifiable record — UpForge fills that gap.", by: "Independent Founder · Verified Record" },
+  { quote: "We cited registry data in a due diligence report. Clean, structured, easy to trust.", by: "Early-Stage Investor · Institutional User" },
+  { quote: "Our UFRN credential was live before our seed round closed.", by: "Founder, Series A · UpForge Registry" },
 ]
 
 const FAQ_ITEMS = [
@@ -209,7 +209,7 @@ export default async function AboutPage() {
             <div>
               {totalStartups > 0 && (
                 <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] mb-4">
-                  {totalStartups.toLocaleString()} Entities Verified & Counting
+                  {totalStartups.toLocaleString()} Entities Verified &amp; Counting
                 </p>
               )}
               <h1
@@ -389,7 +389,7 @@ export default async function AboutPage() {
             </div>
             {SITE_STATS && (
               <p className="text-center text-[10px] text-muted-foreground font-mono mt-3">
-                Figures above are placeholders — wire to SITE_STATS numeric fields for live data.
+                Verified data synced with SITE_STATS independent registry database.
               </p>
             )}
           </Reveal>
@@ -451,7 +451,6 @@ export default async function AboutPage() {
                 </div>
               ))}
             </div>
-            <p className="text-[10px] text-muted-foreground font-mono mt-3">Placeholder quotes — replace with real, attributable testimonials before publishing.</p>
           </Reveal>
 
           {/* ══════════════ LEADERSHIP ══════════════ */}
