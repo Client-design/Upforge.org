@@ -6,11 +6,11 @@ import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/data/blog-posts"
 import { Filter } from "lucide-react"
+import { SITE_STATS } from "@/lib/site-stats"
 
 export default function BlogIndexPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
 
-  // Filter posts based on selection
   const filteredPosts = selectedCategory === "all"
     ? BLOG_POSTS
     : BLOG_POSTS.filter(post => post.categorySlug === selectedCategory)
@@ -23,7 +23,6 @@ export default function BlogIndexPage() {
       <Navbar />
       <div className="min-h-screen bg-background text-foreground">
 
-        {/* Header */}
         <section className="border-b-2 border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-5 pb-6 text-center">
           <h1
             className="text-3xl md:text-[44px] lg:text-[54px] font-bold leading-[1.05] mb-3"
@@ -43,10 +42,8 @@ export default function BlogIndexPage() {
           </div>
         </section>
 
-        {/* Category Filter and Selector */}
         <div className="max-w-[1300px] mx-auto px-6 py-6 border-b border-border">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            {/* Category Links list */}
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory("all")}
@@ -73,7 +70,6 @@ export default function BlogIndexPage() {
               ))}
             </div>
 
-            {/* Dropdown Filter for smaller screens / convenience */}
             <div className="flex items-center gap-2 self-start sm:self-auto">
               <Filter className="w-3.5 h-3.5 text-muted-foreground" />
               <select
@@ -91,7 +87,6 @@ export default function BlogIndexPage() {
             </div>
           </div>
 
-          {/* Category description */}
           {selectedCategory !== "all" && (
             <p className="text-xs text-muted-foreground italic mt-3 font-serif">
               Showing {filteredPosts.length} reports in &ldquo;{
@@ -103,10 +98,8 @@ export default function BlogIndexPage() {
           )}
         </div>
 
-        {/* Main Content */}
         <div className="max-w-[1300px] mx-auto px-6 py-8">
 
-          {/* Featured Posts (Only show if there are featured posts in the selected category) */}
           {featuredPosts.length > 0 && (
             <section className="mb-12">
               <div className="flex items-center gap-3 mb-6">
@@ -141,7 +134,6 @@ export default function BlogIndexPage() {
             </section>
           )}
 
-          {/* All Articles */}
           <section>
             <div className="flex items-center gap-3 mb-6">
               <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
@@ -190,7 +182,6 @@ export default function BlogIndexPage() {
             )}
           </section>
 
-          {/* Newsletter CTA */}
           <div className="mt-12 border-2 border-foreground p-8 md:p-10">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
               <div>
@@ -211,13 +202,12 @@ export default function BlogIndexPage() {
             </div>
           </div>
 
-          {/* CTA */}
           <div className="mt-8 border-t-2 border-foreground pt-10 text-center">
             <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "'Georgia', serif" }}>
               Get your startup verified globally
             </h2>
             <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-              Join 47,000+ verified startups. Get your UFRN credential. Free basic listing.
+              Join {SITE_STATS.trackedStartupsText} verified startups. Get your UFRN credential. Free basic listing.
             </p>
             <Link
               href="/submit"
