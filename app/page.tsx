@@ -1,6 +1,7 @@
 // app/page.tsx
 import { fetchAllStartups } from "@/lib/google-sheets"
 import type { Metadata } from "next"
+import { SITE_STATS } from "@/lib/site-stats"
 import { ForbesCover } from "../components/forbes/forbes-cover"
 import { ForbesSidebar } from "../components/forbes/forbes-sidebar"
 import { StartupIntelligenceJournal } from "../components/forbes/startup-intelligence-journal"
@@ -11,17 +12,10 @@ import Link from "next/link"
 
 export const revalidate = 300
 
-// ---------------------------------------------------------------------------
-// DOMAIN DETECTION
-// ---------------------------------------------------------------------------
 async function getDomain(): Promise<"org" | "in"> {
   return "org"
 }
 
-
-// ---------------------------------------------------------------------------
-// METADATA
-// ---------------------------------------------------------------------------
 export async function generateMetadata(): Promise<Metadata> {
   const domain = await getDomain()
   const isOrg = domain === "org"
@@ -46,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: "Global Startup Registry & Verified Founder Database | UpForge 2026",
       description:
-        "Discover 47,000+ verified startups across 150+ countries. Get UFRN credentials, track founder intelligence, access real-time startup data.",
+        `Discover ${SITE_STATS.trackedStartupsText} verified startups across ${SITE_STATS.countriesText} countries. Get UFRN credentials, track founder intelligence, access real-time startup data.`,
       keywords: [
         "startup registry",
         "startup directory",
@@ -60,7 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
       alternates: { canonical: canonicalUrl },
       openGraph: {
         title: "UpForge — Global Startup Registry",
-        description: "47,000+ verified startups. Global founder database. Real-time intelligence.",
+        description: `${SITE_STATS.trackedStartupsText} verified startups. Global founder database. Real-time intelligence.`,
         url: canonicalUrl,
         siteName: "UpForge",
         locale: "en",
@@ -107,14 +101,9 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// ---------------------------------------------------------------------------
-// PAGE COMPONENT
-// ---------------------------------------------------------------------------
 export default async function HomePage() {
-  // Fetch latest startups from Google Sheets (cached, 5-min TTL)
   const allStartups = await fetchAllStartups()
 
-  // Sort: featured first, then by created_at descending (newest first)
   const sorted = [...allStartups].sort((a, b) => {
     if (a.is_featured && !b.is_featured) return -1
     if (!a.is_featured && b.is_featured) return 1
@@ -124,41 +113,31 @@ export default async function HomePage() {
   })
 
   const startups = sorted.slice(0, 14)
-
   const coverStartup = startups.length > 0 ? startups[0] : null
   const sidebarStartups = startups.slice(1, 5)
   const indexStartups = startups.slice(5)
 
   return (
     <div className="bg-background min-h-screen text-foreground pt-6 pb-0">
-
       <div className="max-w-[1300px] mx-auto px-4 md:px-8">
-
-        {/* 1. MASTHEAD */}
         <section className="border-b-2 border-foreground pb-3 mb-0 pt-0 flex flex-col items-center text-center w-full">
-          
           <h1
             className="text-3xl md:text-4xl lg:text-[56px] font-bold leading-[1.04] text-foreground mb-2 max-w-4xl pt-1"
             style={{ fontFamily: "'Georgia', serif" }}
           >
             Verified Founder Database
           </h1>
-          
         </section>
 
-        {/* TRUST STRIP — Instant credibility, minimal footprint */}
         <TrustStrip />
 
-        {/* 2. LIVE REGISTRY MATRIX */}
         <section className="mt-8 mb-20">
           <div className="flex items-center gap-3 mb-8 pb-3 border-b-2 border-foreground">
             <h2 className="font-sans font-black text-[13px] uppercase tracking-widest text-[#C59A2E] flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
               Live Verification Feed
             </h2>
-
             <div className="flex-1" />
-
             <Link
               href="/registry"
               className="font-sans font-bold text-[9px] uppercase tracking-[0.15em] text-muted-foreground flex items-center gap-1 hover:text-foreground transition-colors"
@@ -168,31 +147,24 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] lg:grid-cols-[1fr_360px] gap-8 lg:gap-10 border-b border-border pb-12 mb-12">
-
             <main>
               <ForbesCover startup={coverStartup} />
             </main>
-
             <aside className="relative">
               <div className="sticky top-20">
                 <ForbesSidebar startups={sidebarStartups} />
               </div>
             </aside>
-
           </div>
 
           <ForbesIndex startups={indexStartups} />
-
         </section>
 
-        {/* 3. INTELLIGENCE JOURNAL — Startup-focused content only */}
         <section className="mb-24">
           <StartupIntelligenceJournal />
         </section>
-
       </div>
 
-      {/* 4. CTA — Single clear action */}
       <section className="bg-muted/30 border-t-2 border-foreground py-12">
         <div className="max-w-[1300px] mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
@@ -208,7 +180,6 @@ export default async function HomePage() {
                 Attract investors. Takes 5 minutes.
               </p>
             </div>
-            
             <Link
               href="/submit"
               className="font-sans font-black text-[10px] text-background bg-[#C59A2E] px-10 py-4 uppercase tracking-[0.2em] hover:bg-[#A8821E] transition-colors shrink-0 whitespace-nowrap shadow-sm"
@@ -218,7 +189,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
     </div>
   )
 }
