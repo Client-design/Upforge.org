@@ -107,7 +107,7 @@ export async function generateMetadata(): Promise<Metadata> {
 // ---------------------------------------------------------------------------
 export default async function FounderStoriesPage() {
   const featuredFounders = getFeaturedFounders(3)
-  const { founders: initialFounders, total } = getAllFounders(1, 10)
+  const { founders: initialFounders, total } = getAllFounders(1, 9)
   const domain = await getDomain()
   const isOrg = domain === "org"
   
