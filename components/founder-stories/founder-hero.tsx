@@ -30,7 +30,7 @@ export function FounderHero({ featuredFounders }: FounderHeroProps) {
             />
             <div className="absolute top-4 left-4 z-20">
               <span 
-                className="px-3 py-1.5 text-white text-[10px] font-black uppercase tracking-wider"
+                className="px-3 py-1.5 text-white text-[10px] font-black uppercase tracking-wider shadow-xs"
                 style={{ background: mainFounder.accent }}
               >
                 Cover Story
@@ -44,10 +44,10 @@ export function FounderHero({ featuredFounders }: FounderHeroProps) {
                 className="text-[10px] font-black uppercase tracking-[0.15em]"
                 style={{ color: mainFounder.accent }}
               >
-                No. {mainFounder.edition}
+                {mainFounder.category || mainFounder.company}
               </span>
               <span className="text-border">·</span>
-              <span className="text-[9px] uppercase tracking-wider text-muted-foreground">
+              <span className="text-[9px] uppercase tracking-wider text-muted-foreground font-mono">
                 {mainFounder.country} · Est. {mainFounder.founded}
               </span>
             </div>
@@ -85,12 +85,12 @@ export function FounderHero({ featuredFounders }: FounderHeroProps) {
                   className="text-[8px] font-black uppercase tracking-wider"
                   style={{ color: founder.accent }}
                 >
-                  No. {founder.edition}
+                  {founder.category || founder.company}
                 </span>
                 <h4 className="font-serif font-bold text-lg text-foreground group-hover:text-[#C59A2E] transition-colors mt-1">
                   {founder.nameShort}
                 </h4>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
                   {founder.company}
                 </p>
                 <p className="text-xs text-muted-foreground mt-2 line-clamp-2 font-serif italic">
