@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import Link from "next/link"
+import { SITE_STATS } from "@/lib/site-stats"
 
 export const metadata: Metadata = {
   title: "Top 25 Women Founders in India Building Billion-Dollar Companies 2026 | UpForge",
@@ -314,7 +315,7 @@ export default function WomenFoundersIndia2026() {
 
         <div className="bg-muted/30 border-2 border-foreground rounded-lg p-8 text-center">
           <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: "'Georgia', serif" }}>Women-Led Startup? Get Verified.</h3>
-          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">Join 47,000+ startups in the UpForge global registry. Verified women-led startups get highlighted to impact investors. Free.</p>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">Join {SITE_STATS.trackedStartupsText} startups in the UpForge global registry. Verified women-led startups get highlighted to impact investors. Free.</p>
           <Link href="/submit" className="inline-flex items-center gap-2 bg-[#C59A2E] hover:bg-[#A8821E] text-white px-8 py-3 font-bold text-sm uppercase tracking-wider transition-colors">
             List Your Startup →
           </Link>
