@@ -1,5 +1,5 @@
 // app/founder-stories/[slug]/page.tsx
-// SERVER COMPONENT - Fully SEO optimized with theme support
+// SERVER COMPONENT - Super-grade SEO & Google Discover optimized
 
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
@@ -26,14 +26,13 @@ async function getDomain(): Promise<"org" | "in"> {
   return "org"
 }
 
-
 // Generate static paths for all founders (build time)
 export async function generateStaticParams() {
   const { founders } = getAllFounders(1, 100)
   return founders.map(founder => ({ slug: founder.slug }))
 }
 
-// Dynamic metadata for each founder
+// Dynamic metadata for each founder (Google Discover ready)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const founder = getFounderBySlug(slug)
@@ -46,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const url = `${baseUrl}/founder-stories/${slug}`
   
   const title = `${founder.name} — ${founder.company} Founder Story | The Founder Chronicle`
-  const description = `${founder.deck} ${founder.headline} Read the full editorial profile.`
+  const description = `${founder.headline} ${founder.deck} Comprehensive analysis and verified data on ${founder.name}'s journey building ${founder.company}.`
   
   return {
     title,
@@ -54,26 +53,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: [
       `${founder.name} story`,
       `${founder.company} founder`,
-      `${founder.company} success story`,
+      `${founder.company} net worth`,
+      `${founder.name} ${founder.company}`,
       `how ${founder.name} built ${founder.company}`,
-      `${founder.country} startup founders`,
+      `${founder.category || "startup founders"}`,
+      `${founder.country} tech founders 2026`,
+      `The Founder Chronicle UpForge`
     ],
-    alternates: { canonical: url },
+    alternates: { 
+      canonical: url,
+      languages: {
+        'en': `https://www.upforge.org/founder-stories/${slug}`,
+        'x-default': `https://www.upforge.org/founder-stories/${slug}`
+      }
+    },
     openGraph: {
       title,
       description,
       url,
-      siteName: isOrg ? "UpForge" : "UpForge India",
-      locale: isOrg ? "en" : "en_IN",
+      siteName: "UpForge",
+      locale: "en_US",
       type: "article",
       publishedTime: founder.publishedAt,
       modifiedTime: founder.updatedAt,
-      authors: ["UpForge Editorial"],
+      authors: ["UpForge Editorial Team"],
+      tags: [founder.company, founder.name, founder.category || "Startups", "Founder Story"],
       images: [{
         url: founder.imageUrl,
         width: 1200,
         height: 630,
-        alt: `${founder.name} - ${founder.company} founder profile`
+        alt: `${founder.name} - ${founder.company} Founder Profile`
       }]
     },
     twitter: {
@@ -110,15 +119,22 @@ export default async function FounderPage({ params }: PageProps) {
   const relatedFounders = getRelatedFounders(slug, 3)
   const { prev, next } = getAdjacentFounders(slug)
   
-  // Schema.org JSON-LD
-  const articleSchema = {
+  // High-Grade Google Discover & NewsArticle JSON-LD Schema
+  const newsArticleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${baseUrl}/founder-stories/${slug}`
+    },
     "headline": founder.headline,
     "description": founder.deck,
-    "image": founder.imageUrl,
+    "image": [
+      founder.imageUrl
+    ],
     "datePublished": founder.publishedAt,
     "dateModified": founder.updatedAt,
+    "inLanguage": "en-US",
     "author": {
       "@type": "Organization",
       "name": "UpForge Editorial",
@@ -127,14 +143,13 @@ export default async function FounderPage({ params }: PageProps) {
     "publisher": {
       "@type": "Organization",
       "name": "UpForge",
+      "url": baseUrl,
       "logo": {
         "@type": "ImageObject",
-        "url": `${baseUrl}/logo.png`
+        "url": `${baseUrl}/logo.png`,
+        "width": 600,
+        "height": 60
       }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `${baseUrl}/founder-stories/${slug}`
     },
     "about": {
       "@type": "Person",
@@ -144,6 +159,10 @@ export default async function FounderPage({ params }: PageProps) {
         "@type": "Organization",
         "name": founder.company
       }
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".discover-headline", ".discover-deck"]
     }
   }
   
@@ -174,7 +193,7 @@ export default async function FounderPage({ params }: PageProps) {
   
   return (
     <>
-      <JsonLd data={[articleSchema, breadcrumbSchema]} />
+      <JsonLd data={[newsArticleSchema, breadcrumbSchema]} />
       
       <div className="bg-background min-h-screen text-foreground">
         
@@ -186,7 +205,7 @@ export default async function FounderPage({ params }: PageProps) {
                 {baseUrl.replace("https://www.", "")}
               </Link>
               <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono">
-                The Founder Chronicle · {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                The Founder Chronicle · UpForge Editorial
               </span>
             </div>
             
@@ -208,32 +227,32 @@ export default async function FounderPage({ params }: PageProps) {
             {/* Left Column - Story */}
             <div className="py-8">
               
-              {/* Category Badge */}
+              {/* Category Badge without numbers */}
               <div className="flex items-center gap-3 mb-6">
                 <span 
                   className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 text-white"
                   style={{ background: founder.accent }}
                 >
-                  {founder.category || "Founder Story"}
+                  {founder.category || founder.company}
                 </span>
                 <span className="text-[9px] text-muted-foreground uppercase tracking-wider font-mono">
-                  No. {founder.edition} · {founder.country}
+                  {founder.country} · Est. {founder.founded}
                 </span>
               </div>
 
               {/* Headline */}
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-black leading-[1.08] text-foreground mb-5">
+              <h2 className="discover-headline font-serif text-3xl md:text-4xl lg:text-5xl font-black leading-[1.08] text-foreground mb-5">
                 {founder.headline}
               </h2>
 
               {/* Deck */}
-              <p className="font-serif italic text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 pb-6 border-b border-border">
+              <p className="discover-deck font-serif italic text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 pb-6 border-b border-border">
                 {founder.deck}
               </p>
 
               {/* Byline */}
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-8 font-mono">
-                <span className="text-[9px] text-muted-foreground uppercase tracking-wider">By UpForge Editorial</span>
+                <span className="text-[9px] text-muted-foreground uppercase tracking-wider">By UpForge Editorial Team</span>
                 <span className="text-border text-[10px]">·</span>
                 <span className="text-[9px] text-muted-foreground uppercase tracking-wider">{founder.city}</span>
                 <span className="text-border text-[10px]">·</span>
@@ -247,7 +266,7 @@ export default async function FounderPage({ params }: PageProps) {
                 <div className="relative w-full aspect-[16/10] bg-muted border border-border overflow-hidden">
                   <Image
                     src={founder.imageUrl}
-                    alt={founder.name}
+                    alt={`${founder.name} - ${founder.company} Founder`}
                     fill
                     className="object-cover"
                     priority
@@ -307,7 +326,7 @@ export default async function FounderPage({ params }: PageProps) {
                 <div className="relative w-full aspect-[3/4] bg-muted border border-border overflow-hidden">
                   <Image
                     src={founder.imageUrl}
-                    alt={founder.name}
+                    alt={`${founder.name} - ${founder.company}`}
                     fill
                     className="object-cover"
                     priority
