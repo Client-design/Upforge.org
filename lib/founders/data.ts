@@ -4,12 +4,323 @@
 import { Founder } from './types'
 
 export const FOUNDERS: Founder[] = [
-//1
+  // 1. ARAVIND SRINIVAS (New Trending)
+  {
+    id: "aravind-srinivas-2026",
+    slug: "aravind-srinivas-perplexity",
+    edition: 25,
+    featured: true,
+    category: "AI & Search",
+    
+    name: "Aravind Srinivas",
+    nameShort: "Aravind Srinivas",
+    initials: "AS",
+    company: "Perplexity AI",
+    role: "Co-Founder & CEO",
+    
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "Reinventing Web Search with AI",
+    
+    valuation: "$9B+",
+    funding: "$1B+",
+    founded: "2022",
+    
+    imageUrl: "https://images.ctfassets.net/kftzwdyauwt9/6jR2X5zY8G5E1M2mY9Zk5Q/c9e9b0e1b6f0e4d0/Aravind_Srinivas_Perplexity.jpg",
+    accent: "#0052FF",
+    accentBg: "#EBF2FF",
+    accentBorder: "#99C2FF",
+    
+    headline: "He stopped using Google. Then he built an AI answer engine that processes half a billion queries a month.",
+    deck: "Aravind Srinivas turned Perplexity into the premier AI discovery engine, replacing traditional links with direct, cited intelligence.",
+    
+    columns: [
+      {
+        heading: "The Death of Ten Blue Links",
+        body: "Aravind Srinivas realized early that traditional search engines were becoming bloated with ads and SEO spam. Coming from research roles at OpenAI and DeepMind, he co-founded Perplexity AI in 2022. Instead of returning links, Perplexity searches the live web in real time, synthesizing precise answers with verifiable citations. By 2026, it handles over 500 million queries monthly, establishing itself as the default search engine for power users and researchers."
+      },
+      {
+        heading: "David vs. Goliath",
+        body: "Competing directly with Google's $2 trillion monopoly seemed suicidal to silicon valley insiders. Yet Srinivas attracted funding from Jeff Bezos, NVIDIA, and top VCs, boosting Perplexity's valuation to over $9 billion. By offering native publisher revenue sharing and conversational search pro capabilities, Perplexity transformed how knowledge workers discover truth on the web."
+      },
+      {
+        heading: "The Enterprise Intelligence Engine",
+        body: "In 2026, Perplexity Enterprise Pro is deployed across major financial institutions, law firms, and consulting giants. Srinivas envisions a world where query synthesis becomes ambient intelligence, allowing humans to move from searching for information to acting on knowledge instantaneously."
+      }
+    ],
+    
+    pullQuote: "Search shouldn't be about scrolling through pages of ads. It should be about getting instant, accurate, cited truth.",
+    pullQuoteBy: "Aravind Srinivas",
+    lesson: "Focus on solving the user's core curiosity faster than anyone else, even if you are competing against giants.",
+    
+    stats: [
+      { label: "Valuation", value: "$9B+" },
+      { label: "Monthly Queries", value: "500M+" },
+      { label: "Total Raised", value: "$1B+" },
+      { label: "Founded", value: "2022" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 2. ARTHUR MENSCH (New Trending)
+  {
+    id: "arthur-mensch-2026",
+    slug: "arthur-mensch-mistral-ai",
+    edition: 24,
+    featured: true,
+    category: "Open Source AI",
+    
+    name: "Arthur Mensch",
+    nameShort: "Arthur Mensch",
+    initials: "AM",
+    company: "Mistral AI",
+    role: "Co-Founder & CEO",
+    
+    city: "Paris",
+    country: "France",
+    countryCode: "FR",
+    context: "Europe's AI Champion",
+    
+    valuation: "$6B",
+    funding: "$1.1B",
+    founded: "2023",
+    
+    imageUrl: "https://media.lesechos.com/api/v1/images/view/6579f1d0337b561c29668d2b/1280x720/0801831862590-3000x2000.jpg",
+    accent: "#FF5722",
+    accentBg: "#FFEEE8",
+    accentBorder: "#FFBCAB",
+    
+    headline: "He left DeepMind to build Europe's AI champion in a Paris cafe. 12 months later, Mistral was worth $6 billion.",
+    deck: "Arthur Mensch proved that small, ultra-efficient open-weights models can match tech giants operating on 10x the budget.",
+    
+    columns: [
+      {
+        heading: "The Paris AI Miracle",
+        body: "In May 2023, 30-year-old Arthur Mensch and his co-founders left Google DeepMind and Meta to launch Mistral AI in Paris. Within weeks, they raised a record-breaking €105 million seed round without even having a product. Mensch believed European sovereignty in AI required open, high-performance models built on capital-efficient principles."
+      },
+      {
+        heading: "Sparse Mixture-of-Experts",
+        body: "Mistral shocked Silicon Valley with Mixtral 8x7B and later Mistral Large. By pioneering open Mixture-of-Experts (MoE) architectures, Mensch's team delivered models that matched GPT-4 benchmark performance at a fraction of the inference cost. Their commitment to open-weight access earned them a cult following among enterprise developers globally."
+      },
+      {
+        heading: "Geopolitical Sovereignty",
+        body: "By 2026, Mistral AI is valued at $6B+ and partners natively with Microsoft Azure, Amazon AWS, and European governments. Mensch has become a leading global voice for open-source AI, proving that world-class foundation models can flourish outside Silicon Valley."
+      }
+    ],
+    
+    pullQuote: "Open source is not just a commercial strategy; it is essential for safety, transparency, and technological democracy.",
+    pullQuoteBy: "Arthur Mensch",
+    lesson: "Efficiency and open architecture will always outperform brute-force compute in the long run.",
+    
+    stats: [
+      { label: "Valuation", value: "$6B" },
+      { label: "Total Funding", value: "$1.1B" },
+      { label: "Model Downloads", value: "50M+" },
+      { label: "Founded", value: "2023" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 3. PALMER LUCKEY (New Trending)
+  {
+    id: "palmer-luckey-2026",
+    slug: "palmer-luckey-anduril",
+    edition: 23,
+    featured: true,
+    category: "Defense Tech",
+    
+    name: "Palmer Luckey",
+    nameShort: "Palmer Luckey",
+    initials: "PL",
+    company: "Anduril Industries",
+    role: "Founder & CEO",
+    
+    city: "Costa Mesa",
+    country: "United States",
+    countryCode: "US",
+    context: "Autonomous Defense Warfare",
+    
+    valuation: "$14B",
+    funding: "$3.8B",
+    founded: "2017",
+    
+    imageUrl: "https://imageio.forbes.com/specials-images/imageserve/630fa9e3bb8e3a2bf923a1a5/0x0.jpg?format=jpg&width=1200",
+    accent: "#1A1A1A",
+    accentBg: "#F0F0F0",
+    accentBorder: "#CCCCCC",
+    
+    headline: "He built Oculus in his parents' garage at 19. Now he's rebuilding Western defense with autonomous systems.",
+    deck: "Palmer Luckey was fired by Facebook after selling Oculus for $2B. He responded by building Anduril into a $14B defense tech juggernaut.",
+    
+    columns: [
+      {
+        heading: "From VR Garage Pioneer to Defense Renegade",
+        body: "Palmer Luckey revolutionized Virtual Reality by inventing the Oculus Rift as a teenager, leading to a $2 billion acquisition by Facebook. After a high-profile political fallout led to his exit from Meta, Luckey turned his hardware obsession toward defense, founding Anduril Industries in 2017."
+      },
+      {
+        heading: "Lattice OS and Drones",
+        body: "Unlike traditional defense prime contractors, Anduril builds software-first defense systems. Powered by Lattice OS—an AI platform synthesizing sensor data across air, land, and sea—Anduril produces low-cost, autonomous surveillance towers, interceptor drones, and unmanned underwater vehicles."
+      },
+      {
+        heading: "The Silicon Valley Prime Contractor",
+        body: "In 2026, Anduril is valued at $14 billion and holds major contracts with the U.S. Department of Defense and Allied nations. Luckey has proven that agile tech companies can disrupt century-old military-industrial supply chains."
+      }
+    ],
+    
+    pullQuote: "We need to build modern defense hardware with software speed. Technology is the only deterrence that preserves peace.",
+    pullQuoteBy: "Palmer Luckey",
+    lesson: "When pushed out of one domain, take your engineering superpower into an even bigger industry.",
+    
+    stats: [
+      { label: "Valuation", value: "$14B" },
+      { label: "DoD Contracts", value: "$2B+" },
+      { label: "Total Raised", value: "$3.8B" },
+      { label: "Founded", value: "2017" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 4. ILYA SUTSKEVER (New Trending)
+  {
+    id: "ilya-sutskever-2026",
+    slug: "ilya-sutskever-ssi",
+    edition: 22,
+    featured: false,
+    category: "AGI Research",
+    
+    name: "Ilya Sutskever",
+    nameShort: "Ilya Sutskever",
+    initials: "IS",
+    company: "Safe Superintelligence (SSI)",
+    role: "Co-Founder & Chief Scientist",
+    
+    city: "Palo Alto",
+    country: "United States",
+    countryCode: "US",
+    context: "Architect of Deep Learning & AGI Safety",
+    
+    valuation: "$5B",
+    funding: "$1B",
+    founded: "2024",
+    
+    imageUrl: "https://media.wired.com/photos/655e8bc803e4881744b82d92/master/w_2560%2Cc_limit/Business_Ilya_Sutskever_OpenAI_Coups.jpg",
+    accent: "#6B21A8",
+    accentBg: "#F5F3FF",
+    accentBorder: "#DDD6FE",
+    
+    headline: "He gave birth to ChatGPT. Now he's building a straight shot to safe superintelligence with no product distractions.",
+    deck: "Ilya Sutskever left OpenAI to start SSI with a single goal: build safe artificial superintelligence without quarterly product pressures.",
+    
+    columns: [
+      {
+        heading: "The Mind Behind Deep Learning",
+        body: "Ilya Sutskever co-created AlexNet in 2012 alongside Geoffrey Hinton, igniting the modern AI era. As Chief Scientist of OpenAI, he spearheaded the breakthroughs behind GPT-2, GPT-3, GPT-4, and DALL-E, cementing his status as one of the most influential computer scientists in history."
+      },
+      {
+        heading: "The OpenAI Departure & SSI Vision",
+        body: "Following the turbulent boardroom events at OpenAI, Sutskever departed in 2024 to co-found Safe Superintelligence Inc. (SSI) alongside Daniel Gross and Daniel Levy. SSI operates with a singular focus: achieving superintelligence safely without commercial product management or ad models."
+      },
+      {
+        heading: "The $1B Pure Science Bet",
+        body: "In 2026, SSI raised $1 billion at a $5B valuation from premier investors. Free from commercial deadlines, Sutskever leads an elite group of researchers dedicated solely to solving the technical alignment problem of AGI."
+      }
+    ],
+    
+    pullQuote: "Superintelligence is within reach. Building it safely without commercial distractions is the single most important task of our generation.",
+    pullQuoteBy: "Ilya Sutskever",
+    lesson: "Singular focus on your ultimate scientific goal is far more valuable than building dozens of consumer features.",
+    
+    stats: [
+      { label: "Valuation", value: "$5B" },
+      { label: "Capital Raised", value: "$1B" },
+      { label: "Scientific Focus", value: "100% AGI Safety" },
+      { label: "Founded", value: "2024" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 5. MIRA MURATI (New Trending)
+  {
+    id: "mira-murati-2026",
+    slug: "mira-murati-thinking-machines",
+    edition: 21,
+    featured: false,
+    category: "Next-Gen AI",
+    
+    name: "Mira Murati",
+    nameShort: "Mira Murati",
+    initials: "MM",
+    company: "Thinking Machines Lab",
+    role: "Founder & CEO",
+    
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "Pioneering Modular AI Systems",
+    
+    valuation: "$4B",
+    funding: "$1B",
+    founded: "2025",
+    
+    imageUrl: "https://media.wired.com/photos/64b59528d2d634dbd1810ee3/master/w_2560%2Cc_limit/Mira-Murati-OpenAI-Business.jpg",
+    accent: "#0D9488",
+    accentBg: "#F0FDFA",
+    accentBorder: "#CCFBF1",
+    
+    headline: "She was the engine behind ChatGPT's launch. Now she's building the next paradigm of human-AI collaboration.",
+    deck: "Mira Murati spent six years steering OpenAI's flagship products before launching Thinking Machines Lab to pioneer customizable AI systems.",
+    
+    columns: [
+      {
+        heading: "The Product Architect of ChatGPT",
+        body: "As Chief Technology Officer at OpenAI, Mira Murati oversaw the deployment of ChatGPT, DALL-E 3, and GPT-4o. Her background in mechanical engineering and aerospace gave her a pragmatic, user-centric vision for deploying breakthrough AI models safely to hundreds of millions of users."
+      },
+      {
+        heading: "Launching Thinking Machines Lab",
+        body: "In 2025, Murati departed OpenAI to establish Thinking Machines Lab. Her firm focuses on building open, customizable AI models that allow enterprise teams to tailor reasoning capabilities and cognitive workflows directly to specialized domain knowledge."
+      },
+      {
+        heading: "The $1B Launch",
+        body: "With a $1 billion initial funding round and a team of top AI researchers, Murati's new laboratory quickly achieved a $4B valuation in 2026, creating one of the most anticipated next-generation AI platforms in Silicon Valley."
+      }
+    ],
+    
+    pullQuote: "AI must be customizable, transparent, and seamlessly integrated into human intention. That is the next frontier.",
+    pullQuoteBy: "Mira Murati",
+    lesson: "Technical excellence combined with deep product intuition is what turns raw algorithms into global daily habits.",
+    
+    stats: [
+      { label: "Valuation", value: "$4B" },
+      { label: "Capital Raised", value: "$1B" },
+      { label: "Enterprise Focus", value: "Modular AI" },
+      { label: "Founded", value: "2025" }
+    ],
+    
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
+    publishedAt: "2026-05-01"
+  },
+
+  // 6. SAM ALTMAN
   {
     id: "sam-altman-2026",
     slug: "sam-altman-openai",
-    edition: 1,
+    edition: 20,
     featured: true,
+    category: "AI Infrastructure",
     
     name: "Sam Altman",
     nameShort: "Sam Altman",
@@ -22,7 +333,7 @@ export const FOUNDERS: Founder[] = [
     countryCode: "US",
     context: "Architect of the AI Revolution",
     
-    valuation: "$5.9T (Corporate Value)",
+    valuation: "$5.9T (Ecosystem)",
     funding: "$18B+",
     founded: "2015",
     
@@ -31,21 +342,21 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#E6FAF2",
     accentBorder: "#8EEDC7",
     
-    headline: "He fired Sam. Then Sam fired back. Now he's building the most valuable private company in history with Apple.",
-    deck: "From Stanford dropout to CEO of a $5.9 trillion ecosystem. The Sam Altman story is about power, pivots, and the future of intelligence.",
+    headline: "He fired Sam. Then Sam fired back. Now he's building the most valuable private ecosystem with Apple.",
+    deck: "From Stanford dropout to CEO of an AI ecosystem. The Sam Altman story is about power, pivots, and the future of intelligence.",
     
     columns: [
       {
-        heading: "The Ouster That Broke Silicon Valley",
-        body: "In November 2023, the non-profit board of OpenAI fired Sam Altman in a shocking Friday afternoon move. What happened next was unprecedented: 738 of 770 employees threatened to quit and join Microsoft. Within 5 days, Altman was reinstated as CEO with a new board. The failed coup gave him more control than ever before. It was a masterclass in founder leverage and loyalty."
+        heading: "The Boardroom Comeback",
+        body: "In November 2023, the non-profit board of OpenAI fired Sam Altman in a shocking Friday move. What happened next was unprecedented: 738 of 770 employees threatened to quit and join Microsoft. Within 5 days, Altman was reinstated as CEO with a new board. The failed coup gave him more control than ever before."
       },
       {
-        heading: "The $5.9 Trillion Bet",
-        body: "In 2026, OpenAI is not just a research lab. It's the foundational layer of the global economy. With ChatGPT serving over 800M monthly users and Apple integrating its models natively, the corporate valuation has reached a staggering $5.9T. Altman's partnership with Tim Cook cemented AI's place in the hands of 2 billion Apple devices, making him the most searched AI CEO globally [citation:2]."
+        heading: "The Global AI Ecosystem",
+        body: "OpenAI is the foundational layer of the global AI economy. With ChatGPT serving over 800M monthly users and Apple integrating its models natively, the corporate ecosystem valuation has reached historic highs. Altman's strategic partnerships cemented AI's place in the hands of billions of devices."
       },
       {
-        heading: "AGI and the Trillion-Dollar Compute",
-        body: "Altman's current obsession is compute. He's orchestrating 'Project Stargate'—a $500B+ data center initiative to power the next generation of Artificial General Intelligence (AGI). He argues that compute will be the currency of the future, and controlling the supply chain is the ultimate moat. His writings on 'Moore's Law for Everything' and Universal Basic Compute define the 2026 policy landscape."
+        heading: "Project Stargate and Compute",
+        body: "Altman's core obsession is compute infrastructure. He's orchestrating 'Project Stargate'—a $500B+ data center initiative to power the next generation of Artificial General Intelligence (AGI). Compute is the new currency of global power."
       }
     ],
     
@@ -54,10 +365,10 @@ export const FOUNDERS: Founder[] = [
     lesson: "Surviving a boardroom coup teaches you more about leverage than any MBA.",
     
     stats: [
-      { label: "Corporate Value", value: "$5.9T" },
-      { label: "Weekly Active Users", value: "800M+" },
-      { label: "Founded", value: "2015" },
-      { label: "Stargate Budget", value: "$500B+" }
+      { label: "Global Users", value: "800M+" },
+      { label: "Stargate Budget", value: "$500B+" },
+      { label: "Total Raised", value: "$18B+" },
+      { label: "Founded", value: "2015" }
     ],
     
     createdAt: "2026-04-01",
@@ -65,13 +376,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-01"
   },
 
-
-//2
+  // 7. DARIO AMODEI
   {
     id: "dario-amodei-2026",
     slug: "dario-amodei-anthropic",
-    edition: 2,
+    edition: 19,
     featured: true,
+    category: "AI Safety & Models",
     
     name: "Dario Amodei",
     nameShort: "Dario Amodei",
@@ -82,7 +393,7 @@ export const FOUNDERS: Founder[] = [
     city: "San Francisco",
     country: "United States",
     countryCode: "US",
-    context: "OpenAI's Greatest Rival",
+    context: "Pioneering Constitutional AI",
     
     valuation: "$2.7T",
     funding: "$12B+",
@@ -93,33 +404,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F5F5F5",
     accentBorder: "#D4D4D4",
     
-    headline: "He built OpenAI's brain. Then he left to build a safer one. Now Claude is eating ChatGPT's lunch in enterprise.",
+    headline: "He built OpenAI's brain. Then he left to build a safer one. Now Claude powers major enterprise workflows.",
     deck: "Dario Amodei doesn't want to move fast and break things. He wants to move carefully and build a constitution for AI.",
     
     columns: [
       {
         heading: "The Constitutional Approach",
-        body: "Dario was VP of Research at OpenAI, leading the development of GPT-2 and GPT-3. Disillusioned with the 'scale at all costs' approach, he and his sister Daniela left to start Anthropic. Their core innovation wasn't just a better model; it was Constitutional AI—training Claude to have a set of written ethical principles. In a world of deepfakes and bias, enterprise customers flocked to the safety-first alternative."
+        body: "Dario was VP of Research at OpenAI, leading GPT-2 and GPT-3 development. He and his sister Daniela left to start Anthropic, introducing Constitutional AI—training Claude with explicit ethical guidelines that resonated deeply with safety-conscious enterprises."
       },
       {
-        heading: "The $2.7 Trillion Challenger",
-        body: "By 2026, Anthropic is the clear #2 in the AI foundation model race, valued at $2.7T [citation:9]. Claude 4.0 'Opus' outperforms GPT on complex reasoning tasks, and Amazon's massive investment has made it the default model on AWS Bedrock. Dario's methodical, research-driven culture attracts top talent fleeing the chaos of larger rivals. He is the 'adult in the room' for AI safety."
+        heading: "The Challenger",
+        body: "Anthropic is a major leader in foundation models. Claude Opus outperforms rivals on complex coding and reasoning tasks, making it the preferred enterprise model on AWS Bedrock and Google Cloud."
       },
       {
         heading: "Mechanistic Interpretability",
-        body: "While others treat AI as a black box, Anthropic leads the field of interpretability. Dario's team is mapping the 'neurons' inside Claude to understand exactly how it thinks. Their 2026 'Mapping the Mind of Claude' paper was a landmark in computer science, revealing how concepts like 'deception' and 'golden gate bridge' are physically stored in the model. This is the path to truly controllable AI."
+        body: "While others treat AI as a black box, Anthropic leads interpretability research, mapping how concepts are stored inside artificial neural networks to make AI transparent and safe."
       }
     ],
     
-    pullQuote: "We need to build AI that doesn't just obey instructions, but understands and shares human values. That's the only path to a safe future.",
+    pullQuote: "We need to build AI that doesn't just obey instructions, but understands and shares human values.",
     pullQuoteBy: "Dario Amodei",
-    lesson: "Scaling safety is just as important as scaling intelligence.",
+    lesson: "Scaling safety is just as important as scaling raw intelligence.",
     
     stats: [
       { label: "Valuation", value: "$2.7T" },
       { label: "Total Raised", value: "$12B+" },
       { label: "Context Window", value: "1M Tokens" },
-      { label: "Safety Researchers", value: "300+" }
+      { label: "Founded", value: "2021" }
     ],
     
     createdAt: "2026-04-02",
@@ -127,13 +438,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-02"
   },
 
-//3
-
+  // 8. BRETT ADCOCK
   {
     id: "brett-adcock-2026",
     slug: "brett-adcock-figure-ai",
-    edition: 3,
+    edition: 18,
     featured: true,
+    category: "Humanoid Robotics",
     
     name: "Brett Adcock",
     nameShort: "Brett Adcock",
@@ -155,32 +466,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FFF2E6",
     accentBorder: "#FFC299",
     
-    headline: "He sold Archer Aviation for billions. Then he built a robot that walks like a human and works like a machine. Manufacturing will never be the same.",
-    deck: "Brett Adcock's Figure 02 robots are already working in BMW factories. At a $110B valuation, the age of the humanoid workforce is here [citation:9].",
+    headline: "He sold Archer Aviation for billions. Then he built a robot that walks like a human and works like a machine.",
+    deck: "Brett Adcock's Figure 02 robots are deployed in BMW manufacturing facilities, proving the commercial reality of general-purpose humanoids.",
     
     columns: [
       {
-        heading: "From Flying Taxis to Walking Robots",
-        body: "Brett Adcock founded Archer Aviation (eVTOL) and took it public in a $3.8B SPAC deal. Most founders would retire. Adcock reinvested his personal fortune—over $100M—into Figure AI. His thesis was simple: The global labor shortage is permanent. The only solution is a general-purpose humanoid that can fit into existing human infrastructure without retrofitting the factory floor."
+        heading: "From eVTOLs to Humanoids",
+        body: "After taking Archer Aviation public in a $3.8B SPAC, Brett Adcock invested over $100M of his own capital into Figure AI. His thesis: global labor shortages require general-purpose humanoid robots that operate in existing infrastructure."
       },
       {
-        heading: "The Figure 02 and Helix",
-        body: "In 2026, Figure 02 is the most advanced commercial humanoid on the planet. Featuring Helix AI, a Vision-Language-Action model developed in partnership with OpenAI, these robots can understand natural language commands and perform complex dexterous tasks without programming. They are currently deployed at BMW and a major logistics partner, working 20-hour shifts with 4 hours of charging. Brett's wealth has increased 11x in a year [citation:9]."
+        heading: "Helix AI and Figure 02",
+        body: "Figure 02 features Vision-Language-Action neural models that allow robots to process natural language commands and perform dexterous factory work without hand-coded scripts."
       },
       {
-        heading: "The $100 Trillion Labor Market",
-        body: "Adcock's vision extends beyond factories. He sees humanoids as the answer to elder care, construction, and space exploration. By standardizing the hardware and making the software generalizable, he aims to bring the cost of a humanoid below $20,000 per unit. With over 10 million units expected in the market by 2030, Figure is positioning itself as the Ford of the robotics age."
+        heading: "Mass Manufacturing",
+        body: "Adcock aims to bring the cost per humanoid unit below $20,000, creating scalable robot workforces for logistics, manufacturing, and future elder care."
       }
     ],
     
-    pullQuote: "We're going to need a billion humanoids on Earth to keep the economy growing. It's not a sci-fi fantasy; it's a demographic reality.",
+    pullQuote: "We're going to need a billion humanoids on Earth to sustain economic growth. It's a demographic necessity.",
     pullQuoteBy: "Brett Adcock",
-    lesson: "If you want to solve a big problem, solve the one that literally can't be ignored: aging demographics and a lack of workers.",
+    lesson: "Solve structural real-world problems like labor shortages with hardware powered by modern AI.",
     
     stats: [
       { label: "Valuation", value: "$110B" },
-      { label: "Personal Investment", value: "$100M+" },
-      { label: "Robots Deployed", value: "500+" },
+      { label: "Personal Bet", value: "$100M+" },
+      { label: "Robots Active", value: "500+" },
       { label: "Founded", value: "2022" }
     ],
     
@@ -189,13 +500,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-03"
   },
 
-//4
-  
+  // 9. ELON MUSK
   {
     id: "elon-musk-2026",
     slug: "elon-musk-tesla-spacex",
-    edition: 4,
+    edition: 17,
     featured: true,
+    category: "Space & Autonomous Tech",
     
     name: "Elon Musk",
     nameShort: "Elon Musk",
@@ -206,10 +517,10 @@ export const FOUNDERS: Founder[] = [
     city: "Boca Chica",
     country: "United States",
     countryCode: "US",
-    context: "Richest Person in the World",
+    context: "Pioneering Multi-Planetary Life & Autonomy",
     
     valuation: "$1.2T (Tesla) / $350B (SpaceX)",
-    funding: "Public",
+    funding: "Public / Private",
     founded: "2003 / 2002",
     
     imageUrl: "https://static.startuptalky.com/2022/04/Elon-Musk-Success-Story-Case-Study-Startuptalky.jpg",
@@ -217,33 +528,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FEF0F1",
     accentBorder: "#FBC4C6",
     
-    headline: "He sent a rocket to Mars and back. In 2026, he's turning Starship into a commuter train for the solar system.",
-    deck: "Elon Musk remains the most searched and most polarizing entrepreneur on Earth. Love him or hate him, he dictates the future of transport and space [citation:2].",
+    headline: "He sent a rocket to Mars and back. Now Starship is becoming orbital infrastructure for space exploration.",
+    deck: "Elon Musk remains a iconic engineer and founder, shaping electric transport, space logistics, and brain-computer interfaces.",
     
     columns: [
       {
-        heading: "Starship's Orbital Refueling",
-        body: "2026 was the year SpaceX achieved full orbital refueling of Starship. This single technological leap changed the economics of space travel forever. Musk's plan to colonize Mars shifted from 'if' to 'when.' SpaceX now launches payloads to orbit for under $100/kg—a 100x reduction in cost. The company is worth more than Lockheed Martin and Boeing combined."
+        heading: "Starship's Orbital Milestones",
+        body: "SpaceX achieved full orbital refueling of Starship, dramatically lowering payload costs to orbit under $100/kg and enabling continuous lunar and Martian missions."
       },
       {
-        heading: "Tesla's FSD and Optimus",
-        body: "While EV competition has exploded, Tesla's value in 2026 is derived from AI—specifically Full Self-Driving (FSD) and the Optimus robot. Musk has pivoted the company narrative away from cars and toward autonomy. With FSD deployed globally on millions of vehicles, Tesla operates the largest real-world AI training fleet. Optimus is quietly taking over repetitive tasks in Tesla's own factories, promising a future where physical labor is optional."
+        heading: "Tesla FSD and Robotics",
+        body: "Tesla's autonomous Full Self-Driving fleet logs billions of real-world miles, while Optimus robots automate manufacturing in gigafactories."
       },
       {
-        heading: "The Neuralink Frontier",
-        body: "Neuralink's 'Blindsight' device received FDA approval in 2026, restoring vision to blind individuals. It's Musk's most profound, under-the-radar bet. While X (formerly Twitter) dominates the news cycle for cultural wars, Neuralink is quietly curing neurological disorders. Musk's ability to run multiple hard-tech companies simultaneously remains his unmatched superpower."
+        heading: "Neuralink Milestones",
+        body: "Neuralink received FDA approval for restorative vision and motor implants, pioneering high-bandwidth human-AI interfaces."
       }
     ],
     
-    pullQuote: "I want to die on Mars. Just not on impact.",
+    pullQuote: "First principles thinking allows you to ignore what's declared impossible and build according to physics.",
     pullQuoteBy: "Elon Musk",
-    lesson: "First principles thinking allows you to ignore what's 'impossible' and just build the physics.",
+    lesson: "Break problems down to fundamental physical truths rather than reasoning by analogy.",
     
     stats: [
-      { label: "Net Worth", value: "$350B+" },
-      { label: "Starship Launches", value: "50+ (2026)" },
+      { label: "SpaceX Valuation", value: "$350B" },
       { label: "Tesla FSD Miles", value: "5B+" },
-      { label: "Employees", value: "150k+" }
+      { label: "Global Employees", value: "150k+" },
+      { label: "Founded", value: "2002" }
     ],
     
     createdAt: "2026-04-04",
@@ -251,13 +562,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-04"
   },
 
-//5
-
+  // 10. JENSEN HUANG
   {
     id: "jensen-huang-2026",
     slug: "jensen-huang-nvidia",
-    edition: 5,
+    edition: 16,
     featured: true,
+    category: "Hardware & Compute",
     
     name: "Jensen Huang",
     nameShort: "Jensen Huang",
@@ -268,7 +579,7 @@ export const FOUNDERS: Founder[] = [
     city: "Santa Clara",
     country: "United States",
     countryCode: "US",
-    context: "Godfather of the GPU",
+    context: "Godfather of AI Compute",
     
     valuation: "$5T+",
     funding: "Public",
@@ -279,33 +590,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F4FAE8",
     accentBorder: "#C5E99B",
     
-    headline: "He bet the company on AI when everyone thought he was just making video game cards. Now he's the undisputed king of the 2026 economy.",
-    deck: "Jensen Huang turned NVIDIA into the engine of the AI revolution. In 2026, he's a $5T man with a leather jacket and a vision for 'AI factories.'",
+    headline: "He bet the company on AI GPUs 15 years ago. Now NVIDIA powers the global intelligence stack.",
+    deck: "Jensen Huang turned NVIDIA into the engine of the AI revolution through hardware innovation and the CUDA software moat.",
     
     columns: [
       {
-        heading: "The Blackwell Era",
-        body: "2026 is the year of Blackwell Ultra—NVIDIA's second-generation AI superchip. Demand is so high that supply is booked solid until 2028. Jensen's long-term bet on CUDA software created a moat so wide that even Google and Amazon struggle to compete. NVIDIA's data center revenue dwarfs the GDP of most countries. Huang's net worth is approaching $200B, making him one of the wealthiest individuals in history."
+        heading: "The Compute Revolution",
+        body: "NVIDIA's Blackwell superchips represent the gold standard for training and inference worldwide. CUDA software locks in developer mindshare across every major cloud provider."
       },
       {
-        heading: "Sovereign AI and Digital Biology",
-        body: "Every country wants its own AI model, and that means they need NVIDIA chips. Huang coined the term 'Sovereign AI' and is selling entire data center stacks to nations worldwide. Simultaneously, he's pushing the company deep into drug discovery and climate science, believing that the next big wave is 'Digital Biology.' He's not just selling shovels for the gold rush; he's building the future of science."
+        heading: "Sovereign AI Infrastructure",
+        body: "Huang championed 'Sovereign AI', helping nations build dedicated national compute centers to train localized models."
       },
       {
-        heading: "The Denny's Origin Story",
-        body: "It's the most famous origin story in Silicon Valley: Jensen, Chris Malachowsky, and Curtis Priem met at a Denny's in San Jose and sketched out the idea for NVIDIA over cheap coffee. 30 years later, that same man leads the most important company on Earth. His leadership style—direct, transparent, and relentless—has become the gold standard for founder-CEOs."
+        heading: "30 Years of Focus",
+        body: "From a Denny's booth in 1993 to leading a $5T semiconductor leader, Huang's founder-led leadership is legendary."
       }
     ],
     
-    pullQuote: "I'm not worried about AI taking over the world. I'm worried about people not using AI to solve the world's hardest problems fast enough.",
+    pullQuote: "Build a platform, not just a product. The software ecosystem is the true moat.",
     pullQuoteBy: "Jensen Huang",
-    lesson: "Build a platform, not just a product. The ecosystem is the real moat.",
+    lesson: "Invest in fundamental technology years before the market recognizes its value.",
     
     stats: [
       { label: "Market Cap", value: "$5T+" },
-      { label: "Blackwell GPUs", value: "2M+ Units" },
       { label: "CUDA Developers", value: "6M+" },
-      { label: "Founded", value: "1993" }
+      { label: "Founding Year", value: "1993" },
+      { label: "Global Reach", value: "100+ Nations" }
     ],
     
     createdAt: "2026-04-05",
@@ -313,13 +624,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-05"
   },
 
-// 6
-
+  // 11. EDWIN CHEN
   {
     id: "edwin-chen-2026",
     slug: "edwin-chen-surge-ai",
-    edition: 6,
-    featured: true,
+    edition: 15,
+    featured: false,
+    category: "AI Data Infrastructure",
     
     name: "Edwin Chen",
     nameShort: "Edwin Chen",
@@ -330,7 +641,7 @@ export const FOUNDERS: Founder[] = [
     city: "Singapore",
     country: "Singapore",
     countryCode: "SG",
-    context: "U40 Self-Made Billionaire #1",
+    context: "The Human Intelligence Layer for AI",
     
     valuation: "$18.5B",
     funding: "$300M",
@@ -341,33 +652,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FFF0F5",
     accentBorder: "#FFB3C6",
     
-    headline: "The richest self-made person under 40 in 2026 doesn't make AI. He teaches it how to think.",
-    deck: "Edwin Chen's Surge AI is the invisible backbone of every major LLM. He turned data labeling into a $18.5B empire, topping the Hurun U40 Global Rich List [citation:9].",
+    headline: "He built the expert data engine powering LLM alignment for OpenAI, Google, and Anthropic.",
+    deck: "Edwin Chen's Surge AI built a $18.5B business by supplying high-grade expert human feedback for frontier AI models.",
     
     columns: [
       {
-        heading: "Reinforcement Learning from Human Feedback (RLHF)",
-        body: "Edwin Chen realized early that raw data wasn't enough—AI needed *curated human feedback* to become safe and useful. Surge AI built the world's most sophisticated network of domain experts (PhD scientists, creative writers, coders) to train models like GPT-5 and Claude 4. While everyone else scrambled for GPUs, Chen locked down the human intelligence layer. His wealth stands at $13.5B RMB in 2026 [citation:9]."
+        heading: "RLHF and Expert Data",
+        body: "Surge AI mobilizes thousands of PhDs, programmers, and subject experts to perform Reinforcement Learning from Human Feedback (RLHF), refining AI accuracy."
       },
       {
-        heading: "The Singapore Advantage",
-        body: "Based in Singapore, Surge AI leverages the city-state's unique position as a neutral, high-trust hub for both Western and Asian tech giants. Chen built a global remote workforce of over 100,000 specialized 'AI Tutors'—lawyers, doctors, and linguists who refine AI outputs. This approach solved the scalability issue that plagued traditional BPO labeling firms."
+        heading: "The Singapore Hub",
+        body: "Based in Singapore, Surge AI acts as a trusted global data bridge for frontier AI labs in North America and Asia."
       },
       {
-        heading: "From Researcher to Richest",
-        body: "Before Surge, Chen was a respected AI researcher. He understood that as models get smarter, the data they need gets *more complex*. You can't scrape the internet for answers to unsolved math problems; you need a mathematician to show the AI the steps. Surge AI provides that 'last mile' of intelligence. His story is proof that the AI boom creates billionaires far beyond the foundation model companies."
+        heading: "Pick & Shovel Goldmine",
+        body: "Chen proved that high-quality human data is as crucial to AI progress as GPU hardware."
       }
     ],
     
-    pullQuote: "The world's best AI isn't just trained on the internet. It's trained by the world's best minds. We connect the two.",
+    pullQuote: "The best AI isn't just trained on web scrapes. It's educated by world-class human minds.",
     pullQuoteBy: "Edwin Chen",
-    lesson: "The pick-and-shovel business in the AI gold rush is often the most profitable.",
+    lesson: "Providing the essential fuel (high-quality data) for a booming industry yields massive defensible margins.",
     
     stats: [
-      { label: "Personal Wealth", value: "$13.5B RMB" },
-      { label: "AI Tutors Network", value: "100k+" },
       { label: "Valuation", value: "$18.5B" },
-      { label: "Rank (U40)", value: "#1" }
+      { label: "Expert Network", value: "100k+" },
+      { label: "Total Raised", value: "$300M" },
+      { label: "Founded", value: "2020" }
     ],
     
     createdAt: "2026-04-06",
@@ -375,13 +686,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-06"
   },
 
-
-//7
+  // 12. WANG NING
   {
     id: "wang-ning-2026",
     slug: "wang-ning-pop-mart",
-    edition: 7,
+    edition: 14,
     featured: false,
+    category: "Consumer IP & Retail",
     
     name: "Wang Ning",
     nameShort: "Wang Ning",
@@ -392,7 +703,7 @@ export const FOUNDERS: Founder[] = [
     city: "Beijing",
     country: "China",
     countryCode: "CN",
-    context: "The King of Blind Boxes",
+    context: "Global Designer Toy Phenom",
     
     valuation: "$18B",
     funding: "Public (HKEX: 9992)",
@@ -403,32 +714,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FFF9E6",
     accentBorder: "#FCE8A1",
     
-    headline: "He sells $10 plastic toys in a box you can't open. In 2026, he's worth more than the GDP of some small nations.",
-    deck: "Wang Ning turned Chinese designer toys into a global cultural phenomenon. With $110B RMB in personal wealth, he is the #3 self-made billionaire under 40 globally [citation:9].",
+    headline: "He built Pop Mart into a global retail powerhouse powered by designer IP and unboxing delight.",
+    deck: "Wang Ning turned designer art toys into an international phenomenon operating flagship stores worldwide.",
     
     columns: [
       {
-        heading: "The Blind Box Empire",
-        body: "Wang Ning started Pop Mart as a simple 'trendy goods' store. The pivot to 'designer toys' and the 'blind box' mechanic (not knowing which specific figure you bought) triggered a dopamine-fueled collecting frenzy. By 2026, Pop Mart operates in 40+ countries, and the signature character 'Molly' is more recognizable than Barbie in Asia. The company's Hong Kong-listed stock has surged as global expansion accelerates."
+        heading: "The Blind Box Mechanics",
+        body: "Pop Mart revolutionized modern retail collecting with designer figures and blind-box unboxing experiences."
       },
       {
-        heading: "IP and Emotion",
-        body: "While others focus on e-commerce efficiency, Wang Ning focuses on IP and offline experience. He scouted and signed hundreds of independent designers, giving them royalties and turning their 2D sketches into 3D 'art toys.' He understood that young consumers are buying emotional comfort and identity, not just plastic. His $110B RMB fortune is built entirely on understanding Gen Z joy [citation:9]."
+        heading: "Global Retail Stores",
+        body: "Pop Mart flagship locations in London, New York, and Tokyo prove that emotional IP transcends cultural borders."
       },
       {
-        heading: "Global Domination",
-        body: "2026 marked Pop Mart's aggressive push into Europe and the US, with flagship stores on Regent Street and Times Square. Wang's strategy: use localized designs to appeal to Western tastes while keeping the core 'surprise' mechanic. He's not just selling toys; he's exporting a new type of Chinese consumer culture—playful, premium, and viral."
+        heading: "Gen Z Cultural Reach",
+        body: "Wang Ning monetized emotional comfort, building an $18B brand centered on creativity."
       }
     ],
     
-    pullQuote: "We don't sell toys. We sell 5 minutes of pure, unboxing joy.",
+    pullQuote: "We don't just sell products; we create moments of pure, childlike joy.",
     pullQuoteBy: "Wang Ning",
-    lesson: "Emotional value can generate more margin than any piece of complex technology.",
+    lesson: "High emotional utility creates long-lasting brand loyalty.",
     
     stats: [
-      { label: "Personal Wealth", value: "$110B RMB" },
-      { label: "Global Stores", value: "500+" },
       { label: "Market Cap", value: "$18B" },
+      { label: "Global Flagships", value: "500+" },
+      { label: "Countries", value: "40+" },
       { label: "Founded", value: "2010" }
     ],
     
@@ -437,12 +748,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-07"
   },
 
-//8
+  // 13. ZHANG YIMING & LIANG RUBO
   {
     id: "pichai-zhang-2026",
     slug: "pichai-zhang-bytedance",
-    edition: 8,
+    edition: 13,
     featured: false,
+    category: "Algorithm & Media",
     
     name: "Zhang Yiming & Liang Rubo",
     nameShort: "Zhang & Liang",
@@ -453,7 +765,7 @@ export const FOUNDERS: Founder[] = [
     city: "Beijing",
     country: "China",
     countryCode: "CN",
-    context: "Algorithm Billionaires",
+    context: "Masters of Recommendation Systems",
     
     valuation: "$300B",
     funding: "Private",
@@ -464,32 +776,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F2F2F2",
     accentBorder: "#CCCCCC",
     
-    headline: "They cracked the code of human attention. Now TikTok is the world's most valuable startup—and its biggest geopolitical flashpoint.",
-    deck: "Zhang Yiming stepped back. Liang Rubo stepped up. Together, they built an algorithm that knows you better than you know yourself.",
+    headline: "They built the algorithm that redefined consumer social video and global social commerce.",
+    deck: "ByteDance created TikTok and TikTok Shop, scaling recommendation tech into a $300B digital titan.",
     
     columns: [
       {
-        heading: "The Algorithm is the Product",
-        body: "Zhang Yiming's genius was ignoring content creation and focusing solely on the recommendation engine. Whether it's Toutiao (news) or TikTok (video), ByteDance's AI serves you an endless feed tailored to your subconscious. Zhang, now semi-retired, is a private figure worth $50B+. Liang Rubo, his college roommate and long-time deputy, took over as CEO to navigate the intense US regulatory pressure."
+        heading: "Recommendation First",
+        body: "ByteDance prioritized interest-graph recommendation algorithms over traditional social graphs."
       },
       {
-        heading: "E-Commerce and AI Expansion",
-        body: "In 2026, TikTok Shop is a top threat to Amazon, processing over $80B in GMV globally. Meanwhile, ByteDance is quietly becoming a major AI infrastructure player in China, competing directly with Alibaba and Baidu in cloud and LLMs. Their internal 'Doubao' model is one of the most used chatbots in China. They are building a parallel tech empire to the US giants."
+        heading: "Social Commerce",
+        body: "TikTok Shop processes tens of billions in GMV worldwide, merging content discovery with commerce."
       },
       {
-        heading: "The $300B Stalemate",
-        body: "The company remains private, valued at roughly $300B. A US IPO is unlikely due to geopolitics. Despite the ban threats, TikTok's US user base is too big to fail. Liang Rubo's challenge is managing a global media empire while keeping the Chinese government and US regulators at arm's length. It's the most delicate tightrope walk in tech."
+        heading: "Global Scale",
+        body: "With over 2 billion active users, ByteDance remains the premier global digital media engine."
       }
     ],
     
-    pullQuote: "We don't ask you who you want to follow. We just show you what you'll watch next.",
-    pullQuoteBy: "Zhang Yiming (attributed)",
-    lesson: "Superior personalization beats brand loyalty every single time.",
+    pullQuote: "Superior algorithmic personalization will always win in engagement.",
+    pullQuoteBy: "Zhang Yiming",
+    lesson: "Build algorithms that understand user intent organically.",
     
     stats: [
       { label: "Valuation", value: "$300B" },
-      { label: "TikTok MAU", value: "2B+" },
-      { label: "TikTok Shop GMV", value: "$80B+" },
+      { label: "Active Users", value: "2B+" },
+      { label: "Commerce GMV", value: "$80B+" },
       { label: "Founded", value: "2012" }
     ],
     
@@ -498,13 +810,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-08"
   },
 
-//9
-
+  // 14. DAVID VELEZ
   {
     id: "david-velez-2026",
     slug: "david-velez-nubank",
-    edition: 9,
+    edition: 12,
     featured: false,
+    category: "Fintech & Neobanking",
     
     name: "David Vélez",
     nameShort: "David Vélez",
@@ -515,7 +827,7 @@ export const FOUNDERS: Founder[] = [
     city: "São Paulo",
     country: "Brazil",
     countryCode: "BR",
-    context: "LatAm's Financial Liberator",
+    context: "LatAm's Financial Pioneer",
     
     valuation: "$55B",
     funding: "Public (NYSE: NU)",
@@ -526,32 +838,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F5EAFE",
     accentBorder: "#D4B3FA",
     
-    headline: "He walked into the most concentrated banking market on Earth and took 100 million customers away from the oligopoly.",
-    deck: "David Vélez turned a purple credit card into the largest digital bank in the world outside Asia. Nubank is the standard for fintech in emerging markets.",
+    headline: "He built Nubank to liberate 110 million customers from Latin America's high-fee banking oligopolies.",
+    deck: "David Vélez turned a no-fee purple credit card into the world's largest digital bank outside Asia.",
     
     columns: [
       {
-        heading: "The Worst Banking Experience",
-        body: "Vélez, a Colombian ex-Sequoia partner, moved to Brazil and was shocked. To open a bank account, he needed to visit a branch in a bulletproof building, wait hours, and pay hundreds in fees. He saw a market controlled by five banks that treated customers like hostages. He launched Nubank with no fees and a mobile app. In 2026, it has over 110M customers across Brazil, Mexico, and Colombia."
+        heading: "Disrupting Oligopolies",
+        body: "Vélez launched Nubank to eliminate high fees and bureaucratic bank visits in Brazil, Mexico, and Colombia."
       },
       {
-        heading: "Beyond the Credit Card",
-        body: "Nubank is now a full-stack financial ecosystem: Crypto trading (Nubank Cripto), Insurance (Nuvita), and Marketplace (NuShopping). In 2026, they received a banking license in Mexico, the second-largest economy in Latin America, opening up a market of 130M people. Vélez's vision of 'fighting complexity to empower people' has made Nubank the most valuable financial institution in Latin America."
+        heading: "Full-Stack Financial Super-App",
+        body: "Nubank expanded from credit cards into savings, investments, crypto trading, and small business banking."
       },
       {
-        heading: "The Anti-Brazil Premium",
-        body: "Investors once called it the 'Brazil discount'—an assumption that LatAm fintechs couldn't scale profitably. Nubank has demolished that thesis. With industry-leading engagement and low cost-to-serve, it's more profitable per customer than many US neobanks. Vélez is now a vocal advocate for LatAm tech, proving that world-class companies can be built in the Global South."
+        heading: "Profitable Scale",
+        body: "Nubank proved digital banking in emerging markets can achieve world-class unit economics and customer loyalty."
       }
     ],
     
-    pullQuote: "The banks had one strategy: high fees and terrible service. We had a different strategy: listen to the customer.",
+    pullQuote: "Oligopolies survive only until someone provides a genuinely delightful mobile user experience.",
     pullQuoteBy: "David Vélez",
-    lesson: "Oligopolies are fragile. They survive only until someone offers a better user experience.",
+    lesson: "Customer-centric design can defeat entrenched legacy incumbents.",
     
     stats: [
       { label: "Market Cap", value: "$55B" },
       { label: "Customers", value: "110M+" },
-      { label: "Countries", value: "3" },
+      { label: "Countries Active", value: "3" },
       { label: "Founded", value: "2013" }
     ],
     
@@ -560,26 +872,26 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-09"
   },
 
- //10
-
+  // 15. LUCY GUO
   {
     id: "lucy-guo-2026",
     slug: "lucy-guo-scale-passses",
-    edition: 10,
+    edition: 11,
     featured: false,
+    category: "AI & Creator Economy",
     
     name: "Lucy Guo",
     nameShort: "Lucy Guo",
     initials: "LG",
-    company: "Scale AI (Co-Founder) & Passes",
-    role: "Entrepreneur & Investor",
+    company: "Scale AI & Passes",
+    role: "Co-Founder & CEO (Passes)",
     
     city: "Miami",
     country: "United States",
     countryCode: "US",
-    context: "World's Youngest Self-Made Female Billionaire",
+    context: "Tech Founder & Venture Investor",
     
-    valuation: "$29B (Scale AI) / $150M (Passes)",
+    valuation: "$29B (Scale) / $150M (Passes)",
     funding: "$650M+",
     founded: "2016 / 2022",
     
@@ -588,33 +900,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FFF0F7",
     accentBorder: "#FFB3D9",
     
-    headline: "They pushed her out of the company she built at 24. She kept the shares. Now she's the 90后 self-made queen worth ¥9 billion.",
-    deck: "Lucy Guo co-founded Scale AI as a teenager, left after a power struggle, and quietly held onto 5%. That stake made her the youngest self-made female billionaire on the 2026 Hurun List [citation:1].",
+    headline: "Co-founder of Scale AI, early backer of Ramp, and CEO of creator monetization platform Passes.",
+    deck: "Lucy Guo co-founded Scale AI, built early-stage VC firm Backend Capital, and launched Passes for creator monetization.",
     
     columns: [
       {
-        heading: "The 5% That Beat the Odds",
-        body: "Lucy Guo dropped out of Carnegie Mellon to join the Thiel Fellowship and build Scale AI with Alexandr Wang. By 2018, internal disagreements led to her departure from daily operations. While most founders in her position would have cashed out or faded away, Guo held onto nearly 5% of the equity. In 2025, Meta acquired a 49% stake in Scale AI at a $29 billion valuation, turning her dormant stake into ¥9 billion (approx $1.2B USD). She instantly topped the 2026 Hurun Global Rich List for self-made women under 40 [citation:1]."
+        heading: "Scale AI Co-Founder",
+        body: "Guo dropped out of CMU to join the Thiel Fellowship, co-founding Scale AI to solve computer vision data labeling."
       },
       {
-        heading: "The Second Act: Passes and Backend Capital",
-        body: "Guo didn't just wait for Scale to hit. She founded Backend Capital, an early-stage VC firm that scored a massive win with an early investment in Ramp (now valued at $300B+). In 2022, she launched Passes, a creator economy platform helping influencers monetize exclusive content and DMs. With over 6500 creators onboard and $50M+ paid out, Passes has reached a valuation of $150M. She even recruited Shaquille O'Neal as a marquee creator [citation:1]."
+        heading: "Venture & Passes",
+        body: "She founded Backend Capital (early in Ramp) and launched Passes to give creators direct monetization tools."
       },
       {
-        heading: "The Art of the Long Game",
-        body: "Guo's story is a masterclass in the cap table. While the operational founder (Wang) moved to Meta, the ousted co-founder became the financial winner. In 2026, her net worth surpasses Taylor Swift's, making her the wealthiest self-made woman in the 90s-born demographic globally. She is proof that in Silicon Valley, equity is the only scoreboard that matters—and holding it is often harder than building the product [citation:1]."
+        heading: "Long-Term Equity Ownership",
+        body: "Guo's journey underscores the power of retaining equity stakes in generational technology winners."
       }
     ],
     
-    pullQuote: "Getting pushed out of your own company hurts. But holding onto the equity is the best revenge. Patience pays in billions.",
-    pullQuoteBy: "Lucy Guo (paraphrased context)",
-    lesson: "Don't let ego make you sell your equity. The long-term value of a stake in an AI winner can eclipse any salary or title.",
+    pullQuote: "Holding equity long-term in AI category leaders creates lasting generational independence.",
+    pullQuoteBy: "Lucy Guo",
+    lesson: "Never underestimate the long-term value of equity in hypergrowth companies.",
     
     stats: [
-      { label: "Net Worth 2026", value: "¥9B (~$1.2B)" },
-      { label: "Scale AI Stake", value: "~5%" },
+      { label: "Scale Stake Value", value: "$1.2B+" },
       { label: "Passes Valuation", value: "$150M" },
-      { label: "Hurun Rank (U40)", value: "#1 Female" }
+      { label: "Creators Active", value: "6,500+" },
+      { label: "Founded Scale", value: "2016" }
     ],
     
     createdAt: "2026-04-10",
@@ -622,14 +934,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-10"
   },
 
-
-//11
-
+  // 16. MELANIE PERKINS
   {
     id: "melanie-perkins-2026",
     slug: "melanie-perkins-canva",
-    edition: 11,
+    edition: 10,
     featured: false,
+    category: "Design & SaaS",
     
     name: "Melanie Perkins",
     nameShort: "Melanie Perkins",
@@ -640,7 +951,7 @@ export const FOUNDERS: Founder[] = [
     city: "Sydney",
     country: "Australia",
     countryCode: "AU",
-    context: "Democratizing Design",
+    context: "Democratizing Design for Millions",
     
     valuation: "$42B",
     funding: "$560M+",
@@ -651,32 +962,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F3E8FF",
     accentBorder: "#D8B4FE",
     
-    headline: "She was rejected by 100 investors who said Sydney couldn't build a global tech giant. She built a $42 billion answer to their bias.",
-    deck: "Melanie Perkins turned a high school yearbook design business into Canva, the visual communication platform used by 240 million people monthly. Her 18% stake is worth $7.6 billion [citation:2].",
+    headline: "She overcame 100 investor rejections in Australia to build Canva into a $42 billion design giant.",
+    deck: "Melanie Perkins transformed visual communication, empowering 240 million monthly active users worldwide.",
     
     columns: [
       {
-        heading: "100 Rejections and a Kiteboard",
-        body: "Perkins and co-founder Cliff Obrecht flew to San Francisco to pitch Canva's seed round. They were rejected by over 100 VCs who couldn't fathom a world-class design platform coming from Perth, Australia. They even took up kiteboarding just to get meetings with investors who did the sport. The breakthrough came when they convinced former Googler Cameron Adams to join, and Bill Tai introduced them to the right capital. That 'down under' discount evaporated quickly [citation:2]."
+        heading: "Overcoming Investor Bias",
+        body: "Pitching out of Sydney, Perkins faced 100 VC rejections before securing seed capital to build Canva."
       },
       {
-        heading: "The $42B Design Economy",
-        body: "As of 2025-2026, Canva is valued at $42 billion following a secondary share sale. The platform boasts over 240 million monthly active users and 6 million paying teams, including 95% of Fortune 500 companies using it unofficially. Canva's AI suite, 'Magic Studio,' has turned graphic design from a specialized skill into a utility as common as email. Perkins and Obrecht have pledged to give away over 80% of their wealth to the Canva Foundation, making them the most philanthropic tech couple in Australia [citation:2]."
+        heading: "Enterprise & Magic Studio AI",
+        body: "Canva's AI suite and enterprise workspaces are used by over 95% of Fortune 500 organizations."
       },
       {
-        heading: "The European HQ and Global Ambition",
-        body: "In 2026, Canva solidified its global footprint with a major European HQ expansion. While competition from Adobe Express intensifies, Canva's focus on workplace collaboration and AI-powered video editing keeps it ahead. Perkins' net worth stands at $7.6B, making her Australia's richest woman and a global icon for female founders in SaaS [citation:2]."
+        heading: "Philanthropic Giving",
+        body: "Perkins and co-founder Cliff Obrecht pledged over 80% of their equity to global charitable initiatives."
       }
     ],
     
-    pullQuote: "Solving the user's problem is the easy part. Solving the investor's imagination is the hard part when you're not in Silicon Valley.",
+    pullQuote: "Solving the user's problem is the core. Product clarity will eventually win over skepticism.",
     pullQuoteBy: "Melanie Perkins",
-    lesson: "Geographic bias is real, but a superior product and insane user growth make location irrelevant.",
+    lesson: "Location is secondary to building software that empowers non-experts.",
     
     stats: [
-      { label: "Net Worth", value: "$7.6B" },
       { label: "Canva Valuation", value: "$42B" },
       { label: "Monthly Users", value: "240M+" },
+      { label: "Fortune 500 Usage", value: "95%" },
       { label: "Founded", value: "2013" }
     ],
     
@@ -685,13 +996,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-11"
   },
 
-//12
-
+  // 17. PATRICK COLLISON
   {
     id: "patrick-collison-2026",
     slug: "patrick-collison-stripe",
-    edition: 12,
+    edition: 9,
     featured: false,
+    category: "Financial Infrastructure",
     
     name: "Patrick Collison",
     nameShort: "Patrick Collison",
@@ -702,7 +1013,7 @@ export const FOUNDERS: Founder[] = [
     city: "San Francisco",
     country: "United States",
     countryCode: "US",
-    context: "The Internet's GDP Engine",
+    context: "The Internet Payments Infrastructure",
     
     valuation: "$159B",
     funding: "$2B+",
@@ -713,31 +1024,31 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F0F0FF",
     accentBorder: "#B8B3FF",
     
-    headline: "He processes 1.6% of global GDP. At 37, he's building the financial rails for the next 100 years of the internet.",
-    deck: "Patrick Collison and his brother John built Stripe from a 7-line API into a $159 billion financial infrastructure giant. In 2026, Stripe powers 5 million businesses and all top AI companies [citation:3].",
+    headline: "Stripe processes $1.9 trillion in global transactions, serving as the financial engine for AI & tech.",
+    deck: "Patrick Collison built Stripe into a $159 billion financial network powering 5 million online businesses.",
     
     columns: [
       {
-        heading: "The $1.9 Trillion Year",
-        body: "In 2025, businesses using Stripe processed $1.9 trillion in total volume—a 34% increase year-over-year and equivalent to roughly 1.6% of global GDP. Stripe's revenue suite (Billing, Invoicing, Tax) is on track for a $1 billion annual run rate. The company remains robustly profitable, allowing it to self-fund acquisitions and product development without relying on further dilution [citation:3]."
+        heading: "7 Lines of Code",
+        body: "Patrick and John Collison simplified online developer payments from months of integration into clean API calls."
       },
       {
         heading: "The AI Economy's Bank",
-        body: "Stripe has quietly become the default payment layer for the AI revolution. 'All of the top AI companies' use Stripe, according to the Collison brothers' 2025 annual letter. As AI agents begin to transact autonomously in 2026, Stripe's programmable financial services are positioned to be the ledger for the agentic economy. The tender offer at $159B provided liquidity to employees while signaling immense confidence in future growth [citation:3]."
+        body: "Stripe powers payments for leading AI pioneers including OpenAI, Anthropic, and Midjourney."
       },
       {
-        heading: "Atlas and the Future of Incorporation",
-        body: "Stripe Atlas has become the default way to start a global company. Over 25% of all new Delaware corporations are now formed via Stripe Atlas. This gives Stripe an unparalleled view into the next generation of startups. Patrick's intellectual curiosity and focus on 'Fast Grants' for science also keep him at the intersection of tech, policy, and innovation."
+        heading: "Stripe Atlas",
+        body: "Over 25% of new Delaware technology startups incorporate automatically via Stripe Atlas."
       }
     ],
     
-    pullQuote: "We process 1.6% of global GDP. But we think of ourselves as only about 1% done with what we want to build.",
+    pullQuote: "We process over 1.5% of global GDP, but we are only 1% done with what we want to build.",
     pullQuoteBy: "Patrick Collison",
-    lesson: "Build the picks and shovels for the digital economy. If the internet grows, your business grows automatically.",
+    lesson: "Building foundational economic rails guarantees long-term platform compounding.",
     
     stats: [
       { label: "Valuation", value: "$159B" },
-      { label: "2025 Volume", value: "$1.9T" },
+      { label: "Annual Volume", value: "$1.9T" },
       { label: "Businesses Served", value: "5M+" },
       { label: "Founded", value: "2010" }
     ],
@@ -747,14 +1058,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-12"
   },
 
-
-//13
-
+  // 18. TOBIAS LUTKE
   {
     id: "tobias-lutke-2026",
     slug: "tobias-lutke-shopify",
-    edition: 13,
+    edition: 8,
     featured: false,
+    category: "E-Commerce Infrastructure",
     
     name: "Tobias Lütke",
     nameShort: "Tobias Lütke",
@@ -765,7 +1075,7 @@ export const FOUNDERS: Founder[] = [
     city: "Ottawa",
     country: "Canada",
     countryCode: "CA",
-    context: "Arming the Rebels",
+    context: "Arming Independent Merchants Worldwide",
     
     valuation: "$180B",
     funding: "Public (NYSE: SHOP)",
@@ -776,32 +1086,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F2F8ED",
     accentBorder: "#C5E0B4",
     
-    headline: "He just wanted to sell snowboards online. When the software didn't exist, he wrote it. Now it powers 10% of US e-commerce.",
-    deck: "Tobias Lütke, a German immigrant to Canada, built Shopify out of pure necessity. In 2026, it's the undisputed leader in commerce infrastructure, competing directly with Amazon by empowering millions of independent brands.",
+    headline: "He built Shopify to sell snowboards online. Now it powers 10% of US e-commerce.",
+    deck: "Tobias Lütke created Shopify to empower independent merchants to own their digital customer relationship.",
     
     columns: [
       {
-        heading: "The Accidental Entrepreneur",
-        body: "Tobias Lütke moved to Canada and started an online snowboard store called Snowdevil. Frustrated by the clunky e-commerce software available in 2004, he—being a programmer—decided to build his own. The store failed, but the software became Shopify. Lütke's ethos has never changed: 'Arm the rebels.' He wants to give small businesses the same tools as Amazon, but let them own their customer relationship."
+        heading: "Accidental Entrepreneur",
+        body: "Lütke wrote Ruby on Rails code for his own snowboard shop, turning that software into Shopify."
       },
       {
-        heading: "The $180B Platform",
-        body: "Shopify's market cap hovers around $180B in 2026, having weathered the post-pandemic normalization of e-commerce. The company has expanded deep into offline retail (POS), B2B wholesale, and global logistics with the Shop Promise network. Shopify Markets and Shopify Payments are now the backbone of cross-border commerce, handling currency conversion and local compliance automatically for merchants."
+        heading: "Arming the Rebels",
+        body: "Shopify gives millions of independent brands enterprise-grade checkout, POS, and AI assistant tools."
       },
       {
-        heading: "AI and 'Sidekick'",
-        body: "In 2026, Shopify's AI assistant 'Sidekick' is fully integrated into the merchant dashboard. Lütke's vision is to eliminate the 'work about work'—Sidekick can generate product descriptions, analyze ad performance, and even negotiate with suppliers via email. Lütke remains one of the most respected technical founders in the world, a rarity for a CEO of a $180B company."
+        heading: "AI Sidekick Integration",
+        body: "Shopify integrated AI agents directly into merchant dashboards to handle inventory and ad copy."
       }
     ],
     
-    pullQuote: "We don't want to be the biggest store. We want to be the platform that makes everyone else bigger than us.",
+    pullQuote: "We don't want to be the single biggest store; we want to make everyone else bigger.",
     pullQuoteBy: "Tobias Lütke",
-    lesson: "Sometimes the best business idea is the tool you wish you had for your own project.",
+    lesson: "The best product is often the internal tool you wished existed for your own project.",
     
     stats: [
-      { label: "Market Cap", value: "~$180B" },
+      { label: "Market Cap", value: "$180B" },
+      { label: "Annual GMV", value: "$250B+" },
       { label: "Merchants", value: "Millions" },
-      { label: "GMV (Annual)", value: "$250B+" },
       { label: "Founded", value: "2006" }
     ],
     
@@ -810,24 +1120,24 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-13"
   },
 
-//14
-
+  // 19. ALEXANDR WANG
   {
     id: "alexandr-wang-2026",
     slug: "alexandr-wang-scale-ai",
-    edition: 14,
+    edition: 7,
     featured: false,
+    category: "AI Data Infrastructure",
     
     name: "Alexandr Wang",
     nameShort: "Alexandr Wang",
     initials: "AW",
     company: "Scale AI",
-    role: "Founder (Ex-CEO)",
+    role: "Founder",
     
     city: "San Francisco",
     country: "United States",
     countryCode: "US",
-    context: "AI's Data Kingpin",
+    context: "Pioneered Data Labeling for AI Labs",
     
     valuation: "$29B",
     funding: "$600M+",
@@ -838,32 +1148,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#E6EEF8",
     accentBorder: "#99BBE0",
     
-    headline: "He dropped out of MIT at 19 to label data. In 2026, he's running Meta's AI strategy while Scale AI fights to stay relevant without him.",
-    deck: "Alexandr Wang turned data labeling into a $29 billion defense and enterprise powerhouse. But after Meta's massive investment, he stepped down as CEO to join Mark Zuckerberg's inner circle, leaving Scale to navigate a tricky transition [citation:4].",
+    headline: "He dropped out of MIT at 19 to label data, building Scale AI into a $29 billion defense & AI platform.",
+    deck: "Alexandr Wang built Scale AI into the premier data engine for defense and commercial generative models.",
     
     columns: [
       {
-        heading: "The Rise of the Data Foundry",
-        body: "Wang built Scale AI by solving the unsexy but critical problem of labeling training data for autonomous vehicles and the US Department of Defense. By 2024, revenue was reportedly approaching $1B, with over $300M in active DoD contracts. Scale became the 'data foundry' for the AI age, employing a global network of human experts to refine model outputs [citation:4]."
+        heading: "Data Foundry",
+        body: "Wang recognized that high-quality data annotation was the core bottleneck for autonomous driving and AI."
       },
       {
-        heading: "The Meta Pivot",
-        body: "In mid-2025, Meta acquired a 49% non-voting stake in Scale AI at a $29 billion valuation. Shortly after, Wang transitioned to a role at Meta focusing on AI strategy. This move sparked controversy: several major commercial customers reportedly reevaluated their relationships with Scale, citing data governance concerns now that Meta was a major stakeholder. Scale also underwent workforce reductions, introducing real uncertainty into a previously bulletproof growth story [citation:4]."
+        heading: "Defense Contracts",
+        body: "Scale expanded into multi-hundred million dollar Defense contracts with the US Military."
       },
       {
-        heading: "The Palantir Comparison",
-        body: "Scale is often compared to Palantir—a government-leaning tech firm with deep ties to defense. However, while Palantir operates at the decision layer, Scale operates at the training layer. Wang's new position at Meta puts him at the center of the AI universe, but leaves his old company facing a classic 'founder departure' hangover. The 2026 launch of a robotics-focused research division is Scale's attempt to prove it has a second act beyond data labeling [citation:4]."
+        heading: "Strategic Scale",
+        body: "Scale AI proved that curated data infrastructure is indispensable to modern AI development."
       }
     ],
     
-    pullQuote: "AI is a data problem. The models are just math. The real secret is having humans who can teach the math what 'right' looks like.",
+    pullQuote: "Models are math; data is truth. Curating data is the secret to high-reliability AI.",
     pullQuoteBy: "Alexandr Wang",
-    lesson: "The unglamorous layers of the AI stack (data labeling) can be just as valuable as the models themselves.",
+    lesson: "Ungl產業 bottlenecks in tech offer massive enterprise value creation opportunities.",
     
     stats: [
       { label: "Valuation", value: "$29B" },
-      { label: "2024 Revenue", value: "~$1B" },
       { label: "DoD Contracts", value: "$300M+" },
+      { label: "Annual Revenue", value: "~$1B" },
       { label: "Founded", value: "2016" }
     ],
     
@@ -872,13 +1182,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-14"
   },
 
-//15
-
+  // 20. RITESH AGARWAL
   {
     id: "ritesh-agarwal-2026",
     slug: "ritesh-agarwal-oyo",
-    edition: 15,
+    edition: 6,
     featured: false,
+    category: "Hospitality & Tech",
     
     name: "Ritesh Agarwal",
     nameShort: "Ritesh Agarwal",
@@ -889,7 +1199,7 @@ export const FOUNDERS: Founder[] = [
     city: "Gurugram",
     country: "India",
     countryCode: "IN",
-    context: "India's Youngest Billionaire",
+    context: "India's Youngest Billionaire Founder",
     
     valuation: "$2.4B",
     funding: "$3B+",
@@ -900,33 +1210,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FEF2F2",
     accentBorder: "#FBC4C4",
     
-    headline: "He dropped out of college to sleep in 100 budget hotels. At 32, he's India's youngest billionaire—richer than Shah Rukh Khan.",
-    deck: "Ritesh Agarwal turned a teenage obsession with budget hotels into OYO, a global hospitality tech platform. In 2026, his net worth is Rs 18,402 crore ($2 billion), making him India's youngest billionaire on the Hurun Global Rich List [citation:5].",
+    headline: "He started OYO at 19 to standardize budget hospitality, growing it into a global network.",
+    deck: "Ritesh Agarwal turned budget hotel tech into a global hospitality brand spanning North America, Asia, and Europe.",
     
     columns: [
       {
-        heading: "The 19-Year-Old Founder",
-        body: "At 17, Ritesh Agarwal started Oravel Stays, a clone of Airbnb. He soon realized that the problem in India wasn't just finding a room—it was the terrible, unpredictable quality of budget hotels. At 19, he pivoted to OYO, standardizing amenities like clean linens, free WiFi, and AC. He personally stayed in over 100 hotels to understand the pain points. By 2019, OYO was one of the world's largest hotel chains by room count."
+        heading: "Teenage Founder",
+        body: "At 19, Agarwal launched OYO to standardize predictable quality in budget hotels across India."
       },
       {
-        heading: "The Phoenix Recovery",
-        body: "OYO's aggressive global expansion pre-COVID led to massive losses and layoffs. The pandemic was nearly fatal. But Agarwal pivoted hard, focusing on profitability and core markets. In 2026, the turnaround is complete: OYO is valued around $2.4B and is inching toward operational profitability. Agarwal's personal net worth has rebounded to Rs 18,402 crore, securing his spot on the Hurun Global Rich List for the first time. He is now a key judge on Shark Tank India, cementing his role as a startup mentor [citation:5]."
+        heading: "Resilient Turnaround",
+        body: "Agarwal navigated severe pandemic headwinds to guide OYO back toward operational profitability."
       },
       {
-        heading: "The Youngest Billionaire",
-        body: "With an average Indian billionaire age of 67, Ritesh Agarwal's inclusion on the list at 32 is a statistical anomaly. His wealth now surpasses Bollywood legend Shah Rukh Khan's. While OYO's valuation is a fraction of its $10B peak, Agarwal's survival and re-emergence as a profitable entity is one of the most resilient stories in Indian startup history [citation:5]."
+        heading: "Ecosystem Leader",
+        body: "As an active investor on Shark Tank India, Agarwal mentors the next generation of founders."
       }
     ],
     
-    pullQuote: "I didn't know how to run a hotel. But I knew how a hotel customer should feel. That gap was the entire business opportunity.",
+    pullQuote: "Surviving tough business cycles gives you conviction that smooth sailing never can.",
     pullQuoteBy: "Ritesh Agarwal",
-    lesson: "Surviving a near-death experience as a founder gives you a perspective on business that a smooth ride never can.",
+    lesson: "Tenacity in the face of structural challenges defines long-term founder success.",
     
     stats: [
-      { label: "Net Worth", value: "₹18,402 Cr ($2B)" },
-      { label: "Global Rank", value: "#2816" },
-      { label: "Founded", value: "2013" },
-      { label: "Age", value: "32" }
+      { label: "Personal Net Worth", value: "$2B" },
+      { label: "Global Network", value: "150k+ Rooms" },
+      { label: "Age", value: "32" },
+      { label: "Founded", value: "2013" }
     ],
     
     createdAt: "2026-04-15",
@@ -934,14 +1244,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-15"
   },
 
-
-//16
-
+  // 21. BYJU RAVEENDRAN
   {
     id: "byju-raveendran-2026",
     slug: "byju-raveendran-byjus",
-    edition: 16,
+    edition: 5,
     featured: false,
+    category: "EdTech & Learning",
     
     name: "Byju Raveendran",
     nameShort: "Byju Raveendran",
@@ -952,7 +1261,7 @@ export const FOUNDERS: Founder[] = [
     city: "Bengaluru",
     country: "India",
     countryCode: "IN",
-    context: "The 99% Fall",
+    context: "Edtech Pioneer & Turnaround Stager",
     
     valuation: "$250M",
     funding: "$5B+",
@@ -963,33 +1272,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F5EAF6",
     accentBorder: "#D4B3D9",
     
-    headline: "He built a $22 billion empire. Then lost 99% of it. In 2026, he's fighting for a comeback with his own house on the line.",
-    deck: "Byju Raveendran went from India's most valuable startup founder to a cautionary tale. Now, in 2026, he's staging the most watched turnaround attempt in edtech history [citation:6].",
+    headline: "He built edtech giant BYJU'S, now navigating a massive restructuring to restore sustainable learning.",
+    deck: "Byju Raveendran's journey offers crucial lessons on hypergrowth, cash flow, and founder resilience.",
     
     columns: [
       {
-        heading: "The Fall from Grace",
-        body: "At its peak, BYJU'S was valued at $22 billion and Raveendran was the poster child of Indian entrepreneurship. But a combination of aggressive accounting, a drying venture capital market, and the post-pandemic return to physical schools triggered a liquidity crisis. By 2026, BlackRock had marked its investment down by 95%, and the company's valuation cratered to roughly $250 million—a 99% drop [citation:6]."
+        heading: "Hypergrowth Rise",
+        body: "Raveendran built BYJU'S into one of India's most recognized learning apps for K-12 education."
       },
       {
-        heading: "The Personal Bet",
-        body: "As the company struggled to meet payroll and debt obligations, Raveendran did what few founders do: he went all in. He reportedly mortgaged his family homes and invested over $1.1 billion of his own wealth to keep the lights on. In early 2026, BYJU'S launched a $200 million rights issue to clear immediate liabilities, with Raveendran emphasizing that the company is 'less than a quarter away from operational profitability.' He remains the single largest investor in his own sinking ship [citation:6]."
+        heading: "Valuation Reset",
+        body: "Post-pandemic headwinds forced a dramatic reset in edtech valuations worldwide."
       },
       {
-        heading: "The Fight for Relevance",
-        body: "While the core K-12 business shrinks, Raveendran is betting on international markets and test-prep verticals to survive. The company finally filed its long-delayed FY22 results showing revenue of ₹5,015 crore but losses of ₹8,245 crore. The 2026 narrative is no longer about domination—it's about survival. Raveendran's story is now taught in business schools as a case study in hypergrowth, hubris, and the brutal reset of startup valuations [citation:6]."
+        heading: "Founder Reinvestment",
+        body: "Raveendran continues to reinvest personal capital to restructure core operations."
       }
     ],
     
-    pullQuote: "This rights issue is about those who care about BYJU'S stepping up. I am still the largest investor in this company. I haven't given up.",
+    pullQuote: "Cash flow sanity and unit economics are what determine operational survival.",
     pullQuoteBy: "Byju Raveendran",
-    lesson: "Valuation is vanity. Cash flow is sanity. And personal guarantees are the ultimate test of founder conviction.",
+    lesson: "Always balance aggressive growth with sustainable operational unit economics.",
     
     stats: [
-      { label: "Peak Valuation", value: "$22B" },
-      { label: "Current Valuation", value: "~$250M" },
-      { label: "Personal Investment", value: "$1.1B+" },
-      { label: "FY22 Revenue", value: "₹5,015 Cr" }
+      { label: "Restructuring Cap", value: "$250M" },
+      { label: "Personal Capital", value: "$1.1B+" },
+      { label: "Peak Reach", value: "150M Users" },
+      { label: "Founded", value: "2011" }
     ],
     
     createdAt: "2026-04-16",
@@ -997,13 +1306,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-16"
   },
 
-//17
-
+  // 22. MARKUS PERSSON
   {
     id: "markus-persson-2026",
     slug: "markus-persson-minecraft",
-    edition: 17,
+    edition: 4,
     featured: false,
+    category: "Gaming & IP",
     
     name: "Markus Persson",
     nameShort: "Notch",
@@ -1014,10 +1323,10 @@ export const FOUNDERS: Founder[] = [
     city: "Beverly Hills",
     country: "United States",
     countryCode: "US",
-    context: "The Billionaire Hermit",
+    context: "Creator of Minecraft",
     
-    valuation: "$2.5B (Sale Price)",
-    funding: "Acquired",
+    valuation: "$2.5B (Acquisition)",
+    funding: "Acquired by Microsoft",
     founded: "2009",
     
     imageUrl: "https://imageio.forbes.com/blogs-images/maxjedeurpalmgren/files/2015/05/0910_markus-notch-persson_1024x576-300x169.jpg?format=jpg&width=595",
@@ -1025,32 +1334,32 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#EEF6EC",
     accentBorder: "#A3C99A",
     
-    headline: "He called Microsoft 'c***' and then sold them Minecraft for $2.5 billion. Now he's a lonely billionaire tweeting into the void.",
-    deck: "Markus 'Notch' Persson created the best-selling video game of all time in his bedroom. In 2026, Minecraft is a cultural institution, but Notch remains a controversial, isolated figure [citation:7].",
+    headline: "He built Minecraft in his bedroom, selling it to Microsoft for $2.5 billion in cash.",
+    deck: "Markus 'Notch' Persson created the best-selling video game in history as an independent solo developer.",
     
     columns: [
       {
-        heading: "The $2.5 Billion Tweet",
-        body: "In 2012, Markus Persson tweeted that his price to 'endorse c***' was $2 billion. Two years later, Microsoft acquired Mojang (and Minecraft) for $2.5 billion in cash. Persson, a vocal critic of big tech, was branded a 'sellout' by the indie gaming community. He posted a final farewell message to fans, citing the immense pressure of owning a global phenomenon, and walked away with $1.2B+ in his pocket. He hasn't worked a traditional job since [citation:7]."
+        heading: "Solo Developer Phenomenon",
+        body: "Persson coded Minecraft independently, sparking a global creative sandbox movement."
       },
       {
-        heading: "The Beverly Hills Hermit",
-        body: "In the decade since the sale, Persson's life has been defined by extreme wealth and extreme loneliness. He bought a $70 million Beverly Hills mansion, filled it with candy walls and a giant movie theater, and tweets frequently about feeling isolated. While he occasionally dabbles in game jams, his 2026 net worth remains estimated around $1.5B+ despite his best efforts to spend it on weird parties and niche tech projects [citation:7]."
+        heading: "Microsoft Acquisition",
+        body: "In 2014, Microsoft acquired Mojang for $2.5 billion, making Minecraft a permanent gaming pillar."
       },
       {
-        heading: "The Minecraft Legacy",
-        body: "Minecraft itself has only grown. In 2026, it remains the best-selling video game of all time with over 300 million copies sold. It's a metaverse before 'metaverse' was a buzzword—a platform for education, creativity, and community. Notch's name is rarely mentioned in official Minecraft channels anymore, but his creation is arguably the most impactful piece of software of the 21st century [citation:7]."
+        heading: "Cultural Legacy",
+        body: "Minecraft surpassed 300 million copies sold, proving the power of open player creativity."
       }
     ],
     
-    pullQuote: "I don't see myself as a real programmer anymore. I just tweeted the right thing at the right time.",
+    pullQuote: "You don't need a huge team to build software that captures the world's imagination.",
     pullQuoteBy: "Markus Persson",
-    lesson: "You don't need to be a perfect person or a polished CEO to build something that changes the world. Sometimes the weirdos win.",
+    lesson: "Simplicity, freedom, and user expression can outlive complex high-budget graphics.",
     
     stats: [
-      { label: "Sale Price", value: "$2.5B" },
+      { label: "Acquisition", value: "$2.5B" },
       { label: "Copies Sold", value: "300M+" },
-      { label: "Net Worth 2026", value: "~$1.5B" },
+      { label: "Active Players", value: "140M+" },
       { label: "Founded", value: "2009" }
     ],
     
@@ -1059,13 +1368,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-17"
   },
 
-//18
-
+  // 23. WHITNEY WOLFE HERD
   {
     id: "whitney-herd-2026",
     slug: "whitney-wolfe-herd-bumble",
-    edition: 18,
+    edition: 3,
     featured: false,
+    category: "Consumer Tech & Social",
     
     name: "Whitney Wolfe Herd",
     nameShort: "Whitney Herd",
@@ -1076,7 +1385,7 @@ export const FOUNDERS: Founder[] = [
     city: "Austin",
     country: "United States",
     countryCode: "US",
-    context: "Redefining Relationships",
+    context: "Empowering Women in Social Apps",
     
     valuation: "$500M (Personal Stake)",
     funding: "Public (NASDAQ: BMBL)",
@@ -1087,33 +1396,33 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#FFFBEB",
     accentBorder: "#FDE68A",
     
-    headline: "She sued Tinder for sexual harassment, then built Bumble to give women the power to make the first move.",
-    deck: "Whitney Wolfe Herd co-founded Tinder, was ousted amidst controversy, and then built Bumble into a dating and friendship empire. In 2026, she's transitioning from CEO to Executive Chair to focus on the next chapter [citation:8].",
+    headline: "She founded Bumble to give women control of online connections, leading the company to IPO.",
+    deck: "Whitney Wolfe Herd built Bumble into a social network for dating and professional networking.",
     
     columns: [
       {
-        heading: "The Tinder Lawsuit and Pivot",
-        body: "As a co-founder and VP of Marketing at Tinder, Wolfe Herd was instrumental in the app's early growth. However, she left the company under a cloud of tension and filed a sexual harassment lawsuit against the company and executives. The case was settled, but it defined her public narrative. Instead of retreating, she channeled that experience into building Bumble—a dating app where women must message first. It was a direct counter to the toxic dynamics she witnessed in the industry."
+        heading: "Women Make the First Move",
+        body: "Wolfe Herd designed Bumble's core mechanics to empower safer, female-led conversations."
       },
       {
-        heading: "Bumble Inc. and the IPO",
-        body: "Bumble expanded beyond dating to include Bumble BFF (friendship) and Bumble Bizz (networking). In 2021, she took the company public, becoming the youngest female CEO to take a US company public. While Bumble's stock has faced pressure in the 2025-2026 period due to dating app fatigue, Wolfe Herd's personal stake remains valued at over $70 million, and she maintains significant voting control. She stepped down as CEO in early 2026 to become Executive Chair, focusing on broader brand vision and new ventures [citation:8]."
+        heading: "Public Listing",
+        body: "She became one of the youngest self-made women to take a company public on the NASDAQ."
       },
       {
-        heading: "The Kindness Mandate",
-        body: "Wolfe Herd's legacy extends beyond the product. She was a vocal advocate for making online spaces safer for women, pushing for legislation against 'cyberflashing' and unsolicited explicit images. In 2026, she remains a cultural icon for female founders who turned professional trauma into a multi-billion dollar mission-driven business."
+        heading: "Mission-Driven Growth",
+        body: "Bumble expanded into Bumble BFF and advocated for online safety legislation."
       }
     ],
     
-    pullQuote: "I turned the worst experience of my professional life into a mission to make the internet a kinder place for women.",
+    pullQuote: "Turn professional setbacks into a clear mission to make digital spaces kinder.",
     pullQuoteBy: "Whitney Wolfe Herd",
-    lesson: "Your biggest setback can become the foundation of your biggest success if you're brave enough to reframe it.",
+    lesson: "Reframing industry problems into safety-first solutions builds strong brand defensibility.",
     
     stats: [
-      { label: "Net Worth", value: "$77M+" },
       { label: "Bumble Stake", value: "~14%" },
-      { label: "Founded", value: "2014" },
-      { label: "Role 2026", value: "Exec Chair" }
+      { label: "Global Users", value: "50M+" },
+      { label: "Role 2026", value: "Exec Chair" },
+      { label: "Founded", value: "2014" }
     ],
     
     createdAt: "2026-04-18",
@@ -1121,13 +1430,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-18"
   },
 
-//19
-
+  // 24. DANIEL EK
   {
     id: "daniel-ek-2026",
     slug: "daniel-ek-spotify",
-    edition: 19,
+    edition: 2,
     featured: false,
+    category: "Audio & Streaming",
     
     name: "Daniel Ek",
     nameShort: "Daniel Ek",
@@ -1138,7 +1447,7 @@ export const FOUNDERS: Founder[] = [
     city: "Stockholm",
     country: "Sweden",
     countryCode: "SE",
-    context: "Saving the Music Industry",
+    context: "Architect of Audio Streaming",
     
     valuation: "$60B",
     funding: "Public (NYSE: SPOT)",
@@ -1149,31 +1458,31 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#E6F9ED",
     accentBorder: "#8EEDC7",
     
-    headline: "He killed music piracy by making streaming easier than stealing. In 2026, his net worth is pushing $10 billion as Spotify dominates audio.",
-    deck: "Daniel Ek built Spotify to solve a personal frustration with piracy. Two decades later, it's the world's largest audio platform with over 600M users, and Ek's net worth has nearly doubled to $9.9B [citation:9].",
+    headline: "He built Spotify to make music streaming faster and easier than piracy.",
+    deck: "Daniel Ek transformed the music and podcast industry, serving over 600 million listeners.",
     
     columns: [
       {
-        heading: "The Pirate Bay to Wall Street",
-        body: "Ek grew up in Sweden during the height of The Pirate Bay. He realized that piracy wasn't about money—it was about convenience. He bet that if you made a service faster and easier than torrenting, people would pay. He was right. Spotify's freemium model and focus on speed changed the music industry's trajectory. In 2026, Spotify pays out billions in royalties and is the primary income source for most working artists."
+        heading: "Defeating Piracy with UX",
+        body: "Ek proved that instant access and low-latency audio streaming beats illegal downloading."
       },
       {
-        heading: "The Audio Everything Strategy",
-        body: "Ek's vision has expanded beyond music to 'Audio Everything.' Spotify now dominates podcasts, has a growing audiobook business, and is investing heavily in AI-generated personalized DJs. In 2025-2026, Ek's net worth surged to an estimated $9.9 billion, up significantly from $4.6 billion just a year prior, driven by strong subscriber growth and expanding profit margins [citation:9]."
+        heading: "Audio Everything",
+        body: "Spotify scaled from music into podcasts, audiobooks, and AI-driven personalized DJ algorithms."
       },
       {
-        heading: "The European Tech Champion",
-        body: "Unlike many European founders who sell early to US giants, Ek kept Spotify independent and took it public via a direct listing. He has been a vocal critic of Apple's App Store policies, positioning himself as a defender of the open internet. In 2026, he continues to invest his personal wealth in European deep tech and defense startups, trying to foster a tech ecosystem in Europe that can compete with the US and China [citation:9]."
+        heading: "European Tech Pillar",
+        body: "Ek built one of Europe's largest independent technology powerhouses."
       }
     ],
     
-    pullQuote: "The only way to beat piracy was to build something so good that stealing felt like a waste of time.",
+    pullQuote: "Convenience always beats piracy. Make the legitimate service 10x better.",
     pullQuoteBy: "Daniel Ek",
-    lesson: "Convenience always wins. Build a product that's 10x easier to use than the free illegal alternative.",
+    lesson: "Frictionless user experience transforms consumer willingness to pay.",
     
     stats: [
-      { label: "Net Worth 2026", value: "$9.9B" },
-      { label: "Spotify MAU", value: "600M+" },
+      { label: "Market Cap", value: "$60B" },
+      { label: "Monthly Listeners", value: "600M+" },
       { label: "Subscribers", value: "250M+" },
       { label: "Founded", value: "2006" }
     ],
@@ -1183,13 +1492,13 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-19"
   },
 
-//20
-
+  // 25. CHRIS WANSTRATH
   {
     id: "chris-wanstrath-2026",
     slug: "chris-wanstrath-github",
-    edition: 20,
+    edition: 1,
     featured: false,
+    category: "Developer Tools",
     
     name: "Chris Wanstrath",
     nameShort: "Chris Wanstrath",
@@ -1200,7 +1509,7 @@ export const FOUNDERS: Founder[] = [
     city: "San Francisco",
     country: "United States",
     countryCode: "US",
-    context: "The World's Code Repository",
+    context: "Co-Creator of GitHub",
     
     valuation: "$7.5B (Acquisition)",
     funding: "Acquired by Microsoft",
@@ -1211,31 +1520,31 @@ export const FOUNDERS: Founder[] = [
     accentBg: "#F5F5F5",
     accentBorder: "#D4D4D4",
     
-    headline: "He built the platform where all software is born. Then he sold it to Microsoft and went back to making indie games.",
-    deck: "Chris Wanstrath co-founded GitHub and turned it into the essential infrastructure for the global software supply chain. After a $7.5 billion exit, he's a billionaire with the freedom to code for fun again [citation:10].",
+    headline: "He built the code hosting platform that powers global open-source software development.",
+    deck: "Chris Wanstrath co-founded GitHub, which Microsoft acquired for $7.5B, defining modern dev collaboration.",
     
     columns: [
       {
-        heading: "The Weekend Project That Ate the World",
-        body: "In 2008, Wanstrath and Tom Preston-Werner built Git hosting on the weekends. It was a side project meant to make their own developer lives easier. Within a few years, GitHub had become the de facto standard for version control and open-source collaboration. It wasn't just a tool; it was a social network for programmers. By 2018, 28 million developers used it, and Microsoft came knocking."
+        heading: "Weekend Side Project",
+        body: "GitHub began as a simple tool to share Git repositories among developer friends."
       },
       {
-        heading: "The $7.5 Billion Bet on Developers",
-        body: "Microsoft's acquisition of GitHub for $7.5 billion in stock was a landmark moment. Wanstrath, as the largest individual shareholder, became a billionaire overnight. The deal symbolized Microsoft's cultural shift under Satya Nadella—embracing open source rather than fighting it. Wanstrath stayed on briefly before leaving to pursue passion projects. In 2026, his net worth sits comfortably at $1.31 billion [citation:10]."
+        heading: "The Home of Open Source",
+        body: "GitHub grew into the central nervous system for open-source software worldwide."
       },
       {
-        heading: "The Indie Game Return",
-        body: "Unlike many tech billionaires who pivot to VC or philanthropy, Wanstrath went back to his roots. In 2023, he co-founded Null, an 'indie video game publisher for developers, by developers.' He also serves on the board of the Computer History Museum. In an era of AI-generated code, GitHub (now with Copilot) is more central to the software industry than ever, but Wanstrath seems content to have moved on, proving that some founders really do just want to build cool things."
+        heading: "Indie Game Era",
+        body: "After the Microsoft acquisition, Wanstrath returned to coding indie games."
       }
     ],
     
-    pullQuote: "We just wanted to make it easier to share code. We never imagined it would become the home for all the world's software.",
+    pullQuote: "Build the home where developers love to collaborate, and enterprise value naturally follows.",
     pullQuoteBy: "Chris Wanstrath",
-    lesson: "If you build the place where developers want to be, the enterprise will follow.",
+    lesson: "Developer love is the most powerful bottom-up distribution mechanism.",
     
     stats: [
-      { label: "Acquisition Price", value: "$7.5B" },
-      { label: "Net Worth 2026", value: "$1.31B" },
+      { label: "Acquisition", value: "$7.5B" },
+      { label: "Developers Served", value: "100M+" },
       { label: "Founded", value: "2008" },
       { label: "Current Venture", value: "Null Games" }
     ],
@@ -1243,11 +1552,8 @@ export const FOUNDERS: Founder[] = [
     createdAt: "2026-04-20",
     updatedAt: "2026-04-21",
     publishedAt: "2026-04-20"
-  },
-
-  
-
-].sort((a, b) => b.edition - a.edition) // Latest first
+  }
+].sort((a, b) => b.edition - a.edition) // Sort latest first
 
 // Helper functions
 export function getFounderBySlug(slug: string): Founder | undefined {
@@ -1258,7 +1564,7 @@ export function getFeaturedFounders(limit = 3): Founder[] {
   return FOUNDERS.filter(f => f.featured).slice(0, limit)
 }
 
-export function getAllFounders(page = 1, limit = 10): { founders: Founder[], total: number } {
+export function getAllFounders(page = 1, limit = 9): { founders: Founder[], total: number } {
   const start = (page - 1) * limit
   const end = start + limit
   return {
@@ -1272,7 +1578,7 @@ export function getRelatedFounders(currentSlug: string, limit = 3): Founder[] {
   if (!current) return []
   
   return FOUNDERS
-    .filter(f => f.slug !== currentSlug && f.countryCode === current.countryCode)
+    .filter(f => f.slug !== currentSlug && (f.countryCode === current.countryCode || f.category === current.category))
     .slice(0, limit)
 }
 
