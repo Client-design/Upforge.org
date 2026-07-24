@@ -895,7 +895,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$650M+",
     founded: "2016 / 2022",
     
-    imageUrl: "https://s.yimg.com/ny/api/res/1.2/Kj.HT8geIRyaUxrvUFUwiQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/fortune_175/6884b89fd7c8e1b52eafa992cc44dd81",
+    imageUrl: "https://s.yimg.com/ny/api/res/1.2/Kj.HT8geIRyaUxrvUFUwiQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD08MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/fortune_175/6884b89fd7c8e1b52eafa992cc44dd81",
     accent: "#FF007F",
     accentBg: "#FFF0F7",
     accentBorder: "#FFB3D9",
@@ -1554,7 +1554,7 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-04-20"
   },
 
-// 26. GUILHERME RAUCH (New Age Developer Infrastructure)
+  // 26. GUILHERME RAUCH (New Age Developer Infrastructure)
   {
     id: "guilherme-rauch-2026",
     slug: "guilherme-rauch-vercel",
@@ -1632,7 +1632,6 @@ export const FOUNDERS: Founder[] = [
     
     city: "Denver",
     country: "United States",
-    countryCode: "US",
     countryCode: "US",
     context: "Architect of Enterprise & Defense AIP",
     
