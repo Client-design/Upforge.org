@@ -168,21 +168,11 @@ export function CreatorCardDesktop({
       </div>
 
       {/* Actions */}
-      <div className="mt-auto space-y-2">
+      <div className="mt-auto">
         <div className="w-full py-2 rounded-xl text-[11px] font-bold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-all duration-300 flex items-center justify-center gap-1">
           <ShieldCheck className="w-3.5 h-3.5" />
           View Profile
         </div>
-
-        {!isPartner && (
-          <button
-            onClick={handleApplyClick}
-            className="w-full py-2 rounded-xl text-[11px] font-bold text-white bg-[#C59A2E] hover:bg-[#A8821E] transition-colors flex items-center justify-center gap-1"
-          >
-            Apply for Partner Program
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
-        )}
       </div>
     </div>
   )
