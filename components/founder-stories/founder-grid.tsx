@@ -16,120 +16,146 @@ export function FounderGrid({ initialFounders, totalFounders }: FounderGridProps
   const [hasMore, setHasMore] = useState(initialFounders.length < totalFounders)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  
+  const isFetchingRef = useRef(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const loadMoreRef = useRef<HTMLDivElement>(null)
-  
+
   const loadMore = useCallback(async () => {
-    if (loading || !hasMore) return
+    if (isFetchingRef.current || !hasMore) return
     
+    isFetchingRef.current = true
     setLoading(true)
     setError(null)
     
     try {
-      const res = await fetch(`/api/founder-stories/load-more?page=${page + 1}&limit=10`)
+      const nextPage = page + 1
+      const res = await fetch(`/api/founder-stories/load-more?page=${nextPage}&limit=9`)
       
       if (!res.ok) throw new Error('Failed to load more stories')
       
       const data = await res.json()
       
-      // Smooth append with slight delay for animation
-      await new Promise(resolve => setTimeout(resolve, 300))
+      // Slight delay for smooth visual transition
+      await new Promise(resolve => setTimeout(resolve, 250))
       
-      setFounders(prev => [...prev, ...data.founders])
-      setPage(data.nextPage || page + 1)
-      setHasMore(data.hasMore)
+      if (Array.isArray(data.founders) && data.founders.length > 0) {
+        setFounders(prev => {
+          // Filter out duplicate IDs if any
+          const existingIds = new Set(prev.map(f => f.id))
+          const newUniqueFounders = data.founders.filter((f: Founder) => !existingIds.has(f.id))
+          return [...prev, ...newUniqueFounders]
+        })
+        setPage(nextPage)
+        setHasMore(data.hasMore ?? false)
+      } else {
+        setHasMore(false)
+      }
     } catch (err) {
-      setError('Failed to load more stories. Please try again.')
-      console.error("Failed to load more founders:", err)
+      setError('Could not load additional profiles. Retrying automatically on scroll.')
+      console.error("Infinite scroll fetch error:", err)
     } finally {
       setLoading(false)
+      isFetchingRef.current = false
     }
-  }, [page, hasMore, loading])
-  
-  // Intersection Observer for infinite scroll
+  }, [page, hasMore])
+
+  // Intersection Observer for continuous auto infinite scroll
   useEffect(() => {
-    if (loading) return
-    
     if (observerRef.current) {
       observerRef.current.disconnect()
     }
-    
+
+    if (!hasMore) return
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
+        const first = entries[0]
+        if (first.isIntersecting && !isFetchingRef.current && hasMore) {
           loadMore()
         }
       },
       { 
         threshold: 0.1,
-        rootMargin: "100px" 
+        rootMargin: "300px" // Pre-fetch 300px before reaching trigger for lag-free scroll
       }
     )
-    
+
     if (loadMoreRef.current) {
       observerRef.current.observe(loadMoreRef.current)
     }
-    
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect()
       }
     }
-  }, [hasMore, loading, loadMore])
-  
+  }, [hasMore, loadMore])
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {founders.map((founder, index) => (
           <div 
             key={founder.id} 
-            className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-            style={{ animationDelay: `${(index % 10) * 50}ms` }}
+            className="animate-in fade-in slide-in-from-bottom-5 duration-500 fill-mode-both"
+            style={{ animationDelay: `${(index % 9) * 40}ms` }}
           >
             <FounderCard founder={founder} />
           </div>
         ))}
-      </div>
-      
-      {/* Load More Trigger & Loading State */}
-      {hasMore && (
-        <div ref={loadMoreRef} className="flex justify-center py-12">
-          {loading ? (
-            <div className="flex flex-col items-center gap-3">
-              <Loader2 className="w-6 h-6 animate-spin text-[#C59A2E]" />
-              <span className="text-xs uppercase tracking-widest text-muted-foreground font-mono">
-                Loading more stories...
-              </span>
-            </div>
-          ) : error ? (
-            <button
-              onClick={loadMore}
-              className="px-6 py-3 border border-foreground text-foreground text-xs uppercase tracking-widest font-mono hover:bg-foreground hover:text-background transition-colors"
+
+        {/* Skeleton cards while fetching new items */}
+        {loading && (
+          [...Array(3)].map((_, i) => (
+            <div 
+              key={`skeleton-${i}`} 
+              className="bg-card border border-border p-5 flex flex-col justify-between h-96 animate-pulse"
             >
-              Try Again
-            </button>
-          ) : (
-            <div className="h-10" />
-          )}
+              <div className="w-full h-48 bg-muted mb-4 rounded-xs" />
+              <div className="space-y-2">
+                <div className="h-3 w-1/4 bg-muted rounded-xs" />
+                <div className="h-5 w-3/4 bg-muted rounded-xs" />
+                <div className="h-3 w-full bg-muted rounded-xs" />
+                <div className="h-3 w-2/3 bg-muted rounded-xs" />
+              </div>
+              <div className="pt-4 border-t border-border flex justify-between">
+                <div className="h-3 w-1/3 bg-muted rounded-xs" />
+                <div className="h-4 w-4 bg-muted rounded-xs" />
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Auto Load Trigger */}
+      {hasMore && (
+        <div ref={loadMoreRef} className="flex justify-center py-10 my-4">
+          <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-muted/50 border border-border/80 backdrop-blur-sm">
+            <Loader2 className="w-4 h-4 animate-spin text-[#C59A2E]" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground font-bold">
+              Loading more founder stories...
+            </span>
+          </div>
         </div>
       )}
-      
-      {/* End of List */}
+
+      {/* End of Stories Indicator */}
       {!hasMore && founders.length > 0 && (
-        <div className="text-center py-16 border-t border-border mt-8">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-mono">
-            ✦ You've reached the end ✦
+        <div className="text-center py-14 border-t border-border/60 mt-12">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#C59A2E] font-mono font-bold">
+            ✦ All {founders.length} Founder Stories Loaded ✦
           </span>
-          <p className="font-serif italic text-muted-foreground mt-3">
-            All {totalFounders} founder stories — more coming soon
+          <p className="font-serif italic text-muted-foreground text-sm mt-2">
+            Stay tuned for upcoming editorial profiles.
           </p>
         </div>
       )}
-      
+
       {/* Empty State */}
-      {founders.length === 0 && (
-        <div className="text-center py-16">
-          <p className="font-serif text-xl text-muted-foreground">No stories found</p>
+      {founders.length === 0 && !loading && (
+        <div className="text-center py-16 border border-dashed border-border">
+          <p className="font-serif text-xl text-muted-foreground">No founder stories found.</p>
         </div>
       )}
     </>
