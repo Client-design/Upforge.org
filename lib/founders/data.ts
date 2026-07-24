@@ -27,7 +27,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1B+",
     founded: "2022",
     
-    imageUrl: "https://images.ctfassets.net/kftzwdyauwt9/6jR2X5zY8G5E1M2mY9Zk5Q/c9e9b0e1b6f0e4d0/Aravind_Srinivas_Perplexity.jpg",
+    imageUrl: "public/images/founders/aravind-srinivas.jpg",
     accent: "#0052FF",
     accentBg: "#EBF2FF",
     accentBorder: "#99C2FF",
@@ -89,7 +89,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1.1B",
     founded: "2023",
     
-    imageUrl: "https://media.lesechos.com/api/v1/images/view/6579f1d0337b561c29668d2b/1280x720/0801831862590-3000x2000.jpg",
+    imageUrl: "public/images/founders/arthur-mensch.jpg",
     accent: "#FF5722",
     accentBg: "#FFEEE8",
     accentBorder: "#FFBCAB",
@@ -151,7 +151,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$3.8B",
     founded: "2017",
     
-    imageUrl: "https://imageio.forbes.com/specials-images/imageserve/630fa9e3bb8e3a2bf923a1a5/0x0.jpg?format=jpg&width=1200",
+    imageUrl: "public/images/founders/palmer-luckey.jpg",
     accent: "#1A1A1A",
     accentBg: "#F0F0F0",
     accentBorder: "#CCCCCC",
@@ -213,7 +213,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1B",
     founded: "2024",
     
-    imageUrl: "https://media.wired.com/photos/655e8bc803e4881744b82d92/master/w_2560%2Cc_limit/Business_Ilya_Sutskever_OpenAI_Coups.jpg",
+    imageUrl: "public/images/founders/ilya-sutskever.jpg",
     accent: "#6B21A8",
     accentBg: "#F5F3FF",
     accentBorder: "#DDD6FE",
@@ -275,7 +275,7 @@ export const FOUNDERS: Founder[] = [
     funding: "$1B",
     founded: "2025",
     
-    imageUrl: "https://media.wired.com/photos/64b59528d2d634dbd1810ee3/master/w_2560%2Cc_limit/Mira-Murati-OpenAI-Business.jpg",
+    imageUrl: "public/images/founders/mira-murati.jpg",
     accent: "#0D9488",
     accentBg: "#F0FDFA",
     accentBorder: "#CCFBF1",
