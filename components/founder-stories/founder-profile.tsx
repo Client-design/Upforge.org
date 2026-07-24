@@ -60,7 +60,7 @@ export function FounderProfile({
             upforge.org
           </Link>
           <span className="text-[9px] text-[#AAA] uppercase tracking-widest">
-            Founder Chronicle · March 2026
+            Founder Chronicle · UpForge Editorial
           </span>
         </div>
         
@@ -77,14 +77,14 @@ export function FounderProfile({
           {/* Left Column - Story */}
           <div className="py-8 lg:pr-8 border-r border-[#C8C2B4]">
             
-            {/* Category Badge */}
+            {/* Category Badge without ranking numbers */}
             <div className="flex items-center gap-3 mb-6 font-mono">
               <span className="text-[8.5px] font-black tracking-[0.28em] uppercase px-3 py-1.5 text-white"
                     style={{ background: founder.accent }}>
-                {founder.category || "Founder Story"}
+                {founder.category || founder.company}
               </span>
               <span className="text-[9px] text-[#AAA] uppercase tracking-wider">
-                No. {founder.edition} · {founder.country}
+                {founder.country} · Est. {founder.founded}
               </span>
             </div>
 
