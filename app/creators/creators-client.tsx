@@ -12,7 +12,6 @@ import { motion, AnimatePresence } from "framer-motion"
 
 import { CreatorCardDesktop } from "@/components/creators/creator-card-desktop"
 import { CreatorCardMobile } from "@/components/creators/creator-card-mobile"
-import { PromotedSection } from "@/components/creators/promoted-section"
 import { ApplyModal } from "@/components/creators/apply-modal"
 import { CreatorProfileModal } from "@/components/creators/creator-profile-modal"
 import { PartnerProgramSection } from "@/components/creators/partner-program-section"
@@ -349,8 +348,8 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </div>
             <div className="h-6 w-px bg-slate-200 dark:bg-slate-800" />
             <div className="text-center">
-              <div className="font-serif font-black text-xl md:text-2xl text-slate-850 dark:text-white">Daily</div>
-              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Spotlight rotation</div>
+              <div className="font-serif font-black text-xl md:text-2xl text-slate-850 dark:text-white">Direct</div>
+              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Partner Rewards</div>
             </div>
           </div>
 
@@ -393,14 +392,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
 
       {/* PARTNER PROGRAM SECTION */}
       <PartnerProgramSection />
-
-      {/* PROMOTED SECTION */}
-      {!isLoading && promotedCreators.length > 0 && (
-        <PromotedSection 
-          creators={promotedCreators} 
-          onViewProfile={handleOpenProfile}
-        />
-      )}
 
       {/* MAIN CONTENT */}
       <div className="max-w-[1300px] mx-auto px-4 md:px-8">
