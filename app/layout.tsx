@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import "./globals.css"
@@ -85,6 +84,9 @@ export async function generateMetadata(): Promise<Metadata> {
       google: "google4fca56100e982c53",
       other: {
         monetag: "11a060c13bb08c2111f804101cc133b9",
+        // Trustpilot Verification Added Here:
+        "trustpilot-one-time-domain-verification-id":
+          "47d37b53-b662-45e7-bc73-2e163c7c4b0e",
       },
     },
     icons: {
