@@ -623,11 +623,11 @@ export function Navbar() {
           </div>
 
           {/* MOBILE CONTROLS */}
-          <div className="md:hidden flex items-center gap-1">
+          <div className="md:hidden flex items-center gap-1.5 relative z-[110] pointer-events-auto">
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="relative w-10 h-5 rounded-full bg-muted border border-border/50 transition-colors duration-300 ease-in-out hover:bg-muted/80"
+                className="relative w-10 h-5 rounded-full bg-muted border border-border/50 transition-colors duration-300 ease-in-out hover:bg-muted/80 touch-manipulation"
                 aria-label={`Switch theme`}
               >
                 <div
@@ -644,14 +644,16 @@ export function Navbar() {
               </button>
             )}
             <button
-              className="p-2.5 text-foreground hover:bg-muted/50 rounded-lg transition-all"
-              onClick={() => {
-                setIsOpen(!isOpen);
+              type="button"
+              className="p-2.5 text-foreground hover:bg-muted/50 rounded-lg transition-all cursor-pointer active:scale-95 touch-manipulation relative z-[110]"
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsOpen((prev) => !prev)
               }}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
@@ -660,7 +662,7 @@ export function Navbar() {
       {/* MOBILE MENU */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-[99] md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[105] md:hidden transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         aria-hidden={!isOpen}
