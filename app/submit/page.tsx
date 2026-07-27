@@ -487,6 +487,9 @@ The UpForge Team
                 <p style={{ fontSize:11, color:"var(--sf-fg2)", lineHeight:1.6, margin:0 }}>
                   Your unique global registry ID. Share on LinkedIn, pitch decks, and your website. Format: <span style={{ fontFamily:"'Space Mono',monospace", color:"var(--sf-gold)" }}>UF-2026-00001</span>
                 </p>
+                <p style={{ fontSize:10, color:"var(--sf-fg3)", lineHeight:1.5, marginTop:12, fontStyle:"italic", borderTop:"1px solid var(--sf-border)", paddingTop:8 }}>
+                  Disclaimer: UFRN is an independent registry credential issued by UpForge and does not substitute for legal business incorporation or government tax registration.
+                </p>
               </div>
             </div>
           </div>
