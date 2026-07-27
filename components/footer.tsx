@@ -67,13 +67,15 @@ const FOOTER_COLUMNS = [
     links: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
+      { label: "Partner Program", href: "/partner-program" },
       { label: "Careers", href: "/careers" },
       { label: "FAQs", href: "/faq" },
     ],
   },
   {
-    heading: "Legal",
+    heading: "Legal & Trust",
     links: [
+      { label: "Editorial Standards", href: "/editorial-standards" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
       { label: "Cookie Policy", href: "/cookies" },
@@ -353,19 +355,20 @@ export function Footer() {
           </div>
 
           {/* COPYRIGHT */}
+          {/* <!-- DOMAIN: .org = global registry framing, .in = India-focused framing --> */}
           <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-background/95">
             <div>
               <p className="text-[12px] text-muted-foreground">
                 © {year} UpForge · Built for founders, investors, and analysts
               </p>
               <p className="text-[10px] text-muted-foreground/70 mt-0.5">
-                upforge.in (India) · upforge.org (Global Registry)
+                UpForge.org (Global Startup Registry) · UpForge.in (India Ecosystem Directory)
               </p>
             </div>
             <div className="flex gap-6 text-[12px] text-muted-foreground">
+              <Link href="/editorial-standards">Editorial Standards</Link>
               <Link href="/privacy">Privacy</Link>
               <Link href="/terms">Terms</Link>
-              <Link href="/cookies">Cookies</Link>
             </div>
           </div>
         </div>
