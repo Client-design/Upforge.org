@@ -1,49 +1,25 @@
 // app/about/page.tsx
-// v7 — Global registry positioning. Merges the verification/UFRN narrative
-// with editorial trust-signals (team, quotes, milestones, FAQ), unified
-// under one design system, with a signature animated "registry seal" and
-// a live ledger ticker. Built to feel like an institution, not a template.
-//
-// INTEGRATION NOTES (read before dropping in):
-// 1. Place the four files from components/about/* into your own
-//    components/about/ directory (or adjust the import paths below).
-// 2. This still calls fetchAllStartups() from "@/lib/google-sheets" and
-//    SITE_STATS from "@/lib/site-stats" exactly like your existing pages —
-//    wire the numeric stat targets (see STATS array) to real numbers so
-//    the count-up animation reflects live data instead of the placeholders.
-// 3. The getAboutInsights() Groq call is optional flavor copy for the
-//    "Ecosystem Pulse" band — if you'd rather not depend on a third-party
-//    LLM call at request time, delete that block and use the fallback
-//    object directly (it's already written to stand alone).
-// 4. Swap EDITORIAL_TEAM / FAQ_ITEMS / TRUST_QUOTES copy for your real,
-//    verifiable details before shipping — placeholders are marked.
-
 import { fetchAllStartups } from "@/lib/google-sheets"
 import { SITE_STATS } from "@/lib/site-stats"
-import { Navbar } from "@/components/navbar"
 import Link from "next/link"
 import type { Metadata } from "next"
 import {
   ShieldCheck, Award, FileText, CheckCircle2, Globe, ArrowRight,
-  Sparkles, Building2, Users, BadgeCheck, TrendingUp,
+  Sparkles, Building2, Users, AlertCircle, HelpCircle, Mail, MapPin, Scale
 } from "lucide-react"
 
 import { Reveal } from "@/components/about/reveal"
 import { CountUpStat } from "@/components/about/count-up-stat"
-import { RegistrySeal } from "@/components/about/registry-seal"
-import { LiveLedgerTicker } from "@/components/about/live-ledger-ticker"
 
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "About UpForge — The Independent Global Startup Registry",
-  description:
-    "UpForge is the independent global startup registry and verified founder database — structured data, UFRN credentials, and ecosystem intelligence for builders, investors, and press.",
+  title: "About UpForge — Global Startup Registry & Verification Standard",
+  description: "UpForge is the independent global startup registry. Standardized company records, UFRN verification credentials, and ecosystem intelligence.",
   alternates: { canonical: "https://www.upforge.org/about" },
   openGraph: {
-    title: "About UpForge — The Independent Global Startup Registry",
-    description:
-      "The trust index for verified startups and founders worldwide. Independent, standardized, permanent.",
+    title: "About UpForge — Global Startup Registry & Verification Standard",
+    description: "The trust index for verified startups and founders worldwide. Independent, standardized, permanent.",
     url: "https://www.upforge.org/about",
     siteName: "UpForge",
     images: [{ url: "https://www.upforge.org/og/registry.png", width: 1200, height: 630 }],
@@ -53,116 +29,32 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-// ── Optional flavor copy for the Ecosystem Pulse band ──────────────────
-interface EcosystemPulse { headline: string; stat: string; context: string }
-
-async function getEcosystemPulse(): Promise<EcosystemPulse> {
-  try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.GROQ_API_KEY}` },
-      body: JSON.stringify({
-        model: "mixtral-8x7b-32768",
-        messages: [
-          {
-            role: "system",
-            content: `Return ONLY valid JSON: {"headline": "one factual, well-sourced stat about the global startup ecosystem in 2026", "stat": "big number or %", "context": "brief context under 12 words"}`,
-          },
-          { role: "user", content: "Give one credible, verifiable data point about why documenting startups globally matters in 2026." },
-        ],
-        temperature: 0.2,
-        response_format: { type: "json_object" },
-      }),
-    })
-    const data = await response.json()
-    return JSON.parse(data.choices[0].message.content)
-  } catch {
-    return {
-      headline: "Most early-stage startups have no verifiable public record until they raise",
-      stat: "180+",
-      context: "countries with active early-stage founders today",
-    }
-  }
-}
-
-// ── Static content ──────────────────────────────────────────────────────
-const PILLARS = [
-  {
-    num: "01",
-    title: "Verified Startup Registry",
-    desc: "Every profile is evaluated through a multi-step verification process — corporate details, domain ownership, leadership identity, and sector classification.",
-    icon: ShieldCheck,
-  },
-  {
-    num: "02",
-    title: "UFRN Credentialing",
-    desc: "Verified entities receive a unique UpForge Registry Number — a permanent, audit-ready digital identity that travels with the company.",
-    icon: Award,
-  },
-  {
-    num: "03",
-    title: "Founder & Creator Intelligence",
-    desc: "Verified founders and builders get a trusted place to show traction, milestones, and audience — legible to investors and partners alike.",
-    icon: Users,
-  },
-  {
-    num: "04",
-    title: "Independent Ecosystem Research",
-    desc: "Data-driven reports and sector breakdowns for founders, investors, and policymakers — built from registry data, not press releases.",
-    icon: FileText,
-  },
-]
-
-const METHOD_STEPS = [
-  { title: "Entity Verification", desc: "Official registration checks against the relevant national or state registry for each entity." },
-  { title: "Domain & Digital Footprint", desc: "Active web presence, SSL validation, and basic operational checks." },
-  { title: "Leadership Authenticity", desc: "Founder identity checks against verified professional records." },
-  { title: "Product & Operations Signal", desc: "Evidence of an active product, customers, or independently verifiable media coverage." },
-]
-
-// Wire these to real numbers from SITE_STATS before shipping — the strings
-// below are illustrative so the count-up has something to animate toward.
-const STATS = [
-  { target: 42000, suffix: "+", label: "Verified Startups & Growing" },
-  { target: 650000, suffix: "+", label: "Tracked Entities in Database" },
-  { target: 34, suffix: "+", label: "Industry Sectors Covered" },
-  { target: 90, suffix: "+", label: "Countries Reached Globally" },
-]
-
-const MILESTONES = [
-  { year: "2008", event: "First wave of globally networked startup hubs emerges outside Silicon Valley" },
-  { year: "2015", event: "Public startup registries begin appearing across national governments" },
-  { year: "2019", event: "Cross-border early-stage funding passes pre-2015 records" },
-  { year: "2021", event: "Record global venture funding — the industry's breakout year" },
-  { year: "2024", event: "AI-native startups become the fastest-growing registry category" },
-  { year: "2026", event: "UpForge becomes an independent global registry standard" },
-]
-
-const TRUST_QUOTES = [
-  { quote: "Every serious startup needs a permanent, verifiable record — UpForge fills that gap.", by: "Independent Founder · Verified Record" },
-  { quote: "We cited registry data in a due diligence report. Clean, structured, easy to trust.", by: "Early-Stage Investor · Institutional User" },
-  { quote: "Our UFRN credential was live before our seed round closed.", by: "Founder, Series A · UpForge Registry" },
-]
-
 const FAQ_ITEMS = [
-  { q: "What is UpForge?", a: "UpForge is an independent global startup registry and verified founder database — a structured, permanently accessible public record across 30+ sectors and 90+ countries." },
-  { q: "What is a UFRN?", a: "A UFRN (UpForge Registry Number) is a unique, permanent credential issued to a verified entity — an audit-ready identity that stays with the company." },
-  { q: "Is UpForge free for founders?", a: "Yes. Listing on the registry is free. Verification and a UFRN credential don't require paying for placement." },
-  { q: "How does UpForge verify entities?", a: "Through entity registration checks, domain and digital footprint review, leadership authenticity checks, and product or operations signal — see our full methodology." },
-  { q: "Is UpForge a media company?", a: "No. UpForge is neither a media outlet nor an accelerator — a neutral registry with no paid rankings or sponsored placements." },
-  { q: "Who uses UpForge?", a: "Founders build a verifiable record. Investors discover companies before they're widely covered. Press cite registry data with confidence." },
+  { q: "What is UpForge?", a: "UpForge is an independent global startup registry that provides structured, permanent public records for verified companies and founders." },
+  { q: "What is a UFRN?", a: "A UFRN (UpForge Registry Number) is a unique digital credential issued to verified entities to confirm their record in our independent index." },
+  { q: "Does UFRN replace legal incorporation?", a: "No. UFRN is an independent registry credential issued by UpForge for digital identity and registry verification. It is not a legal business incorporation certificate or government tax registration." },
+  { q: "How does UpForge verify entities?", a: "Through entity registration checks against national/state databases, domain and SSL validation, founder identity verification via professional records, and public digital footprint review." },
+  { q: "Are rankings or verification statuses for sale?", a: "No. UpForge operates with strict editorial independence: no paid rankings, no pay-to-play profile positions, and no sponsored placements." }
 ]
 
 export default async function AboutPage() {
   let totalStartups = 0
+  let totalCountries = 0
+  let totalSectors = 0
+
   try {
     const startups = await fetchAllStartups()
-    totalStartups = startups.length
-  } catch (err) {
-    console.error("[About Page] Failed to fetch startup counts:", err)
-  }
+    const approved = startups.filter(s => s.status === "approved")
+    totalStartups = approved.length || 0
 
-  const pulse = await getEcosystemPulse()
+    const countries = new Set(approved.map(s => s.country_code).filter(Boolean))
+    totalCountries = countries.size || 30
+
+    const sectors = new Set(approved.map(s => s.category).filter(Boolean))
+    totalSectors = sectors.size || 25
+  } catch (err) {
+    console.error("[About Page] Error fetching live metrics:", err)
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -173,365 +65,315 @@ export default async function AboutPage() {
         name: "UpForge",
         url: "https://www.upforge.org",
         logo: "https://www.upforge.org/logo.png",
-        description: "The independent global startup registry and verified founder database.",
-        foundingDate: "2025",
-        sameAs: ["https://www.linkedin.com/company/upforge", "https://twitter.com/upforge_in"],
+        description: "Independent global startup registry and verified founder database.",
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "contact@upforge.org",
+          contactType: "customer service"
+        }
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "UpForge", item: "https://www.upforge.org/" },
-          { "@type": "ListItem", position: 2, name: "About", item: "https://www.upforge.org/about" },
-        ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: FAQ_ITEMS.map((f) => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-      },
-    ],
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.upforge.org" },
+          { "@type": "ListItem", position: 2, name: "About", item: "https://www.upforge.org/about" }
+        ]
+      }
+    ]
   }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <Navbar />
 
       <div className="bg-background text-foreground min-h-screen font-serif overflow-x-hidden">
+        
+        {/* 1. HERO SECTION */}
+        <section className="border-b-2 border-foreground max-w-[1200px] mx-auto px-4 md:px-8 pt-16 pb-12 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-[#C59A2E]" />
+            <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+              Institutional Startup Registry
+            </span>
+          </div>
 
-        {/* ══════════════ HERO ══════════════ */}
-        <section className="border-b-[2px] border-foreground max-w-[1300px] mx-auto px-4 md:px-8 pt-12 pb-10 flex flex-col items-center text-center">
-          <div className="flex flex-col items-center gap-6">
-            <RegistrySeal size={148} />
-            <div>
-              {totalStartups > 0 && (
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] mb-4">
-                  {totalStartups.toLocaleString()} Entities Verified &amp; Counting
-                </p>
-              )}
-              <h1
-                className="text-3xl md:text-5xl lg:text-[56px] font-bold leading-[1.06] mb-5 max-w-4xl mx-auto"
-                style={{ fontFamily: "'Georgia', serif" }}
-              >
-                The Independent Global Registry for Startups &amp; Founders
-              </h1>
-              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-serif italic">
-                A permanent, standardized public record of verified companies and builders —
-                no paid rankings, no sponsored placements, no algorithm to game.
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4 pt-2">
-              <Link
-                href="/submit"
-                className="inline-flex items-center gap-2 bg-foreground hover:bg-[#C59A2E] text-background py-3.5 px-7 font-bold uppercase tracking-[0.15em] text-xs font-mono transition-colors"
-              >
-                Get Verified <ArrowRight size={14} />
-              </Link>
-              <Link
-                href="/registry"
-                className="inline-flex items-center gap-2 border-[1.5px] border-foreground hover:border-[#C59A2E] hover:text-[#C59A2E] py-3.5 px-7 font-bold uppercase tracking-[0.15em] text-xs font-mono transition-colors"
-              >
-                Explore Registry
-              </Link>
-            </div>
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 max-w-4xl mx-auto tracking-tight"
+            style={{ fontFamily: "'Georgia', serif" }}
+          >
+            The Independent Global Registry for Verified Startups
+          </h1>
+
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-serif italic">
+            UpForge provides standardized, permanent public records for emerging ventures worldwide — establishing trust, legibility, and identity without sponsored bias or algorithmic distortion.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 pt-8">
+            <Link
+              href="/submit"
+              className="inline-flex items-center gap-2 bg-foreground hover:bg-[#C59A2E] text-background py-3.5 px-8 font-bold uppercase tracking-[0.15em] text-xs font-mono transition-colors"
+            >
+              Get Listed <ArrowRight size={14} />
+            </Link>
+            <Link
+              href="/partner-program"
+              className="inline-flex items-center gap-2 border-2 border-foreground hover:border-[#C59A2E] hover:text-[#C59A2E] py-3.5 px-8 font-bold uppercase tracking-[0.15em] text-xs font-mono transition-colors"
+            >
+              Partner Program
+            </Link>
           </div>
         </section>
 
-        {/* Signature ledger strip — full bleed, sits right under the hero */}
-        <LiveLedgerTicker />
+        <main className="max-w-[1200px] mx-auto px-6 py-16 space-y-20">
 
-        <main className="max-w-[1300px] mx-auto px-6 py-16 space-y-20">
-
-          {/* ══════════════ MISSION ══════════════ */}
-          <Reveal as="section">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] block mb-3">
-                  Section 01 — Mission
-                </span>
-                <h2 className="text-2xl md:text-4xl font-bold mb-6 leading-tight" style={{ fontFamily: "'Georgia', serif" }}>
-                  Solving the Credibility Gap in the Global Ecosystem
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  UpForge is an independent global startup registry and verified founder database.
-                  We provide structured data, verification infrastructure, and public credibility
-                  credentials for early-stage companies, high-growth ventures, and independent builders.
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Noise, unverified claims, and fragmented data make it hard for investors, partners,
-                  and customers to tell a legitimate venture from a well-designed landing page.
-                  UpForge exists as one standardized source of truth.
-                </p>
-              </div>
-              <div className="border-[1.5px] border-foreground p-8 bg-muted/20">
-                <div className="space-y-6">
-                  {[
-                    { icon: Building2, title: "Standardized Registry", desc: "Structured profiles: verified leadership, corporate details, operational status." },
-                    { icon: Award, title: "UFRN Digital Credentials", desc: "Unique, permanent, audit-ready identifiers issued to verified entities." },
-                    { icon: Globe, title: "Global Standard", desc: "Connecting founders to capital, international press, and enterprise partners." },
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-4 items-start">
-                      <div className="w-10 h-10 shrink-0 border border-foreground flex items-center justify-center">
-                        <item.icon className="w-4 h-4 text-[#C59A2E]" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-base mb-1" style={{ fontFamily: "'Georgia', serif" }}>{item.title}</h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* ══════════════ CORE PILLARS ══════════════ */}
+          {/* 2. WHAT UPFORGE IS / IS NOT */}
           <Reveal as="section">
             <div className="flex items-center gap-3 mb-8">
-              <span className="text-[#C59A2E] text-[8px]">✦</span>
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Section 02 — What UpForge Does</span>
-              <div className="flex-1 h-px bg-foreground" />
+              <span className="text-[#C59A2E] font-mono text-xs">01 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Positioning & Definition</h2>
+              <div className="flex-1 h-px bg-border" />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-[1.5px] border-foreground">
-              {PILLARS.map((p, i) => (
-                <div
-                  key={p.num}
-                  className={`p-6 flex flex-col justify-between hover:bg-muted/30 transition-colors group border-b lg:border-b-0 border-foreground ${i < 3 ? "lg:border-r-[1.5px]" : ""}`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-[10px] font-bold text-[#C59A2E]">{p.num}</span>
-                      <p.icon className="w-4 h-4 text-foreground group-hover:text-[#C59A2E] transition-colors" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-3 group-hover:text-[#C59A2E] transition-colors" style={{ fontFamily: "'Georgia', serif" }}>
-                      {p.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{p.desc}</p>
-                  </div>
-                </div>
-              ))}
+
+            <div className="grid md:grid-cols-2 gap-8 border border-border p-8 bg-card">
+              <div>
+                <h3 className="font-serif text-2xl font-bold text-foreground mb-4">What UpForge Is</h3>
+                <ul className="space-y-3 font-serif text-sm text-muted-foreground leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C59A2E] shrink-0 mt-0.5" />
+                    <span><strong>An Independent Registry:</strong> A standardized repository of corporate identity, founding timeline, and verified sector taxonomy.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C59A2E] shrink-0 mt-0.5" />
+                    <span><strong>A Digital Credential Issuer:</strong> Issuing audit-ready UpForge Registry Numbers (UFRN) to qualified startup entities.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C59A2E] shrink-0 mt-0.5" />
+                    <span><strong>An Ecosystem Intelligence Layer:</strong> Providing transparent data for analysts, venture capital researchers, and partners.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="border-t md:border-t-0 md:border-l border-border pt-6 md:pt-0 md:pl-8">
+                <h3 className="font-serif text-2xl font-bold text-foreground mb-4">What UpForge Is Not</h3>
+                <ul className="space-y-3 font-serif text-sm text-muted-foreground leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold shrink-0">✕</span>
+                    <span><strong>Not a Pay-to-Rank Directory:</strong> We do not sell featured placement, search rank boosts, or arbitrary leaderboard scores.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold shrink-0">✕</span>
+                    <span><strong>Not a Government Authority:</strong> UFRN is a registry credential, not an official government incorporation or tax registration.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold shrink-0">✕</span>
+                    <span><strong>Not an Investment Brokerage:</strong> We do not broker securities, promise funding rounds, or execute financial transactions.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </Reveal>
 
-          {/* ══════════════ METHODOLOGY ══════════════ */}
+          {/* 3. HOW WE VERIFY & LEGAL DISCLAIMER */}
           <Reveal as="section">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-8">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] block mb-3">
-                  Section 03 — Methodology
-                </span>
-                <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ fontFamily: "'Georgia', serif" }}>
-                  How We Verify — Transparency First
-                </h2>
-                <p className="text-sm text-muted-foreground font-serif italic">
-                  Trust is earned through clear methodology. Verification status is not for sale.
-                </p>
-              </div>
-              <div className="border-[1.5px] border-foreground divide-y divide-border">
-                {METHOD_STEPS.map((step, i) => (
-                  <div key={i} className="p-5 flex items-start gap-4 hover:bg-muted/30 transition-colors">
-                    <CheckCircle2 className="w-5 h-5 text-[#C59A2E] shrink-0 mt-0.5" />
-                    <div>
-                      <h3 className="font-bold text-sm mb-1">{step.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
-                    </div>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#C59A2E] font-mono text-xs">02 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Verification Methodology</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
+
+            <div className="space-y-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { num: "01", title: "Registration Cross-Check", desc: "Verifying MCA / state incorporation filings and business registration records." },
+                  { num: "02", title: "Domain & Web Security", desc: "Validating SSL certificates, operational domain ownership, and active web footprint." },
+                  { num: "03", title: "Founder Professional Records", desc: "Cross-referencing founder profiles on LinkedIn and public professional repositories." },
+                  { num: "04", title: "Funding & Public Signals", desc: "Verifying press coverage, institutional disclosures, and verified customer signals." }
+                ].map((m, i) => (
+                  <div key={i} className="p-6 border border-border bg-background">
+                    <span className="font-mono text-xs text-[#C59A2E] font-bold block mb-2">{m.num}</span>
+                    <h4 className="font-sans font-bold text-sm uppercase tracking-wider mb-2">{m.title}</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{m.desc}</p>
                   </div>
                 ))}
               </div>
-              <div className="text-center pt-6">
-                <Link href="/methodology" className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-[#C59A2E] hover:underline">
-                  Read Full Verification Protocol &amp; Documentation <ArrowRight size={12} />
+
+              {/* Legal Disclaimer Box */}
+              <div className="p-6 border-l-4 border-[#C59A2E] bg-muted/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <Scale className="w-4 h-4 text-[#C59A2E]" />
+                  <h4 className="font-sans font-bold text-xs uppercase tracking-wider text-foreground">Official Regulatory & Legal Disclaimer</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed font-serif">
+                  UFRN is an independent registry credential issued by UpForge.org for digital identity and registry verification. It is not a legal business incorporation certificate, government tax identifier, or official regulatory registration, and does not replace statutory business incorporation documents.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* 4. BY THE NUMBERS (DYNAMIC DUAL-SOURCE STATS) */}
+          <Reveal as="section">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#C59A2E] font-mono text-xs">03 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Registry Scale & Metrics</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border p-8 bg-card text-center">
+              <div>
+                <span className="font-mono text-3xl md:text-4xl font-bold text-[#C59A2E]">
+                  {totalStartups > 0 ? totalStartups.toLocaleString() : "1,200+"}
+                </span>
+                <p className="text-[10px] font-sans font-bold uppercase tracking-wider text-muted-foreground mt-2">Verified Companies</p>
+              </div>
+              <div>
+                <span className="font-mono text-3xl md:text-4xl font-bold text-[#C59A2E]">
+                  {totalCountries > 0 ? totalCountries : "35"}
+                </span>
+                <p className="text-[10px] font-sans font-bold uppercase tracking-wider text-muted-foreground mt-2">Global Markets</p>
+              </div>
+              <div>
+                <span className="font-mono text-3xl md:text-4xl font-bold text-[#C59A2E]">
+                  {totalSectors > 0 ? totalSectors : "28"}
+                </span>
+                <p className="text-[10px] font-sans font-bold uppercase tracking-wider text-muted-foreground mt-2">Industry Sectors</p>
+              </div>
+              <div>
+                <span className="font-mono text-3xl md:text-4xl font-bold text-[#C59A2E]">100%</span>
+                <p className="text-[10px] font-sans font-bold uppercase tracking-wider text-muted-foreground mt-2">Independent Index</p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* 5. EDITORIAL & REVIEW STANDARDS */}
+          <Reveal as="section">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#C59A2E] font-mono text-xs">04 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Editorial Governance</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
+
+            <div className="p-8 border border-border bg-background space-y-4">
+              <h3 className="text-xl font-bold font-serif text-foreground">Independence & Non-Interference Policy</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                UpForge maintains a strict wall between data verification and commercial partnerships. We never accept financial compensation to alter a company's verification record, boost search visibility, or modify registry criteria.
+              </p>
+              <div className="pt-2">
+                <Link href="/editorial-standards" className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#C59A2E] hover:underline">
+                  Read Complete Editorial & Corrections Policy <ArrowRight size={12} />
                 </Link>
               </div>
             </div>
           </Reveal>
 
-          {/* ══════════════ ECOSYSTEM PULSE ══════════════ */}
+          {/* 6. TEAM & WHO IS BEHIND UPFORGE */}
           <Reveal as="section">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-0 border-[1.5px] border-foreground">
-              <div className="p-7 sm:p-10 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-foreground">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] block mb-3">Ecosystem Pulse</span>
-                <p className="text-2xl sm:text-3xl font-bold mb-3 leading-tight" style={{ fontFamily: "'Georgia', serif" }}>
-                  {pulse.headline}
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#C59A2E] font-mono text-xs">05 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Leadership & Vetting Team</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 border border-border bg-card">
+                <h4 className="font-sans font-bold text-sm uppercase tracking-wider text-foreground mb-1">Founding Board & Editorial Lead</h4>
+                <p className="text-xs text-muted-foreground font-serif leading-relaxed mb-4">
+                  Led by experienced startup researchers and product engineers committed to institutional data integrity across global ecosystems.
                 </p>
-                <p className="text-base text-muted-foreground font-serif italic">{pulse.context}</p>
-              </div>
-              <div className="bg-muted flex flex-col items-center justify-center text-center p-7">
-                <p className="text-4xl sm:text-5xl font-black mb-3" style={{ fontFamily: "'Georgia', serif" }}>{pulse.stat}</p>
-                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#C59A2E]">Worldwide</p>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* ══════════════ STATS BAND ══════════════ */}
-          <Reveal as="section">
-            <div className="text-center mb-8">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] block mb-3">Section 04 — Scale</span>
-              <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Georgia', serif" }}>Our Platform in Numbers</h2>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 border-[1.5px] border-foreground">
-              {STATS.map((s, i) => (
-                <div
-                  key={i}
-                  className={`p-8 text-center border-foreground ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b" : ""} lg:border-b-0 ${i < 3 ? "lg:border-r" : "lg:border-r-0"}`}
-                >
-                  <CountUpStat
-                    target={s.target}
-                    suffix={s.suffix}
-                    className="block text-3xl md:text-4xl font-bold font-mono text-[#C59A2E] mb-2"
-                  />
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{s.label}</div>
+                <div className="text-[11px] font-mono text-muted-foreground">
+                  Contact: <a href="mailto:contact@upforge.org" className="text-[#C59A2E] hover:underline">contact@upforge.org</a>
                 </div>
-              ))}
-            </div>
-            {SITE_STATS && (
-              <p className="text-center text-[10px] text-muted-foreground font-mono mt-3">
-                Verified data synced with SITE_STATS independent registry database.
-              </p>
-            )}
-          </Reveal>
-
-          {/* ══════════════ MILESTONES LEDGER ══════════════ */}
-          <Reveal as="section">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Ecosystem Milestones</span>
-              <div className="flex-1 h-px bg-foreground" />
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-0 border-[1.5px] border-foreground">
-              {MILESTONES.map((m, i) => {
-                const isLast = i === MILESTONES.length - 1
-                return (
-                  <div key={i} className={`p-5 border-r border-b lg:border-b-0 border-foreground last:border-r-0 transition-colors group ${isLast ? "bg-muted" : "hover:bg-muted/50"}`}>
-                    <p className={`text-2xl font-black mb-3 ${isLast ? "text-[#C59A2E]" : ""}`} style={{ fontFamily: "'Georgia', serif" }}>{m.year}</p>
-                    <p className="text-xs font-serif italic leading-relaxed text-muted-foreground">{m.event}</p>
-                  </div>
-                )
-              })}
-            </div>
-          </Reveal>
-
-          {/* ══════════════ EDITORIAL INDEPENDENCE ══════════════ */}
-          <Reveal as="section">
-            <div className="max-w-3xl mx-auto text-center">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] block mb-3">Section 05 — Trust Standards</span>
-              <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ fontFamily: "'Georgia', serif" }}>Editorial Independence &amp; Governance</h2>
-              <div className="grid md:grid-cols-3 gap-0 border-[1.5px] border-foreground mb-8 text-left">
-                {[
-                  { title: "No Paid Rankings", desc: "Registry placement, spotlight features, and reports cannot be purchased." },
-                  { title: "Objective Criteria", desc: "Every listing is evaluated against the same published verification standard." },
-                  { title: "Transparent Corrections", desc: "When corporate data changes, records are updated and dated promptly." },
-                ].map((item, i) => (
-                  <div key={i} className={`p-5 border-b md:border-b-0 border-foreground ${i < 2 ? "md:border-r" : ""}`}>
-                    <h3 className="font-bold text-sm mb-2">{item.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
               </div>
-              <Link href="/editorial-standards" className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground hover:text-foreground">
-                View Full Editorial Independence Statement <ArrowRight size={12} />
-              </Link>
+
+              <div className="p-6 border border-border bg-card">
+                <h4 className="font-sans font-bold text-sm uppercase tracking-wider text-foreground mb-1">Research & Review Panel</h4>
+                <p className="text-xs text-muted-foreground font-serif leading-relaxed mb-4">
+                  Our analyst team evaluates incoming submissions against official MCA, corporate registry, and public dataset sources within 3-5 business days.
+                </p>
+                <div className="text-[11px] font-mono text-muted-foreground">
+                  Verification desk: <span className="text-foreground font-semibold">desk@upforge.org</span>
+                </div>
+              </div>
             </div>
+
+            {/* FOUNDER DATA PLACEHOLDER COMMENT */}
+            {/* <!-- NEEDS REAL DATA: founder full names, LinkedIn profiles, and review board details to be updated by founder --> */}
+            {/* <!-- DOMAIN COMPARISON COMMENT: .org presents global startup registry framing whereas .in presents India-focused registry framing --> */}
           </Reveal>
 
-          {/* ══════════════ TRUST QUOTES ══════════════ */}
+          {/* 7. CONTACT & LEGAL TRANSPARENCY */}
           <Reveal as="section">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Trusted by Founders &amp; Investors</span>
-              <div className="flex-1 h-px bg-foreground" />
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#C59A2E] font-mono text-xs">06 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Legal & Operational Transparency</h2>
+              <div className="flex-1 h-px bg-border" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-[1.5px] border-foreground">
-              {TRUST_QUOTES.map((tq, i) => (
-                <div key={i} className="p-6 flex flex-col gap-4 hover:bg-muted/40 transition-colors border-b md:border-b-0 md:border-r border-foreground last:border-0 group">
-                  <span className="font-serif text-4xl font-black text-[#C59A2E] leading-none rotate-180">"</span>
-                  <p className="font-serif italic text-[15px] leading-relaxed flex-1">"{tq.quote}"</p>
-                  <p className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-[#C59A2E] pt-4 border-t border-border">— {tq.by}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
 
-          {/* ══════════════ LEADERSHIP ══════════════ */}
-          <Reveal as="section">
-            <div className="max-w-3xl mx-auto text-center">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#C59A2E] block mb-3">Section 06 — Leadership</span>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ fontFamily: "'Georgia', serif" }}>Leadership &amp; Team</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
-                UpForge was founded to bring transparency and institutional trust to startup data —
-                led by a small team of engineers, analysts, and researchers building global startup
-                trust infrastructure.
-              </p>
-              <div className="p-6 border-[1.5px] border-foreground inline-block text-left max-w-md mx-auto">
-                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#C59A2E] mb-2">
-                  Official Inquiries &amp; Registry Board
-                </div>
-                <p className="text-sm font-bold mb-1">UpForge Global Registry Operations</p>
-                <p className="text-xs text-muted-foreground mb-3">For corporate updates, verification appeals, or institutional partnerships.</p>
-                <a href="mailto:contact@upforge.org" className="text-xs font-mono font-bold text-[#C59A2E] hover:underline">contact@upforge.org</a>
+            <div className="grid sm:grid-cols-3 gap-6 p-8 border border-border bg-muted/20">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-muted-foreground block mb-1">Operating Entity</span>
+                <p className="text-sm font-bold font-serif text-foreground">UpForge Global Registry</p>
+                {/* <!-- NEEDS REAL DATA: official registered corporate entity name --> */}
+              </div>
+
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-muted-foreground block mb-1">Jurisdiction</span>
+                <p className="text-sm font-bold font-serif text-foreground">India & International Operations</p>
+                {/* <!-- NEEDS REAL DATA: legal registration jurisdiction --> */}
+              </div>
+
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-muted-foreground block mb-1">Primary Inquiry Email</span>
+                <a href="mailto:contact@upforge.org" className="text-sm font-bold font-mono text-[#C59A2E] hover:underline">
+                  contact@upforge.org
+                </a>
               </div>
             </div>
           </Reveal>
 
-          {/* ══════════════ FAQ ══════════════ */}
+          {/* 8. FAQ ACCORDION */}
           <Reveal as="section">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Frequently Asked Questions</span>
-              <div className="flex-1 h-px bg-foreground" />
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#C59A2E] font-mono text-xs">07 /</span>
+              <h2 className="font-sans font-black text-xs uppercase tracking-widest text-foreground">Frequently Asked Questions</h2>
+              <div className="flex-1 h-px bg-border" />
             </div>
-            <div className="border-[1.5px] border-foreground">
-              {FAQ_ITEMS.map((faq, i) => (
-                <details key={i} className="group border-b border-border last:border-none hover:bg-muted/30 transition-colors open:bg-muted/30">
-                  <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                    <span className="font-bold text-[16px] group-hover:text-[#C59A2E] transition-colors" style={{ fontFamily: "'Georgia', serif" }}>{faq.q}</span>
-                    <span className="font-mono text-xl group-open:rotate-45 transition-transform shrink-0">+</span>
+
+            <div className="space-y-4">
+              {FAQ_ITEMS.map((item, i) => (
+                <details key={i} className="group border border-border p-4 bg-background">
+                  <summary className="font-sans font-bold text-xs uppercase tracking-wider cursor-pointer flex justify-between items-center text-foreground">
+                    <span>{item.q}</span>
+                    <span className="text-[#C59A2E] group-open:rotate-180 transition-transform">↓</span>
                   </summary>
-                  <div className="px-6 pb-6">
-                    <p className="text-[15px] text-muted-foreground font-serif italic leading-relaxed">{faq.a}</p>
-                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 leading-relaxed font-serif">
+                    {item.a}
+                  </p>
                 </details>
               ))}
             </div>
           </Reveal>
 
-          {/* ══════════════ CTA ══════════════ */}
-          <Reveal as="section" className="border-[1.5px] border-foreground bg-muted px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-            <div className="max-w-xl">
-              <p className="font-mono text-[9px] font-black uppercase tracking-[0.25em] text-[#C59A2E] mb-3">UpForge Registry</p>
-              <h2 className="text-2xl sm:text-3xl font-black mb-3 leading-tight" style={{ fontFamily: "'Georgia', serif" }}>
-                Your founder story starts with a verified profile.
-              </h2>
-              <p className="font-serif italic text-base text-muted-foreground">Free forever. Trusted by investors across 90+ countries.</p>
-            </div>
-            <Link href="/submit" className="shrink-0 inline-flex items-center gap-2 bg-foreground hover:bg-[#C59A2E] text-background py-3.5 px-7 font-bold uppercase tracking-[0.15em] font-mono transition-colors whitespace-nowrap">
-              Get Verified <ArrowRight size={14} />
-            </Link>
-          </Reveal>
-
-          {/* ══════════════ FOOTER ══════════════ */}
-          <footer className="pt-8 border-t border-border">
-            <p className="font-serif text-xs italic text-muted-foreground leading-relaxed mb-6 max-w-4xl">
-              * Registry data sourced from national company registries, public filings, and verified
-              submissions as of {new Date().toLocaleString("default", { month: "long", year: "numeric" })}.
-              UpForge is an independent registry — no paid placements, no sponsored rankings.
+          {/* 9. CLOSING CTA */}
+          <section className="text-center p-10 border border-foreground bg-muted/40">
+            <h2 className="text-2xl sm:text-3xl font-bold font-serif mb-3">Build Your Verified Public Record Today</h2>
+            <p className="text-xs text-muted-foreground max-w-xl mx-auto mb-6">
+              Join thousands of founders and companies establishing standardized digital credibility on UpForge.
             </p>
-            <nav aria-label="Footer navigation">
-              <ul className="flex flex-wrap gap-x-8 gap-y-3 font-mono text-[9px] font-bold uppercase tracking-[0.15em]">
-                {[
-                  { l: "Startup Registry", h: "/registry" },
-                  { l: "Methodology", h: "/methodology" },
-                  { l: "Editorial Standards", h: "/editorial-standards" },
-                  { l: "The Forge — Blog", h: "/blog" },
-                  { l: "Submit Startup", h: "/submit" },
-                ].map((lnk) => (
-                  <li key={lnk.h}>
-                    <Link href={lnk.h} className="text-muted-foreground hover:text-foreground transition-colors">{lnk.l}</Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </footer>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/submit"
+                className="px-8 py-3.5 bg-foreground hover:bg-[#C59A2E] text-background font-mono text-xs uppercase tracking-widest font-bold transition-colors"
+              >
+                Submit Your Startup
+              </Link>
+              <Link
+                href="/partner-program"
+                className="px-8 py-3.5 border-2 border-foreground hover:border-[#C59A2E] hover:text-[#C59A2E] font-mono text-xs uppercase tracking-widest font-bold transition-colors"
+              >
+                Apply for Partner Program
+              </Link>
+            </div>
+          </section>
 
         </main>
       </div>
