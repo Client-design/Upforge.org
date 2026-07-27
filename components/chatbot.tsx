@@ -240,7 +240,7 @@ export function Chatbot() {
         }
       `}</style>
 
-      <div style={{ position:"fixed", bottom:24, right:24, zIndex:9999, display:"flex", flexDirection:"column", alignItems:"flex-end" }}>
+      <div style={{ position:"fixed", bottom:24, right:24, zIndex:9999, display:"flex", flexDirection:"column", alignItems:"flex-end", pointerEvents:"none" }}>
 
         {/* ── PANEL ─────────────────────────────────────────────── */}
         {isOpen && (
@@ -254,6 +254,7 @@ export function Chatbot() {
             border: "1px solid var(--border)",
             boxShadow: "0 12px 40px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.04)",
             animation: "forgeIn 0.18s ease forwards",
+            pointerEvents: "auto",
           }}>
 
             {/* Header */}
@@ -421,6 +422,8 @@ export function Chatbot() {
             boxShadow:"0 8px 24px rgba(0,0,0,0.18)",
             display:"flex", flexDirection:"column", position:"relative",
             transition:"box-shadow .15s",
+            pointerEvents: "auto",
+            touchAction: "manipulation",
           }}
           onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.25), 0 0 0 4px rgba(0,0,0,0.1)")}
           onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.18)")}
