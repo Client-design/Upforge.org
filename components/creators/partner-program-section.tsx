@@ -4,7 +4,7 @@
 import Image from "next/image"
 import { Sparkles, ShieldCheck, ArrowRight } from "lucide-react"
 
-const APPLY_LINK = "https://payments.cashfree.com/forms/UpForge-Partners-Program"
+const APPLY_LINK = "/partner-program"
 
 export function PartnerProgramSection() {
   return (
@@ -71,11 +71,9 @@ export function PartnerProgramSection() {
 
             <a
               href={APPLY_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
               className="mt-7 inline-flex items-center justify-center gap-2 px-6 py-2.5 text-xs font-bold text-white bg-[#C59A2E] hover:bg-[#A8821E] rounded-full transition-colors shadow w-fit"
             >
-              Apply for Partner Program <ArrowRight className="w-3.5 h-3.5" />
+              Learn More & Apply <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
