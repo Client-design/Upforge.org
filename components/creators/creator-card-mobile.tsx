@@ -40,12 +40,6 @@ export function CreatorCardMobile({
   const gradient = getGradient(creator.instagramHandle)
   const isPartner = creator.isPartner
 
-  const handleApplyClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    window.open(PARTNER_APPLY_LINK, "_blank", "noopener,noreferrer")
-  }
-
   const ringClass = isPartner
     ? "ring-2 ring-[#C59A2E]"
     : isPromoted
@@ -124,18 +118,21 @@ export function CreatorCardMobile({
             </svg>
           </div>
 
-          {isPartner && (
-            <div
-              className="v-badge-m absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900"
-              style={{
-                background: "linear-gradient(135deg, #C59A2E 0%, #22c55e 100%)",
-                boxShadow: "0 0 6px 2px rgba(197,154,46,0.8), 0 0 12px 3px rgba(34,197,94,0.5)",
-              }}
-              title="Verified Partner"
-            >
-              <span className="text-white text-[9px] font-black leading-none">V</span>
-            </div>
-          )}
+          {/* Uniform V Badge across all verified creators */}
+          <div
+            className="v-badge-m absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900 shadow-md"
+            style={{
+              background: isPartner
+                ? "linear-gradient(135deg, #C59A2E 0%, #22c55e 100%)"
+                : "linear-gradient(135deg, #0095F6 0%, #10b981 100%)",
+              boxShadow: isPartner
+                ? "0 0 6px 2px rgba(197,154,46,0.8), 0 0 12px 3px rgba(34,197,94,0.5)"
+                : "0 0 6px 2px rgba(0,149,246,0.6), 0 0 10px 2px rgba(16,185,129,0.4)",
+            }}
+            title={isPartner ? "Official Partner" : "Verified Creator"}
+          >
+            <span className="text-white text-[9px] font-black leading-none">V</span>
+          </div>
         </div>
 
         {/* Name */}
@@ -151,7 +148,7 @@ export function CreatorCardMobile({
             Official Partner
           </span>
         ) : (
-          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-[8px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
+          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[8px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
             {creator.niche}
           </span>
         )}
@@ -166,10 +163,17 @@ export function CreatorCardMobile({
 
       {/* Actions */}
       <div className="mt-2.5">
-        <div className="w-full py-1.5 rounded-lg text-[9px] font-bold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center justify-center gap-0.5">
-          <ShieldCheck className="w-3 h-3" />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation()
+            onViewProfile(creator)
+          }}
+          className="w-full py-2 rounded-lg text-[9.5px] font-bold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1 active:scale-95 touch-manipulation cursor-pointer"
+        >
+          <ShieldCheck className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
           View Profile
-        </div>
+        </button>
       </div>
     </div>
   )
