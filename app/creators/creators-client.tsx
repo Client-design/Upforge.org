@@ -312,80 +312,70 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
       )}
 
 {/* HERO */}
-      <section className="border-b border-border relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/20 via-transparent to-pink-50/10 dark:from-slate-900 dark:to-slate-950 pointer-events-none" />
-        <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-10 md:py-16 text-center relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#e6683c] animate-pulse" />
-            <span className="text-[10px] font-bold text-slate-700 dark:text-slate-350 uppercase tracking-widest">
-              Verified Creator Registry
+      <section className="border-b border-border relative overflow-hidden bg-muted/10">
+        <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-12 md:py-20 text-center relative">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-background border border-border mb-6 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#B30000] animate-pulse" />
+            <span className="text-[10px] font-bold text-foreground uppercase tracking-widest font-mono">
+              Official Partner Program • Verified Digital Creators
             </span>
           </div>
 
           <h1
-            className="text-4xl md:text-6xl font-black leading-[1.08] mb-4 text-slate-900 dark:text-white"
-            style={{ fontFamily: "Georgia, serif" }}
+            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-4 text-foreground font-serif"
           >
-            UpForge Creator{" "}
-            <span className="bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#dc2743] bg-clip-text text-transparent">
-              Registry Community
-            </span>
+            Official UpForge <span className="text-[#B30000]">Partner Program</span>
           </h1>
 
-          <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            The official trust index of verified digital creators. Showcasing audience reach, professional niches, and verified identity badges issued by UpForge.
+          <p className="text-xl md:text-3xl font-serif text-foreground font-medium mb-4">
+            Become a Partner. <span className="text-[#B30000] underline decoration-[#B30000]/40 underline-offset-4">Earn Per View.</span>
           </p>
 
-          <div className="flex items-center justify-center gap-6 md:gap-10 mb-8 max-w-lg mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 py-3.5 px-6 rounded-2xl shadow-sm">
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-serif">
+            Join India&apos;s premier verified creator directory. Monetize audience reach with guaranteed per-view payouts, display official verified V credentials, and unlock brand partnership opportunities.
+          </p>
+
+          <div className="flex items-center justify-center gap-6 md:gap-12 mb-10 max-w-2xl mx-auto bg-background border border-border py-4 px-8 rounded-2xl shadow-sm">
             <div className="text-center">
-              <div className="font-serif font-black text-xl md:text-2xl text-slate-850 dark:text-white">{creators.length}</div>
-              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Total Members</div>
+              <div className="font-serif font-bold text-2xl md:text-3xl text-foreground">{creators.length}</div>
+              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mt-1">Verified Members</div>
             </div>
-            <div className="h-6 w-px bg-slate-200 dark:bg-slate-800" />
+            <div className="h-8 w-px bg-border" />
             <div className="text-center">
-              <div className="font-serif font-black text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">100%</div>
-              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Verified Credentials</div>
+              <div className="font-serif font-bold text-2xl md:text-3xl text-[#B30000]">Earn Per View</div>
+              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mt-1">Partner Rewards</div>
             </div>
-            <div className="h-6 w-px bg-slate-200 dark:bg-slate-800" />
+            <div className="h-8 w-px bg-border" />
             <div className="text-center">
-              <div className="font-serif font-black text-xl md:text-2xl text-slate-850 dark:text-white">Direct</div>
-              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Partner Rewards</div>
+              <div className="font-serif font-bold text-2xl md:text-3xl text-emerald-600 dark:text-emerald-400">100%</div>
+              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mt-1">V Badge Verified</div>
             </div>
           </div>
 
           <div className="flex items-center justify-center gap-3 flex-wrap">
+            <Link
+              href="/partner-program"
+              className="px-7 py-3 text-xs font-bold uppercase tracking-wider text-background bg-[#B30000] hover:bg-[#8A0000] rounded-full transition shadow-md"
+            >
+              Become a Partner →
+            </Link>
+
             <button
               onClick={() => setIsModalOpen(true)}
-              className="px-6 py-2.5 text-xs font-bold text-white bg-foreground text-background rounded-full hover:opacity-95 transition shadow"
+              className="px-7 py-3 text-xs font-bold uppercase tracking-wider border border-foreground bg-background hover:bg-muted text-foreground rounded-full transition shadow-sm"
             >
-              Apply for Verification
+              Apply for V Badge
             </button>
-            <Link
-              href="/contact"
-              className="px-6 py-2.5 text-xs font-bold border border-border bg-background hover:bg-muted text-foreground rounded-full transition shadow-sm"
-            >
-              Contact Registry Board
-            </Link>
             
             <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-6 py-2.5 text-xs font-bold border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-full transition shadow-sm"
+              className="flex items-center gap-2 px-6 py-3 text-xs font-bold border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 rounded-full transition shadow-sm"
             >
-              <MessageCircle className="w-3.5 h-3.5" />
-              Request Profile Update
+              <MessageCircle className="w-4 h-4" />
+              Partner Support
             </a>
-            
-            <button
-              onClick={() => {
-                setIsSearchOpen(!isSearchOpen)
-                if (!isSearchOpen) setTimeout(() => inputRef.current?.focus(), 100)
-              }}
-              className="md:hidden p-2.5 border border-border bg-background rounded-full shadow-sm"
-            >
-              {isSearchOpen ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
-            </button>
           </div>
         </div>
       </section>
