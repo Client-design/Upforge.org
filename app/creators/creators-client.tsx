@@ -314,16 +314,9 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
 {/* HERO */}
       <section className="border-b border-border relative overflow-hidden bg-background">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-10 md:py-14 text-center relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/60 border border-border/80 mb-4 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#e6683c] animate-pulse" />
-            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-mono">
-              UpForge Partner Program • Verified Digital Directory
-            </span>
-          </div>
 
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] mb-3 text-foreground font-serif"
-          >
+          {/* Main Title & Subtitle */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-foreground mb-2">
             Official UpForge Partner Program
           </h1>
 
@@ -331,27 +324,51 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             Become a Partner. <span className="text-foreground font-semibold">Earn Per View.</span>
           </p>
 
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed font-serif">
-            Join India&apos;s premier verified digital creator directory. Monetize audience reach with guaranteed per-view payouts, official trust credentials, and brand partnership opportunities.
+          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed font-serif">
+            Post about UpForge on your own social media and earn for every verified view. A transparent, invite-based rewards program built for our verified creator community — no spam, no gimmicks, no hidden terms.
           </p>
 
-          <div className="flex items-center justify-center gap-6 md:gap-10 mb-8 max-w-xl mx-auto bg-muted/30 border border-border/60 py-3.5 px-6 rounded-xl shadow-sm">
-            <div className="text-center">
-              <div className="font-serif font-bold text-xl md:text-2xl text-foreground">{creators.length}</div>
-              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Verified Members</div>
+          {/* Earnings Per Verified View Section */}
+          <div className="max-w-3xl mx-auto bg-card border border-border/80 rounded-2xl p-5 md:p-8 shadow-sm mb-8 text-center">
+            <div className="mb-6">
+              <h2 className="text-lg md:text-xl font-serif font-bold text-foreground">
+                Earnings Per Verified View
+              </h2>
+              <p className="text-xs text-muted-foreground mt-1 font-medium">
+                Approved posts only · Paid monthly
+              </p>
             </div>
-            <div className="h-7 w-px bg-border/60" />
-            <div className="text-center">
-              <div className="font-serif font-bold text-xl md:text-2xl text-[#e6683c]">Earn Per View</div>
-              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Partner Rewards</div>
+
+            {/* Payout Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-6">
+              <div className="bg-muted/40 border border-border/60 rounded-xl p-3.5 md:p-4 text-center">
+                <div className="font-serif font-bold text-xl md:text-2xl text-foreground">₹0.01</div>
+                <div className="text-[10px] md:text-xs font-semibold text-muted-foreground mt-1">Per View Rate</div>
+              </div>
+
+              <div className="bg-muted/40 border border-border/60 rounded-xl p-3.5 md:p-4 text-center">
+                <div className="font-serif font-bold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">₹100</div>
+                <div className="text-[10px] md:text-xs font-semibold text-muted-foreground mt-1">10,000 Views</div>
+              </div>
+
+              <div className="bg-muted/40 border border-border/60 rounded-xl p-3.5 md:p-4 text-center">
+                <div className="font-serif font-bold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">₹1,000</div>
+                <div className="text-[10px] md:text-xs font-semibold text-muted-foreground mt-1">1,00,000 Views</div>
+              </div>
+
+              <div className="bg-muted/40 border border-border/60 rounded-xl p-3.5 md:p-4 text-center">
+                <div className="font-serif font-bold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">₹10,000</div>
+                <div className="text-[10px] md:text-xs font-semibold text-muted-foreground mt-1">10,00,000 Views</div>
+              </div>
             </div>
-            <div className="h-7 w-px bg-border/60" />
-            <div className="text-center">
-              <div className="font-serif font-bold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">Direct</div>
-              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Brand Access</div>
-            </div>
+
+            {/* Verification Disclaimer */}
+            <p className="text-[11px] md:text-xs text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed italic border-t border-border/40 pt-4">
+              Every post is manually reviewed before views are counted toward earnings. This keeps the program authentic and spam-free — built for genuine creators, not view farms. UpForge reserves the right to verify view counts before payout.
+            </p>
           </div>
 
+          {/* Action Links */}
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <Link
               href="/partner-program"
