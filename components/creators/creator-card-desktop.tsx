@@ -123,24 +123,6 @@ export function CreatorCardDesktop({
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
           </svg>
         </div>
-
-        {/* Glowing V Badge - Uniform across all verified creators */}
-        <div
-          className={`v-badge absolute -top-1 right-[calc(50%-46px)] w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900 shadow-md ${
-            isPartner ? "" : ""
-          }`}
-          style={{
-            background: isPartner
-              ? "linear-gradient(135deg, #C59A2E 0%, #22c55e 100%)"
-              : "linear-gradient(135deg, #0095F6 0%, #10b981 100%)",
-            boxShadow: isPartner
-              ? "0 0 8px 2px rgba(197,154,46,0.8), 0 0 14px 4px rgba(34,197,94,0.5)"
-              : "0 0 8px 2px rgba(0,149,246,0.6), 0 0 12px 3px rgba(16,185,129,0.4)",
-          }}
-          title={isPartner ? "Official Partner" : "Verified Creator"}
-        >
-          <span className="text-white text-[11px] font-black leading-none">V</span>
-        </div>
       </div>
 
       {/* Name and Handle */}
