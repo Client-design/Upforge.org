@@ -29,110 +29,96 @@ export function StartupCard({ startup, featured = false }: StartupCardProps) {
     ? startup.ufrn.split("-").slice(-2).join("-")
     : ufrnDisplay
 
-  // Global-standard relative URL (Automatically uses .org logic from lib/domain)
   const startupHref = getStartupUrl(startup.slug || "")
 
   return (
     <Link href={startupHref} className="group block h-full">
       <article
-        className={`relative flex h-full flex-col rounded-2xl border transition-all duration-500 bg-white ${
+        className={`relative flex h-full flex-col justify-between rounded-xl border bg-white p-6 transition-all duration-300 ${
           featured
-            ? "border-slate-200 p-7 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-1"
-            : "border-slate-100 p-6 hover:border-blue-200 shadow-sm hover:shadow-md"
+            ? "border-slate-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+            : "border-slate-200/80 hover:border-slate-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
         }`}
       >
         {featured && (
           <div className="absolute -top-3 left-6">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-4 py-1 shadow-lg shadow-slate-200">
-              <Sparkles className="h-3 w-3 text-yellow-400" />
-              <span className="text-[10px] font-black uppercase tracking-[0.15em] text-white">
-                Elite Member
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-0.5 shadow-sm">
+              <Sparkles className="h-3 w-3 text-amber-400" />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-white">
+                Featured
               </span>
             </div>
           </div>
         )}
 
-        <div className="mb-6 flex items-start justify-between">
-          <div
-            className={`flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border bg-white transition-colors ${
-              featured ? "border-slate-100 shadow-sm" : "border-slate-50 shadow-none"
-            }`}
-          >
-            {startup.logo_url ? (
-              <img
-                src={startup.logo_url}
-                alt={`${startup.name} logo`}
-                className="h-full w-full object-contain p-3"
-              />
-            ) : (
-              <span className="text-2xl font-black text-slate-900">
-                {startup.name?.charAt(0) || "?"}
-              </span>
-            )}
+        <div>
+          <div className="mb-5 flex items-start justify-between">
+            <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+              {startup.logo_url ? (
+                <img
+                  src={startup.logo_url}
+                  alt={`${startup.name} logo`}
+                  className="h-full w-full object-contain p-2.5"
+                />
+              ) : (
+                <span className="text-xl font-bold text-slate-800">
+                  {startup.name?.charAt(0) || "?"}
+                </span>
+              )}
+            </div>
+
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 text-slate-400 transition-all group-hover:bg-slate-900 group-hover:text-white">
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </div>
           </div>
 
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-400 transition-all group-hover:bg-slate-900 group-hover:text-white group-hover:scale-110">
-            <ArrowUpRight className="h-4 w-4" />
+          <div className="space-y-2">
+            <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+              {startup.name}
+            </h3>
+
+            <div className="flex flex-wrap items-center gap-2 text-[11px]">
+              <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">
+                {startup.category}
+              </span>
+              {startup.city && (
+                <span className="text-slate-500 font-medium">• {startup.city}</span>
+              )}
+              {startup.founded_year && (
+                <span className="text-slate-400 font-medium">• EST. {startup.founded_year}</span>
+              )}
+            </div>
+
+            <p className="line-clamp-2 text-xs leading-relaxed text-slate-600 font-normal">
+              {startup.description}
+            </p>
           </div>
         </div>
 
-        <div className="space-y-3 flex-1">
-          <h3 className="text-2xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
-            {startup.name}
-          </h3>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-md bg-slate-100 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
-              {startup.category}
-            </span>
-            {startup.founded_year && (
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                • EST. {startup.founded_year}
-              </span>
-            )}
-          </div>
-
-          <p className="line-clamp-3 text-sm leading-relaxed font-medium text-slate-500">
-            {startup.description}
-          </p>
-        </div>
-
-        <div className="mt-8 flex items-center justify-between border-t border-slate-50 pt-5">
-          <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-400 border border-white">
+        <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 text-xs">
+          <div className="flex items-center gap-2">
+            <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-500">
               {founderInfo.name.charAt(0)}
             </div>
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 leading-none mb-1">
-                Founder
-              </p>
-              <p className="text-xs font-bold text-slate-900">
-                {founderInfo.name}
-                {founderInfo.hasMore && <span className="text-blue-600 ml-1">+ Team</span>}
-              </p>
-            </div>
+            <span className="font-medium text-slate-700">
+              {founderInfo.name}
+              {founderInfo.hasMore && <span className="text-slate-400 font-normal ml-1">+ team</span>}
+            </span>
           </div>
 
-          <div className="flex flex-col items-end gap-0.5">
-            <div className="flex items-center gap-1 text-green-600">
-              <ShieldCheck className="h-3 w-3" />
-              <span className="text-[9px] font-black uppercase tracking-tighter">Verified</span>
-            </div>
-
+          <div>
             {hasRealUFRN ? (
               <span 
-                className="text-[9px] font-mono text-[#A89060]"
+                className="text-[10px] font-mono text-slate-400"
                 title={`Registry ID: ${startup.ufrn}`}
               >
                 {ufrnShort}
               </span>
             ) : (
-              <p className="text-[9px] font-mono text-slate-300">{ufrnDisplay}</p>
+              <span className="text-[10px] font-mono text-slate-300">{ufrnDisplay}</span>
             )}
           </div>
         </div>
-
-        <div className="absolute bottom-0 left-6 right-6 h-0.5 scale-x-0 bg-slate-900 transition-transform duration-500 group-hover:scale-x-100" />
       </article>
     </Link>
   )
