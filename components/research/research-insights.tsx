@@ -67,11 +67,12 @@ export function ResearchInsights() {
 
       <div className="mt-5 p-4 border-l-4 border-[#C59A2E] bg-muted/30">
         <p className="font-mono text-[9px] uppercase tracking-widest text-[#C59A2E] mb-2">
-          Did you know?
+          Ecosystem Signal
         </p>
         <p className="font-serif italic text-sm text-foreground">
-          Startups with UFRN verification receive 3.2x more inbound investor interest.
+          Startups with verified UFRN records report significantly higher inbound investor engagement and diligence readiness.
         </p>
+        {/* FOUNDER: confirm or remove this stat, needs real data source */}
       </div>
     </div>
   )
