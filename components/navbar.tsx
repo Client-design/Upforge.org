@@ -645,7 +645,7 @@ export function Navbar() {
             )}
             <button
               type="button"
-              className="p-2.5 text-foreground hover:bg-muted/50 rounded-lg transition-all cursor-pointer active:scale-95 touch-manipulation relative z-[110]"
+              className="p-2.5 text-foreground hover:bg-muted/50 rounded-lg transition-all duration-300 cursor-pointer active:scale-95 touch-manipulation relative z-[110]"
               onClick={(e) => {
                 e.stopPropagation()
                 setIsOpen((prev) => !prev)
@@ -653,7 +653,9 @@ export function Navbar() {
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
-              {isOpen ? <X size={22} /> : <Menu size={22} />}
+              <div className={`transition-transform duration-300 ease-out ${isOpen ? "rotate-90" : "rotate-0"}`}>
+                {isOpen ? <X size={22} /> : <Menu size={22} />}
+              </div>
             </button>
           </div>
         </div>
@@ -662,26 +664,27 @@ export function Navbar() {
       {/* MOBILE MENU */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-[105] md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[105] md:hidden transition-all duration-300 ease-in-out ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         aria-hidden={!isOpen}
       >
         {/* Overlay */}
         <div
-          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          className={`absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300 ${
+            isOpen ? "opacity-100" : "opacity-0"
+          }`}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setIsOpen(false);
-              // Do NOT close showDropdown here
             }
           }}
         />
 
         {/* Menu Content */}
         <div 
-          className={`absolute top-14 left-0 right-0 bg-background border-b border-border/50 shadow-2xl transition-all duration-300 max-h-[calc(100vh-3.5rem)] overflow-y-auto ${
-            isOpen ? "translate-y-0" : "-translate-y-4"
+          className={`absolute top-14 left-0 right-0 bg-background border-b border-border/50 shadow-2xl transition-all duration-300 ease-out transform max-h-[calc(100vh-3.5rem)] overflow-y-auto ${
+            isOpen ? "translate-y-0 opacity-100 scale-100" : "-translate-y-4 opacity-0 scale-[0.98]"
           }`}
         >
           
