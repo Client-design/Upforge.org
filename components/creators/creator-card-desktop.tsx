@@ -124,19 +124,23 @@ export function CreatorCardDesktop({
           </svg>
         </div>
 
-        {/* Glowing Partner V Badge */}
-        {isPartner && (
-          <div
-            className="v-badge absolute -top-1 right-[calc(50%-46px)] w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900"
-            style={{
-              background: "linear-gradient(135deg, #C59A2E 0%, #22c55e 100%)",
-              boxShadow: "0 0 8px 2px rgba(197,154,46,0.8), 0 0 14px 4px rgba(34,197,94,0.5)",
-            }}
-            title="Verified Partner"
-          >
-            <span className="text-white text-[11px] font-black leading-none">V</span>
-          </div>
-        )}
+        {/* Glowing V Badge - Uniform across all verified creators */}
+        <div
+          className={`v-badge absolute -top-1 right-[calc(50%-46px)] w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900 shadow-md ${
+            isPartner ? "" : ""
+          }`}
+          style={{
+            background: isPartner
+              ? "linear-gradient(135deg, #C59A2E 0%, #22c55e 100%)"
+              : "linear-gradient(135deg, #0095F6 0%, #10b981 100%)",
+            boxShadow: isPartner
+              ? "0 0 8px 2px rgba(197,154,46,0.8), 0 0 14px 4px rgba(34,197,94,0.5)"
+              : "0 0 8px 2px rgba(0,149,246,0.6), 0 0 12px 3px rgba(16,185,129,0.4)",
+          }}
+          title={isPartner ? "Official Partner" : "Verified Creator"}
+        >
+          <span className="text-white text-[11px] font-black leading-none">V</span>
+        </div>
       </div>
 
       {/* Name and Handle */}
@@ -147,9 +151,13 @@ export function CreatorCardDesktop({
         <p className="text-[11px] font-medium text-slate-400 dark:text-slate-500 mt-0.5 truncate max-w-[170px] mx-auto">
           @{creator.instagramHandle}
         </p>
-        {isPartner && (
+        {isPartner ? (
           <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#C59A2E]/15 to-emerald-500/15 border border-[#C59A2E]/30 text-[8px] font-black text-[#A8821E] dark:text-[#C59A2E] uppercase tracking-widest">
             Official Partner
+          </span>
+        ) : (
+          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[8px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+            Verified Member
           </span>
         )}
       </div>
@@ -168,11 +176,18 @@ export function CreatorCardDesktop({
       </div>
 
       {/* Actions */}
-      <div className="mt-auto">
-        <div className="w-full py-2 rounded-xl text-[11px] font-bold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-all duration-300 flex items-center justify-center gap-1">
+      <div className="mt-auto pt-1">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation()
+            onViewProfile(creator)
+          }}
+          className="w-full py-2.5 rounded-xl text-[11px] font-bold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-all duration-300 flex items-center justify-center gap-1.5 shadow-sm active:scale-95 touch-manipulation cursor-pointer"
+        >
           <ShieldCheck className="w-3.5 h-3.5" />
           View Profile
-        </div>
+        </button>
       </div>
     </div>
   )
