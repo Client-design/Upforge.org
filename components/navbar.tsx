@@ -705,42 +705,68 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* MOBILE MENU OVERLAY & CONTAINER */}
+      {/* FULL SCREEN MOBILE MENU OVERLAY TAKEOVER */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-[105] md:hidden transition-all duration-300 ease-out ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-[200] md:hidden bg-background text-foreground flex flex-col transition-all duration-300 ease-in-out ${
+          isOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-95"
         }`}
         aria-hidden={!isOpen}
       >
-        {/* Backdrop overlay */}
-        <div
-          className={`absolute inset-0 bg-black/60 backdrop-blur-xl transition-opacity duration-300 ${
-            isOpen ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setIsOpen(false);
-            }
-          }}
-        />
+        {/* Mobile Full Screen Header Bar */}
+        <div className="h-16 px-5 border-b border-border flex items-center justify-between shrink-0 bg-background/95 backdrop-blur-md">
+          <Link 
+            href="/" 
+            className="flex items-center gap-2" 
+            onClick={closeAll}
+          >
+            <div className="relative w-7 h-7 overflow-hidden rounded-lg">
+              <Image
+                src="/logo.jpg"
+                alt="UpForge"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif font-bold text-base leading-none text-foreground">UpForge</span>
+              <span className="text-[8px] font-mono text-amber-500 font-bold uppercase tracking-widest leading-none mt-0.5">MAGAZINE</span>
+            </div>
+          </Link>
 
-        {/* Menu Content Dropdown */}
-        <div 
-          className={`absolute top-14 left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 ease-out transform max-h-[calc(100vh-3.5rem)] overflow-y-auto ${
-            isOpen ? "translate-y-0 opacity-100 scale-100" : "-translate-y-6 opacity-0 scale-[0.97]"
-          }`}
-        >
-          
-          {/* Cover story mobile banner */}
-          <div className="px-4 py-3 bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-amber-500/10 border-b border-border flex items-center justify-between">
-            <Link
-              href="/founder-stories/michael-truell-anysphere-cursor"
+          <div className="flex items-center gap-3">
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2 rounded-full bg-muted border border-border text-foreground transition-transform active:scale-95"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-amber-600" />}
+              </button>
+            )}
+
+            <button
               onClick={closeAll}
-              className="flex items-center gap-2.5 group"
+              className="p-2 rounded-full bg-muted border border-border text-foreground hover:bg-accent transition-all active:scale-95"
+              aria-label="Close menu"
             >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Full Screen Scrollable Body */}
+        <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6">
+          
+          {/* Cover Story Feature Banner */}
+          <Link
+            href="/founder-stories/michael-truell-anysphere-cursor"
+            onClick={closeAll}
+            className="group flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-amber-500/10 border border-amber-500/20 shadow-sm"
+          >
+            <div className="flex items-center gap-3">
               <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 to-rose-500 shrink-0">
-                <div className="relative w-7 h-7 rounded-full overflow-hidden border border-background">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-background">
                   <Image
                     src="https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg"
                     alt="Michael Truell"
@@ -749,239 +775,156 @@ export function Navbar() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col">
+              <div>
                 <span className="text-[9px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
-                  COVER STORY
+                  READ COVER STORY
                 </span>
-                <span className="text-xs font-bold text-foreground group-hover:text-amber-600 transition-colors">
-                  Michael Truell • Cursor
-                </span>
+                <p className="text-xs font-bold text-foreground group-hover:text-amber-600 transition-colors">
+                  Michael Truell • Cursor CEO
+                </p>
               </div>
-            </Link>
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          </div>
-
-          
-          {/* MOBILE SEARCH - Always at top */}
-          <div className="px-5 py-4 border-b border-border/30 relative">
-            {/* Search Input */}
-            <div className="relative">
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                if (!searchQuery.trim()) return;
-                router.push(`/registry?q=${encodeURIComponent(searchQuery.trim())}`);
-                setSearchQuery("");
-                closeAll();
-              }} className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  ref={mobileSearchInputRef}
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    setSelectedIndex(-1);
-                  }}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Search startups, blogs..."
-                  className="w-full pl-11 pr-10 py-3 text-base bg-muted/50 border border-border/50 rounded-xl focus:outline-none focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10"
-                  aria-label="Search startups"
-                  autoComplete="off"
-                  style={{ fontSize: '16px' }}
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleClearSearch();
-                    }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-muted/50 text-muted-foreground"
-                  >
-                    <X size={16} />
-                  </button>
-                )}
-              </form>
-
-              {/* MOBILE DROPDOWN - Positioned ABOVE menu content, stays open until X clicked or text cleared */}
-              {showDropdown && (
-                <div 
-                  ref={mobileDropdownRef}
-                  className="absolute top-full left-0 right-0 mt-2 bg-background border border-border/50 rounded-xl shadow-2xl z-[130] overflow-hidden max-h-72 overflow-y-auto touch-manipulation"
-                  onClick={(e) => e.stopPropagation()}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onTouchStart={(e) => e.stopPropagation()}
-                  onTouchEnd={(e) => e.stopPropagation()}
-                >
-                  {isLoading && <SearchSkeleton />}
-
-                  {!isLoading && suggestions.length > 0 && (
-                    <>
-                      {suggestions.map((item, idx) => (
-                        <button
-                          key={idx}
-                          onMouseDown={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.nativeEvent.stopImmediatePropagation();
-                            handleSuggestionClick(item.href, e);
-                          }}
-                          onTouchStart={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.nativeEvent.stopImmediatePropagation();
-                            handleSuggestionClick(item.href, e);
-                          }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.nativeEvent.stopImmediatePropagation();
-                            handleSuggestionClick(item.href, e);
-                          }}
-                          className="w-full text-left px-4 py-3.5 flex items-start gap-3 transition-colors border-b border-border/20 last:border-0 hover:bg-muted/30 active:bg-muted/50 cursor-pointer touch-manipulation select-none"
-                          role="option"
-                          aria-selected={selectedIndex === idx}
-                        >
-                          <Search size={14} className="text-muted-foreground mt-0.5 shrink-0 pointer-events-none" />
-                          <div className="flex-1 min-w-0 pointer-events-none">
-                            <div className="text-sm text-foreground font-medium truncate">{item.title}</div>
-                            {item.subtitle && (
-                              <div className="text-xs text-muted-foreground truncate mt-0.5">{item.subtitle}</div>
-                            )}
-                          </div>
-                          <span className={`shrink-0 text-[10px] font-bold uppercase px-2 py-0.5 rounded border pointer-events-none ${getTypeBadgeClass(item.type)}`}>
-                            {item.type}
-                          </span>
-                        </button>
-                      ))}
-
-                      <div className="px-4 py-2.5 bg-muted/20 border-t border-border/30">
-                        <span className="text-[10px] text-muted-foreground">{suggestions.length} results</span>
-                      </div>
-                    </>
-                  )}
-
-                  {!isLoading && suggestions.length === 0 && searchQuery.length >= 2 && (
-                    <div className="px-4 py-5 text-center">
-                      <Search size={20} className="text-muted-foreground/40 mx-auto mb-2" />
-                      <p className="text-sm text-muted-foreground mb-2">
-                        No results for &ldquo;{searchQuery}&rdquo;
-                      </p>
-                      <button
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          router.push(`/registry?q=${encodeURIComponent(searchQuery)}`);
-                          setSearchQuery("");
-                          closeAll();
-                        }}
-                        className="text-[13px] text-foreground hover:underline font-medium cursor-pointer"
-                      >
-                        Search all startups →
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Close button at bottom */}
-                  <div className="px-4 py-2 bg-muted/10 border-t border-border/20 flex justify-between items-center">
-                    <span className="text-[10px] text-muted-foreground">
-                      {searchQuery.length < 2 ? "Type to search" : `${suggestions.length} results`}
-                    </span>
-                    <button
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleClearSearch();
-                      }}
-                      className="text-[11px] text-muted-foreground hover:text-foreground flex items-center gap-1 px-2 py-1 rounded hover:bg-muted/50 transition-colors"
-                    >
-                      <X size={12} />
-                      Close
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+          </Link>
+
+          {/* Search Input */}
+          <div className="relative">
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (!searchQuery.trim()) return;
+              router.push(`/registry?q=${encodeURIComponent(searchQuery.trim())}`);
+              setSearchQuery("");
+              closeAll();
+            }} className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                ref={mobileSearchInputRef}
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setSelectedIndex(-1);
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder="Search founders, startups, intelligence..."
+                className="w-full pl-11 pr-10 py-3.5 text-sm bg-muted/60 border border-border rounded-xl focus:outline-none focus:border-amber-500/50"
+                aria-label="Search"
+                autoComplete="off"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={handleClearSearch}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-muted-foreground"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </form>
+
+            {/* Suggestions dropdown */}
+            {showDropdown && (
+              <div className="mt-2 bg-card border border-border rounded-xl shadow-xl overflow-hidden max-h-60 overflow-y-auto">
+                {isLoading && <SearchSkeleton />}
+                {!isLoading && suggestions.map((item, idx) => (
+                  <button
+                    key={idx}
+                    onClick={(e) => handleSuggestionClick(item.href, e)}
+                    className="w-full text-left px-4 py-3 border-b border-border/30 hover:bg-muted text-xs flex items-center justify-between"
+                  >
+                    <span className="font-semibold text-foreground truncate">{item.title}</span>
+                    <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-muted text-muted-foreground">{item.type}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* NAV LINKS */}
-          <nav className="divide-y divide-border/30">
+          {/* Navigation Links */}
+          <nav className="space-y-1">
+            <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground mb-2">Main Navigation</p>
             {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`flex items-center justify-between px-5 py-4 text-sm font-medium transition-colors ${
-                  isActive(link.href)
-                    ? "text-foreground bg-accent/10 border-l-2 border-foreground"
-                    : "text-muted-foreground border-l-2 border-transparent"
-                }`}
                 onClick={closeAll}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-xl font-serif text-lg font-bold transition-all ${
+                  isActive(link.href)
+                    ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+                    : "text-foreground hover:bg-muted"
+                }`}
               >
-                {link.name}
+                <span>{link.name}</span>
+                <ChevronRight className="w-4 h-4 text-muted-foreground" />
               </Link>
             ))}
-
-            {/* MOBILE MORE ACCORDION */}
-            <div className="border-t border-border/30">
-              <button
-                onClick={() => setIsMobileMoreOpen(prev => !prev)}
-                className="flex items-center justify-between w-full px-5 py-4 text-sm font-medium text-muted-foreground"
-              >
-                <span>More</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileMoreOpen ? "rotate-180" : ""}`} />
-              </button>
-              {isMobileMoreOpen && (
-                <div className="pb-2">
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-5 py-1">Explore</p>
-                  {MORE_LINKS.explore.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={closeAll}
-                      className="block px-5 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-5 py-2 mt-1 border-t border-border/20">Resources</p>
-                  {MORE_LINKS.resources.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={closeAll}
-                      className="block px-5 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
           </nav>
 
-          {/* MOBILE ACTIONS */}
-          <div className="px-5 py-4 flex flex-col gap-3 border-t border-border/30 bg-muted/10">
+          {/* Quick Categories */}
+          <div className="space-y-2 pt-2 border-t border-border">
+            <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">Founder Categories</p>
+            <div className="flex flex-wrap gap-2">
+              <Link
+                href="/founder-stories/category/ai-technology"
+                onClick={closeAll}
+                className="px-3 py-1.5 rounded-lg bg-muted text-xs font-mono font-semibold hover:bg-amber-500/20 hover:text-amber-600 transition-colors"
+              >
+                AI & Technology
+              </Link>
+              <Link
+                href="/founder-stories/category/open-source-ai"
+                onClick={closeAll}
+                className="px-3 py-1.5 rounded-lg bg-muted text-xs font-mono font-semibold hover:bg-amber-500/20 hover:text-amber-600 transition-colors"
+              >
+                Open Source AI
+              </Link>
+              <Link
+                href="/founder-stories/category/developer-tools"
+                onClick={closeAll}
+                className="px-3 py-1.5 rounded-lg bg-muted text-xs font-mono font-semibold hover:bg-amber-500/20 hover:text-amber-600 transition-colors"
+              >
+                Developer Tools
+              </Link>
+              <Link
+                href="/founder-stories/category/enterprise-foundation-models"
+                onClick={closeAll}
+                className="px-3 py-1.5 rounded-lg bg-muted text-xs font-mono font-semibold hover:bg-amber-500/20 hover:text-amber-600 transition-colors"
+              >
+                Enterprise AI
+              </Link>
+            </div>
+          </div>
+
+          {/* Action CTAs */}
+          <div className="pt-4 border-t border-border space-y-3">
             <Link
               href="/verify"
-              className="flex items-center justify-center gap-2 px-4 py-3 border border-border/50 rounded-lg text-sm font-semibold uppercase"
+              className="flex items-center justify-center gap-2 w-full py-3 border border-border rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-foreground hover:bg-muted transition-colors"
               onClick={closeAll}
             >
-              <ShieldCheck size={14} />
-              Verify UFRN
+              <ShieldCheck size={15} />
+              Verify UFRN Credential
             </Link>
             <Link
               href="/submit"
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-foreground text-background rounded-lg text-sm font-bold uppercase"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-foreground text-background rounded-xl font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity shadow-md"
               onClick={closeAll}
             >
-              <Sparkles size={14} />
+              <Sparkles size={15} />
               Submit Startup
-              <ChevronRight size={14} />
             </Link>
           </div>
+
+        </div>
+
+        {/* Full Screen Footer */}
+        <div className="p-4 border-t border-border bg-muted/20 text-center shrink-0">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+            UpForge Global Startup Registry & Intelligence • 2026
+          </p>
         </div>
       </div>
+
     </>
   );
 }
