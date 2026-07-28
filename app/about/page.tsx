@@ -2,6 +2,7 @@
 import { fetchAllStartups } from "@/lib/google-sheets"
 import { SITE_STATS } from "@/lib/site-stats"
 import Link from "next/link"
+import { Navbar } from "@/components/navbar"
 import type { Metadata } from "next"
 import {
   ShieldCheck, Award, FileText, CheckCircle2, Globe, ArrowRight,
@@ -86,10 +87,27 @@ export default async function AboutPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
+      <Navbar />
+
       <div className="bg-background text-foreground min-h-screen font-serif overflow-x-hidden">
         
+        {/* Editorial Masthead Header */}
+        <header className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md w-full">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
+              <span className="font-bold text-foreground uppercase tracking-widest text-[10px] sm:text-[11px]">
+                ABOUT UPFORGE • INSTITUTIONAL REGISTRY
+              </span>
+            </div>
+            <div className="flex items-center gap-4 text-[11px]">
+              <span className="hidden sm:inline font-mono font-bold tracking-wider">EDITORIAL INDEPENDENCE & CREDENTIALS</span>
+            </div>
+          </div>
+        </header>
+
         {/* 1. HERO SECTION */}
-        <section className="border-b-2 border-foreground max-w-[1200px] mx-auto px-4 md:px-8 pt-16 pb-12 text-center">
+        <section className="border-b-2 border-foreground max-w-[1200px] mx-auto px-4 md:px-8 pt-12 pb-12 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-6">
             <Sparkles className="w-3.5 h-3.5 text-[#C59A2E]" />
             <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
