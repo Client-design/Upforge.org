@@ -23,22 +23,43 @@ export default function BlogIndexPage() {
       <Navbar />
       <div className="min-h-screen bg-background text-foreground">
 
-        <section className="border-b-2 border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-5 pb-6 text-center">
+        {/* Editorial Masthead Header */}
+        <header className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md w-full">
+          <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
+              <span className="font-bold text-foreground uppercase tracking-widest text-[10px] sm:text-[11px]">
+                UPFORGE JOURNAL • STARTUP INTELLIGENCE
+              </span>
+            </div>
+            <div className="flex items-center gap-4 text-[11px]">
+              <span className="hidden sm:inline font-mono font-bold tracking-wider">MONTHLY EDITORIAL REPORTS & RESEARCH</span>
+            </div>
+          </div>
+        </header>
+
+        <section className="border-b-2 border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-4 pb-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C59A2E]" />
+            <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+              GLOBAL ECOSYSTEM RESEARCH
+            </span>
+          </div>
           <h1
-            className="text-3xl md:text-[44px] lg:text-[54px] font-bold leading-[1.05] mb-3"
+            className="text-3xl md:text-[44px] lg:text-[54px] font-bold leading-[1.05] mb-3 text-foreground"
             style={{ fontFamily: "'Georgia', serif" }}
           >
             Startup Intelligence Journal
           </h1>
-          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mb-4">
-            Data-driven analysis of Global startup ecosystem — funding trends, unicorn profiles, founder strategies, and actionable guides updated monthly.
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mb-4 font-serif italic">
+            Data-driven analysis of global startup ecosystem — funding trends, unicorn profiles, founder strategies, and actionable guides updated monthly.
           </p>
-          <div className="flex items-center justify-center gap-4 text-[11px] text-muted-foreground">
-            <span>{BLOG_POSTS.length} In-Depth Reports</span>
+          <div className="flex items-center justify-center gap-4 text-[11px] text-muted-foreground font-mono">
+            <span className="font-bold text-[#C59A2E]">{BLOG_POSTS.length} In-Depth Reports</span>
             <span className="text-border">|</span>
             <span>Updated July 2026</span>
             <span className="text-border">|</span>
-            <span>Free Forever</span>
+            <span>Free Access</span>
           </div>
         </section>
 
