@@ -3,9 +3,9 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight, ChevronLeft, ChevronRight, ShieldCheck, CheckCircle2, Award } from "lucide-react"
-import { 
-  getFounderBySlug, 
-  getRelatedFounders, 
+import {
+  getFounderBySlug,
+  getRelatedFounders,
   getAdjacentFounders,
   getAllFounders,
   getCategorySlug
@@ -25,18 +25,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const founder = getFounderBySlug(slug)
-  
+
   if (!founder) return {}
-  
+
   const baseUrl = "https://www.upforge.org"
   const url = `${baseUrl}/founder-stories/${slug}`
-  
+
   const cardImg = founder.cardImage || founder.imageUrl
   const newsImg = founder.newsImage || founder.imageUrl
-  
+
   const title = `${founder.name} — ${founder.role} of ${founder.company} | UpForge Founder Story`
   const description = `${founder.oneLiner || founder.deck} Built by ${founder.name} (${founder.company}). Verified on UpForge.`
-  
+
   return {
     title,
     description,
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${founder.country} tech founders 2026`,
       `The Founder Chronicle UpForge`
     ],
-    alternates: { 
+    alternates: {
       canonical: url,
       languages: {
         'en': url,
@@ -101,16 +101,16 @@ export default async function FounderPage({ params }: PageProps) {
   const { slug } = await params
   const founder = getFounderBySlug(slug)
   const baseUrl = "https://www.upforge.org"
-  
+
   if (!founder) notFound()
-  
+
   const categorySlug = getCategorySlug(founder.category)
   const relatedFounders = getRelatedFounders(slug, 4)
   const { prev, next } = getAdjacentFounders(slug)
-  
+
   const cardImg = founder.cardImage || founder.imageUrl
   const newsImg = founder.newsImage || founder.imageUrl
-  
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -123,7 +123,7 @@ export default async function FounderPage({ params }: PageProps) {
     "image": cardImg,
     "description": founder.oneLiner || founder.deck
   }
-  
+
   const newsArticleSchema = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -165,7 +165,7 @@ export default async function FounderPage({ params }: PageProps) {
       }
     }
   }
-  
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -196,13 +196,13 @@ export default async function FounderPage({ params }: PageProps) {
       }
     ]
   }
-  
+
   return (
     <>
       <JsonLd data={[personSchema, newsArticleSchema, breadcrumbSchema]} />
-      
+
       <div className="bg-[#09090b] min-h-screen text-zinc-100 selection:bg-amber-500/30 selection:text-amber-200">
-        
+
         {/* Editorial Sub-Header / Breadcrumbs Bar */}
         <div className="border-b border-zinc-800 bg-[#09090b]/80 backdrop-blur-md sticky top-0 z-40">
           <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-3 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-zinc-400">
@@ -218,7 +218,7 @@ export default async function FounderPage({ params }: PageProps) {
               <span>/</span>
               <span className="text-zinc-200 font-semibold truncate max-w-[200px] sm:max-w-none">{founder.name}</span>
             </nav>
-            
+
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold tracking-wider border border-emerald-500/20">
                 <CheckCircle2 className="w-3 h-3" />
@@ -232,14 +232,14 @@ export default async function FounderPage({ params }: PageProps) {
 
         {/* Main Editorial Masthead Section */}
         <main className="max-w-[1300px] mx-auto px-4 md:px-8 pt-8 pb-20">
-          
+
           <div className="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 pb-16 border-b border-zinc-800">
-            
+
             {/* Left Column — Main Story & Header */}
             <div>
               {/* Category Eyebrow & UFRN Badge */}
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <Link 
+                <Link
                   href={`/founder-stories/category/${categorySlug}`}
                   className="text-[11px] font-mono font-black uppercase tracking-[0.2em] px-3.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
                 >
@@ -365,7 +365,7 @@ export default async function FounderPage({ params }: PageProps) {
             {/* Right Sidebar — Desktop Cover & Intelligence Cards */}
             <aside className="hidden lg:block">
               <div className="sticky top-20 space-y-6">
-                
+
                 {/* 4:5 Magazine Cover Card */}
                 <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
                   <Image
@@ -394,7 +394,7 @@ export default async function FounderPage({ params }: PageProps) {
                       <ShieldCheck className="w-4 h-4" /> VERIFIED
                     </span>
                   </div>
-                  
+
                   <div className="space-y-3 font-mono text-xs">
                     <div className="flex justify-between">
                       <span className="text-zinc-500">UFRN Code</span>
@@ -501,7 +501,7 @@ export default async function FounderPage({ params }: PageProps) {
           {/* Prev / Next Founder Pagination Links */}
           <div className="flex items-center justify-between gap-4 mt-12 py-6 border-t border-b border-zinc-800 font-mono text-xs">
             {prev ? (
-              <Link 
+              <Link
                 href={`/founder-stories/${prev.slug}`}
                 className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors truncate max-w-[45%]"
               >
@@ -515,7 +515,7 @@ export default async function FounderPage({ params }: PageProps) {
             </Link>
 
             {next ? (
-              <Link 
+              <Link
                 href={`/founder-stories/${next.slug}`}
                 className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors truncate max-w-[45%]"
               >
