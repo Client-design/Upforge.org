@@ -5,7 +5,7 @@ import { FOUNDERS } from "@/lib/founders/data"
 import { TrustStrip } from "@/components/homepage/TrustStrip"
 import { ForbesIndex } from "@/components/forbes/forbes-index"
 import { StartupIntelligenceJournal } from "@/components/forbes/startup-intelligence-journal"
-import { ArrowRight, ShieldCheck, CheckCircle2, Award, ChevronRight, Rss } from "lucide-react"
+import { ArrowRight, CheckCircle2, Rss } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -37,7 +37,6 @@ export async function generateMetadata(): Promise<Metadata> {
       "founder database",
       "verified founders",
       "UpForge Founder Chronicle",
-      "UFRN verification",
       "global startup database",
       "startup intelligence",
       "Michael Truell Cursor founder"
@@ -79,24 +78,26 @@ export default async function HomePage() {
 
   const indexStartups = sortedStartups.slice(0, 12)
 
-  // FOUNDERS is already sorted by publishedAt descending
-  const heroFounder = FOUNDERS[0] // Michael Truell (2026-07-28)
+  // FOUNDERS is sorted by publishedAt descending
+  const heroFounder = FOUNDERS[0] // Michael Truell
   const latestFoundersStrip = FOUNDERS.slice(1, 7)
 
   return (
-    <div className="bg-[#09090b] min-h-screen text-zinc-100 selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="bg-background text-foreground min-h-screen selection:bg-amber-500/20 selection:text-amber-700 dark:selection:text-amber-200">
       
       {/* Editorial Masthead Bar */}
-      <header className="border-b border-zinc-800 bg-[#09090b]/90 backdrop-blur-md">
-        <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-3 flex items-center justify-between font-mono text-xs text-zinc-400">
-          <div className="flex items-center gap-3">
+      <header className="border-b border-border bg-background/95 backdrop-blur-md">
+        <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
+          <div className="flex items-center gap-2.5">
             <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-            <span className="font-bold text-zinc-200 uppercase tracking-widest text-[11px]">FOUNDER CHRONICLE • EDITION NO. 26</span>
+            <span className="font-bold text-foreground uppercase tracking-widest text-[10px] sm:text-[11px]">
+              FOUNDER CHRONICLE • EDITION NO. 26
+            </span>
           </div>
           <div className="flex items-center gap-4 text-[11px]">
             <span className="hidden sm:inline">GLOBAL REGISTRY</span>
-            <span className="hidden sm:inline text-zinc-700">•</span>
-            <Link href="/founder-stories/feed.xml" className="flex items-center gap-1 text-zinc-400 hover:text-amber-400 transition-colors">
+            <span className="hidden sm:inline text-border">•</span>
+            <Link href="/founder-stories/feed.xml" className="flex items-center gap-1 text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               <Rss className="w-3.5 h-3.5 text-amber-500" />
               <span>RSS Feed</span>
             </Link>
@@ -105,22 +106,22 @@ export default async function HomePage() {
       </header>
 
       {/* Main Magazine Container */}
-      <main className="max-w-[1300px] mx-auto px-4 md:px-8 pt-8 pb-20">
+      <main className="max-w-[1300px] mx-auto px-4 md:px-8 pt-6 sm:pt-8 pb-20">
         
         {/* ========================================================================= */}
         {/* SECTION 1: HERO = LATEST FOUNDER ENTRY (Magazine Cover Treatment)          */}
         {/* ========================================================================= */}
         {heroFounder && (
-          <section className="mb-16 border-b border-zinc-800 pb-16">
+          <section className="mb-12 sm:mb-16 border-b border-border pb-12 sm:pb-16">
             <Link 
               href={`/founder-stories/${heroFounder.slug}`}
-              className="group grid lg:grid-cols-12 gap-8 lg:gap-12 rounded-3xl border border-zinc-800/90 bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-zinc-950/80 p-6 sm:p-10 hover:border-amber-500/50 transition-all duration-500 shadow-2xl overflow-hidden relative"
+              className="group grid lg:grid-cols-12 gap-6 lg:gap-10 rounded-2xl sm:rounded-3xl border border-border bg-card p-4 sm:p-8 hover:border-amber-500/50 transition-all duration-300 shadow-xl overflow-hidden relative"
             >
               {/* Background ambient glow */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 blur-3xl pointer-events-none rounded-full" />
               
               {/* Left Column: 4:5 Portrait Magazine Cover Image */}
-              <div className="lg:col-span-5 relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl">
+              <div className="lg:col-span-5 relative aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-muted border border-border shadow-md">
                 <Image
                   src={heroFounder.cardImage || heroFounder.imageUrl}
                   alt={`${heroFounder.name}, ${heroFounder.role} of ${heroFounder.company} — UpForge Verified Founder`}
@@ -129,72 +130,72 @@ export default async function HomePage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 
                 {/* Cover Tag */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <span className="px-3 py-1 text-zinc-950 bg-amber-400 font-mono text-[10px] font-black uppercase tracking-widest rounded shadow-md">
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                  <span className="px-2.5 py-1 text-black bg-amber-400 font-mono text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded shadow-md">
                     COVER STORY
                   </span>
                   {heroFounder.verified && (
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-400 bg-zinc-950/90 px-2.5 py-1 rounded border border-emerald-500/30 backdrop-blur-xs">
+                    <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-mono font-bold text-emerald-300 bg-black/80 px-2 py-0.5 rounded border border-emerald-500/30 backdrop-blur-xs">
                       <CheckCircle2 className="w-3 h-3" /> VERIFIED
                     </span>
                   )}
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 text-zinc-200 font-mono text-xs">
-                  <p className="text-amber-400 font-bold uppercase tracking-wider text-[11px]">{heroFounder.category || "AI & TECHNOLOGY"}</p>
+                <div className="absolute bottom-3 left-3 right-3 text-white font-mono text-xs">
+                  <p className="text-amber-300 font-bold uppercase tracking-wider text-[10px] sm:text-[11px]">{heroFounder.category || "AI & TECHNOLOGY"}</p>
                 </div>
               </div>
 
               {/* Right Column: Magazine Masthead & Pull Quote */}
-              <div className="lg:col-span-7 flex flex-col justify-between py-2 space-y-6">
+              <div className="lg:col-span-7 flex flex-col justify-between py-1 space-y-4 sm:space-y-6">
                 <div>
                   {/* Eyebrow Label */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-[0.25em] text-amber-400 px-3 py-1 rounded bg-amber-500/10 border border-amber-500/20">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400 px-2.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
                       {heroFounder.category || "AI & TECHNOLOGY"}
                     </span>
-                    <span className="font-mono text-xs text-zinc-400">
-                      UFRN Code: <strong className="text-zinc-200">{heroFounder.ufrnCode || "UF-2026-US-XXXXX"}</strong>
+                    <span className="font-mono text-[11px] text-muted-foreground">
+                      FEATURED PROFILE
                     </span>
                   </div>
 
-                  {/* Giant Serif Name Headline */}
-                  <h1 className="font-serif font-black text-4xl sm:text-5xl lg:text-6xl text-zinc-50 leading-[1.04] tracking-tight group-hover:text-amber-400 transition-colors mb-3">
+                  {/* Serif Name Headline */}
+                  <h1 className="font-serif font-black text-2xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] tracking-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors mb-2">
                     {heroFounder.name}
                   </h1>
 
                   {/* Role / Company Subheading */}
-                  <p className="font-sans font-bold text-xl sm:text-2xl text-amber-400/90 tracking-wide mb-6">
+                  <p className="font-sans font-bold text-lg sm:text-xl text-amber-600 dark:text-amber-400/90 tracking-wide mb-4">
                     {heroFounder.role} of {heroFounder.company}
                   </p>
 
                   {/* 1-2 Line Pull Quote Description */}
-                  <div className="p-6 rounded-2xl bg-zinc-900/90 border border-zinc-800 backdrop-blur-sm mb-6">
-                    <blockquote className="font-serif italic text-xl sm:text-2xl text-zinc-200 leading-relaxed">
+                  <div className="p-4 sm:p-5 rounded-xl bg-muted/60 border border-border backdrop-blur-sm mb-4">
+                    <blockquote className="font-serif italic text-base sm:text-xl text-foreground leading-relaxed">
                       "{heroFounder.oneLiner || heroFounder.deck}"
                     </blockquote>
                   </div>
 
                   {heroFounder.headline && (
-                    <p className="font-serif text-base text-zinc-400 leading-relaxed max-w-2xl line-clamp-3">
+                    <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl line-clamp-2 sm:line-clamp-3">
                       {heroFounder.headline}
                     </p>
                   )}
                 </div>
 
                 {/* Bottom Action Strip */}
-                <div className="pt-6 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-                  <div className="flex items-center gap-3 text-zinc-400">
+                <div className="pt-4 sm:pt-6 border-t border-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+                  <div className="flex items-center gap-2 text-muted-foreground text-[11px]">
                     <span>Published {heroFounder.publishedAt}</span>
                     <span>•</span>
                     <span>{heroFounder.city || "San Francisco"}</span>
                   </div>
 
-                  <span className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all group-hover:translate-x-1 shadow-lg">
-                    Read Full Cover Story <ArrowRight className="w-4 h-4" />
+                  <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-foreground text-background font-bold text-xs uppercase tracking-wider transition-all group-hover:translate-x-1 shadow-md">
+                    Read Full Story <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </div>
@@ -205,65 +206,65 @@ export default async function HomePage() {
         {/* ========================================================================= */}
         {/* SECTION 2: LATEST FOUNDERS HORIZONTAL STRIP                               */}
         {/* ========================================================================= */}
-        <section className="mb-20">
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-zinc-800">
-            <div className="flex items-center gap-3">
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-100">
+        <section className="mb-14 sm:mb-20">
+          <div className="flex items-center justify-between mb-6 pb-2.5 border-b border-border">
+            <div className="flex items-center gap-2.5">
+              <h2 className="font-serif text-xl sm:text-3xl font-bold text-foreground">
                 Latest Verified Founders
               </h2>
-              <span className="font-mono text-xs px-2.5 py-0.5 rounded bg-zinc-800 text-amber-400 font-semibold">
+              <span className="font-mono text-[10px] sm:text-xs px-2 py-0.5 rounded bg-muted text-amber-600 dark:text-amber-400 font-semibold border border-border">
                 Updated Daily
               </span>
             </div>
 
             <Link
               href="/founder-stories"
-              className="font-mono text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 uppercase tracking-wider"
+              className="font-mono text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
-              View All Founder Stories <ArrowRight className="w-3.5 h-3.5" />
+              View All Stories <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-5">
             {latestFoundersStrip.map((f) => (
               <Link
                 key={f.id}
                 href={`/founder-stories/${f.slug}`}
-                className="group rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden hover:border-amber-500/40 transition-all duration-300 flex flex-col shadow-lg"
+                className="group rounded-xl border border-border bg-card overflow-hidden hover:border-amber-500/40 transition-all duration-300 flex flex-col shadow-sm"
               >
-                <div className="relative aspect-[4/5] bg-zinc-950 overflow-hidden">
+                <div className="relative aspect-[4/5] bg-muted overflow-hidden">
                   <Image
                     src={f.cardImage || f.imageUrl}
                     alt={`${f.name}, ${f.role} of ${f.company} — UpForge Verified Founder`}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 16vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 16vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
                   
                   <div className="absolute top-2 left-2 right-2 flex items-center justify-between">
-                    <span className="text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-zinc-950/90 text-amber-400 border border-zinc-800">
+                    <span className="text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-black/80 text-amber-300 border border-zinc-800">
                       {f.category || "FOUNDER"}
                     </span>
                     {f.verified && (
-                      <span className="text-emerald-400 bg-zinc-950/90 p-1 rounded border border-emerald-500/30">
+                      <span className="text-emerald-300 bg-black/80 p-0.5 rounded border border-emerald-500/30">
                         <CheckCircle2 className="w-2.5 h-2.5" />
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="p-3.5 flex-1 flex flex-col justify-between space-y-2">
+                <div className="p-3 flex-1 flex flex-col justify-between space-y-1.5">
                   <div>
-                    <h3 className="font-serif font-bold text-sm text-zinc-100 group-hover:text-amber-400 transition-colors line-clamp-1">
+                    <h3 className="font-serif font-bold text-xs sm:text-sm text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors line-clamp-1">
                       {f.name}
                     </h3>
-                    <p className="font-mono text-[10px] text-zinc-400 line-clamp-1">
+                    <p className="font-mono text-[10px] text-muted-foreground line-clamp-1">
                       {f.role} • {f.company}
                     </p>
                   </div>
-                  <p className="font-serif text-xs text-zinc-400 line-clamp-2 italic">
+                  <p className="font-serif text-[11px] sm:text-xs text-muted-foreground line-clamp-2 italic">
                     "{f.oneLiner || f.deck}"
                   </p>
                 </div>
@@ -273,23 +274,23 @@ export default async function HomePage() {
         </section>
 
         {/* Trust Strip */}
-        <div className="mb-20">
+        <div className="mb-14 sm:mb-20">
           <TrustStrip />
         </div>
 
         {/* ========================================================================= */}
         {/* SECTION 3: GLOBAL STARTUP REGISTRY INDEX                                  */}
         {/* ========================================================================= */}
-        <section className="mb-20">
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-zinc-800">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-100">
+        <section className="mb-14 sm:mb-20">
+          <div className="flex items-center justify-between mb-6 pb-2.5 border-b border-border">
+            <h2 className="font-serif text-xl sm:text-3xl font-bold text-foreground">
               Verified Global Startup Index
             </h2>
             <Link
               href="/registry"
-              className="font-mono text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 uppercase tracking-wider"
+              className="font-mono text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
-              Explore Full Registry <ArrowRight className="w-3.5 h-3.5" />
+              Explore Full Registry <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
           </div>
 
@@ -299,28 +300,28 @@ export default async function HomePage() {
         {/* ========================================================================= */}
         {/* SECTION 4: STARTUP INTELLIGENCE JOURNAL                                    */}
         {/* ========================================================================= */}
-        <section className="mb-20">
+        <section className="mb-14 sm:mb-20">
           <StartupIntelligenceJournal />
         </section>
 
       </main>
 
       {/* Register Startup Banner */}
-      <section className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-950 border-t border-zinc-800 py-16">
+      <section className="bg-muted/40 border-t border-border py-12 sm:py-16">
         <div className="max-w-[1300px] mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 text-center md:text-left">
             <div>
-              <span className="text-amber-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">VERIFIED GLOBAL REGISTRY</span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-black text-zinc-50 mb-3">
+              <span className="text-amber-600 dark:text-amber-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">VERIFIED GLOBAL REGISTRY</span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-black text-foreground mb-2 sm:mb-3">
                 Register Your Startup Globally
               </h2>
-              <p className="text-zinc-400 text-base max-w-xl">
-                Get your official UFRN credential. Appear in the global founder database. Attract international investors. Takes 5 minutes.
+              <p className="text-muted-foreground text-sm sm:text-base max-w-xl">
+                Get your official UFRN credential. Appear in the global founder database. Attract international investors. Free submission.
               </p>
             </div>
             <Link
               href="/submit"
-              className="font-mono font-bold text-xs text-zinc-950 bg-amber-500 hover:bg-amber-400 px-8 py-4 rounded-xl uppercase tracking-widest transition-all shrink-0 whitespace-nowrap shadow-xl"
+              className="font-mono font-bold text-xs text-background bg-foreground hover:opacity-90 px-6 sm:px-8 py-3.5 rounded-xl uppercase tracking-widest transition-all shrink-0 whitespace-nowrap shadow-lg"
             >
               Apply For Listing →
             </Link>
