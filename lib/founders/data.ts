@@ -2222,12 +2222,14 @@ export const FOUNDERS: Founder[] = [
     
     stats: [
       { label: "Valuation", value: "$5.5B" },
-      { label: "Total Raised", value: "$970M" },
+      { label: "Total Raised", value: "$970M" }
+    ],
     createdAt: "2026-05-01",
     updatedAt: "2026-05-01",
     publishedAt: "2026-05-01"
   }
 ]
+
 
 // Always normalize fields & sort by publishedAt descending
 FOUNDERS.forEach(f => {
