@@ -126,14 +126,16 @@ function TypingDots() {
 
 // ─── EXECUTIVE QUICK PROMPTS ──────────────────────────────────────────────────
 
-const FORBES_PROMPTS = [
+const QUICK_PROMPTS = [
   { q: "How do startups get UFRN verification?", cat: "UFRN Lookup", icon: ShieldCheck },
-  { q: "Tell me about Michael Truell & Cursor", cat: "Cover Story", icon: BookOpen },
+  { q: "Tell me about Michael Truell & Cursor", cat: "Founder Story", icon: BookOpen },
   { q: "What are global SaaS valuation benchmarks?", cat: "Valuations", icon: TrendingUp },
   { q: "How do I list my startup on UpForge?", cat: "Registry", icon: Compass },
 ]
 
-// ─── MAIN FORBES CHATBOT COMPONENT ───────────────────────────────────────────
+const INITIAL_MESSAGE = "Welcome to **UpForge AI Intelligence**.\n\nAsk me anything about verified global startups, founder profiles, market benchmarks, or UFRN credentials."
+
+// ─── MAIN CLEAN CHATBOT COMPONENT ─────────────────────────────────────────────
 
 export function Chatbot() {
   const [isOpen, setIsOpen]       = useState(false)
@@ -143,9 +145,8 @@ export function Chatbot() {
   const [badge, setBadge]         = useState(0)
   const [msgs, setMsgs]           = useState<Message[]>([{
     role: "assistant",
-    content: "Welcome to **UpForge Intelligence** — Forbes-grade Global Startup & Founder AI Analyst.\n\nI provide verified intelligence on:\n- **Startup Registry & UFRN Credentials**\n- **Founder Stories & Executive Profiles**\n- **Global VC Funding & Valuation Benchmarks**\n\nHow may I assist your research today?",
+    content: INITIAL_MESSAGE,
   }])
-  const [newIdxs, setNewIdxs] = useState<Set<number>>(new Set())
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef  = useRef<HTMLInputElement>(null)
@@ -166,9 +167,7 @@ export function Chatbot() {
     const msg = (text ?? input).trim()
     if (!msg || loading) return
     const userMsg: Message = { role: "user", content: msg }
-    const nextIdx = msgs.length + 1
     setMsgs(p => [...p, userMsg])
-    setNewIdxs(p => new Set(p).add(msgs.length))
     setInput("")
     setLoading(true)
     try {
@@ -180,7 +179,6 @@ export function Chatbot() {
       const data = await res.json()
       const reply = data.message ?? data.error ?? "Couldn't process request. Please try again."
       setMsgs(p => [...p, { role: "assistant", content: reply }])
-      setNewIdxs(p => new Set(p).add(nextIdx))
       if (!isOpen) setBadge(c => c + 1)
     } catch {
       setMsgs(p => [...p, { role: "assistant", content: "Network issue — please check connection." }])
@@ -190,11 +188,7 @@ export function Chatbot() {
   }, [input, loading, msgs, isOpen])
 
   const reset = () => {
-    setMsgs([{
-      role: "assistant",
-      content: "Welcome to **UpForge Intelligence** — Forbes-grade Global Startup & Founder AI Analyst.\n\nI provide verified intelligence on:\n- **Startup Registry & UFRN Credentials**\n- **Founder Stories & Executive Profiles**\n- **Global VC Funding & Valuation Benchmarks**\n\nHow may I assist your research today?",
-    }])
-    setNewIdxs(new Set())
+    setMsgs([{ role: "assistant", content: INITIAL_MESSAGE }])
     setInput("")
   }
 
@@ -204,12 +198,12 @@ export function Chatbot() {
 
         {/* ── INTELLIGENCE PANEL ───────────────────────────────────── */}
         {isOpen && (
-          <div className={`mb-4 rounded-2xl w-[min(92vw,380px)] ${minimized ? 'h-auto' : 'h-[min(560px,80vh)]'} flex flex-col overflow-hidden bg-background border border-border shadow-2xl animate-in fade-in zoom-in-95 duration-200 pointer-events-auto`}>
+          <div className={`mb-4 rounded-2xl w-[min(92vw,380px)] ${minimized ? 'h-auto' : 'h-[min(540px,78vh)]'} flex flex-col overflow-hidden bg-background border border-border shadow-2xl animate-in fade-in zoom-in-95 duration-200 pointer-events-auto`}>
 
-            {/* Forbes Header Masthead */}
+            {/* Premium Editorial Header */}
             <div className="bg-foreground text-background shrink-0 px-4 py-3 border-b border-border flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-amber-500/40 bg-black shrink-0">
+                <div className="relative w-7 h-7 rounded-lg overflow-hidden border border-amber-500/40 bg-black shrink-0">
                   <Image src="/logo.jpg" alt="UpForge AI" fill className="object-cover" priority />
                 </div>
                 <div className="flex flex-col">
@@ -218,12 +212,12 @@ export function Chatbot() {
                       UpForge AI
                     </span>
                     <span className="text-[8px] font-mono font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500 text-black">
-                      FORBES AI
+                      ANALYST AI
                     </span>
                   </div>
                   <span className="text-[10px] font-mono text-muted-foreground opacity-80 mt-0.5 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Global Intelligence Desk
+                    Startup Intelligence Desk
                   </span>
                 </div>
               </div>
@@ -302,15 +296,15 @@ export function Chatbot() {
                   )}
                 </div>
 
-                {/* Forbes Executive Quick Action Shortcuts */}
+                {/* Executive Quick Action Shortcuts */}
                 {msgs.length === 1 && (
                   <div className="px-3.5 py-3 border-t border-border bg-muted/40 shrink-0">
                     <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-1.5">
                       <Sparkles className="w-3 h-3 text-amber-500" />
-                      EXECUTIVE QUERY SHORTCUTS
+                      QUICK QUERIES
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                      {FORBES_PROMPTS.map((p, idx) => {
+                      {QUICK_PROMPTS.map((p, idx) => {
                         const Icon = p.icon
                         return (
                           <button
@@ -346,20 +340,20 @@ export function Chatbot() {
                       value={input}
                       disabled={loading}
                       onChange={e => setInput(e.target.value)}
-                      placeholder="Ask Forbes AI about startups, founders..."
+                      placeholder="Ask UpForge AI about startups, founders..."
                       aria-label="Message UpForge AI"
-                      className="flex-1 px-3.5 py-2.5 text-xs font-serif bg-muted/60 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-amber-500 transition-colors"
+                      className="flex-1 px-3.5 py-2 text-xs font-serif bg-muted/60 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-amber-500 transition-colors"
                     />
                     <button
                       type="submit"
                       disabled={loading || !input.trim()}
                       aria-label="Send message"
-                      className="w-10 h-10 shrink-0 rounded-xl bg-foreground text-background flex items-center justify-center border border-foreground hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-xs cursor-pointer"
+                      className="w-9 h-9 shrink-0 rounded-xl bg-foreground text-background flex items-center justify-center border border-foreground hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-xs cursor-pointer"
                     >
                       {loading ? (
-                        <Loader2 className="w-4 h-4 animate-spin text-background" />
+                        <Loader2 className="w-3.5 h-3.5 animate-spin text-background" />
                       ) : (
-                        <Send className="w-4 h-4" />
+                        <Send className="w-3.5 h-3.5" />
                       )}
                     </button>
                   </form>
@@ -380,7 +374,7 @@ export function Chatbot() {
         {/* ── FLOATING TRIGGER FAB ───────────────────────────────── */}
         <button
           onClick={() => { setIsOpen(v => !v); setMinimized(false) }}
-          aria-label="Open UpForge Forbes AI Intelligence Assistant"
+          aria-label="Open UpForge AI Intelligence Assistant"
           className="w-13 h-13 rounded-full shrink-0 cursor-pointer overflow-hidden bg-foreground text-background border-2 border-amber-500/60 shadow-2xl flex items-center justify-center relative transition-all duration-300 hover:scale-105 pointer-events-auto touch-manipulation group"
         >
           {isOpen ? (
