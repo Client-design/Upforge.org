@@ -2231,9 +2231,11 @@ export const FOUNDERS: Founder[] = [
     updatedAt: "2026-05-01",
     publishedAt: "2026-05-01"
   }
-  
+]
+
 // Always normalize fields & sort by publishedAt descending
 FOUNDERS.forEach(f => {
+
   if (!f.publishedAt) f.publishedAt = f.createdAt || "2026-04-01"
   if (!f.cardImage) f.cardImage = f.imageUrl
   if (!f.newsImage) f.newsImage = f.imageUrl
