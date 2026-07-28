@@ -14,6 +14,8 @@ import {
   Youtube,
 } from "lucide-react";
 
+import { FOUNDERS } from "@/lib/founders/data";
+
 // Custom SVG for X (formerly Twitter)
 function XIcon({ size = 18 }: { size?: number }) {
   return (
@@ -60,6 +62,7 @@ const FOOTER_COLUMNS = [
       { label: "Startup Research", href: "/research" },
       { label: "Submit Startup", href: "/submit" },
       { label: "Newsletter", href: "/newsletter" },
+      { label: "RSS Feed (XML)", href: "/founder-stories/feed.xml" },
     ],
   },
   {
@@ -131,6 +134,7 @@ const TRUST_ITEMS = [
   { icon: Shield, label: "Independent Registry" },
   { icon: BadgeCheck, label: "Verified Startup Data" },
   { icon: Globe, label: "Global Coverage" },
+  { icon: BadgeCheck, label: "Trustpilot Verified", href: "https://www.trustpilot.com/review/upforge.org" },
 ];
 
 export function Footer() {
@@ -156,13 +160,28 @@ export function Footer() {
         {/* TRUST STRIP */}
         <div className="border-b border-border bg-background/95 backdrop-blur-sm">
           <div className="max-w-[1400px] mx-auto px-6 py-3 flex flex-wrap gap-6 justify-center lg:justify-between">
-            {TRUST_ITEMS.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2">
-                <Icon size={13} className="text-[var(--accent-gold)]" />
-                <span className="text-[11px] text-muted-foreground tracking-wider uppercase">
-                  {label}
-                </span>
-              </div>
+            {TRUST_ITEMS.map(({ icon: Icon, label, href }) => (
+              href ? (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[var(--accent-gold)] transition-colors"
+                >
+                  <Icon size={13} className="text-emerald-500" />
+                  <span className="text-[11px] text-muted-foreground hover:text-foreground tracking-wider uppercase font-semibold">
+                    {label} ↗
+                  </span>
+                </a>
+              ) : (
+                <div key={label} className="flex items-center gap-2">
+                  <Icon size={13} className="text-[var(--accent-gold)]" />
+                  <span className="text-[11px] text-muted-foreground tracking-wider uppercase">
+                    {label}
+                  </span>
+                </div>
+              )
             ))}
           </div>
         </div>
@@ -270,26 +289,16 @@ export function Footer() {
                 Latest Founders
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/founder-stories/michael-truell-anysphere-cursor" className="text-[12px] text-muted-foreground hover:text-foreground font-semibold block truncate">
-                    Michael Truell <span className="text-[10px] text-amber-500 font-normal">Cursor</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/founder-stories/aravind-srinivas-perplexity" className="text-[12px] text-muted-foreground hover:text-foreground block truncate">
-                    Aravind Srinivas <span className="text-[10px] text-zinc-500">Perplexity</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/founder-stories/sam-altman-openai" className="text-[12px] text-muted-foreground hover:text-foreground block truncate">
-                    Sam Altman <span className="text-[10px] text-zinc-500">OpenAI</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/founder-stories/nik-storonsky-revolut" className="text-[12px] text-muted-foreground hover:text-foreground block truncate">
-                    Nik Storonsky <span className="text-[10px] text-zinc-500">Revolut</span>
-                  </Link>
-                </li>
+                {FOUNDERS.slice(0, 4).map((f) => (
+                  <li key={f.id}>
+                    <Link
+                      href={`/founder-stories/${f.slug}`}
+                      className="text-[12px] text-muted-foreground hover:text-foreground font-semibold block truncate"
+                    >
+                      {f.name} <span className="text-[10px] text-amber-500 font-normal">{f.company}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
