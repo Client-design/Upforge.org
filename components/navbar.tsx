@@ -41,6 +41,7 @@ const MORE_LINKS = {
   ],
   resources: [
     { name: "Founder Stories", href: "/founder-stories", desc: "In-depth founder profiles" },
+    { name: "Category Hubs", href: "/founder-stories#categories", desc: "Browse founders by sector & category" },
     { name: "Submit Startup", href: "/submit", desc: "Get your UFRN credential. Free." },
     { name: "Newsletter", href: "/newsletter", desc: "Weekly startup intelligence digest" },
   ],
@@ -310,6 +311,7 @@ export function Navbar() {
   const links: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "Global Registry", href: "/registry" },
+    { name: "Founder Stories", href: "/founder-stories" },
     { name: "Community", href: "/creators" },
     { name: "Journal", href: "/blog" },
     { name: "About", href: "/about" },
