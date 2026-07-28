@@ -208,9 +208,6 @@ export default async function HomePage() {
               <h2 className="font-serif text-xl sm:text-3xl font-bold text-foreground">
                 Latest Verified Founders
               </h2>
-              <span className="font-mono text-[10px] sm:text-xs px-2 py-0.5 rounded bg-muted text-amber-600 dark:text-amber-400 font-semibold border border-border">
-                Updated Daily
-              </span>
             </div>
 
             <Link
