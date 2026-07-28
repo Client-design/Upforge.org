@@ -262,9 +262,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
+  // Founder Stories dynamic entries
+  const { FOUNDERS, getAllCategories } = await import("@/lib/founders/data")
+  const founderStoryEntries: MetadataRoute.Sitemap = FOUNDERS.map(f => ({
+    url: `${BASE}/founder-stories/${f.slug}`,
+    lastModified: safeDateString(f.publishedAt || f.updatedAt || f.createdAt),
+    changeFrequency: "daily" as const,
+    priority: 0.9,
+  }))
+
+  const founderCategoryEntries: MetadataRoute.Sitemap = getAllCategories().map(cat => ({
+    url: `${BASE}/founder-stories/category/${cat.slug}`,
+    lastModified: safeDateString(JULY_2026_STR),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }))
+
   return [
     ...staticEntries,
     ...founderEntries,
+    ...founderStoryEntries,
+    ...founderCategoryEntries,
     ...categoryEntries,
     ...cityEntries,
     ...startupEntries,
@@ -274,3 +292,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogCategoryEntries,
   ]
 }
+
