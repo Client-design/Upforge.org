@@ -85,8 +85,8 @@ export default async function HomePage() {
   return (
     <div className="bg-background text-foreground min-h-screen selection:bg-amber-500/20 selection:text-amber-700 dark:selection:text-amber-200">
       
-      {/* Editorial Masthead Bar */}
-      <header className="border-b border-border bg-background/95 backdrop-blur-md">
+      {/* Editorial Masthead Bar - Hidden on mobile view */}
+      <header className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md">
         <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
           <div className="flex items-center gap-2.5">
             <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
