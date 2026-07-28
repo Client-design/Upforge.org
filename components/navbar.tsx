@@ -376,28 +376,63 @@ export function Navbar() {
       >
         <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
           
-          {/* BRAND */}
-          <Link 
-            href="/" 
-            className="flex items-center gap-2.5 group shrink-0 touch-manipulation" 
-            onClick={closeAll}
-          >
-            <div className="relative w-8 h-8 overflow-hidden rounded-lg shadow-sm ring-1 ring-border/50 group-hover:ring-foreground/20 transition-all duration-300">
-              <Image
-                src="/logo.jpg"
-                alt="UpForge"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <span
-              className="text-lg tracking-tight text-foreground font-bold"
-              style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+          {/* BRAND + IG PLAYER COVER STORY PILL */}
+          <div className="flex items-center gap-3.5 shrink-0">
+            <Link 
+              href="/" 
+              className="flex items-center gap-2.5 group touch-manipulation" 
+              onClick={closeAll}
             >
-              UpForge
-            </span>
-          </Link>
+              <div className="relative w-8 h-8 overflow-hidden rounded-lg shadow-sm ring-1 ring-border/50 group-hover:ring-foreground/20 transition-all duration-300">
+                <Image
+                  src="/logo.jpg"
+                  alt="UpForge"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="flex flex-col">
+                <span
+                  className="text-lg tracking-tight text-foreground font-bold leading-none"
+                  style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+                >
+                  UpForge
+                </span>
+                <span className="text-[9px] font-mono text-amber-500 font-bold uppercase tracking-widest leading-none mt-0.5">
+                  EDITORIAL
+                </span>
+              </div>
+            </Link>
+
+            {/* IG Player Style Active Story Ring */}
+            <Link
+              href="/founder-stories/michael-truell-anysphere-cursor"
+              className="hidden lg:flex items-center gap-2 pl-3 border-l border-border/50 group/story"
+              title="Read Cover Story: Michael Truell (Cursor)"
+            >
+              <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-amber-300 shadow-sm animate-pulse">
+                <div className="relative w-6 h-6 rounded-full overflow-hidden border border-background">
+                  <Image
+                    src="https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg"
+                    alt="Michael Truell — Cover Story"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col text-[10px] font-mono">
+                <span className="text-amber-500 font-bold tracking-wider uppercase flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                  COVER STORY
+                </span>
+                <span className="text-muted-foreground group-hover/story:text-foreground transition-colors truncate max-w-[110px]">
+                  Michael Truell
+                </span>
+              </div>
+            </Link>
+          </div>
+
 
           {/* DESKTOP SEARCH */}
           <div className="hidden md:flex items-center flex-1 max-w-md mx-8 relative" ref={dropdownRef}>
