@@ -263,7 +263,37 @@ export function Footer() {
                 </ul>
               </div>
             ))}
+
+            {/* LATEST FOUNDER STORIES COLUMN */}
+            <div>
+              <h3 className="text-[11px] uppercase tracking-widest font-semibold text-[#C59A2E] mb-4">
+                Latest Founders
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/founder-stories/michael-truell-anysphere-cursor" className="text-[12px] text-muted-foreground hover:text-foreground font-semibold block truncate">
+                    Michael Truell <span className="text-[10px] text-amber-500 font-normal">Cursor</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/founder-stories/aravind-srinivas-perplexity" className="text-[12px] text-muted-foreground hover:text-foreground block truncate">
+                    Aravind Srinivas <span className="text-[10px] text-zinc-500">Perplexity</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/founder-stories/sam-altman-openai" className="text-[12px] text-muted-foreground hover:text-foreground block truncate">
+                    Sam Altman <span className="text-[10px] text-zinc-500">OpenAI</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/founder-stories/nik-storonsky-revolut" className="text-[12px] text-muted-foreground hover:text-foreground block truncate">
+                    Nik Storonsky <span className="text-[10px] text-zinc-500">Revolut</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
+
 
           {/* GLOBAL REGISTRY BANNER */}
           <div className="py-6 border-b border-border flex flex-col sm:flex-row items-center justify-between gap-4 bg-muted/50">
