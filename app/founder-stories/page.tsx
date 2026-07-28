@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react"
-import { FOUNDERS, getAllCategories } from "@/lib/founders/data"
-import { FounderCard } from "@/components/founder-stories/founder-card"
+import { ArrowRight, CheckCircle2, ShieldCheck, MapPin } from "lucide-react"
+import { FOUNDERS, getAllCountries, getCountryFlag } from "@/lib/founders/data"
 import { FounderNewsletter } from "@/components/founder-stories/founder-newsletter"
 import { JsonLd } from "@/components/seo/json-ld"
+import { CountryFilterSection } from "@/components/founder-stories/country-filter-section"
 
 export const revalidate = 3600
 
@@ -13,8 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = "https://www.upforge.org/founder-stories"
 
   return {
-    title: "Founder Stories & Intelligence — The Founder Chronicle | UpForge",
-    description: "Deep-dive editorial profiles of top tech founders, CEOs, and unicorn builders. Verified credentials, leadership analysis, and real stories.",
+    title: "Verified Founder Intelligence — The Founder Chronicle | UpForge",
+    description: "Deep-dive editorial profiles of the world's most consequential founders, CEOs, and technology pioneers. Verified credentials and leadership analysis.",
     keywords: [
       "founder stories", "startup founders", "entrepreneur profiles",
       "global unicorn founders", "founder interviews", "AI founders",
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: "Founder Stories & Intelligence — The Founder Chronicle | UpForge",
+      title: "Verified Founder Intelligence — The Founder Chronicle | UpForge",
       description: "Editorial deep-dives into the founders building tomorrow's economy.",
       url: canonicalUrl,
       siteName: "UpForge",
@@ -47,9 +47,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function FounderStoriesPage() {
-  const categories = getAllCategories()
+  const countries = getAllCountries()
   const latestHeroFounder = FOUNDERS[0]
-  const restFounders = FOUNDERS.slice(1)
 
   const collectionSchema = {
     "@context": "https://schema.org",
@@ -66,97 +65,45 @@ export default async function FounderStoriesPage() {
     }))
   }
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.upforge.org"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Founder Stories",
-        "item": "https://www.upforge.org/founder-stories"
-      }
-    ]
-  }
-
   return (
     <>
-      <JsonLd data={[collectionSchema, breadcrumbSchema]} />
+      <JsonLd data={collectionSchema} />
 
       <div className="bg-background text-foreground min-h-screen selection:bg-amber-500/20 selection:text-amber-700 dark:selection:text-amber-200">
         
-        {/* Breadcrumb / Top Bar - Hidden on mobile view */}
-        <div className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md sticky top-14 z-30">
-          <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[11px] sm:text-xs">
-              <Link href="/" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Home</Link>
-              <span>/</span>
-              <span className="text-amber-600 dark:text-amber-400 font-semibold">Founder Stories</span>
-            </nav>
-
-            <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-widest hidden sm:inline">
-              FOUNDER CHRONICLE • {FOUNDERS.length} VERIFIED
-            </span>
-          </div>
-        </div>
-
-        <main className="max-w-[1300px] mx-auto px-4 md:px-8 py-6 sm:py-10">
+        <main className="max-w-[1300px] mx-auto px-4 md:px-8 pt-2 sm:pt-4 pb-12 sm:pb-16">
           
-          {/* Header Masthead Banner */}
-          <section className="text-center py-6 border-b border-border mb-8">
+          {/* Header Masthead Banner - Direct start with THE FOUNDER CHRONICLE */}
+          <section className="text-center py-4 sm:py-6 border-b border-border mb-8">
             <span className="inline-block text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-[0.2em] px-3.5 py-1 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 mb-3">
               THE FOUNDER CHRONICLE
             </span>
             <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black text-foreground tracking-tight mb-3">
               Verified Founder Intelligence
             </h1>
-            <p className="font-serif text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="font-serif text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
               Deep-dive editorial profiles of the world's most consequential founders, CEOs, and technology pioneers.
             </p>
-          </section>
 
-          {/* Compact Horizontal Scroll Category Filter Bar */}
-          <section className="mb-10">
-            <div className="flex items-center justify-between mb-3 px-1">
-              <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground font-bold">
-                Filter By Category
-              </h2>
-              <span className="font-mono text-xs text-muted-foreground">
-                {categories.length} Categories ({FOUNDERS.length} Profiles)
+            {/* Institutional Trust Highlights Bar */}
+            <div className="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-3 font-mono text-[11px] text-muted-foreground border-t border-border/40">
+              <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
+                <ShieldCheck className="w-3.5 h-3.5" /> {FOUNDERS.length} VERIFIED PROFILES
               </span>
-            </div>
-            
-            {/* Sleek Horizontal Scrollable Pills */}
-            <div className="relative">
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none snap-x">
-                <Link
-                  href="/founder-stories"
-                  className="shrink-0 px-3.5 py-1.5 rounded-full bg-amber-500 text-black font-mono text-xs font-bold transition-all shadow-sm"
-                >
-                  All ({FOUNDERS.length})
-                </Link>
-                {categories.map((cat) => (
-                  <Link
-                    key={cat.slug}
-                    href={`/founder-stories/category/${cat.slug}`}
-                    className="shrink-0 px-3.5 py-1.5 rounded-full bg-card border border-border text-foreground hover:border-amber-500/50 hover:text-amber-600 dark:hover:text-amber-400 font-mono text-xs transition-all snap-start"
-                  >
-                    {cat.name} <span className="text-muted-foreground font-normal">({cat.count})</span>
-                  </Link>
-                ))}
-              </div>
+              <span>•</span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <MapPin className="w-3.5 h-3.5 text-amber-500" /> {countries.length} GLOBAL INNOVATION HUBS
+              </span>
+              <span className="hidden sm:inline">•</span>
+              <span className="font-medium hidden sm:inline text-amber-600 dark:text-amber-400">
+                INSTITUTIONAL GRADE EDITORIAL
+              </span>
             </div>
           </section>
 
           {/* Featured Cover Story Hero */}
           {latestHeroFounder && (
-            <section className="mb-14">
+            <section className="mb-12">
               <div className="flex items-center gap-3 mb-4 pb-2 border-b border-border">
                 <h2 className="font-mono text-xs uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
@@ -216,7 +163,10 @@ export default async function FounderStoriesPage() {
                   </div>
 
                   <div className="pt-4 border-t border-border flex items-center justify-between font-mono text-xs">
-                    <span className="text-muted-foreground">{latestHeroFounder.city || "San Francisco"} • Est. {latestHeroFounder.founded || "2022"}</span>
+                    <span className="flex items-center gap-1.5 text-muted-foreground">
+                      <span>{getCountryFlag(latestHeroFounder.country)}</span>
+                      <span>{latestHeroFounder.city || "San Francisco"} • Est. {latestHeroFounder.founded || "2022"}</span>
+                    </span>
                     <span className="text-amber-600 dark:text-amber-400 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1 text-xs sm:text-sm">
                       Read Cover Story <ArrowRight className="w-4 h-4" />
                     </span>
@@ -226,22 +176,8 @@ export default async function FounderStoriesPage() {
             </section>
           )}
 
-          {/* Founders Grid Index */}
-          <section className="mb-16 sm:mb-20">
-            <div className="flex items-center gap-3 mb-6 pb-3 border-b border-border">
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-foreground">
-                All Verified Founders
-              </h2>
-              <div className="flex-1" />
-              <span className="font-mono text-xs text-muted-foreground">Sorted by Latest Published</span>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {restFounders.map((f) => (
-                <FounderCard key={f.id} founder={f} />
-              ))}
-            </div>
-          </section>
+          {/* Country Filter & Founders Grid Section */}
+          <CountryFilterSection countries={countries} founders={FOUNDERS} />
 
         </main>
 
