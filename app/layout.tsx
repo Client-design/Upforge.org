@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 })
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
 }
@@ -78,6 +78,14 @@ export async function generateMetadata(): Promise<Metadata> {
     publisher: "UpForge",
     alternates: {
       canonical: baseUrl,
+      types: {
+        "application/rss+xml": [
+          {
+            url: `${baseUrl}/founder-stories/feed.xml`,
+            title: "UpForge Founder Stories RSS Feed",
+          },
+        ],
+      },
     },
     verification: {
       // Add your actual Google Search Console verification token here
