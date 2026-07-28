@@ -2223,10 +2223,6 @@ export const FOUNDERS: Founder[] = [
     stats: [
       { label: "Valuation", value: "$5.5B" },
       { label: "Total Raised", value: "$970M" },
-      { label: "Transformer Paper", value: "130k+ Citations" },
-      { label: "Founded", value: "2019" }
-    ],
-    
     createdAt: "2026-05-01",
     updatedAt: "2026-05-01",
     publishedAt: "2026-05-01"
@@ -2241,7 +2237,6 @@ FOUNDERS.forEach(f => {
   if (!f.newsImage) f.newsImage = f.imageUrl
   if (!f.oneLiner) f.oneLiner = f.deck || f.headline
   if (f.verified === undefined) f.verified = true
-  if (!f.ufrnCode) f.ufrnCode = `UF-2026-${f.countryCode || 'GLOBAL'}-${f.slug.slice(0, 6).toUpperCase()}`
 })
 
 FOUNDERS.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
