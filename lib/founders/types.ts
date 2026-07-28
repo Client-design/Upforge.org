@@ -38,7 +38,12 @@ export interface Founder {
   pullQuoteBy: string
   lesson: string
   stats: FounderStats[]
-  category?: string // ✅ Make sure this exists
+  category?: string
+  oneLiner?: string
+  cardImage?: string
+  newsImage?: string
+  verified?: boolean
+  ufrnCode?: string
   createdAt: string
   updatedAt: string
   publishedAt: string
