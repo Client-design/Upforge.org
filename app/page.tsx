@@ -95,13 +95,9 @@ export default async function HomePage() {
             </span>
           </div>
           <div className="flex items-center gap-4 text-[11px]">
-            <span className="hidden sm:inline">GLOBAL REGISTRY</span>
-            <span className="hidden sm:inline text-border">•</span>
-            <Link href="/founder-stories/feed.xml" className="flex items-center gap-1 text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
-              <Rss className="w-3.5 h-3.5 text-amber-500" />
-              <span>RSS Feed</span>
-            </Link>
+            <span className="hidden sm:inline font-mono font-bold tracking-wider">GLOBAL REGISTRY & INTELLIGENCE</span>
           </div>
+
         </div>
       </header>
 
