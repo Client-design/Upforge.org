@@ -532,3 +532,4 @@ export default async function FounderPage({ params }: PageProps) {
     </>
   )
 }
+
