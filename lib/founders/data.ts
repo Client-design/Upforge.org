@@ -62,67 +62,62 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-07-28"
   },
 
-  // 1. ARAVIND SRINIVAS (New Trending)
-  {
-    id: "aravind-srinivas-2026",
-    slug: "aravind-srinivas-perplexity",
-    edition: 25,
-    featured: true,
-    category: "AI & Search",
-    
-    name: "Aravind Srinivas",
-    nameShort: "Aravind Srinivas",
-    initials: "AS",
-    company: "Perplexity AI",
-    role: "Co-Founder & CEO",
-    
-    city: "San Francisco",
-    country: "United States",
-    countryCode: "US",
-    context: "Reinventing Web Search with AI",
-    
-    valuation: "$9B+",
-    funding: "$1B+",
-    founded: "2022",
-    
-    imageUrl: "https://images.forbesindia.com/blog/wp-content/uploads/2026/05/Aravind-SrinivasGettyImages2181313521-copy-2026-05-e346b495c894f887b068916e2a001fbd.jpg?im=Resize,width=600,aspect=fit,type=normal",
-    accent: "#0052FF",
-    accentBg: "#EBF2FF",
-    accentBorder: "#99C2FF",
-    
-    headline: "He stopped using Google. Then he built an AI answer engine that processes half a billion queries a month.",
-    deck: "Aravind Srinivas turned Perplexity into the premier AI discovery engine, replacing traditional links with direct, cited intelligence.",
-    
-    columns: [
-      {
-        heading: "The Death of Ten Blue Links",
-        body: "Aravind Srinivas realized early that traditional search engines were becoming bloated with ads and SEO spam. Coming from research roles at OpenAI and DeepMind, he co-founded Perplexity AI in 2022. Instead of returning links, Perplexity searches the live web in real time, synthesizing precise answers with verifiable citations. By 2026, it handles over 500 million queries monthly, establishing itself as the default search engine for power users and researchers."
-      },
-      {
-        heading: "David vs. Goliath",
-        body: "Competing directly with Google's $2 trillion monopoly seemed suicidal to silicon valley insiders. Yet Srinivas attracted funding from Jeff Bezos, NVIDIA, and top VCs, boosting Perplexity's valuation to over $9 billion. By offering native publisher revenue sharing and conversational search pro capabilities, Perplexity transformed how knowledge workers discover truth on the web."
-      },
-      {
-        heading: "The Enterprise Intelligence Engine",
-        body: "In 2026, Perplexity Enterprise Pro is deployed across major financial institutions, law firms, and consulting giants. Srinivas envisions a world where query synthesis becomes ambient intelligence, allowing humans to move from searching for information to acting on knowledge instantaneously."
-      }
-    ],
-    
-    pullQuote: "Search shouldn't be about scrolling through pages of ads. It should be about getting instant, accurate, cited truth.",
-    pullQuoteBy: "Aravind Srinivas",
-    lesson: "Focus on solving the user's core curiosity faster than anyone else, even if you are competing against giants.",
-    
-    stats: [
-      { label: "Valuation", value: "$9B+" },
-      { label: "Monthly Queries", value: "500M+" },
-      { label: "Total Raised", value: "$1B+" },
-      { label: "Founded", value: "2022" }
-    ],
-    
-    createdAt: "2026-05-01",
-    updatedAt: "2026-05-01",
-    publishedAt: "2026-05-01"
-  },
+{
+  id: "gavin-uberti-etched-2026",
+  slug: "gavin-uberti-etched-sohu",
+  edition: 26,
+  featured: true,
+  category: "AI & Hardware",
+  name: "Gavin Uberti",
+  nameShort: "Gavin Uberti",
+  initials: "GU",
+  company: "Etched",
+  role: "Co-Founder & CEO",
+  city: "Cupertino",
+  country: "United States",
+  countryCode: "US",
+  context: "Specialized AI ASIC Chips & Transformer Hardware",
+  valuation: "$500M+",
+  funding: "$120M+",
+  founded: "2022",
+  imageUrl: "https://images.upforge.org/Magazine/gavin-uberti-etched-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/gavin-uberti-etched-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/gavin-uberti-etched-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-US-89231",
+  oneLiner: "Etched builds Sohu, a specialized AI chip (ASIC) designed specifically for transformer models to deliver unprecedented inference speed over standard GPUs.",
+  accent: "#2563EB",
+  accentBg: "#EFF6FF",
+  accentBorder: "#93C5FD",
+  headline: "The founder taking on Nvidia by hardcoding transformers directly into silicon. How Gavin Uberti built Sohu to shatter AI inference performance ceilings.",
+  deck: "Etched builds Sohu, a specialized AI chip (ASIC) designed only for transformer models — claiming far higher speed than Nvidia's GPUs for AI inference.",
+  columns: [
+    {
+      heading: "Challenging the General-Purpose GPU Paradigm",
+      body: "Gavin Uberti and his team dropped out of Harvard with a bold, controversial conviction: general-purpose GPUs are fundamentally inefficient for the future of artificial intelligence. While traditional semiconductor giants build chips designed to run any workload, Etched took the ultimate gamble by hardcoding the transformer architecture directly onto microchips.\n\nTheir flagship ASIC chip, Sohu, eliminates unnecessary hardware abstraction layers. By optimizing exclusively for transformers—the backbone of modern LLMs, video generators, and multimodal models—Etched unlocks orders-of-magnitude faster throughput and dramatically lower power consumption."
+    },
+    {
+      heading: "The Silicon Bet on Transformers",
+      body: "Building custom silicon is widely considered one of hardware engineering's highest-risk ventures. However, Sohu's architecture offers a decisive advantage for real-time AI inference, allowing massive models to run at blazing speeds previously thought impossible on standard hardware clusters.\n\nAs AI deployments shift heavily from model training to large-scale operational inference, Etched provides giant tech enterprise workloads, frontier labs, and cloud providers with a crucial alternative to compute bottlenecks and sky-high chip costs."
+    },
+    {
+      heading: "Building the Next Semiconductor Giant",
+      body: "Backed by prominent venture firms and tech visionaries, Gavin Uberti is leading Etched through a defining moment in the hardware race. By betting that transformers will remain the dominant AI paradigm for years to come, Etched is redefining performance boundaries across the entire global semiconductor ecosystem."
+    }
+  ],
+  pullQuote: "If you bet on general compute, you're paying for flexibility you don't need. Hardcoding the transformer architecture into silicon is the only way to break the inference wall.",
+  pullQuoteBy: "Gavin Uberti",
+  lesson: "Specializing radically for a singular, dominant technology paradigm can give you an unbeatable performance lead over incumbent giants.",
+  stats: [
+    { label: "Valuation", value: "$500M+" },
+    { label: "Category", value: "AI & Hardware" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-US-89231" }
+  ],
+  createdAt: "2026-07-28",
+  updatedAt: "2026-07-28",
+  publishedAt: "2026-07-28"
+},
 
   // 2. ARTHUR MENSCH (New Trending)
   {
