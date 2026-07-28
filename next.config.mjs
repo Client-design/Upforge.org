@@ -192,6 +192,11 @@ const nextConfig = {
   trailingSlash: false,
   reactStrictMode: true,
 
+  // ─── TURBOPACK CONFIG ───────────────────────────────────────────────────
+  turbopack: {
+    root: path.resolve("."),
+  },
+
   // ─── EXPERIMENTAL ───────────────────────────────────────────────────────
   experimental: {
     optimizeCss: true,
