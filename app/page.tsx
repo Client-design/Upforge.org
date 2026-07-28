@@ -214,7 +214,7 @@ export default async function HomePage() {
               href="/founder-stories"
               className="font-mono text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
-              View All Stories <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              All<ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
           </div>
 
@@ -277,13 +277,13 @@ export default async function HomePage() {
         <section className="mb-14 sm:mb-20">
           <div className="flex items-center justify-between mb-6 pb-2.5 border-b border-border">
             <h2 className="font-serif text-xl sm:text-3xl font-bold text-foreground">
-              Verified Global Startup Index
+              Verified Index
             </h2>
             <Link
               href="/registry"
               className="font-mono text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
-              Explore Full Registry <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              All <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
           </div>
 
