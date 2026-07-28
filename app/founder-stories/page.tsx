@@ -1,234 +1,246 @@
-// app/founder-stories/page.tsx
-// SERVER COMPONENT - Main index with theme support
-
 import { Suspense } from "react"
 import { Metadata } from "next"
-import { getAllFounders, getFeaturedFounders } from "@/lib/founders/data"
-import { FounderHero } from "@/components/founder-stories/founder-hero"
-import { FounderGrid } from "@/components/founder-stories/founder-grid"
+import Link from "next/link"
+import Image from "next/image"
+import { ArrowRight, CheckCircle2, ShieldCheck, Rss } from "lucide-react"
+import { FOUNDERS, getAllCategories, getCategorySlug } from "@/lib/founders/data"
+import { FounderCard } from "@/components/founder-stories/founder-card"
 import { FounderNewsletter } from "@/components/founder-stories/founder-newsletter"
 import { JsonLd } from "@/components/seo/json-ld"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
 
 export const revalidate = 3600
 
-// ---------------------------------------------------------------------------
-// DOMAIN DETECTION (same as homepage)
-// ---------------------------------------------------------------------------
-async function getDomain(): Promise<"org" | "in"> {
-  return "org"
-}
-
-
-// ---------------------------------------------------------------------------
-// METADATA
-// ---------------------------------------------------------------------------
 export async function generateMetadata(): Promise<Metadata> {
-  const domain = await getDomain()
-  const isOrg = domain === "org"
-  const canonicalUrl = isOrg 
-    ? "https://www.upforge.org/founder-stories" 
-    : "https://www.upforge.in/founder-stories"
-
-  if (isOrg) {
-    return {
-      title: "The Founder Chronicle — Global Startup Builder Stories 2026 | UpForge",
-      description: "Deep-dive editorial profiles of the founders reshaping the global economy. From unicorn builders to emerging market innovators. Verified data, real stories.",
-      keywords: [
-        "founder stories", "startup founders", "entrepreneur profiles",
-        "global unicorn founders", "founder interviews", "AI founders",
-        "tech billionaires", "startup success stories"
-      ],
-      alternates: { 
-        canonical: canonicalUrl,
-        languages: {
-          'en': 'https://www.upforge.org/founder-stories',
-          'x-default': 'https://www.upforge.org/founder-stories'
-        }
-      },
-      openGraph: {
-        title: "The Founder Chronicle — Global Startup Builder Stories 2026",
-        description: "Editorial deep-dives into the founders building tomorrow's economy.",
-        url: canonicalUrl,
-        siteName: "UpForge",
-        locale: "en",
-        type: "website",
-        images: [{
-          url: "https://www.upforge.org/og/founder-chronicle.png",
-          width: 1200,
-          height: 630,
-          alt: "The Founder Chronicle by UpForge"
-        }]
-      },
-      twitter: {
-        card: "summary_large_image",
-        site: "@UpForgeHQ",
-        creator: "@UpForgeHQ",
-        title: "The Founder Chronicle — Global Edition 2026",
-        description: "Deep-dive founder profiles. Real stories, verified data.",
-        images: ["https://www.upforge.org/og/founder-chronicle.png"]
-      },
-      robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          "max-image-preview": "large",
-          "max-snippet": -1
-        }
-      }
-    }
-  }
+  const canonicalUrl = "https://www.upforge.org/founder-stories"
 
   return {
-    title: "The Founder Chronicle — India's Startup Builders 2026 | UpForge",
-    description: "Deep-dive editorial profiles of India's most consequential startup founders. Real stories, verified data.",
+    title: "Founder Stories & Intelligence — The Founder Chronicle | UpForge",
+    description: "Deep-dive editorial profiles of top tech founders, CEOs, and unicorn builders. Verified UFRN credentials, leadership analysis, and real stories.",
     keywords: [
-      "Indian founder stories", "India startup founders", "Indian unicorn founders",
-      "Indian entrepreneur profiles", "startup success stories India"
+      "founder stories", "startup founders", "entrepreneur profiles",
+      "global unicorn founders", "founder interviews", "AI founders",
+      "tech billionaires", "startup success stories", "UpForge Founder Chronicle"
     ],
-    alternates: { canonical: canonicalUrl },
+    alternates: { 
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: "The Founder Chronicle — India's Startup Builders 2026",
-      description: "Editorial deep-dives into India's top founders.",
+      title: "Founder Stories & Intelligence — The Founder Chronicle | UpForge",
+      description: "Editorial deep-dives into the founders building tomorrow's economy.",
       url: canonicalUrl,
-      siteName: "UpForge India",
-      locale: "en_IN",
+      siteName: "UpForge",
       type: "website",
+      images: [{
+        url: "https://images.upforge.org/Magazine/michael-truell-cursor-founder-news.jpg",
+        width: 1200,
+        height: 675,
+        alt: "UpForge Founder Chronicle Cover"
+      }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@UpForgeHQ",
+      title: "The Founder Chronicle — UpForge",
+      description: "Deep-dive founder profiles. Real stories, verified data.",
     },
     robots: { index: true, follow: true }
   }
 }
 
-// ---------------------------------------------------------------------------
-// PAGE COMPONENT
-// ---------------------------------------------------------------------------
 export default async function FounderStoriesPage() {
-  const featuredFounders = getFeaturedFounders(3)
-  const { founders: initialFounders, total } = getAllFounders(1, 9)
-  const domain = await getDomain()
-  const isOrg = domain === "org"
-  
+  const categories = getAllCategories()
+  const latestHeroFounder = FOUNDERS[0]
+  const restFounders = FOUNDERS.slice(1)
+
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "The Founder Chronicle — UpForge",
     "description": "Editorial profiles of startup founders building the future economy",
-    "url": isOrg ? "https://www.upforge.org/founder-stories" : "https://www.upforge.in/founder-stories",
-    "numberOfItems": total,
-    "itemListElement": initialFounders.map((founder, index) => ({
+    "url": "https://www.upforge.org/founder-stories",
+    "numberOfItems": FOUNDERS.length,
+    "itemListElement": FOUNDERS.map((founder, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": isOrg 
-        ? `https://www.upforge.org/founder-stories/${founder.slug}`
-        : `https://www.upforge.in/founder-stories/${founder.slug}`,
-      "name": founder.name
+      "url": `https://www.upforge.org/founder-stories/${founder.slug}`,
+      "name": `${founder.name} — ${founder.role} of ${founder.company}`
     }))
   }
-  
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.upforge.org"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Founder Stories",
+        "item": "https://www.upforge.org/founder-stories"
+      }
+    ]
+  }
+
   return (
     <>
-      <JsonLd data={collectionSchema} />
-      
-      <div className="bg-background min-h-screen text-foreground pt-6 pb-0">
-        <div className="max-w-[1300px] mx-auto px-4 md:px-8">
-          
-          {/* 1. MASTHEAD — Clean like homepage, only title */}
-          <section className="border-b-2 border-foreground pb-3 mb-3 pt-0 flex flex-col items-center text-center w-full">
-            <h1
-              className="text-3xl md:text-4xl lg:text-[56px] font-bold leading-[1.04] text-foreground mb-2 max-w-4xl pt-1"
-              style={{ fontFamily: "'Georgia', serif" }}
-            >
-              The Founder Chronicle
-            </h1>
-          </section>
+      <JsonLd data={[collectionSchema, breadcrumbSchema]} />
 
-          {/* 2. FEATURED STORIES SECTION */}
-          <section className="mb-20">
-            <div className="flex items-center gap-3 mb-8 pb-3 border-b-2 border-foreground">
-              <h2 className="font-sans font-black text-[13px] uppercase tracking-widest text-[#C59A2E] flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
-                Featured Stories
-              </h2>
-              <div className="flex-1" />
-              <Link
-                href="/founder-stories"
-                className="font-sans font-bold text-[9px] uppercase tracking-[0.15em] text-muted-foreground flex items-center gap-1 hover:text-foreground transition-colors"
-              >
-                All Stories <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
+      <div className="bg-[#09090b] min-h-screen text-zinc-100 selection:bg-amber-500/30 selection:text-amber-200">
+        
+        {/* Breadcrumb / Top Bar */}
+        <div className="border-b border-zinc-800 bg-[#09090b]/80 backdrop-blur-md sticky top-0 z-40">
+          <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-3 flex items-center justify-between font-mono text-xs text-zinc-400">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2">
+              <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-amber-400 font-semibold">Founder Stories</span>
+            </nav>
 
-            <FounderHero featuredFounders={featuredFounders} />
-          </section>
-
-          {/* 3. THE INDEX — All founders grid */}
-          <section className="mb-24">
-            <div className="flex items-center gap-3 mb-8 pb-3 border-b-2 border-foreground">
-              <h2 className="font-sans font-black text-[13px] uppercase tracking-widest text-foreground">
-                The Index
-              </h2>
-              <div className="flex-1" />
-              <span className="font-sans font-bold text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
-                {total} Profiles
-              </span>
-            </div>
-
-            <Suspense fallback={<FounderGridSkeleton />}>
-              <FounderGrid 
-                initialFounders={initialFounders}
-                totalFounders={total}
-              />
-            </Suspense>
-          </section>
-
-        </div>
-
-        {/* 4. NEWSLETTER CTA */}
-        <FounderNewsletter />
-
-        {/* 5. BOTTOM CTA — Submit your story */}
-        <section className="bg-muted/30 border-t-2 border-foreground py-8">
-          <div className="max-w-[1300px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="w-8 h-8 rounded-full bg-[#C59A2E] flex items-center justify-center shrink-0">
-                <span className="text-background font-serif text-xl font-bold">F</span>
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-1" style={{ fontFamily: "'Georgia', serif" }}>
-                  Are you a founder?
-                </h2>
-                <p className="font-serif italic text-[15px] text-muted-foreground">
-                  Get your story featured in The Founder Chronicle. Verified profiles, global reach.
-                </p>
-              </div>
-            </div>
             <Link
-              href="/submit"
-              className="font-sans font-black text-[10px] text-background bg-[#C59A2E] px-8 py-3.5 uppercase tracking-[0.2em] hover:bg-[#A8821E] transition-colors shrink-0 whitespace-nowrap shadow-sm"
+              href="/founder-stories/feed.xml"
+              className="flex items-center gap-1.5 text-zinc-400 hover:text-amber-400 transition-colors text-xs font-mono"
             >
-              Submit Your Story
+              <Rss className="w-3.5 h-3.5 text-amber-500" />
+              <span>RSS Feed</span>
             </Link>
           </div>
-        </section>
+        </div>
+
+        <main className="max-w-[1300px] mx-auto px-4 md:px-8 py-8">
+          
+          {/* Header Banner */}
+          <section className="text-center py-6 border-b border-zinc-800 mb-10">
+            <span className="inline-block text-[11px] font-mono font-bold uppercase tracking-[0.2em] px-3.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-3">
+              THE FOUNDER CHRONICLE
+            </span>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-50 tracking-tight mb-3">
+              Verified Founder Intelligence
+            </h1>
+            <p className="font-serif text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+              Deep-dive editorial profiles of the world's most consequential founders, CEOs, and technology pioneers.
+            </p>
+          </section>
+
+          {/* Featured Latest Hero Entry */}
+          {latestHeroFounder && (
+            <section className="mb-14">
+              <div className="flex items-center gap-3 mb-6 pb-3 border-b border-zinc-800">
+                <h2 className="font-mono text-xs uppercase tracking-widest text-amber-400 font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                  LATEST COVER STORY
+                </h2>
+                <div className="flex-1" />
+                <span className="font-mono text-xs text-zinc-500">Published {latestHeroFounder.publishedAt}</span>
+              </div>
+
+              <Link 
+                href={`/founder-stories/${latestHeroFounder.slug}`}
+                className="group grid lg:grid-cols-12 gap-8 rounded-2xl border border-zinc-800 bg-zinc-900/70 p-6 sm:p-8 hover:border-amber-500/50 transition-all duration-500 shadow-2xl overflow-hidden"
+              >
+                {/* 4:5 Portrait Card Image */}
+                <div className="lg:col-span-5 relative aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-xl">
+                  <Image
+                    src={latestHeroFounder.cardImage || latestHeroFounder.imageUrl}
+                    alt={`${latestHeroFounder.name}, ${latestHeroFounder.role} of ${latestHeroFounder.company} — UpForge Verified Founder`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 450px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
+                  <span className="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded bg-zinc-950/90 text-amber-400 border border-zinc-700">
+                    {latestHeroFounder.category || "COVER STORY"}
+                  </span>
+                </div>
+
+                {/* Info & One-Liner */}
+                <div className="lg:col-span-7 flex flex-col justify-between py-2 space-y-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      {latestHeroFounder.verified && (
+                        <span className="inline-flex items-center gap-1 text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
+                          <CheckCircle2 className="w-3.5 h-3.5" /> VERIFIED FOUNDER
+                        </span>
+                      )}
+                      <span className="font-mono text-xs text-zinc-400">
+                        UFRN: <strong className="text-amber-400">{latestHeroFounder.ufrnCode || "UF-2026-VERIFIED"}</strong>
+                      </span>
+                    </div>
+
+                    <h2 className="font-serif font-black text-3xl sm:text-4xl text-zinc-50 group-hover:text-amber-400 transition-colors leading-tight mb-2">
+                      {latestHeroFounder.name}
+                    </h2>
+                    <p className="font-sans font-bold text-xl text-amber-400/90 mb-4">
+                      {latestHeroFounder.role} of {latestHeroFounder.company}
+                    </p>
+
+                    <p className="font-serif italic text-lg sm:text-xl text-zinc-300 leading-relaxed mb-6">
+                      "{latestHeroFounder.oneLiner || latestHeroFounder.deck}"
+                    </p>
+
+                    {latestHeroFounder.headline && (
+                      <p className="font-serif text-base text-zinc-400 leading-relaxed line-clamp-3">
+                        {latestHeroFounder.headline}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="pt-6 border-t border-zinc-800 flex items-center justify-between font-mono text-xs">
+                    <span className="text-zinc-400">{latestHeroFounder.city || "San Francisco"} • Est. {latestHeroFounder.founded || "2022"}</span>
+                    <span className="text-amber-400 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1 text-sm">
+                      Read Cover Story <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </section>
+          )}
+
+          {/* Category Tabs */}
+          <section className="mb-10">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold">Filter By Category</h2>
+              <span className="font-mono text-xs text-zinc-500">{FOUNDERS.length} Total Founders</span>
+            </div>
+            <div className="flex flex-wrap gap-2.5">
+              {categories.map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/founder-stories/category/${cat.slug}`}
+                  className="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:border-amber-500/40 hover:text-amber-400 font-mono text-xs transition-all"
+                >
+                  {cat.name} <span className="text-zinc-500 font-normal">({cat.count})</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Founders Grid Index */}
+          <section className="mb-20">
+            <div className="flex items-center gap-3 mb-6 pb-3 border-b border-zinc-800">
+              <h2 className="font-serif text-2xl font-bold text-zinc-100">
+                All Verified Founders
+              </h2>
+              <div className="flex-1" />
+              <span className="font-mono text-xs text-zinc-400">Sorted by Latest Published</span>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {restFounders.map((f) => (
+                <FounderCard key={f.id} founder={f} />
+              ))}
+            </div>
+          </section>
+
+        </main>
+
+        <FounderNewsletter />
       </div>
     </>
-  )
-}
-
-// Loading skeleton
-function FounderGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[...Array(6)].map((_, i) => (
-        <div key={i} className="animate-pulse">
-          <div className="bg-muted h-64 mb-4 border border-border" />
-          <div className="bg-muted h-4 w-3/4 mb-2" />
-          <div className="bg-muted h-3 w-1/2" />
-        </div>
-      ))}
-    </div>
   )
 }
