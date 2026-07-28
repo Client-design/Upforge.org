@@ -58,6 +58,12 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: "UpForge — Global Startup Registry & Founder Intelligence",
+      description: `${SITE_STATS.trackedStartupsText} verified startups. Global founder database. Real-time intelligence.`,
+      images: ["https://images.upforge.org/Magazine/michael-truell-cursor-founder-news.jpg"],
+    },
     other: {
       "application-ld+json": JSON.stringify(schema),
     },
