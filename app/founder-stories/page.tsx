@@ -91,8 +91,8 @@ export default async function FounderStoriesPage() {
 
       <div className="bg-background text-foreground min-h-screen selection:bg-amber-500/20 selection:text-amber-700 dark:selection:text-amber-200">
         
-        {/* Breadcrumb / Top Bar */}
-        <div className="border-b border-border bg-background/95 backdrop-blur-md sticky top-14 z-30">
+        {/* Breadcrumb / Top Bar - Hidden on mobile view */}
+        <div className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md sticky top-14 z-30">
           <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[11px] sm:text-xs">
               <Link href="/" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Home</Link>
