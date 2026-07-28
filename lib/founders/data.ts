@@ -62,191 +62,176 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-07-28"
   },
 
-  // 1. ARAVIND SRINIVAS (New Trending)
-  {
-    id: "aravind-srinivas-2026",
-    slug: "aravind-srinivas-perplexity",
-    edition: 25,
-    featured: true,
-    category: "AI & Search",
-    
-    name: "Aravind Srinivas",
-    nameShort: "Aravind Srinivas",
-    initials: "AS",
-    company: "Perplexity AI",
-    role: "Co-Founder & CEO",
-    
-    city: "San Francisco",
-    country: "United States",
-    countryCode: "US",
-    context: "Reinventing Web Search with AI",
-    
-    valuation: "$9B+",
-    funding: "$1B+",
-    founded: "2022",
-    
-    imageUrl: "https://images.forbesindia.com/blog/wp-content/uploads/2026/05/Aravind-SrinivasGettyImages2181313521-copy-2026-05-e346b495c894f887b068916e2a001fbd.jpg?im=Resize,width=600,aspect=fit,type=normal",
-    accent: "#0052FF",
-    accentBg: "#EBF2FF",
-    accentBorder: "#99C2FF",
-    
-    headline: "He stopped using Google. Then he built an AI answer engine that processes half a billion queries a month.",
-    deck: "Aravind Srinivas turned Perplexity into the premier AI discovery engine, replacing traditional links with direct, cited intelligence.",
-    
-    columns: [
-      {
-        heading: "The Death of Ten Blue Links",
-        body: "Aravind Srinivas realized early that traditional search engines were becoming bloated with ads and SEO spam. Coming from research roles at OpenAI and DeepMind, he co-founded Perplexity AI in 2022. Instead of returning links, Perplexity searches the live web in real time, synthesizing precise answers with verifiable citations. By 2026, it handles over 500 million queries monthly, establishing itself as the default search engine for power users and researchers."
-      },
-      {
-        heading: "David vs. Goliath",
-        body: "Competing directly with Google's $2 trillion monopoly seemed suicidal to silicon valley insiders. Yet Srinivas attracted funding from Jeff Bezos, NVIDIA, and top VCs, boosting Perplexity's valuation to over $9 billion. By offering native publisher revenue sharing and conversational search pro capabilities, Perplexity transformed how knowledge workers discover truth on the web."
-      },
-      {
-        heading: "The Enterprise Intelligence Engine",
-        body: "In 2026, Perplexity Enterprise Pro is deployed across major financial institutions, law firms, and consulting giants. Srinivas envisions a world where query synthesis becomes ambient intelligence, allowing humans to move from searching for information to acting on knowledge instantaneously."
-      }
-    ],
-    
-    pullQuote: "Search shouldn't be about scrolling through pages of ads. It should be about getting instant, accurate, cited truth.",
-    pullQuoteBy: "Aravind Srinivas",
-    lesson: "Focus on solving the user's core curiosity faster than anyone else, even if you are competing against giants.",
-    
-    stats: [
-      { label: "Valuation", value: "$9B+" },
-      { label: "Monthly Queries", value: "500M+" },
-      { label: "Total Raised", value: "$1B+" },
-      { label: "Founded", value: "2022" }
-    ],
-    
-    createdAt: "2026-05-01",
-    updatedAt: "2026-05-01",
-    publishedAt: "2026-05-01"
-  },
+{
+  id: "gavin-uberti-etched-2026",
+  slug: "gavin-uberti-etched-sohu",
+  edition: 26,
+  featured: true,
+  category: "AI & Hardware",
+  name: "Gavin Uberti",
+  nameShort: "Gavin Uberti",
+  initials: "GU",
+  company: "Etched",
+  role: "Co-Founder & CEO",
+  city: "Cupertino",
+  country: "United States",
+  countryCode: "US",
+  context: "Specialized AI ASIC Chips & Transformer Hardware",
+  valuation: "$10B+",
+  funding: "$1B+",
+  founded: "2022",
+  imageUrl: "https://images.upforge.org/Magazine/gavin-uberti-etched-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/gavin-uberti-etched-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/gavin-uberti-etched-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-US-89231",
+  oneLiner: "Etched builds Sohu, a specialized AI chip (ASIC) designed only for transformer models — claiming far higher speed than Nvidia's GPUs for AI inference.",
+  accent: "#2563EB",
+  accentBg: "#EFF6FF",
+  accentBorder: "#93C5FD",
+  headline: "The founder taking on Nvidia by hardcoding transformers directly into silicon. How Gavin Uberti built Sohu to shatter AI inference performance ceilings.",
+  deck: "Etched builds Sohu, a specialized AI chip (ASIC) designed only for transformer models — claiming far higher speed than Nvidia's GPUs for AI inference.",
+  columns: [
+    {
+      heading: "Challenging the General-Purpose GPU Paradigm",
+      body: "Gavin Uberti and his team dropped out of Harvard with a bold, controversial conviction: general-purpose GPUs are fundamentally inefficient for the future of artificial intelligence. While traditional semiconductor giants build chips designed to run any arbitrary workload, Etched took the ultimate gamble by hardcoding the transformer architecture directly onto microchips.\n\nTheir flagship ASIC chip, Sohu, eliminates unnecessary hardware abstraction layers. By optimizing exclusively for transformers—the backbone of modern LLMs, video generators, and multimodal models—Etched unlocks orders-of-magnitude faster throughput and dramatically lower power consumption."
+    },
+    {
+      heading: "The Silicon Bet on Transformers",
+      body: "Building custom silicon is widely considered one of hardware engineering's highest-risk ventures. However, Sohu's architecture offers a decisive advantage for real-time AI inference, allowing massive models to run at blazing speeds previously thought impossible on standard hardware clusters.\n\nAs AI deployments shift heavily from model training to large-scale operational inference, Etched provides giant tech enterprise workloads, frontier labs, and cloud providers with a crucial alternative to compute bottlenecks and sky-high chip costs."
+    },
+    {
+      heading: "Building the Next Semiconductor Giant",
+      body: "Backed by Sequoia Capital, Primary Venture Partners, Peter Thiel, and leading AI luminaries, Gavin Uberti is leading Etched through a defining moment in the hardware race. By betting that transformers will remain the dominant AI paradigm for years to come, Etched is redefining performance boundaries across the entire global semiconductor ecosystem."
+    }
+  ],
+  pullQuote: "If you bet on general compute, you're paying for flexibility you don't need. Hardcoding the transformer architecture into silicon is the only way to break the inference wall.",
+  pullQuoteBy: "Gavin Uberti",
+  lesson: "Specializing radically for a singular, dominant technology paradigm can give you an unbeatable performance lead over incumbent giants.",
+  stats: [
+    { label: "Valuation", value: "$10B+" },
+    { label: "Category", value: "AI & Hardware" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-US-89231" }
+  ],
+  createdAt: "2026-07-28",
+  updatedAt: "2026-07-28",
+  publishedAt: "2026-07-28"
+},
 
-  // 2. ARTHUR MENSCH (New Trending)
-  {
-    id: "arthur-mensch-2026",
-    slug: "arthur-mensch-mistral-ai",
-    edition: 24,
-    featured: true,
-    category: "Open Source AI",
-    
-    name: "Arthur Mensch",
-    nameShort: "Arthur Mensch",
-    initials: "AM",
-    company: "Mistral AI",
-    role: "Co-Founder & CEO",
-    
-    city: "Paris",
-    country: "France",
-    countryCode: "FR",
-    context: "Europe's AI Champion",
-    
-    valuation: "$6B",
-    funding: "$1.1B",
-    founded: "2023",
-    
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg_hmytvaKKLBuMA99yTGr_wl1kdZJvvIpufiATmLWV3deLQ6T_wjTERc&s=10",
-    accent: "#FF5722",
-    accentBg: "#FFEEE8",
-    accentBorder: "#FFBCAB",
-    
-    headline: "He left DeepMind to build Europe's AI champion in a Paris cafe. 12 months later, Mistral was worth $6 billion.",
-    deck: "Arthur Mensch proved that small, ultra-efficient open-weights models can match tech giants operating on 10x the budget.",
-    
-    columns: [
-      {
-        heading: "The Paris AI Miracle",
-        body: "In May 2023, 30-year-old Arthur Mensch and his co-founders left Google DeepMind and Meta to launch Mistral AI in Paris. Within weeks, they raised a record-breaking €105 million seed round without even having a product. Mensch believed European sovereignty in AI required open, high-performance models built on capital-efficient principles."
-      },
-      {
-        heading: "Sparse Mixture-of-Experts",
-        body: "Mistral shocked Silicon Valley with Mixtral 8x7B and later Mistral Large. By pioneering open Mixture-of-Experts (MoE) architectures, Mensch's team delivered models that matched GPT-4 benchmark performance at a fraction of the inference cost. Their commitment to open-weight access earned them a cult following among enterprise developers globally."
-      },
-      {
-        heading: "Geopolitical Sovereignty",
-        body: "By 2026, Mistral AI is valued at $6B+ and partners natively with Microsoft Azure, Amazon AWS, and European governments. Mensch has become a leading global voice for open-source AI, proving that world-class foundation models can flourish outside Silicon Valley."
-      }
-    ],
-    
-    pullQuote: "Open source is not just a commercial strategy; it is essential for safety, transparency, and technological democracy.",
-    pullQuoteBy: "Arthur Mensch",
-    lesson: "Efficiency and open architecture will always outperform brute-force compute in the long run.",
-    
-    stats: [
-      { label: "Valuation", value: "$6B" },
-      { label: "Total Funding", value: "$1.1B" },
-      { label: "Model Downloads", value: "50M+" },
-      { label: "Founded", value: "2023" }
-    ],
-    
-    createdAt: "2026-05-01",
-    updatedAt: "2026-05-01",
-    publishedAt: "2026-05-01"
-  },
+{
+  id: "yang-zhilin-moonshot-ai-2026",
+  slug: "yang-zhilin-moonshot-ai-kimi",
+  edition: 26,
+  featured: true,
+  category: "AI & Technology",
+  name: "Yang Zhilin",
+  nameShort: "Yang Zhilin",
+  initials: "YZ",
+  company: "Moonshot AI (Kimi)",
+  role: "Co-Founder & CEO",
+  city: "Beijing",
+  country: "China",
+  countryCode: "CN",
+  context: "Open-Source Foundation Models & Long-Context Intelligence",
+  valuation: "$20B+",
+  funding: "$3.7B+",
+  founded: "2023",
+  imageUrl: "https://images.upforge.org/Magazine/yang-zhilin-moonshot-ai-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/yang-zhilin-moonshot-ai-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/yang-zhilin-moonshot-ai-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-CN-71824",
+  oneLiner: "Moonshot AI builds Kimi, an open-source AI model competing directly with OpenAI and Anthropic on coding, reasoning, and knowledge tasks.",
+  accent: "#7C3AED",
+  accentBg: "#F5F3FF",
+  accentBorder: "#C4B5FD",
+  headline: "The frontier AI researcher challenging Silicon Valley's dominance with open weights. How Yang Zhilin built Kimi into a global LLM powerhouse.",
+  deck: "Moonshot AI builds Kimi, an open-source AI model competing directly with OpenAI and Anthropic on coding, reasoning, and knowledge tasks.",
+  columns: [
+    {
+      heading: "Redefining Open-Source Frontier Models",
+      body: "Tsinghua and Carnegie Mellon alumnus Yang Zhilin co-founded Moonshot AI with a ambitious vision: to construct general artificial intelligence capable of processing massive context windows without sacrificing reasoning accuracy. Named after his affinity for Pink Floyd's iconic album, Moonshot AI launched Kimi—a chatbot and model series that quickly shattered long-context processing benchmarks across Asia and global open-source ecosystems.\n\nWhile Western labs kept their top-tier models tightly closed, Yang Zhilin took a high-conviction open-weight approach. By releasing frontier-grade models like Kimi K2 and K3 directly to developers, Moonshot AI propelled open-source performance into direct competition with proprietary giants like OpenAI and Anthropic."
+    },
+    {
+      heading: "Mastering Context and Agentic Execution",
+      body: "Moonshot AI’s breakthrough stems from its novel architectural innovations in context scaling, memory efficiency, and Mixture-of-Experts (MoE) routing. Kimi pioneered processing millions of context tokens seamlessly, allowing developers and enterprises to feed entire repositories, research archives, and massive legal frameworks into a single prompt session.\n\nThis extreme context capacity, paired with native tool-calling and long-horizon reasoning abilities, rapidly turned Kimi into the primary development and productivity platform for tens of millions of professional users and enterprise engineering teams worldwide."
+    },
+    {
+      heading: "Anchoring China's AI Vanguard",
+      body: "Backed by tech giants including Alibaba, Tencent, and Meituan alongside top-tier global venture firms, Moonshot AI achieved mega-unicorn status at record speed. Yang Zhilin remains dedicated to accelerating the frontier of open artificial intelligence, continuously proving that open-source architectures can rival and redefine the limits of human intelligence."
+    }
+  ],
+  pullQuote: "Open-source intelligence is the ultimate equalizer. Building models that reason deeply over millions of tokens unlocks entirely new paradigms for human agency.",
+  pullQuoteBy: "Yang Zhilin",
+  lesson: "Combining extreme technical differentiation in core architecture with an open ecosystem strategy can rapidly turn a young startup into an industry pillar.",
+  stats: [
+    { label: "Valuation", value: "$20B+" },
+    { label: "Category", value: "AI & Technology" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-CN-71824" }
+  ],
+  createdAt: "2026-07-28",
+  updatedAt: "2026-07-28",
+  publishedAt: "2026-07-28"
+},
 
-  // 3. PALMER LUCKEY (New Trending)
-  {
-    id: "palmer-luckey-2026",
-    slug: "palmer-luckey-anduril",
-    edition: 23,
-    featured: true,
-    category: "Defense Tech",
-    
-    name: "Palmer Luckey",
-    nameShort: "Palmer Luckey",
-    initials: "PL",
-    company: "Anduril Industries",
-    role: "Founder & CEO",
-    
-    city: "Costa Mesa",
-    country: "United States",
-    countryCode: "US",
-    context: "Autonomous Defense Warfare",
-    
-    valuation: "$14B",
-    funding: "$3.8B",
-    founded: "2017",
-    
-    imageUrl: "https://pic1.calcalist.co.il/picserver3/crop_images/2025/10/18/ry31zybCxx/ry31zybCxx_0_0_2126_1415_0_x-large.jpg",
-    accent: "#1A1A1A",
-    accentBg: "#F0F0F0",
-    accentBorder: "#CCCCCC",
-    
-    headline: "He built Oculus in his parents' garage at 19. Now he's rebuilding Western defense with autonomous systems.",
-    deck: "Palmer Luckey was fired by Facebook after selling Oculus for $2B. He responded by building Anduril into a $14B defense tech juggernaut.",
-    
-    columns: [
-      {
-        heading: "From VR Garage Pioneer to Defense Renegade",
-        body: "Palmer Luckey revolutionized Virtual Reality by inventing the Oculus Rift as a teenager, leading to a $2 billion acquisition by Facebook. After a high-profile political fallout led to his exit from Meta, Luckey turned his hardware obsession toward defense, founding Anduril Industries in 2017."
-      },
-      {
-        heading: "Lattice OS and Drones",
-        body: "Unlike traditional defense prime contractors, Anduril builds software-first defense systems. Powered by Lattice OS—an AI platform synthesizing sensor data across air, land, and sea—Anduril produces low-cost, autonomous surveillance towers, interceptor drones, and unmanned underwater vehicles."
-      },
-      {
-        heading: "The Silicon Valley Prime Contractor",
-        body: "In 2026, Anduril is valued at $14 billion and holds major contracts with the U.S. Department of Defense and Allied nations. Luckey has proven that agile tech companies can disrupt century-old military-industrial supply chains."
-      }
-    ],
-    
-    pullQuote: "We need to build modern defense hardware with software speed. Technology is the only deterrence that preserves peace.",
-    pullQuoteBy: "Palmer Luckey",
-    lesson: "When pushed out of one domain, take your engineering superpower into an even bigger industry.",
-    
-    stats: [
-      { label: "Valuation", value: "$14B" },
-      { label: "DoD Contracts", value: "$2B+" },
-      { label: "Total Raised", value: "$3.8B" },
-      { label: "Founded", value: "2017" }
-    ],
-    
-    createdAt: "2026-05-01",
-    updatedAt: "2026-05-01",
-    publishedAt: "2026-05-01"
-  },
+{
+  id: "bhavin-turakhia-neo-2026",
+  slug: "bhavin-turakhia-neo-ai",
+  edition: 26,
+  featured: true,
+  category: "AI & Enterprise Software",
+  name: "Bhavin Turakhia",
+  nameShort: "Bhavin Turakhia",
+  initials: "BT",
+  company: "Neo",
+  role: "Founder",
+  city: "Mumbai",
+  country: "India",
+  countryCode: "IN",
+  context: "AI-Native Workplace Suite & Enterprise Execution Platform",
+  valuation: "$1B+",
+  funding: "$30M+",
+  founded: "2026",
+  imageUrl: "https://images.upforge.org/Magazine/bhavin-turakhia-neo-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/bhavin-turakhia-neo-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/bhavin-turakhia-neo-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-IN-94021",
+  oneLiner: "Neo is an AI-native enterprise work platform unifying task management, knowledge, file collaboration, and AI agents into one workspace — built to replace fragmented tools like Microsoft Office and Google Workspace.",
+  accent: "#0284C7",
+  accentBg: "#F0F9FF",
+  accentBorder: "#7DD3FC",
+  headline: "The serial tech billionaire betting $30M of his own capital to rebuild enterprise software from scratch. How Bhavin Turakhia is mounting a direct challenge to legacy productivity giants with Neo.",
+  deck: "Neo is an AI-native enterprise work platform unifying task management, knowledge, file collaboration, and AI agents into one workspace — built to replace fragmented tools like Microsoft Office and Google Workspace.",
+  columns: [
+    {
+      heading: "Rebuilding Enterprise Productivity for the AI Era",
+      body: "Billionaire entrepreneur Bhavin Turakhia—co-founder of Directi, Radix, Titan, and fintech unicorn Zeta—launched his fifth venture with a bold declaration: simply bolting AI chatbots onto legacy, decades-old software architectures like Microsoft Office or Google Workspace is fundamentally flawed.\n\nWith $30 million in self-funded capital, Turakhia created Neo—an AI-native workspace designed from the ground up to consolidate project management (Tasket), document authoring (Studio), cloud file collaboration (Drive), and autonomous agent execution (Friday) into a single unified surface."
+    },
+    {
+      heading: "Eliminating Workflow Context Fragmentation",
+      body: "Modern enterprises suffer from extreme context fragmentation, where institutional knowledge and operational data are scattered across dozens of disconnected SaaS apps. Neo solves this friction by establishing AI as a core, first-class collaborator across all company files and workflows.\n\nBy natively embedding autonomous agents that can execute tasks, draft deliverables, and query live repository context alongside human teams, Neo transforms static enterprise software into a high-velocity collaborative network."
+    },
+    {
+      heading: "A Track Record of Building Tech Pillars",
+      body: "Having previously built and scaled global software companies generating billions in value, Bhavin Turakhia's vision for Neo is unapologetically ambitious: to replace legacy productivity stacks across the global enterprise market and define the default operating system for AI-first organizations."
+    }
+  ],
+  pullQuote: "If you want to build an iPhone, you cannot take Nokia parts and turn them into an iPhone. Enterprise software must be rebuilt from scratch so AI isn't a side tab, but an active participant in every workflow.",
+  pullQuoteBy: "Bhavin Turakhia",
+  lesson: "When a technological shift is fundamental, re-architecting the system from scratch beats slapping legacy add-ons onto old frameworks.",
+  stats: [
+    { label: "Personal Commitment", value: "$30M" },
+    { label: "Category", value: "AI & Enterprise Software" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-IN-94021" }
+  ],
+  createdAt: "2026-07-28",
+  updatedAt: "2026-07-28",
+  publishedAt: "2026-07-28"
+},
 
   // 4. ILYA SUTSKEVER (New Trending)
   {
