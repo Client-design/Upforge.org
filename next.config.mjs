@@ -145,6 +145,18 @@ const nextConfig = {
   // ─── REDIRECTS ──────────────────────────────────────────────────────────
   async redirects() {
     return [
+      // Redirect upforge.org (no www) to www.upforge.org
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "upforge.org",
+          },
+        ],
+        destination: "https://www.upforge.org/:path*",
+        permanent: true,
+      },
       // Redirect upforge.in (no www) to www.upforge.org
       {
         source: "/:path*",
