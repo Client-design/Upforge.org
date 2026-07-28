@@ -658,29 +658,24 @@ export function Navbar() {
           </div>
 
           {/* MOBILE CONTROLS */}
-          <div className="md:hidden flex items-center gap-1.5 relative z-[110] pointer-events-auto">
+          <div className="md:hidden flex items-center gap-2 relative z-[110] pointer-events-auto">
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="relative w-10 h-5 rounded-full bg-muted border border-border/50 transition-colors duration-300 ease-in-out hover:bg-muted/80 touch-manipulation"
-                aria-label={`Switch theme`}
+                className="relative w-9 h-9 rounded-full bg-muted/80 border border-border/60 transition-transform active:scale-95 flex items-center justify-center touch-manipulation"
+                aria-label="Switch theme"
               >
-                <div
-                  className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-background border border-border shadow-sm transition-all duration-300 ease-in-out flex items-center justify-center ${
-                    theme === "dark" ? "translate-x-5" : "translate-x-0"
-                  }`}
-                >
-                  {theme === "dark" ? (
-                    <Moon size={10} className="text-foreground" />
-                  ) : (
-                    <Sun size={10} className="text-foreground" />
-                  )}
-                </div>
+                {theme === "dark" ? (
+                  <Moon size={15} className="text-amber-400" />
+                ) : (
+                  <Sun size={15} className="text-amber-600" />
+                )}
               </button>
             )}
+            
             <button
               type="button"
-              className="p-2.5 text-foreground hover:bg-muted/50 rounded-lg transition-all duration-300 cursor-pointer active:scale-95 touch-manipulation relative z-[110]"
+              className="relative w-10 h-10 rounded-xl bg-muted/80 border border-border/60 flex items-center justify-center text-foreground hover:bg-muted transition-all active:scale-95 touch-manipulation z-[110]"
               onClick={(e) => {
                 e.stopPropagation()
                 setIsOpen((prev) => !prev)
@@ -688,25 +683,39 @@ export function Navbar() {
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
-              <div className={`transition-transform duration-300 ease-out ${isOpen ? "rotate-90" : "rotate-0"}`}>
-                {isOpen ? <X size={22} /> : <Menu size={22} />}
+              <div className="relative w-5 h-5 flex flex-col justify-center items-center">
+                <span 
+                  className={`block w-5 h-0.5 bg-foreground rounded-full transition-all duration-300 ease-out ${
+                    isOpen ? "rotate-45 translate-y-[3px]" : "-translate-y-1.5"
+                  }`} 
+                />
+                <span 
+                  className={`block w-5 h-0.5 bg-foreground rounded-full transition-all duration-200 ease-out ${
+                    isOpen ? "opacity-0 scale-0" : "opacity-100"
+                  }`} 
+                />
+                <span 
+                  className={`block w-5 h-0.5 bg-foreground rounded-full transition-all duration-300 ease-out ${
+                    isOpen ? "-rotate-45 -translate-y-[3px]" : "translate-y-1.5"
+                  }`} 
+                />
               </div>
             </button>
           </div>
         </div>
       </header>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU OVERLAY & CONTAINER */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-[105] md:hidden transition-all duration-300 ease-in-out ${
+        className={`fixed inset-0 z-[105] md:hidden transition-all duration-300 ease-out ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         aria-hidden={!isOpen}
       >
-        {/* Overlay */}
+        {/* Backdrop overlay */}
         <div
-          className={`absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-black/60 backdrop-blur-xl transition-opacity duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
@@ -716,12 +725,43 @@ export function Navbar() {
           }}
         />
 
-        {/* Menu Content */}
+        {/* Menu Content Dropdown */}
         <div 
-          className={`absolute top-14 left-0 right-0 bg-background border-b border-border/50 shadow-2xl transition-all duration-300 ease-out transform max-h-[calc(100vh-3.5rem)] overflow-y-auto ${
-            isOpen ? "translate-y-0 opacity-100 scale-100" : "-translate-y-4 opacity-0 scale-[0.98]"
+          className={`absolute top-14 left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 ease-out transform max-h-[calc(100vh-3.5rem)] overflow-y-auto ${
+            isOpen ? "translate-y-0 opacity-100 scale-100" : "-translate-y-6 opacity-0 scale-[0.97]"
           }`}
         >
+          
+          {/* Cover story mobile banner */}
+          <div className="px-4 py-3 bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-amber-500/10 border-b border-border flex items-center justify-between">
+            <Link
+              href="/founder-stories/michael-truell-anysphere-cursor"
+              onClick={closeAll}
+              className="flex items-center gap-2.5 group"
+            >
+              <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 to-rose-500 shrink-0">
+                <div className="relative w-7 h-7 rounded-full overflow-hidden border border-background">
+                  <Image
+                    src="https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg"
+                    alt="Michael Truell"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
+                  COVER STORY
+                </span>
+                <span className="text-xs font-bold text-foreground group-hover:text-amber-600 transition-colors">
+                  Michael Truell • Cursor
+                </span>
+              </div>
+            </Link>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </div>
+
           
           {/* MOBILE SEARCH - Always at top */}
           <div className="px-5 py-4 border-b border-border/30 relative">
