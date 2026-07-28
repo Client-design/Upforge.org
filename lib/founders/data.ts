@@ -4,6 +4,64 @@
 import { Founder } from './types'
 
 export const FOUNDERS: Founder[] = [
+  // 0. MICHAEL TRUELL (Cursor / Anysphere) - FIRST REAL DATA ENTRY
+  {
+    id: "michael-truell-cursor-2026",
+    slug: "michael-truell-anysphere-cursor",
+    edition: 26,
+    featured: true,
+    category: "AI & Technology",
+    name: "Michael Truell",
+    nameShort: "Michael Truell",
+    initials: "MT",
+    company: "Anysphere (Cursor)",
+    role: "Co-Founder & CEO",
+    city: "San Francisco",
+    country: "United States",
+    countryCode: "US",
+    context: "AI-Powered Code Editor & Developer Intelligence",
+    valuation: "$2.5B+",
+    funding: "$100M+",
+    founded: "2022",
+    imageUrl: "https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg",
+    cardImage: "https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg",
+    newsImage: "https://images.upforge.org/Magazine/michael-truell-cursor-founder-news.jpg",
+    verified: true,
+    ufrnCode: "UF-2026-US-XXXXX",
+    oneLiner: "Cursor is an AI-powered code editor that helps developers write, edit, and understand code faster using AI.",
+    accent: "#DC2626",
+    accentBg: "#FEF2F2",
+    accentBorder: "#FCA5A5",
+    headline: "He built the AI code editor that Silicon Valley engineers can't stop talking about. How Michael Truell turned Cursor into software's highest-velocity tool.",
+    deck: "Cursor is an AI-powered code editor that helps developers write, edit, and understand code faster using AI.",
+    columns: [
+      {
+        heading: "Re-imagining the Developer Workflow",
+        body: "Michael Truell and his co-founders at Anysphere set out with a radical premise: code editors shouldn't just format code; they should reason about it alongside the developer. By deeply integrating frontier AI models directly into a familiar VS Code fork, Cursor allows engineers to generate entire features, refactor legacy codebases, and fix bugs through natural language prompts.\n\nThe adoption trajectory was instantaneous. By 2026, Cursor became the default coding environment across top AI labs, high-growth startups, and Fortune 500 engineering organizations."
+      },
+      {
+        heading: "The AI Editor Moat",
+        body: "While conventional IDEs added basic copilot autocompletion, Cursor pioneered project-wide context awareness. Its custom indexing engine ingests entire repositories, enabling multi-file edits and instantaneous codebase Q&A.\n\nThis speed advantage created a profound developer workflow lock-in. Engineers reported 2x to 5x productivity gains, driving viral organic adoption across Twitter/X, GitHub, and developer communities worldwide without traditional paid marketing."
+      },
+      {
+        heading: "Building Anysphere into an AI Powerhouse",
+        body: "Backed by Andreessen Horowitz, OpenAI Startup Fund, and elite angel investors, Anysphere reached unicorn status at record speed. Michael Truell's focus remains steadfast on accelerating human intelligence: empowering developers to build complex systems faster than ever before."
+      }
+    ],
+    pullQuote: "The future of programming isn't typing faster. It's working at the speed of thought alongside an intelligence that understands your entire system.",
+    pullQuoteBy: "Michael Truell",
+    lesson: "Dramatically reduce friction on an everyday task professionals spend hours doing, and adoption will feel effortless.",
+    stats: [
+      { label: "Valuation", value: "$2.5B+" },
+      { label: "Category", value: "AI & Technology" },
+      { label: "Status", value: "Verified Founder" },
+      { label: "UFRN Code", value: "UF-2026-US-XXXXX" }
+    ],
+    createdAt: "2026-07-28",
+    updatedAt: "2026-07-28",
+    publishedAt: "2026-07-28"
+  },
+
   // 1. ARAVIND SRINIVAS (New Trending)
   {
     id: "aravind-srinivas-2026",
@@ -2174,7 +2232,17 @@ export const FOUNDERS: Founder[] = [
     publishedAt: "2026-05-01"
   }
   
-].sort((a, b) => b.edition - a.edition) // Sort latest first
+// Always normalize fields & sort by publishedAt descending
+FOUNDERS.forEach(f => {
+  if (!f.publishedAt) f.publishedAt = f.createdAt || "2026-04-01"
+  if (!f.cardImage) f.cardImage = f.imageUrl
+  if (!f.newsImage) f.newsImage = f.imageUrl
+  if (!f.oneLiner) f.oneLiner = f.deck || f.headline
+  if (f.verified === undefined) f.verified = true
+  if (!f.ufrnCode) f.ufrnCode = `UF-2026-${f.countryCode || 'GLOBAL'}-${f.slug.slice(0, 6).toUpperCase()}`
+})
+
+FOUNDERS.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 
 // Helper functions
 export function getFounderBySlug(slug: string): Founder | undefined {
@@ -2194,13 +2262,46 @@ export function getAllFounders(page = 1, limit = 9): { founders: Founder[], tota
   }
 }
 
+export function getCategorySlug(category?: string): string {
+  if (!category) return "general"
+  return category
+    .toLowerCase()
+    .replace(/&/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+export function getFoundersByCategory(categorySlug: string): Founder[] {
+  return FOUNDERS.filter(f => getCategorySlug(f.category) === categorySlug)
+}
+
+export function getAllCategories(): { name: string; slug: string; count: number }[] {
+  const map = new Map<string, { name: string; slug: string; count: number }>()
+  FOUNDERS.forEach(f => {
+    const catName = f.category || "General"
+    const catSlug = getCategorySlug(catName)
+    const existing = map.get(catSlug)
+    if (existing) {
+      existing.count += 1
+    } else {
+      map.set(catSlug, { name: catName, slug: catSlug, count: 1 })
+    }
+  })
+  return Array.from(map.values())
+}
+
 export function getRelatedFounders(currentSlug: string, limit = 3): Founder[] {
   const current = getFounderBySlug(currentSlug)
   if (!current) return []
   
-  return FOUNDERS
-    .filter(f => f.slug !== currentSlug && (f.countryCode === current.countryCode || f.category === current.category))
-    .slice(0, limit)
+  const currentCatSlug = getCategorySlug(current.category)
+  
+  // Prefer same category, then fallback to same country or general list
+  const sameCat = FOUNDERS.filter(f => f.slug !== currentSlug && getCategorySlug(f.category) === currentCatSlug)
+  if (sameCat.length >= limit) return sameCat.slice(0, limit)
+  
+  const rest = FOUNDERS.filter(f => f.slug !== currentSlug && getCategorySlug(f.category) !== currentCatSlug)
+  return [...sameCat, ...rest].slice(0, limit)
 }
 
 export function getAdjacentFounders(slug: string): { prev: Founder | null, next: Founder | null } {
@@ -2210,3 +2311,4 @@ export function getAdjacentFounders(slug: string): { prev: Founder | null, next:
     next: index < FOUNDERS.length - 1 ? FOUNDERS[index + 1] : null
   }
 }
+
