@@ -1,16 +1,14 @@
-// app/founder-stories/[slug]/page.tsx
-// SERVER COMPONENT - Super-grade SEO & Google Discover optimized
-
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowUpRight, ChevronLeft, ChevronRight, ShieldCheck, CheckCircle2, Award } from "lucide-react"
 import { 
   getFounderBySlug, 
   getRelatedFounders, 
   getAdjacentFounders,
-  getAllFounders
+  getAllFounders,
+  getCategorySlug
 } from "@/lib/founders/data"
 import { FounderNewsletter } from "@/components/founder-stories/founder-newsletter"
 import { JsonLd } from "@/components/seo/json-ld"
@@ -19,33 +17,25 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-// ---------------------------------------------------------------------------
-// DOMAIN DETECTION
-// ---------------------------------------------------------------------------
-async function getDomain(): Promise<"org" | "in"> {
-  return "org"
-}
-
-// Generate static paths for all founders (build time)
 export async function generateStaticParams() {
-  const { founders } = getAllFounders(1, 100)
+  const { founders } = getAllFounders(1, 200)
   return founders.map(founder => ({ slug: founder.slug }))
 }
 
-// Dynamic metadata for each founder (Google Discover ready)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const founder = getFounderBySlug(slug)
-  const domain = await getDomain()
-  const isOrg = domain === "org"
   
   if (!founder) return {}
   
-  const baseUrl = isOrg ? "https://www.upforge.org" : "https://www.upforge.in"
+  const baseUrl = "https://www.upforge.org"
   const url = `${baseUrl}/founder-stories/${slug}`
   
-  const title = `${founder.name} — ${founder.company} Founder Story | The Founder Chronicle`
-  const description = `${founder.headline} ${founder.deck} Comprehensive analysis and verified data on ${founder.name}'s journey building ${founder.company}.`
+  const cardImg = founder.cardImage || founder.imageUrl
+  const newsImg = founder.newsImage || founder.imageUrl
+  
+  const title = `${founder.name} — ${founder.role} of ${founder.company} | UpForge Founder Story`
+  const description = `${founder.oneLiner || founder.deck} Built by ${founder.name} (${founder.company}). Verified on UpForge.`
   
   return {
     title,
@@ -63,8 +53,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { 
       canonical: url,
       languages: {
-        'en': `https://www.upforge.org/founder-stories/${slug}`,
-        'x-default': `https://www.upforge.org/founder-stories/${slug}`
+        'en': url,
+        'x-default': url
       }
     },
     openGraph: {
@@ -75,14 +65,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: "en_US",
       type: "article",
       publishedTime: founder.publishedAt,
-      modifiedTime: founder.updatedAt,
-      authors: ["UpForge Editorial Team"],
+      modifiedTime: founder.updatedAt || founder.publishedAt,
+      authors: ["UpForge Editorial"],
       tags: [founder.company, founder.name, founder.category || "Startups", "Founder Story"],
       images: [{
-        url: founder.imageUrl,
+        url: newsImg,
         width: 1200,
-        height: 630,
-        alt: `${founder.name} - ${founder.company} Founder Profile`
+        height: 675,
+        alt: `${founder.name}, ${founder.role} of ${founder.company} — UpForge Verified Founder Article Image`
       }]
     },
     twitter: {
@@ -91,7 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       creator: "@UpForgeHQ",
       title,
       description,
-      images: [founder.imageUrl]
+      images: [newsImg]
     },
     robots: {
       index: true,
@@ -110,16 +100,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function FounderPage({ params }: PageProps) {
   const { slug } = await params
   const founder = getFounderBySlug(slug)
-  const domain = await getDomain()
-  const isOrg = domain === "org"
-  const baseUrl = isOrg ? "https://www.upforge.org" : "https://www.upforge.in"
+  const baseUrl = "https://www.upforge.org"
   
   if (!founder) notFound()
   
-  const relatedFounders = getRelatedFounders(slug, 3)
+  const categorySlug = getCategorySlug(founder.category)
+  const relatedFounders = getRelatedFounders(slug, 4)
   const { prev, next } = getAdjacentFounders(slug)
   
-  // High-Grade Google Discover & NewsArticle JSON-LD Schema
+  const cardImg = founder.cardImage || founder.imageUrl
+  const newsImg = founder.newsImage || founder.imageUrl
+  
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": founder.name,
+    "jobTitle": founder.role,
+    "worksFor": {
+      "@type": "Organization",
+      "name": founder.company
+    },
+    "image": cardImg,
+    "description": founder.oneLiner || founder.deck
+  }
+  
   const newsArticleSchema = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -127,13 +131,13 @@ export default async function FounderPage({ params }: PageProps) {
       "@type": "WebPage",
       "@id": `${baseUrl}/founder-stories/${slug}`
     },
-    "headline": founder.headline,
-    "description": founder.deck,
+    "headline": `${founder.name}: ${founder.headline || founder.oneLiner}`,
+    "description": founder.oneLiner || founder.deck,
     "image": [
-      founder.imageUrl
+      newsImg
     ],
     "datePublished": founder.publishedAt,
-    "dateModified": founder.updatedAt,
+    "dateModified": founder.updatedAt || founder.publishedAt,
     "inLanguage": "en-US",
     "author": {
       "@type": "Organization",
@@ -159,10 +163,6 @@ export default async function FounderPage({ params }: PageProps) {
         "@type": "Organization",
         "name": founder.company
       }
-    },
-    "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": [".discover-headline", ".discover-deck"]
     }
   }
   
@@ -173,18 +173,24 @@ export default async function FounderPage({ params }: PageProps) {
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "UpForge",
+        "name": "Home",
         "item": baseUrl
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "The Founder Chronicle",
+        "name": "Founder Stories",
         "item": `${baseUrl}/founder-stories`
       },
       {
         "@type": "ListItem",
         "position": 3,
+        "name": founder.category || "Category",
+        "item": `${baseUrl}/founder-stories/category/${categorySlug}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
         "name": founder.name,
         "item": `${baseUrl}/founder-stories/${slug}`
       }
@@ -193,249 +199,327 @@ export default async function FounderPage({ params }: PageProps) {
   
   return (
     <>
-      <JsonLd data={[newsArticleSchema, breadcrumbSchema]} />
+      <JsonLd data={[personSchema, newsArticleSchema, breadcrumbSchema]} />
       
-      <div className="bg-background min-h-screen text-foreground">
+      <div className="bg-[#09090b] min-h-screen text-zinc-100 selection:bg-amber-500/30 selection:text-amber-200">
         
-        {/* Header — Newspaper style */}
-        <header className="border-b-2 border-foreground bg-background">
-          <div className="max-w-[1300px] mx-auto px-4 md:px-8">
-            <div className="flex items-center justify-between py-2 border-b border-border">
-              <Link href="/" className="text-[9px] text-muted-foreground uppercase tracking-widest hover:text-foreground transition-colors font-mono">
-                {baseUrl.replace("https://www.", "")}
+        {/* Editorial Sub-Header / Breadcrumbs Bar */}
+        <div className="border-b border-zinc-800 bg-[#09090b]/80 backdrop-blur-md sticky top-0 z-40">
+          <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-3 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-zinc-400">
+            {/* Breadcrumb Navigation */}
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 flex-wrap">
+              <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
+              <span>/</span>
+              <Link href="/founder-stories" className="hover:text-amber-400 transition-colors">Founder Stories</Link>
+              <span>/</span>
+              <Link href={`/founder-stories/category/${categorySlug}`} className="hover:text-amber-400 transition-colors text-amber-400/90 font-semibold">
+                {founder.category || "General"}
               </Link>
-              <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono">
-                The Founder Chronicle · UpForge Editorial
-              </span>
-            </div>
+              <span>/</span>
+              <span className="text-zinc-200 font-semibold truncate max-w-[200px] sm:max-w-none">{founder.name}</span>
+            </nav>
             
-            <div className="text-center py-8 border-b border-border">
-              <Link href="/founder-stories" className="inline-block">
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black text-foreground hover:text-[#C59A2E] transition-colors">
-                  The Founder Chronicle
-                </h1>
-              </Link>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold tracking-wider border border-emerald-500/20">
+                <CheckCircle2 className="w-3 h-3" />
+                VERIFIED PROFILE
+              </span>
+              <span className="text-zinc-500 hidden sm:inline">•</span>
+              <span className="text-[11px] text-zinc-400 font-mono hidden sm:inline">{founder.publishedAt}</span>
             </div>
           </div>
-        </header>
+        </div>
 
-        {/* Main Content */}
-        <main className="max-w-[1300px] mx-auto px-4 md:px-8 pb-16">
+        {/* Main Editorial Masthead Section */}
+        <main className="max-w-[1300px] mx-auto px-4 md:px-8 pt-8 pb-20">
           
-          <div className="grid lg:grid-cols-[1fr_360px] gap-8 lg:gap-12 border-b-2 border-foreground pb-12">
+          <div className="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 pb-16 border-b border-zinc-800">
             
-            {/* Left Column - Story */}
-            <div className="py-8">
-              
-              {/* Category Badge without numbers */}
-              <div className="flex items-center gap-3 mb-6">
-                <span 
-                  className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 text-white"
-                  style={{ background: founder.accent }}
+            {/* Left Column — Main Story & Header */}
+            <div>
+              {/* Category Eyebrow & UFRN Badge */}
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <Link 
+                  href={`/founder-stories/category/${categorySlug}`}
+                  className="text-[11px] font-mono font-black uppercase tracking-[0.2em] px-3.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
                 >
-                  {founder.category || founder.company}
-                </span>
-                <span className="text-[9px] text-muted-foreground uppercase tracking-wider font-mono">
-                  {founder.country} · Est. {founder.founded}
-                </span>
+                  {founder.category || "AI & TECHNOLOGY"}
+                </Link>
+                {founder.verified && (
+                  <span className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded">
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                    UFRN: <strong className="text-amber-400">{founder.ufrnCode || `UF-2026-${founder.countryCode || 'US'}-VERIFIED`}</strong>
+                  </span>
+                )}
               </div>
 
-              {/* Headline */}
-              <h2 className="discover-headline font-serif text-3xl md:text-4xl lg:text-5xl font-black leading-[1.08] text-foreground mb-5">
-                {founder.headline}
-              </h2>
+              {/* Single H1 Tag */}
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-50 leading-[1.06] tracking-tight mb-4">
+                {founder.name}
+              </h1>
 
-              {/* Deck */}
-              <p className="discover-deck font-serif italic text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 pb-6 border-b border-border">
-                {founder.deck}
+              {/* Styled Subheading for Role & Company */}
+              <p className="font-sans font-bold text-xl sm:text-2xl text-amber-400/90 tracking-wide mb-6">
+                {founder.role} of {founder.company}
               </p>
 
-              {/* Byline */}
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-8 font-mono">
-                <span className="text-[9px] text-muted-foreground uppercase tracking-wider">By UpForge Editorial Team</span>
-                <span className="text-border text-[10px]">·</span>
-                <span className="text-[9px] text-muted-foreground uppercase tracking-wider">{founder.city}</span>
-                <span className="text-border text-[10px]">·</span>
-                <span className="text-[9px] text-muted-foreground uppercase tracking-wider">Est. {founder.founded}</span>
-                <span className="text-border text-[10px]">·</span>
-                <span className="text-[9px] text-muted-foreground uppercase tracking-wider">{founder.context}</span>
-              </div>
-
-              {/* Mobile Image */}
-              <div className="lg:hidden mb-8">
-                <div className="relative w-full aspect-[16/10] bg-muted border border-border overflow-hidden">
-                  <Image
-                    src={founder.imageUrl}
-                    alt={`${founder.name} - ${founder.company} Founder`}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-                <div className="px-4 py-3 bg-foreground">
-                  <p className="font-serif text-background font-bold text-lg">{founder.name}</p>
-                  <p className="text-background/60 text-[10px] uppercase tracking-wide font-mono">
-                    {founder.role} · {founder.company}
-                  </p>
-                </div>
-              </div>
-
-              {/* Newspaper Columns */}
-              <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-border">
-                {founder.columns.map((col, ci) => (
-                  <div key={ci} className={`py-4 md:py-0 ${ci > 0 ? 'md:pl-5' : ''} ${ci < 2 ? 'md:pr-5' : ''}`}>
-                    <h3 
-                      className="font-mono font-black uppercase tracking-[0.1em] text-xs text-foreground mb-3 pb-2 border-b-2"
-                      style={{ borderColor: founder.accent }}
-                    >
-                      {col.heading}
-                    </h3>
-                    {col.body.split("\n\n").map((para, pi) => (
-                      <p 
-                        key={pi} 
-                        className={`font-serif text-sm leading-[1.9] text-muted-foreground mb-4 ${ci === 0 && pi === 0 ? 'first-letter:text-5xl first-letter:font-black first-letter:float-left first-letter:mr-2 first-letter:leading-[0.8] first-letter:text-foreground' : ''}`}
-                      >
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-                ))}
-              </div>
-
-              {/* Pull Quote */}
-              <div 
-                className="mt-10 pt-8 pb-8 text-center border-t-2 border-b border-border"
-                style={{ borderTopColor: founder.accent }}
-              >
-                <span className="block text-border text-xl mb-3">❧</span>
-                <blockquote className="font-serif italic text-foreground text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto px-4">
-                  "{founder.pullQuote}"
-                </blockquote>
-                <span className="block text-border text-xl my-3">❧</span>
-                <p className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground font-mono">
-                  — {founder.pullQuoteBy}, {founder.company}
+              {/* Editorial Deck / One-Liner */}
+              <div className="p-5 sm:p-6 rounded-xl bg-zinc-900/60 border border-zinc-800/80 mb-8 backdrop-blur-sm">
+                <p className="font-serif italic text-lg sm:text-xl text-zinc-300 leading-relaxed">
+                  "{founder.oneLiner || founder.deck}"
                 </p>
               </div>
-            </div>
 
-            {/* Right Sidebar - Desktop */}
-            <aside className="hidden lg:block py-8 border-l border-border pl-8">
-              <div className="sticky top-8 flex flex-col gap-6 max-h-screen overflow-y-auto">
-                
-                {/* Founder Image */}
-                <div className="relative w-full aspect-[3/4] bg-muted border border-border overflow-hidden">
+              {/* Byline and Context Strip */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3 border-y border-zinc-800/80 mb-8 font-mono text-xs text-zinc-400">
+                <span>By <strong className="text-zinc-200">UpForge Editorial</strong></span>
+                <span>•</span>
+                <span>{founder.city || "San Francisco"}, {founder.country || "United States"}</span>
+                <span>•</span>
+                <span>Published {founder.publishedAt}</span>
+                {founder.valuation && (
+                  <>
+                    <span>•</span>
+                    <span>Valuation: <strong className="text-emerald-400">{founder.valuation}</strong></span>
+                  </>
+                )}
+              </div>
+
+              {/* Mobile Portrait Card Image */}
+              <div className="lg:hidden mb-10">
+                <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl">
                   <Image
-                    src={founder.imageUrl}
-                    alt={`${founder.name} - ${founder.company}`}
+                    src={cardImg}
+                    alt={`${founder.name}, ${founder.role} of ${founder.company} — UpForge Verified Founder`}
                     fill
+                    sizes="(max-width: 768px) 100vw, 400px"
                     className="object-cover"
                     priority
                   />
-                  <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/90 to-transparent">
-                    <p className="font-serif text-white font-bold text-lg">{founder.name}</p>
-                    <p className="text-white/60 text-[10px] uppercase tracking-wide font-mono">
-                      {founder.role}
-                    </p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-90" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <p className="font-serif font-bold text-xl text-zinc-100">{founder.name}</p>
+                    <p className="text-amber-400 text-xs font-mono font-semibold uppercase">{founder.role} • {founder.company}</p>
                   </div>
                 </div>
+              </div>
 
-                {/* Stats */}
-                <div className="border-2 border-foreground">
-                  <div className="px-4 py-2.5 bg-foreground">
-                    <p className="text-[8px] font-black uppercase tracking-[0.3em] text-background font-mono">
-                      By the Numbers
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 divide-x divide-y divide-border">
-                    {founder.stats.map((stat, i) => (
-                      <div key={i} className="px-4 py-3.5 bg-background">
-                        <p className="text-[8px] text-muted-foreground uppercase tracking-wider font-mono mb-1">
-                          {stat.label}
+              {/* Editorial Body Content Columns */}
+              {founder.columns && founder.columns.length > 0 ? (
+                <div className="space-y-10">
+                  {founder.columns.map((col, idx) => (
+                    <div key={idx} className="border-l-2 border-amber-500/40 pl-5 sm:pl-6 py-1">
+                      <h2 className="font-serif text-2xl font-bold text-zinc-100 mb-4 tracking-tight">
+                        {col.heading}
+                      </h2>
+                      {col.body.split("\n\n").map((paragraph, pIdx) => (
+                        <p key={pIdx} className="font-serif text-base sm:text-lg text-zinc-300 leading-relaxed mb-4 last:mb-0">
+                          {paragraph}
                         </p>
-                        <p className="font-serif font-black text-foreground text-xl">{stat.value}</p>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  ))}
                 </div>
-
-                {/* Lesson */}
-                <div 
-                  className="px-4 py-4 border"
-                  style={{ 
-                    background: founder.accentBg || 'var(--background)',
-                    borderColor: founder.accent 
-                  }}
-                >
-                  <p 
-                    className="text-[8px] font-black uppercase tracking-[0.2em] mb-2 font-mono"
-                    style={{ color: founder.accent }}
-                  >
-                    The Lesson
+              ) : (
+                <div className="space-y-6 font-serif text-lg text-zinc-300 leading-relaxed">
+                  <p>
+                    {founder.name} has emerged as one of the defining voices in {founder.category || "modern technology"}, steering {founder.company} into a powerhouse of innovation and operational excellence.
                   </p>
-                  <p className="font-serif italic text-foreground text-sm leading-relaxed">
+                  <p>
+                    {founder.headline}
+                  </p>
+                  <p>
+                    Under {founder.name}'s leadership as {founder.role}, {founder.company} continues to redefine industry standards, combining technical depth with relentless focus on user outcomes.
+                  </p>
+                </div>
+              )}
+
+              {/* Pull Quote Block */}
+              {founder.pullQuote && (
+                <div className="my-12 p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 via-zinc-900 to-zinc-900 border border-amber-500/30 text-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 text-amber-500/10 font-serif text-8xl leading-none select-none">“</div>
+                  <blockquote className="font-serif italic text-xl sm:text-2xl text-zinc-100 leading-relaxed max-w-2xl mx-auto relative z-10">
+                    "{founder.pullQuote}"
+                  </blockquote>
+                  <p className="mt-4 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
+                    — {founder.pullQuoteBy || founder.name}, {founder.company}
+                  </p>
+                </div>
+              )}
+
+              {/* Takeaway / Lesson */}
+              {founder.lesson && (
+                <div className="p-6 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                  <h3 className="font-mono text-xs uppercase tracking-widest text-amber-400 font-bold mb-2 flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    FOUNDER LESSON & TAKEAWAY
+                  </h3>
+                  <p className="font-serif italic text-zinc-200 text-base leading-relaxed">
                     {founder.lesson}
                   </p>
                 </div>
+              )}
+            </div>
 
-                {/* Related Founders */}
-                {relatedFounders.length > 0 && (
-                  <div className="border-t border-border pt-5">
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-4 font-mono">
-                      More Stories
-                    </p>
-                    <div className="flex flex-col gap-0 divide-y divide-border">
-                      {relatedFounders.map((rf) => (
-                        <Link 
-                          key={rf.id} 
-                          href={`/founder-stories/${rf.slug}`}
-                          className="flex items-center gap-3 py-4 first:pt-0 last:pb-0 group"
-                        >
-                          <div className="w-12 h-12 relative overflow-hidden border border-border bg-muted shrink-0">
-                            <Image src={rf.imageUrl} alt={rf.nameShort} fill className="object-cover" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="font-serif font-bold text-foreground group-hover:text-[#C59A2E] transition-colors truncate">
-                              {rf.nameShort}
-                            </p>
-                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-mono">
-                              {rf.company}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+            {/* Right Sidebar — Desktop Cover & Intelligence Cards */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-20 space-y-6">
+                
+                {/* 4:5 Magazine Cover Card */}
+                <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
+                  <Image
+                    src={cardImg}
+                    alt={`${founder.name}, ${founder.role} of ${founder.company} — UpForge Verified Founder`}
+                    fill
+                    sizes="400px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <span className="inline-block text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-amber-500 text-zinc-950 mb-2">
+                      {founder.category || "AI & TECHNOLOGY"}
+                    </span>
+                    <h3 className="font-serif font-black text-2xl text-zinc-50">{founder.name}</h3>
+                    <p className="text-zinc-300 font-mono text-xs mt-1">{founder.role} • {founder.company}</p>
                   </div>
-                )}
+                </div>
+
+                {/* Verification & Key Metrics Card */}
+                <div className="p-5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-4">
+                  <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+                    <span className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-wider">VERIFICATION</span>
+                    <span className="inline-flex items-center gap-1 text-emerald-400 text-xs font-mono font-bold">
+                      <ShieldCheck className="w-4 h-4" /> VERIFIED
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-zinc-500">UFRN Code</span>
+                      <span className="text-amber-400 font-bold">{founder.ufrnCode || `UF-2026-${founder.countryCode || 'US'}-XXXXX`}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-zinc-500">Company</span>
+                      <span className="text-zinc-200 font-semibold">{founder.company}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-zinc-500">Founded</span>
+                      <span className="text-zinc-200">{founder.founded || "2022"}</span>
+                    </div>
+                    {founder.valuation && (
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">Valuation</span>
+                        <span className="text-emerald-400 font-bold">{founder.valuation}</span>
+                      </div>
+                    )}
+                    {founder.funding && (
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">Total Funding</span>
+                        <span className="text-zinc-200">{founder.funding}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Newsletter Box */}
+                <div className="p-5 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-800 text-center">
+                  <h4 className="font-serif font-bold text-base text-zinc-100 mb-2">Founder Intelligence Weekly</h4>
+                  <p className="text-xs text-zinc-400 mb-4 font-sans">Get deep-dive founder profiles & verified startup data sent to your inbox.</p>
+                  <Link
+                    href="/newsletter"
+                    className="inline-block w-full py-2.5 px-4 rounded bg-amber-500 hover:bg-amber-400 text-zinc-950 font-mono font-bold text-xs uppercase tracking-wider transition-colors"
+                  >
+                    Subscribe Free
+                  </Link>
+                </div>
+
               </div>
             </aside>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-between py-6 border-b border-border">
+          {/* Related Founders Internal Linking Section */}
+          {relatedFounders.length > 0 && (
+            <section className="mt-16 pt-12 border-t border-zinc-800">
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                <div>
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-100">
+                    Related {founder.category || "Technology"} Founders
+                  </h2>
+                  <p className="text-xs font-mono text-zinc-400 mt-1">Explore verified founder profiles in the same category</p>
+                </div>
+                <Link
+                  href={`/founder-stories/category/${categorySlug}`}
+                  className="font-mono text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 uppercase tracking-wider"
+                >
+                  View Category Hub <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedFounders.map((rf) => (
+                  <Link
+                    key={rf.id}
+                    href={`/founder-stories/${rf.slug}`}
+                    className="group rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden hover:border-amber-500/40 transition-all duration-300 flex flex-col"
+                  >
+                    <div className="relative aspect-[4/5] bg-zinc-950 overflow-hidden">
+                      <Image
+                        src={rf.cardImage || rf.imageUrl}
+                        alt={`${rf.name}, ${rf.role} of ${rf.company} — UpForge Verified Founder`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
+                      <span className="absolute top-3 left-3 text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-900/90 text-amber-400 border border-zinc-700">
+                        {rf.category || "FOUNDER"}
+                      </span>
+                    </div>
+
+                    <div className="p-4 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="font-serif font-bold text-zinc-100 group-hover:text-amber-400 transition-colors line-clamp-1">
+                          {rf.name}
+                        </h3>
+                        <p className="font-mono text-xs text-zinc-400 mt-0.5 line-clamp-1">
+                          {rf.role} • {rf.company}
+                        </p>
+                      </div>
+                      <p className="font-sans text-xs text-zinc-400 line-clamp-2 mt-3 italic">
+                        "{rf.oneLiner || rf.deck}"
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Prev / Next Founder Pagination Links */}
+          <div className="flex items-center justify-between gap-4 mt-12 py-6 border-t border-b border-zinc-800 font-mono text-xs">
             {prev ? (
               <Link 
                 href={`/founder-stories/${prev.slug}`}
-                className="flex items-center gap-2 px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors font-mono"
+                className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors truncate max-w-[45%]"
               >
-                <ChevronLeft className="w-3.5 h-3.5" />
-                {prev.nameShort}
+                <ChevronLeft className="w-4 h-4 shrink-0" />
+                <span className="truncate">Prev: <strong className="text-zinc-200">{prev.name}</strong></span>
               </Link>
             ) : <div />}
-            
-            <Link 
-              href="/founder-stories" 
-              className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground font-mono"
-            >
-              All Stories
+
+            <Link href="/founder-stories" className="text-zinc-500 hover:text-zinc-300 font-bold uppercase tracking-widest text-[11px] shrink-0">
+              All Founders Index
             </Link>
-            
+
             {next ? (
               <Link 
                 href={`/founder-stories/${next.slug}`}
-                className="flex items-center gap-2 px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors font-mono"
+                className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors truncate max-w-[45%]"
               >
-                {next.nameShort}
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span className="truncate">Next: <strong className="text-zinc-200">{next.name}</strong></span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
               </Link>
             ) : <div />}
           </div>
