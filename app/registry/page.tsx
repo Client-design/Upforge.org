@@ -299,15 +299,38 @@ export default async function RegistryPage({ searchParams }: PageProps) {
         <div className="flex-1 relative z-10 w-full flex flex-col">
 
           {/* ══════════════════════════════════════
-              HEADER
+              HEADER MASTHEAD
           ══════════════════════════════════════ */}
-          <section className="border-b-[2px] border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-5 pb-6 flex flex-col items-center text-center">
+          <header className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md w-full">
+            <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
+              <div className="flex items-center gap-2.5">
+                <span className="inline-block w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
+                <span className="font-bold text-foreground uppercase tracking-widest text-[10px] sm:text-[11px]">
+                  UPFORGE REGISTRY • GLOBAL VERIFIED LEDGER
+                </span>
+              </div>
+              <div className="flex items-center gap-4 text-[11px]">
+                <span className="hidden sm:inline font-mono font-bold tracking-wider">OFFICIAL PUBLIC INDEX</span>
+              </div>
+            </div>
+          </header>
+
+          <section className="border-b-[2px] border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-4 pb-6 flex flex-col items-center text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C59A2E]" />
+              <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+                INDEPENDENT STARTUP INTELLIGENCE
+              </span>
+            </div>
             <h1
               className="mast-h1 text-3xl md:text-[44px] lg:text-[54px] font-bold leading-[1.05] text-foreground mb-3 max-w-3xl"
               style={{ fontFamily: "'Georgia', serif" }}
             >
               Global Startup Registry
             </h1>
+            <p className="font-serif italic text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+              The standardized public ledger of verified emerging companies, UFRN identifiers, and founder records.
+            </p>
           </section>
 
           {/* ── Trending Sectors Tabs ── */}
