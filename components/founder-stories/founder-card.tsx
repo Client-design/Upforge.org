@@ -1,81 +1,72 @@
-// components/founder-stories/founder-card.tsx
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, CheckCircle2 } from "lucide-react"
 import { Founder } from "@/lib/founders/types"
 import { useState } from "react"
 
 export function FounderCard({ founder }: { founder: Founder }) {
   const [imageFailed, setImageFailed] = useState(false)
+  const cardImg = founder.cardImage || founder.imageUrl
 
   return (
     <Link href={`/founder-stories/${founder.slug}`} className="group block h-full">
-      <article className="flex flex-col h-full bg-background border border-border hover:border-foreground transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
-        <div className="relative w-full h-60 overflow-hidden bg-muted">
+      <article className="flex flex-col h-full rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/40 transition-all duration-300 hover:shadow-xl overflow-hidden">
+        <div className="relative w-full aspect-[4/5] bg-zinc-950 overflow-hidden">
           {!imageFailed ? (
             <>
               <Image
-                src={founder.imageUrl}
-                alt={`${founder.name} - ${founder.company}`}
+                src={cardImg}
+                alt={`${founder.name}, ${founder.role} of ${founder.company} — UpForge Verified Founder`}
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={() => setImageFailed(true)}
+                loading="lazy"
               />
-              {/* Subtle gradient for depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-90" />
             </>
           ) : (
             <div
-              className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white"
-              style={{ background: founder.accent }}
+              className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-zinc-950"
+              style={{ background: founder.accent || "#DC2626" }}
             >
               {founder.initials}
             </div>
           )}
 
-          {/* Clean Category Badge without ranking numbers */}
-          <div
-            className="absolute top-3 left-3 px-3 py-1 text-white text-[9px] font-black uppercase tracking-wider shadow-xs backdrop-blur-xs"
-            style={{ background: founder.accent }}
-          >
-            {founder.category || founder.company}
+          {/* Badges */}
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+            <span className="px-2.5 py-1 text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider bg-zinc-950/90 border border-zinc-700/80 rounded backdrop-blur-xs">
+              {founder.category || founder.company}
+            </span>
+            {founder.verified && (
+              <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-400 bg-zinc-950/90 px-2 py-1 rounded border border-emerald-500/20">
+                <CheckCircle2 className="w-3 h-3" /> VERIFIED
+              </span>
+            )}
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4">
+            <h3 className="font-serif text-2xl font-black text-zinc-50 group-hover:text-amber-400 transition-colors leading-tight">
+              {founder.name}
+            </h3>
+            <p className="font-mono text-xs uppercase tracking-wider text-amber-400/90 font-semibold mt-1">
+              {founder.role} • {founder.company}
+            </p>
           </div>
         </div>
 
-        <div className="p-5 flex-1 flex flex-col">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-[8.5px] font-black uppercase tracking-[0.15em]" style={{ color: founder.accent }}>
-              {founder.country}
-            </span>
-            <span className="text-border">·</span>
-            <span className="text-[9px] text-muted-foreground uppercase tracking-wider font-mono">
-              Est. {founder.founded}
-            </span>
-          </div>
-
-          <h3 className="font-serif text-xl font-bold text-foreground leading-tight mb-2 group-hover:text-[#C59A2E] transition-colors">
-            {founder.nameShort}
-          </h3>
-
-          <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 font-mono">
-            {founder.company}
+        <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+          <p className="text-sm text-zinc-300 leading-relaxed font-serif italic line-clamp-3">
+            "{founder.oneLiner || founder.deck || founder.headline}"
           </p>
 
-          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 font-serif italic mb-4">
-            {founder.headline}
-          </p>
-
-          <div className="mt-auto pt-4 border-t border-border flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {founder.stats.slice(0, 2).map((stat, i) => (
-                <div key={i}>
-                  <p className="text-[8px] text-muted-foreground uppercase tracking-wider font-mono">{stat.label}</p>
-                  <p className="text-sm font-bold text-foreground">{stat.value}</p>
-                </div>
-              ))}
-            </div>
-            <ArrowUpRight className="w-4 h-4 text-border group-hover:text-[#C59A2E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+          <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between font-mono text-xs text-zinc-400">
+            <span>{founder.city || founder.country || "San Francisco"}</span>
+            <span className="text-amber-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 font-bold">
+              Read Story <ArrowUpRight className="w-3.5 h-3.5" />
+            </span>
           </div>
         </div>
       </article>
