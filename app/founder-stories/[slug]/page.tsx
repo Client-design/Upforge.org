@@ -141,8 +141,8 @@ export default async function FounderPage({ params }: PageProps) {
     "inLanguage": "en-US",
     "author": {
       "@type": "Organization",
-      "name": "UpForge Editorial",
-      "url": baseUrl
+      "name": "UpForge Editorial Board",
+      "url": `${baseUrl}/editorial-standards`
     },
     "publisher": {
       "@type": "Organization",
