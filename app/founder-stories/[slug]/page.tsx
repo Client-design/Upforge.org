@@ -248,9 +248,10 @@ export default async function FounderPage({ params }: PageProps) {
                 {founder.verified && (
                   <span className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded">
                     <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                    UFRN: <strong className="text-amber-400">{founder.ufrnCode || `UF-2026-${founder.countryCode || 'US'}-VERIFIED`}</strong>
+                    <strong className="text-amber-400">VERIFIED FOUNDER</strong>
                   </span>
                 )}
+
               </div>
 
               {/* Single H1 Tag */}
