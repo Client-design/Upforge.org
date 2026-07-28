@@ -3,11 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight, CheckCircle2 } from "lucide-react"
 import { Founder } from "@/lib/founders/types"
+import { getCountryFlag } from "@/lib/founders/data"
 import { useState } from "react"
 
 export function FounderCard({ founder }: { founder: Founder }) {
   const [imageFailed, setImageFailed] = useState(false)
   const cardImg = founder.cardImage || founder.imageUrl
+  const flag = getCountryFlag(founder.country || founder.countryCode)
 
   return (
     <Link href={`/founder-stories/${founder.slug}`} className="group block h-full">
@@ -63,7 +65,10 @@ export function FounderCard({ founder }: { founder: Founder }) {
           </p>
 
           <div className="pt-3.5 border-t border-border flex items-center justify-between font-mono text-xs text-muted-foreground">
-            <span>{founder.city || founder.country || "San Francisco"}</span>
+            <span className="flex items-center gap-1.5 font-medium">
+              <span>{flag}</span>
+              <span>{founder.city || founder.country || "San Francisco"}</span>
+            </span>
             <span className="text-amber-600 dark:text-amber-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 font-bold">
               Read Story <ArrowUpRight className="w-3.5 h-3.5" />
             </span>
@@ -73,3 +78,4 @@ export function FounderCard({ founder }: { founder: Founder }) {
     </Link>
   )
 }
+
