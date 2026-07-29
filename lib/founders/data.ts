@@ -4,7 +4,121 @@
 import { Founder } from './types'
 
 export const FOUNDERS: Founder[] = [
-  // 0. MICHAEL TRUELL (Cursor / Anysphere) - FIRST REAL DATA ENTRY
+
+  {
+  id: "aravind-srinivas-perplexity-2026",
+  slug: "aravind-srinivas-perplexity-ai",
+  edition: 26,
+  featured: true,
+  category: "AI & Technology",
+  name: "Aravind Srinivas",
+  nameShort: "Aravind Srinivas",
+  initials: "AS",
+  company: "Perplexity AI",
+  role: "Co-Founder & CEO",
+  city: "San Francisco",
+  country: "United States",
+  countryCode: "US",
+  context: "AI Answer Engine & Intelligent Web Browsing",
+  valuation: "$9.0B+",
+  funding: "$500M+",
+  founded: "2022",
+  imageUrl: "https://images.upforge.org/Magazine/aravind-srinivas-perplexity-ai-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/aravind-srinivas-perplexity-ai-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/aravind-srinivas-perplexity-ai-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-US-XXXXX",
+  oneLiner: "Perplexity is an AI-powered answer engine that gives direct, cited answers to search queries instead of a list of links—also behind the Comet AI web browser.",
+  accent: "#0D9488",
+  accentBg: "#F0FDFA",
+  accentBorder: "#99F6E4",
+  headline: "He challenged legacy search and built the world's leading AI answer engine. How Aravind Srinivas is redefining how humanity navigates the web.",
+  deck: "Perplexity is an AI-powered answer engine that gives direct, cited answers to search queries instead of a list of links—also behind the Comet AI web browser.",
+  columns: [
+    {
+      heading: "Re-imagining Search from the Ground Up",
+      body: "Founded in 2022 by ex-OpenAI, Google, and DeepMind researcher Aravind Srinivas, Perplexity set out to fix the cluttered experience of modern web search. Instead of forcing users to sift through SEO-heavy blue links, Perplexity delivers direct, real-time syntheses backed by inline citations.\n\nThe platform's adoption exploded globally, growing to log over 300 million search queries per week as knowledge workers and researchers made it their primary discovery tool."
+    },
+    {
+      heading: "Beyond Search: The Comet AI Browser",
+      body: "To deepen its moat, Perplexity expanded beyond traditional search interfaces with the launch of Comet—an AI-powered web browser that embeds an intelligent assistant directly into the web navigation experience.\n\nComet transforms passive web browsing into an interactive workspace where users can summarize, cross-examine, and act on web information in real time."
+    },
+    {
+      heading: "The Orchestration Advantage",
+      body: "Srinivas has been at the forefront of the evolving AI landscape, emphasizing that the true value layer in AI is shifting. Rather than relying solely on raw foundation model scale, the real breakthrough product lies in the orchestration system—seamlessly pairing underlying intelligence with real-world web tools and execution capabilities."
+    }
+  ],
+  pullQuote: "The future of search isn't finding links—it's getting immediate, verified truth. The real winning product in AI is the orchestration system that pairs intelligence with real-world tools.",
+  pullQuoteBy: "Aravind Srinivas",
+  lesson: "Focus on delivering immediate, high-trust clarity over ad-driven discovery, and users will happily rewrite their daily digital habits.",
+  stats: [
+    { label: "Queries / Wk", value: "300M+" },
+    { label: "Category", value: "AI & Technology" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-US-XXXXX" }
+  ],
+  createdAt: "2026-07-29",
+  updatedAt: "2026-07-29",
+  publishedAt: "2026-07-29"
+},
+  
+{
+  id: "mukund-jha-emergent-2026",
+  slug: "mukund-jha-emergent-ai",
+  edition: 26,
+  featured: true,
+  category: "AI & Technology",
+  name: "Mukund Jha",
+  nameShort: "Mukund Jha",
+  initials: "MJ",
+  company: "Emergent",
+  role: "Co-Founder & CEO",
+  city: "Bengaluru",
+  country: "India",
+  countryCode: "IN",
+  context: "AI Vibe-Coding Platform & No-Code App Builder",
+  valuation: "$1.5B",
+  funding: "$130M+",
+  founded: "2025",
+  imageUrl: "https://images.upforge.org/Magazine/mukund-jha-emergent-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/mukund-jha-emergent-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/mukund-jha-emergent-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-IN-XXXXX",
+  oneLiner: "Emergent is a Bengaluru-based AI vibe-coding platform that lets anyone build, test, and deploy web and mobile apps using natural language, no coding required.",
+  accent: "#2563EB",
+  accentBg: "#EFF6FF",
+  accentBorder: "#93C5FD",
+  headline: "He built the vibe-coding engine taking non-technical creators from prompt to production. How Mukund Jha turned Emergent into India's newest AI unicorn.",
+  deck: "Emergent is a Bengaluru-based AI vibe-coding platform that lets anyone build, test, and deploy web and mobile apps using natural language, no coding required.",
+  columns: [
+    {
+      heading: "Democratizing App Creation Through Vibe-Coding",
+      body: "Mukund Jha and his brother Madhav Jha (CTO) launched Emergent with a bold vision: strip away the technical barrier of software engineering and enable anyone to build production-grade web and mobile applications using plain English.\n\nBy leveraging natural language processing and autonomous code generation, Emergent allows creators, founders, and businesses to design, test, and deploy full-stack software without writing a single line of traditional code."
+    },
+    {
+      heading: "India's Third AI Unicorn of 2026",
+      body: "The platform's explosive growth captured immediate market attention. Emergent secured a landmark $130 million Series C funding round at a $1.5 billion post-money valuation—representing a massive five-fold leap in valuation within just six months.\n\nThis rapid trajectory officially crowned Emergent as India's third AI unicorn of 2026, solidifying Bengaluru's status as a top-tier hub for global AI application development."
+    },
+    {
+      heading: "Redefining Software Engineering",
+      body: "With high-velocity execution and a rapidly growing user base across global markets, Mukund Jha is pioneering the shift toward intent-driven development. Emergent continues to push the boundaries of autonomous app deployment for the next generation of builders."
+    }
+  ],
+  pullQuote: "The next million software applications won't be written line-by-line in code. They will be described through natural language and brought to life by intelligent platforms.",
+  pullQuoteBy: "Mukund Jha",
+  lesson: "Remove the steep technical barrier from a complex creative process, and you unlock exponential user adoption and valuation velocity.",
+  stats: [
+    { label: "Valuation", value: "$1.5B" },
+    { label: "Category", value: "AI & Technology" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-IN-XXXXX" }
+  ],
+  createdAt: "2026-07-29",
+  updatedAt: "2026-07-29",
+  publishedAt: "2026-07-29"
+},
+  
   {
     id: "michael-truell-cursor-2026",
     slug: "michael-truell-anysphere-cursor",
