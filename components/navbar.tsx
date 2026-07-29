@@ -38,12 +38,13 @@ const MORE_LINKS = {
   explore: [
     { name: "Compare Startups", href: "/compare", desc: "Side-by-side startup comparisons" },
     { name: "News Gallery", href: "/news-gallery", desc: "Press coverage & media moments" },
+    { name: "About", href: "/about", desc: "About UpForge" },
   ],
-  resources: [
-    { name: "Founder Stories", href: "/founder-stories", desc: "In-depth founder profiles" },
-    { name: "Category Hubs", href: "/founder-stories#categories", desc: "Browse founders by sector & category" },
+  resources: [    
     { name: "Submit Startup", href: "/submit", desc: "Get your UFRN credential. Free." },
     { name: "Newsletter", href: "/newsletter", desc: "Weekly startup intelligence digest" },
+    { name: "contact", href: "/contact", desc: "Contact the Registry" },
+    { name: "faq", href: "/faq", desc: "Frequently Asked Questions" },
   ],
 }
 
@@ -314,7 +315,6 @@ export function Navbar() {
     { name: "Founder Stories", href: "/founder-stories" },
     { name: "Community", href: "/creators" },
     { name: "Journal", href: "/blog" },
-    { name: "About", href: "/about" },
   ];
 
   // Close More dropdown on outside click
