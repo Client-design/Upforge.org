@@ -157,7 +157,7 @@ export default function PartnerProgramPage() {
                 <div className="font-mono text-sm font-bold text-[#C59A2E]">Step 1</div>
                 <div>
                   <h4 className="font-sans font-bold text-xs uppercase tracking-wider mb-1">Submit Application</h4>
-                  <p className="text-xs text-muted-foreground">Fill out the partner registration form with your channel links and audience focus. Turnaround time: [X] business days.</p>
+                  <p className="text-xs text-muted-foreground">Fill out the partner registration form with your channel links and audience focus. Turnaround time: 1–2 days.</p>
                 </div>
               </div>
 
