@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import { useTheme } from "next-themes";
+import { FOUNDERS } from "@/lib/founders/data";
 
 type NavLink = {
   name: string;
@@ -60,6 +61,7 @@ export function Navbar() {
   const router = useRouter();
 
   const { theme, setTheme } = useTheme();
+  const latestFounder = FOUNDERS[0];
 
   const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -407,32 +409,34 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* IG Player Style Active Story Ring */}
-            <Link
-              href="/founder-stories/michael-truell-anysphere-cursor"
-              className="hidden lg:flex items-center gap-2 pl-3 border-l border-border/50 group/story"
-              title="Read Cover Story: Michael Truell (Cursor)"
-            >
-              <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-amber-300 shadow-sm animate-pulse">
-                <div className="relative w-6 h-6 rounded-full overflow-hidden border border-background">
-                  <Image
-                    src="https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg"
-                    alt="Michael Truell — Cover Story"
-                    fill
-                    className="object-cover"
-                  />
+            {/* IG Player Style Active Story Ring (Dynamic Top Founder) */}
+            {latestFounder && (
+              <Link
+                href={`/founder-stories/${latestFounder.slug}`}
+                className="hidden lg:flex items-center gap-2 pl-3 border-l border-border/50 group/story"
+                title={`Read Cover Story: ${latestFounder.name} (${latestFounder.company})`}
+              >
+                <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-amber-300 shadow-sm animate-pulse">
+                  <div className="relative w-6 h-6 rounded-full overflow-hidden border border-background">
+                    <Image
+                      src={latestFounder.cardImage || latestFounder.imageUrl}
+                      alt={`${latestFounder.name} — Cover Story`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col text-[10px] font-mono">
-                <span className="text-amber-500 font-bold tracking-wider uppercase flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-                  COVER STORY
-                </span>
-                <span className="text-muted-foreground group-hover/story:text-foreground transition-colors truncate max-w-[110px]">
-                  Michael Truell
-                </span>
-              </div>
-            </Link>
+                <div className="flex flex-col text-[10px] font-mono">
+                  <span className="text-amber-500 font-bold tracking-wider uppercase flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                    COVER STORY
+                  </span>
+                  <span className="text-muted-foreground group-hover/story:text-foreground transition-colors truncate max-w-[110px]">
+                    {latestFounder.nameShort || latestFounder.name}
+                  </span>
+                </div>
+              </Link>
+            )}
           </div>
 
 
@@ -760,35 +764,37 @@ export function Navbar() {
         {/* Full Screen Scrollable Body */}
         <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6">
           
-          {/* Cover Story Feature Banner */}
-          <Link
-            href="/founder-stories/michael-truell-anysphere-cursor"
-            onClick={closeAll}
-            className="group flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-amber-500/10 border border-amber-500/20 shadow-sm"
-          >
-            <div className="flex items-center gap-3">
-              <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 to-rose-500 shrink-0">
-                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-background">
-                  <Image
-                    src="https://images.upforge.org/Magazine/michael-truell-cursor-founder-card.jpg"
-                    alt="Michael Truell"
-                    fill
-                    className="object-cover"
-                  />
+          {/* Cover Story Feature Banner (Dynamic Top Founder) */}
+          {latestFounder && (
+            <Link
+              href={`/founder-stories/${latestFounder.slug}`}
+              onClick={closeAll}
+              className="group flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-amber-500/10 border border-amber-500/20 shadow-sm"
+            >
+              <div className="flex items-center gap-3">
+                <div className="relative p-[1.5px] rounded-full bg-gradient-to-tr from-amber-500 to-rose-500 shrink-0">
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden border border-background">
+                    <Image
+                      src={latestFounder.cardImage || latestFounder.imageUrl}
+                      alt={latestFounder.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[9px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
+                    READ COVER STORY
+                  </span>
+                  <p className="text-xs font-bold text-foreground group-hover:text-amber-600 transition-colors">
+                    {latestFounder.name} • {latestFounder.company}
+                  </p>
                 </div>
               </div>
-              <div>
-                <span className="text-[9px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
-                  READ COVER STORY
-                </span>
-                <p className="text-xs font-bold text-foreground group-hover:text-amber-600 transition-colors">
-                  Michael Truell • Cursor CEO
-                </p>
-              </div>
-            </div>
-            <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
-          </Link>
+              <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+            </Link>
+          )}
 
           {/* Search Input */}
           <div className="relative">
