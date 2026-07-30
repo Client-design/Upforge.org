@@ -47,8 +47,8 @@ const FAQ_ITEMS = [
     a: "Every submission goes through manual human review and automated view-verification algorithms to prevent fraud, view farms, or bot manipulation."
   },
   {
-    q: "What is included in the Partner Kit?",
-    a: "Approved partners receive an official UpForge welcome kit including high-quality apparel, content gear, and resource guides shipped directly to their verified address."
+    q: "What is required to join the Creator Program?",
+    a: "Read our official book 'The Unfinished Millionaire' on Amazon, submit your Amazon Order ID for verification, and follow our official creator guidelines."
   },
   {
     q: "Is there any application fee or cost?",
@@ -92,7 +92,7 @@ export default function PartnerProgramPage() {
               <Gift className="w-6 h-6 text-[#C59A2E] mb-4" />
               <h3 className="font-sans font-bold text-sm uppercase tracking-wider mb-2">What Partners Get</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Official physical welcome kit (T-shirt, content accessories, resource guides), verified creator profile, and competitive payout structures per verified view.
+                Book prerequisite ('The Unfinished Millionaire'), verified creator profile, transparent rulebook, and competitive payout structures per verified view.
               </p>
             </div>
             <div className="p-6 border border-border bg-card">
@@ -172,8 +172,8 @@ export default function PartnerProgramPage() {
               <div className="flex gap-4 p-5 border border-border bg-card">
                 <div className="font-mono text-sm font-bold text-[#C59A2E]">Step 3</div>
                 <div>
-                  <h4 className="font-sans font-bold text-xs uppercase tracking-wider mb-1">Kit Dispatch & Onboarding</h4>
-                  <p className="text-xs text-muted-foreground">Partner kit ships within [X] days of approval. Track your referral stats and payouts via the partner dashboard.</p>
+                  <h4 className="font-sans font-bold text-xs uppercase tracking-wider mb-1">Order Verification & Content Submission</h4>
+                  <p className="text-xs text-muted-foreground">Verify your Amazon Order ID on our portal, read the book, and start submitting your video content for per-view payouts.</p>
                 </div>
               </div>
             </div>
