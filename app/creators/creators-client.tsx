@@ -23,7 +23,7 @@ import {
 
 const GOOGLE_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfkkbdjrw11tStpTFpEaDKodYQmxUJZbpVlu8iaQJg-1HNaoQ/viewform?embedded=true"
-const WHATSAPP_LINK = "https://wa.link/635wed"
+const WHATSAPP_LINK = "https://wa.link/gmntyi"
 const DESKTOP_INITIAL = 16
 const MOBILE_INITIAL = 10
 const LOAD_MORE = 8
