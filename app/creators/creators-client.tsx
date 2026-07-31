@@ -316,12 +316,6 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
 
       {/* Action Links */}
       <div className="flex items-center justify-center gap-3 flex-wrap my-8 px-4">
-        <Link
-          href="/partner-program"
-          className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-background bg-foreground hover:opacity-90 rounded-full transition shadow-sm"
-        >
-          Become a Partner →
-        </Link>
 
         <button
           onClick={() => setIsModalOpen(true)}
