@@ -237,18 +237,8 @@ Official Web: https://www.upforge.org | ISO Verified Program
                     Verify your purchase.
                   </h3>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
-                    Click the WhatsApp link below to message our verification team with your <strong className="text-slate-900 dark:text-white">Amazon Order ID</strong>, <strong className="text-slate-900 dark:text-white">social media handle</strong>, and <strong className="text-slate-900 dark:text-white">full name</strong>.
+                    WhatsApp link had been provided just message our verification team with your <strong className="text-slate-900 dark:text-white">Amazon Order ID</strong>, <strong className="text-slate-900 dark:text-white">social media handle</strong>, and <strong className="text-slate-900 dark:text-white">full name</strong>.
                   </p>
-                  <a
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition shadow-sm"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Verify via WhatsApp (https://wa.link/gmntyi)</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
                 </div>
               </div>
 
