@@ -5,6 +5,122 @@ import { Founder } from './types'
 
 export const FOUNDERS: Founder[] = [
 
+
+  {
+  id: "brendan-foody-mercor-2026",
+  slug: "brendan-foody-mercor-ai",
+  edition: 26,
+  featured: true,
+  category: "AI & Technology",
+  name: "Brendan Foody",
+  nameShort: "Brendan Foody",
+  initials: "BF",
+  company: "Mercor",
+  role: "Co-Founder & CEO",
+  city: "San Francisco",
+  country: "United States",
+  countryCode: "US",
+  context: "AI-Powered Hiring & Human-in-the-Loop Training Platform",
+  valuation: "$10B+",
+  funding: "$490M+",
+  founded: "2023",
+  imageUrl: "https://images.upforge.org/Magazine/brendan-foody-mercor-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/brendan-foody-mercor-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/brendan-foody-mercor-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-US-XXXXX",
+  oneLiner: "Mercor is an AI-powered hiring and workforce platform that matches skilled talent with jobs and trains AI agents using human expertise.",
+  accent: "#10B981",
+  accentBg: "#ECFDF5",
+  accentBorder: "#6EE7B7",
+  headline: "He built the AI workforce engine powering frontier AI labs and global hiring. How Brendan Foody turned Mercor into a $10B+ talent powerhouse at age 22.",
+  deck: "Mercor is an AI-powered hiring and workforce platform that matches skilled talent with jobs and trains AI agents using human expertise.",
+  columns: [
+    {
+      heading: "Re-engineering Global Workforce Discovery",
+      body: "Brendan Foody and his co-founders Adarsh Hiremath and Surya Midha founded Mercor with an ambitious goal: eliminate the massive friction in matching elite human talent with high-impact roles globally.\n\nInitially launched to connect top international developers with US companies, Mercor built custom AI models to automatically evaluate resume data, conduct asynchronous video interviews, and vet candidates with deep skill assessment algorithms."
+    },
+    {
+      heading: "The Human-in-the-Loop Engine for Frontier AI",
+      body: "As foundational language models matured, Mercor recognized a critical bottleneck facing top labs like OpenAI and Google DeepMind: high-quality human expertise for AI reinforcement learning and agent training.\n\nMercor rapidly pivoted to provide 'human-in-the-loop' data infrastructure. The platform now curates and manages tens of thousands of domain experts—ranging from doctors and lawyers to senior engineers—who train, evaluate, and refine next-generation AI models."
+    },
+    {
+      heading: "Hyper-Growth to $10B+ Valuation",
+      body: "Backed by Felicis Ventures, Benchmark, General Catalyst, and Peter Thiel, Mercor became one of the fastest-growing startups in Silicon Valley history. Scaling to over $1 billion in ARR, Brendan Foody led the company to a $10B+ valuation, establishing Mercor as the primary talent bridge between human intelligence and artificial intelligence."
+    }
+  ],
+  pullQuote: "The future of talent isn't just about placing humans into jobs—it's about pairing human expertise with AI agents to unlock an entirely new tier of productivity.",
+  pullQuoteBy: "Brendan Foody",
+  lesson: "Identify the critical supply bottleneck in a booming technological shift, and pivot your product to become its indispensable infrastructure.",
+  stats: [
+    { label: "Valuation", value: "$10B+" },
+    { label: "Category", value: "AI & Technology" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-US-XXXXX" }
+  ],
+  createdAt: "2026-08-01",
+  updatedAt: "2026-08-01",
+  publishedAt: "2026-08-01"
+},
+
+
+  {
+  id: "rodrigo-liang-sambanova-2026",
+  slug: "rodrigo-liang-sambanova-ai",
+  edition: 26,
+  featured: true,
+  category: "AI & Technology",
+  name: "Rodrigo Liang",
+  nameShort: "Rodrigo Liang",
+  initials: "RL",
+  company: "SambaNova",
+  role: "Co-Founder & CEO",
+  city: "Palo Alto",
+  country: "United States",
+  countryCode: "US",
+  context: "Enterprise AI Chips & Full-Stack Systems Infrastructure",
+  valuation: "$11B",
+  funding: "$2.5B+",
+  founded: "2017",
+  imageUrl: "https://images.upforge.org/Magazine/rodrigo-liang-sambanova-founder-card.jpg",
+  cardImage: "https://images.upforge.org/Magazine/rodrigo-liang-sambanova-founder-card.jpg",
+  newsImage: "https://images.upforge.org/Magazine/rodrigo-liang-sambanova-founder-news.jpg",
+  verified: true,
+  ufrnCode: "UF-2026-US-XXXXX",
+  oneLiner: "SambaNova builds specialized AI chips and full-stack systems that let enterprises and governments run powerful AI models on their own private, secure infrastructure instead of the public cloud.",
+  accent: "#D97706",
+  accentBg: "#FFFBEB",
+  accentBorder: "#FCD34D",
+  headline: "He engineered the full-stack AI silicon alternative to GPU monopolies. How Rodrigo Liang built SambaNova into an $11B enterprise inference powerhouse.",
+  deck: "SambaNova builds specialized AI chips and full-stack systems that let enterprises and governments run powerful AI models on their own private, secure infrastructure instead of the public cloud.",
+  columns: [
+    {
+      heading: "Rethinking AI Silicon Architecture",
+      body: "Former Oracle VP Rodrigo Liang co-founded SambaNova in 2017 alongside Stanford professors Kunle Olukotun and Christopher Ré with a clear premise: traditional GPUs were never natively designed for massive AI dataflows. \n\nBy developing custom Reconfigurable Dataflow Units (RDUs) paired with tightly integrated software, SambaNova engineered a hardware platform capable of running complex reasoning, fine-tuning, and multi-model workloads at unprecedented speed and efficiency."
+    },
+    {
+      heading: "The On-Premises & Sovereign AI Moat",
+      body: "While public clouds dominate general consumer AI, Fortune 500 enterprises and sovereign governments faced strict data privacy, latency, and compliance constraints. SambaNova solved this with on-premises DataScale® systems and full-stack cloud offerings.\n\nFrom tier-one global financial institutions like JPMorganChase deploying SN40 and SN50 platforms to sovereign AI initiatives worldwide, SambaNova established itself as the premier hardware standard for secure enterprise AI inference."
+    },
+    {
+      heading: "Scaling to an $11 Billion Valuation",
+      body: "Months after strategic acquisition talks with Intel highlighted SambaNova's high-value chip IP, the company closed a milestone $1 billion Series F round led by General Atlantic, propelling its valuation to $11 billion.\n\nWith over $2.5 billion in total capital raised from BlackRock, Intel Capital, SoftBank Vision Fund, and Vista Equity, Rodrigo Liang continues to accelerate full-stack AI infrastructure deployments across global markets."
+    }
+  ],
+  pullQuote: "The future of enterprise AI relies on high-velocity inference—running private, complex models on specialized dataflow hardware without surrendering control of your data.",
+  pullQuoteBy: "Rodrigo Liang",
+  lesson: "Solve the hard infrastructural challenges of enterprise security and raw inference velocity, and you become indispensable even against dominant incumbent hardware monopolies.",
+  stats: [
+    { label: "Valuation", value: "$11B" },
+    { label: "Category", value: "AI & Technology" },
+    { label: "Status", value: "Verified Founder" },
+    { label: "UFRN Code", value: "UF-2026-US-XXXXX" }
+  ],
+  createdAt: "2026-08-01",
+  updatedAt: "2026-08-01",
+  publishedAt: "2026-08-01"
+},
+
   {
   id: "aravind-srinivas-perplexity-2026",
   slug: "aravind-srinivas-perplexity-ai",
