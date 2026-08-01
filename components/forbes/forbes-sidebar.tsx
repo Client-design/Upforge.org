@@ -2,6 +2,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import type { Startup } from "@/types/startup"
 
 export function ForbesSidebar({ startups }: { startups: Startup[] }) {
@@ -56,8 +57,15 @@ export function ForbesSidebar({ startups }: { startups: Startup[] }) {
             </div>
 
             {startup.logo_url && (
-              <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 bg-muted border border-border mt-1 overflow-hidden flex items-center justify-center">
-                <img src={startup.logo_url} className="w-full h-full object-cover transition-transform group-hover:scale-[1.05]" />
+              <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 bg-muted border border-border mt-1 overflow-hidden relative">
+                <Image
+                  src={startup.logo_url}
+                  alt={startup.name}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover transition-transform group-hover:scale-[1.05]"
+                  loading="lazy"
+                />
               </div>
             )}
           </Link>
