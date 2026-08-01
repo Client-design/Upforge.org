@@ -226,24 +226,24 @@ export default async function RootLayout({
       data-domain={ctx}
     >
       <head>
-        {/* Ezoic: Privacy Scripts - must load before header script */}
+        {/* Ezoic: Privacy Scripts */}
         <Script
           data-cfasync="false"
           src="https://cmp.gatekeeperconsent.com/min.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         <Script
           data-cfasync="false"
           src="https://the.gatekeeperconsent.com/cmp.min.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
 
         {/* Ezoic: Header Script */}
         <Script
           src="//www.ezojs.com/ezoic/sa.min.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
-        <Script id="ezstandalone-init" strategy="beforeInteractive">
+        <Script id="ezstandalone-init" strategy="afterInteractive">
           {`
             window.ezstandalone = window.ezstandalone || {};
             ezstandalone.cmd = ezstandalone.cmd || [];
@@ -251,7 +251,7 @@ export default async function RootLayout({
         </Script>
         <Script
           src="//ezoicanalytics.com/analytics.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
 
         {/* Performance: Preconnect to critical origins */}
