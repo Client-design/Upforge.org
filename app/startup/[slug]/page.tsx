@@ -10,7 +10,7 @@ import { findStartupBySlug, findRelatedStartups, fetchAllStartups } from "@/lib/
 export const revalidate = 300
 
 const BASE_URL = "https://www.upforge.org"
-const MARKETING_BASE = "https://www.upforge.in"
+const MARKETING_BASE = "https://www.upforge.org"
 const DEFAULT_OG = `${MARKETING_BASE}/og/startup-default.png`
 
 interface PageProps {
