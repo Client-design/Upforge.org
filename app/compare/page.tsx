@@ -40,7 +40,7 @@ async function getDomain(): Promise<"org" | "in"> {
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const canonicalUrl = "https://www.upforge.in/compare"
+  const canonicalUrl = "https://www.upforge.org/compare"
   return {
     title: `Compare ${ALL_COMPARISONS.length}+ Tools & AI Models (2026) | Side-by-Side Analysis | UpForge`,
     description: `Expert comparisons of ${ALL_COMPARISONS.length}+ tools, AI models, SaaS & developer platforms. Claude vs OpenAI, Notion vs Coda. Make smarter decisions.`,
@@ -65,7 +65,7 @@ export default function ComparePage() {
           "@type": "CollectionPage",
           name: "Tool & AI Model Comparisons 2026 | UpForge",
           description: `Expert comparisons of ${ALL_COMPARISONS.length}+ tools.`,
-          url: "https://www.upforge.in/compare"
+          url: "https://www.upforge.org/compare"
         }}
       />
       <CompareClient comparisons={ALL_COMPARISONS} categories={categories} />
