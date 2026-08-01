@@ -37,6 +37,7 @@ const nextConfig = {
     turbopack: {
       root: path.resolve("."),
     },
+    optimizePackageImports: ["lucide-react", "recharts", "framer-motion", "html-to-image"],
   },
 
 
