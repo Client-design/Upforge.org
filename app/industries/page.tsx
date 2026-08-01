@@ -16,12 +16,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Industries — UpForge | India Startup Sector Intelligence",
     description: "Real sector intelligence for Indian founders — funding trends, benchmarks, investor signals, market timing.",
-    type: "website", url: "https://upforge.in/industries",
+    type: "website", url: "https://www.upforge.org/industries",
   },
-  alternates: { canonical: "https://upforge.in/industries" },
+  alternates: { canonical: "https://www.upforge.org/industries" },
 };
 
 // ─── Sector Data ───────────────────────────────────────────────────────────────
+
 
 const SECTORS = [
   {
@@ -318,7 +319,7 @@ export default async function IndustriesPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "India Startup Industries — UpForge",
-    url: "https://upforge.in/industries",
+    url: "https://www.upforge.org/industries",
     description: "Sector intelligence for Indian startup founders",
   };
 
