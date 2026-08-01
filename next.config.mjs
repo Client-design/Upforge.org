@@ -30,6 +30,14 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {
+    root: path.resolve("."),
+  },
+  experimental: {
+    turbopack: {
+      root: path.resolve("."),
+    },
+  },
 
 
   // ─── IMAGE OPTIMIZATION ──────────────────────────────────────────────────
@@ -197,6 +205,9 @@ const nextConfig = {
       { source: "/startups/edtech-%26-language-learning", destination: "/startups/edtech-language-learning", permanent: true },
       { source: "/startups/ai-design-&-creativity", destination: "/startups/ai-design-creativity", permanent: true },
       { source: "/startups/ai-design-%26-creativity", destination: "/startups/ai-design-creativity", permanent: true },
+      // ─── OBSOLETE / REMOVED SLUGS 301 REDIRECTS ────────────────────────────
+      { source: "/indian-unicorns", destination: "/blog/top-indian-unicorns-2026", permanent: true },
+      { source: "/blog/tier-2-tier-3-indian-cities-producing-startups-2026", destination: "/blog/india-startup-ecosystem-2026", permanent: true },
     ]
   },
 
