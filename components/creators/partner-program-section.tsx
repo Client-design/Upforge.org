@@ -111,12 +111,6 @@ Official Web: https://www.upforge.org | ISO Verified Program
           <p className="text-base sm:text-lg text-slate-700 dark:text-slate-200 leading-relaxed font-serif max-w-2xl mx-auto mb-6">
             Read the story. Understand the journey. Create content that&apos;s genuinely yours — and get paid for the organic reach it earns.
           </p>
-
-          <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-amber-500/20 shadow-sm text-left max-w-2xl mx-auto">
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              The UpForge Partner Program is open to any verified creator in our community. To join this specific program, you&apos;ll need your own copy of the featured Kindle title — not because we want you to buy a book, but because this program is built around one thing: creators making real, personal content after actually reading it. Everything else on UpForge — the registry, the creator community, founder stories — stays completely free, whether or not you ever join this program.
-            </p>
-          </div>
         </div>
 
         {/* 2. FULL TRANSPARENCY, UPFRONT */}
