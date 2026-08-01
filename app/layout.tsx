@@ -230,20 +230,20 @@ export default async function RootLayout({
         <Script
           data-cfasync="false"
           src="https://cmp.gatekeeperconsent.com/min.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           data-cfasync="false"
           src="https://the.gatekeeperconsent.com/cmp.min.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         {/* Ezoic: Header Script */}
         <Script
           src="//www.ezojs.com/ezoic/sa.min.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ezstandalone-init" strategy="afterInteractive">
+        <Script id="ezstandalone-init" strategy="lazyOnload">
           {`
             window.ezstandalone = window.ezstandalone || {};
             ezstandalone.cmd = ezstandalone.cmd || [];
@@ -251,7 +251,7 @@ export default async function RootLayout({
         </Script>
         <Script
           src="//ezoicanalytics.com/analytics.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         {/* Performance: Preconnect to critical origins */}
@@ -289,9 +289,9 @@ export default async function RootLayout({
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-3J7Y3695TK"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -305,7 +305,7 @@ export default async function RootLayout({
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5377045438787332"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         <ClientLayout domainContext={ctx}>{children}</ClientLayout>
