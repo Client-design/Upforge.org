@@ -2,6 +2,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import type { Startup } from "@/types/startup"
 
 export function ForbesIndex({ startups }: { startups: Startup[] }) {
@@ -64,8 +65,15 @@ export function ForbesIndex({ startups }: { startups: Startup[] }) {
 
               <div className="mt-auto flex items-center gap-2.5 pt-3 border-t border-border/50">
                 {startup.logo_url ? (
-                  <div className="w-8 h-8 rounded-full border border-border overflow-hidden transition-transform group-hover:scale-105">
-                    <img src={startup.logo_url} alt="" className="w-full h-full object-cover" />
+                  <div className="w-8 h-8 rounded-full border border-border overflow-hidden transition-transform group-hover:scale-105 relative">
+                    <Image
+                      src={startup.logo_url}
+                      alt={startup.name}
+                      width={32}
+                      height={32}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 ) : (
                   <div className="w-8 h-8 rounded-full border border-border bg-foreground flex items-center justify-center font-serif text-[10px] text-white">
