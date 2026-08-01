@@ -13,11 +13,7 @@ async function getDomain(): Promise<"org" | "in"> {
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const domain = await getDomain()
-  const isOrg = domain === "org"
-  const canonicalUrl = isOrg 
-    ? "https://www.upforge.org/compare/claude-vs-openai" 
-    : "https://www.upforge.in/compare/claude-vs-openai"
+  const canonicalUrl = "https://www.upforge.org/compare/claude-vs-openai"
 
   return {
     title: "Claude vs OpenAI (ChatGPT) — Which AI is Better in 2026? | UpForge",
@@ -116,9 +112,7 @@ const comparisonData = {
 }
 
 export default async function ClaudeVsOpenAIPage() {
-  const domain = await getDomain()
-  const isOrg = domain === "org"
-  const baseUrl = isOrg ? "https://www.upforge.org" : "https://www.upforge.in"
+  const baseUrl = "https://www.upforge.org"
 
   const comparisonSchema = {
     "@context": "https://schema.org",
