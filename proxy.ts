@@ -74,13 +74,21 @@ export async function proxy(request: NextRequest) {
   }
 
   // RATE LIMITING
-  if (isApproved) {
-    if (isRateLimited(ip, 30, 10000)) {
-      return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
-    }
-  } else {
-    if (isRateLimited(ip, 150, 10000)) {
-      return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
+  // Bypass rate-limiting for Next.js React Server Component (RSC) prefetch requests (?_rsc=...)
+  const isRscPrefetch = request.nextUrl.searchParams.has("_rsc") || 
+                        request.headers.get("next-router-prefetch") === "1" ||
+                        request.headers.get("purpose") === "prefetch" ||
+                        request.headers.get("rsc") === "1"
+
+  if (!isRscPrefetch) {
+    if (isApproved) {
+      if (isRateLimited(ip, 100, 10000)) {
+        return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
+      }
+    } else {
+      if (isRateLimited(ip, 300, 10000)) {
+        return new NextResponse(JSON.stringify({ error: "Rate limit exceeded." }), { status: 429, headers: { "Content-Type": "application/json" } })
+      }
     }
   }
 
