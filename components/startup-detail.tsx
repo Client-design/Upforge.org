@@ -67,7 +67,7 @@
 
   function StartupLogo({ name, logo_url, size, className = "" }: { name: string; logo_url?: string | null; size: number; className?: string }) {
     if (logo_url) {
-      return <img src={logo_url} alt={name + " logo"} width={size} height={size} className={`object-cover w-full h-full ${className}`} />
+      return <Image src={logo_url} alt={name + " logo"} width={size} height={size} className={`object-cover w-full h-full ${className}`} loading="lazy" />
     }
     return (
       <span className="text-3xl font-serif font-black text-foreground" aria-hidden="true">
