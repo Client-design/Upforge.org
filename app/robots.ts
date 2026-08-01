@@ -119,11 +119,11 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: commonAllows,
         disallow: commonDisallows,
-        crawlDelay: 5, // Strict delay for unknown crawl agents
       },
     ],
     sitemap: [
       `${BASE}/sitemap.xml`,
+      `${BASE}/news-sitemap.xml`,
     ],
     host: BASE,
   }
