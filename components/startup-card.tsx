@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight, Sparkles, ShieldCheck } from "lucide-react"
 import type { Startup } from "@/types/startup"
 import { getStartupUrl } from "@/lib/domain"
@@ -55,10 +56,13 @@ export function StartupCard({ startup, featured = false }: StartupCardProps) {
           <div className="mb-5 flex items-start justify-between">
             <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
               {startup.logo_url ? (
-                <img
+                <Image
                   src={startup.logo_url}
                   alt={`${startup.name} logo`}
+                  width={56}
+                  height={56}
                   className="h-full w-full object-contain p-2.5"
+                  loading="lazy"
                 />
               ) : (
                 <span className="text-xl font-bold text-slate-800">
