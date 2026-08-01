@@ -393,7 +393,6 @@ export function Navbar() {
                   alt="UpForge"
                   fill
                   className="object-cover"
-                  priority
                 />
               </div>
               <div className="flex flex-col">
