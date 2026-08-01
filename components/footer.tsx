@@ -145,13 +145,13 @@ export function Footer() {
       {/* Optional background image for subtle global texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12] dark:opacity-[0.18] mix-blend-soft-light"
-        style={{ display: "none" }}
       >
         <Image
           src="/footer.jpg"
           alt="UpForge global startup map"
           fill
-          priority
+          sizes="100vw"
+          loading="lazy"
           className="object-cover"
         />
       </div>
