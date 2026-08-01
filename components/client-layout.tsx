@@ -1,13 +1,17 @@
 // components/client-layout.tsx
 "use client"
 
+import dynamic from "next/dynamic"
 import { usePathname } from "next/navigation"
 import { createContext, useContext, useMemo } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { Chatbot } from "@/components/chatbot"
 import { ThemeProvider } from "@/components/theme-provider"
 import type { DomainContext } from "@/lib/domain"
+
+const Chatbot = dynamic(() => import("@/components/chatbot").then((mod) => mod.Chatbot), {
+  ssr: false,
+})
 
 // ─── Domain Context ───────────────────────────────────────────────────────────
 // Provides the domain context ('in' | 'org') to ALL client components in the tree.
