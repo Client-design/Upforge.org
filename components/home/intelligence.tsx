@@ -2,6 +2,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 
 export function IntelligenceBriefing() {
@@ -52,11 +53,14 @@ export function IntelligenceBriefing() {
               href={report.link}
               className="group block"
             >
-              <div className="w-full aspect-video overflow-hidden border border-border mb-6">
-                <img 
+              <div className="w-full aspect-video overflow-hidden border border-border mb-6 relative">
+                <Image 
                   src={report.img} 
                   alt={report.title}
-                  className="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  className="object-cover grayscale opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+                  loading="lazy"
                 />
               </div>
 
