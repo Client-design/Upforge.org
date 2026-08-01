@@ -39,7 +39,9 @@ export function SponsoredCard({ startup }: SponsoredCardProps) {
                 src={startup.logo_url}
                 alt={startup.name}
                 fill
+                sizes="64px"
                 className="object-contain p-2"
+                loading="lazy"
               />
             ) : (
               <span className="text-2xl font-black text-zinc-300">
