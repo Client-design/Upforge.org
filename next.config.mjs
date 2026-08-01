@@ -1,5 +1,9 @@
 import fs from "fs"
 import path from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 try {
   const componentsPath = path.resolve("./components")
@@ -31,13 +35,11 @@ try {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
-    root: path.resolve("."),
+    root: __dirname,
   },
   experimental: {
-    turbopack: {
-      root: path.resolve("."),
-    },
-    optimizePackageImports: ["lucide-react", "recharts", "framer-motion", "html-to-image"],
+    optimizeCss: true,
+    optimizePackageImports: ["lucide-react", "recharts", "framer-motion", "html-to-image", "@radix-ui/react-icons"],
   },
 
 
@@ -51,7 +53,7 @@ const nextConfig = {
       { protocol: "https", hostname: "**" },
     ],
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 86400, // 24 hours
+    minimumCacheTTL: 31536000, // 1 year (31,536,000s)
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     dangerouslyAllowSVG: true,
@@ -100,13 +102,13 @@ const nextConfig = {
           },
         ],
       },
-      // Static images - cache 1 week
+      // Static images - cache 1 year immutable
       {
         source: "/images/(.*)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=604800, stale-while-revalidate=2592000",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
@@ -227,21 +229,6 @@ const nextConfig = {
   // ─── GENERAL CONFIG ─────────────────────────────────────────────────────
   trailingSlash: false,
   reactStrictMode: true,
-
-  // ─── TURBOPACK CONFIG ───────────────────────────────────────────────────
-  turbopack: {
-    root: path.resolve("."),
-  },
-
-  // ─── EXPERIMENTAL ───────────────────────────────────────────────────────
-  experimental: {
-    optimizeCss: true,
-    // Optimize package imports for smaller bundles
-    optimizePackageImports: [
-      "lucide-react",
-      "@radix-ui/react-icons",
-    ],
-  },
 }
 
 export default nextConfig
