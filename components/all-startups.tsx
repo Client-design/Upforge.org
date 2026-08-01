@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { 
   BadgeCheck, 
   Building2, 
@@ -79,9 +80,11 @@ const StartupCard = ({ startup }: { startup: Startup }) => (
   <div className="group bg-white border border-[#E8E4DC] hover:border-[#1C1C1C] transition-all p-5 flex flex-col h-full relative overflow-hidden">
     <div className="flex items-start justify-between mb-4">
       <div className="w-12 h-12 relative overflow-hidden bg-[#F7F5F0] border border-[#E8E4DC]">
-        <img 
+        <Image 
           src={startup.logo_url} 
           alt={startup.name}
+          width={48}
+          height={48}
           className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all"
           loading="lazy"
         />
