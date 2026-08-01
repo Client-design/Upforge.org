@@ -218,7 +218,8 @@ export default async function HomePage() {
 
             <Link
               href="/founder-stories"
-              className="font-mono text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
+              aria-label="View all verified founder stories"
+              className="font-mono text-[11px] sm:text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
               All<ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
@@ -256,7 +257,7 @@ export default async function HomePage() {
 
                 <div className="p-3 flex-1 flex flex-col justify-between space-y-1.5">
                   <div>
-                    <h3 className="font-serif font-bold text-xs sm:text-sm text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors line-clamp-1">
+                    <h3 className="font-serif font-bold text-xs sm:text-sm text-foreground group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors line-clamp-1">
                       {f.name}
                     </h3>
                     <p className="font-mono text-[10px] text-muted-foreground line-clamp-1">
@@ -287,7 +288,8 @@ export default async function HomePage() {
             </h2>
             <Link
               href="/registry"
-              className="font-mono text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
+              aria-label="View full verified startup registry"
+              className="font-mono text-[11px] sm:text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
               All <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
