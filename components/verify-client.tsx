@@ -9,6 +9,7 @@
  */
 
 import { useState, useRef, useCallback, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import {
   CheckCircle2, Share2, RotateCcw,
@@ -659,7 +660,7 @@ export function VerifyClient({ totalCount, isOrg }: Props) {
                     display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0
                   }}>
                     {result.logo_url
-                      ? <img src={result.logo_url} style={{ width:"100%", height:"100%", objectFit:"cover" }} alt={result.name}/>
+                      ? <Image src={result.logo_url} width={74} height={74} className="w-full h-full object-cover" alt={result.name} loading="lazy" />
                       : <span style={{ fontFamily:"'EB Garamond',serif", fontSize:"2rem", color:"var(--vf-fg3)" }}>
                           {result.name[0]}
                         </span>
