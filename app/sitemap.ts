@@ -6,9 +6,9 @@ const BASE = "https://www.upforge.org"
 // String fallback format directly use karenge taaki transform crash na ho
 const STATIC_DATE_STR = "2026-04-28"
 
-// All published blog slugs — updated June 2026
+// All published blog slugs — updated July 2026
 const STARTUP_BLOG_SLUGS = [
-  // Core India startup content (March 2026, updated June 2026)
+  // Core India startup content
   "india-startup-ecosystem-2026",
   "how-to-get-startup-funding-india-2026",
   "top-indian-unicorns-2026",
@@ -16,7 +16,7 @@ const STARTUP_BLOG_SLUGS = [
   "top-ai-startups-india-2026",
   "how-to-start-startup-india-2026",
 
-  // New high-value content (June 2026)
+  // High-value content
   "best-vc-firms-india-2026",
   "startup-valuation-india-2026",
   "startup-failure-reasons-india",
@@ -26,14 +26,13 @@ const STARTUP_BLOG_SLUGS = [
   "startup-legal-guide-india-2026",
   "india-vs-silicon-valley-startups",
 
-  // Trend articles (July 2026)
+  // Trend articles
   "ai-startup-funding-exit-route-india-2026",
   "investors-rejecting-generic-ai-pitches-2026",
   "defense-tech-startups-india-2026",
-  "tier-2-tier-3-indian-cities-producing-startups-2026",
   "startup-verification-ufrn-credentials-guide",
 
-  // 10 New July 2026 Articles
+  // Specialized guides
   "top-20-saas-startups-india-2026",
   "ai-agents-for-startups-india-2026",
   "top-startup-incubators-india-2026",
@@ -77,7 +76,6 @@ const STATIC_ROUTES = [
   { path: "/founders", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/founder-stories", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/ufrn", priority: 0.8, changeFrequency: "daily" as const },
-  { path: "/indian-unicorns", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/methodology", priority: 0.75, changeFrequency: "monthly" as const },
   { path: "/editorial-standards", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/news-gallery", priority: 0.65, changeFrequency: "weekly" as const },
@@ -127,13 +125,11 @@ type BlogRow = {
   is_featured?: boolean | null
 }
 
-// Helper: Yeh direct ISO format ki VALID string return karega, raw object nahi
+// Helper: Returns valid YYYY-MM-DD ISO string
 function safeDateString(value?: string | null): string {
   if (!value) return STATIC_DATE_STR
   const d = new Date(value)
   if (isNaN(d.getTime())) return STATIC_DATE_STR
-  
-  // Safely format manually as YYYY-MM-DD to avoid native runtime toISOString crash loops
   return d.toISOString().split('T')[0]
 }
 
@@ -197,17 +193,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: s.is_featured ? 0.9 : 0.75,
   }))
 
-  // 6. UFRN verification pages
-  const ufrnEntries: MetadataRoute.Sitemap = startups
-    .filter(s => s.ufrn)
-    .map(s => ({
-      url: `${BASE}/ufrn/${s.ufrn}`,
-      lastModified: safeDateString(s.updated_at || s.created_at),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }))
+  // Note: UFRN verification routes (/ufrn/[ufrn-id]) are excluded from sitemap
+  // because they have noindex tags, avoiding GSC "Excluded by noindex tag" errors.
 
-  // 7. Blog entries from database
+  // 6. Blog entries from database
   const blogEntries: MetadataRoute.Sitemap = blogs.map(b => ({
     url: `${BASE}/blog/${b.slug}`,
     lastModified: safeDateString(b.updated_at || b.created_at),
@@ -219,7 +208,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "ai-startup-funding-exit-route-india-2026",
     "investors-rejecting-generic-ai-pitches-2026",
     "defense-tech-startups-india-2026",
-    "tier-2-tier-3-indian-cities-producing-startups-2026",
     "startup-verification-ufrn-credentials-guide",
     "top-20-saas-startups-india-2026",
     "ai-agents-for-startups-india-2026",
@@ -286,7 +274,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categoryEntries,
     ...cityEntries,
     ...startupEntries,
-    ...ufrnEntries,
     ...blogEntries,
     ...curatedBlogEntries,
     ...blogCategoryEntries,
