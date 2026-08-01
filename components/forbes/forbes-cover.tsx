@@ -2,6 +2,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import type { Startup } from "@/types/startup"
 
 export function ForbesCover({ startup }: { startup: Startup | null }) {
@@ -17,10 +18,13 @@ export function ForbesCover({ startup }: { startup: Startup | null }) {
         {/* Massive Cover Image */}
         <div className="w-full aspect-[16/10] bg-muted border border-border mb-4 overflow-hidden relative">
           {startup.logo_url ? (
-             <img 
+             <Image 
                src={startup.logo_url} 
                alt={startup.name}
+               fill
+               sizes="(max-width: 768px) 100vw, 600px"
                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+               loading="lazy"
              />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center font-serif text-5xl text-muted-foreground/30">
