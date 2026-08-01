@@ -211,19 +211,11 @@ Official Web: https://www.upforge.org | ISO Verified Program
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-1">
-                    Get the book on Amazon Kindle.
+                    Get the book on Amazon.
                   </h3>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-2">
                     Read it at your own pace. This is the only prerequisite for the Partner Program specifically.
                   </p>
-                  <a
-                    href={AMAZON_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-amber-600 dark:text-amber-400 font-bold hover:underline"
-                  >
-                    View Kindle Edition on Amazon <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
               </div>
 
