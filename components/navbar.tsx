@@ -390,7 +390,7 @@ export function Navbar() {
               <div className="relative w-8 h-8 overflow-hidden rounded-lg shadow-sm ring-1 ring-border/50 group-hover:ring-foreground/20 transition-all duration-300">
                 <Image
                   src="/logo.jpg"
-                  alt="UpForge"
+                  alt=""
                   fill
                   className="object-cover"
                 />
@@ -402,7 +402,7 @@ export function Navbar() {
                 >
                   UpForge
                 </span>
-                <span className="text-[9px] font-mono text-amber-500 font-bold uppercase tracking-widest leading-none mt-0.5">
+                <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 font-bold uppercase tracking-widest leading-none mt-0.5">
                   EDITORIAL
                 </span>
               </div>
@@ -719,6 +719,7 @@ export function Navbar() {
           isOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-95"
         }`}
         aria-hidden={!isOpen}
+        inert={!isOpen ? true : undefined}
       >
         {/* Mobile Full Screen Header Bar */}
         <div className="h-16 px-5 border-b border-border flex items-center justify-between shrink-0 bg-background/95 backdrop-blur-md">
@@ -730,14 +731,14 @@ export function Navbar() {
             <div className="relative w-7 h-7 overflow-hidden rounded-lg">
               <Image
                 src="/logo.jpg"
-                alt="UpForge"
+                alt=""
                 fill
                 className="object-cover"
               />
             </div>
             <div className="flex flex-col">
               <span className="font-serif font-bold text-base leading-none text-foreground">UpForge</span>
-              <span className="text-[8px] font-mono text-amber-500 font-bold uppercase tracking-widest leading-none mt-0.5">MAGAZINE</span>
+              <span className="text-[8px] font-mono text-amber-700 dark:text-amber-400 font-bold uppercase tracking-widest leading-none mt-0.5">MAGAZINE</span>
             </div>
           </Link>
 
