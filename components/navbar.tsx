@@ -421,7 +421,9 @@ export function Navbar() {
                       src={latestFounder.cardImage || latestFounder.imageUrl}
                       alt={`${latestFounder.name} — Cover Story`}
                       fill
+                      sizes="24px"
                       className="object-cover"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -777,7 +779,9 @@ export function Navbar() {
                       src={latestFounder.cardImage || latestFounder.imageUrl}
                       alt={latestFounder.name}
                       fill
+                      sizes="32px"
                       className="object-cover"
+                      loading="lazy"
                     />
                   </div>
                 </div>
