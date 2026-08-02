@@ -127,8 +127,8 @@ function TypingDots() {
 // ─── EXECUTIVE QUICK PROMPTS ──────────────────────────────────────────────────
 
 const QUICK_PROMPTS = [
+  { q: "How does the Partner Program & view earnings work?", cat: "Partners", icon: Sparkles },
   { q: "How do startups get UFRN verification?", cat: "UFRN Lookup", icon: ShieldCheck },
-  { q: "Tell me about Michael Truell & Cursor", cat: "Founder Story", icon: BookOpen },
   { q: "What are global SaaS valuation benchmarks?", cat: "Valuations", icon: TrendingUp },
   { q: "How do I list my startup on UpForge?", cat: "Registry", icon: Compass },
 ]
