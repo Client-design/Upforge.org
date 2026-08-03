@@ -8,24 +8,24 @@ export const revalidate = 300
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "UpForge Creator Community — Grow Together on Instagram",
+    title: "Official UpForge Creator Network — Verified Creators Directory",
     description:
-      "Join the UpForge Verified Creator Community. Submit your profile, get featured in the daily spotlight, and connect with fellow Instagram creators to grow together.",
+      "Explore the official UpForge Verified Creator Network. Discover listed creators working with UpForge, view audience reach metrics, and apply for creator listing.",
     keywords: [
-      "instagram creator community",
-      "verified creator community",
-      "creator spotlight",
-      "grow on instagram",
-      "creator network india",
-      "digital creators community",
+      "upforge creator network",
+      "verified creators directory",
+      "instagram creator network",
+      "upforge brand ambassadors",
+      "creator directory india",
+      "verified digital creators",
     ],
     alternates: {
       canonical: "https://upforge.org/creators",
     },
     openGraph: {
-      title: "UpForge Creator Community — Grow Together on Instagram",
+      title: "Official UpForge Creator Network — Verified Creators Directory",
       description:
-        "Submit your profile, get featured daily, and support other creators. A free community for Instagram creators.",
+        "Explore listed creators working with UpForge, view audience metrics, and apply for verification.",
       type: "website",
       url: "https://upforge.org/creators",
     },
