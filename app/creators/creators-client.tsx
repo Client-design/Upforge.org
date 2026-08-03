@@ -6,7 +6,7 @@ import Link from "next/link"
 import {
   ChevronDown, X, Search, MessageCircle, Filter,
   Users, TrendingUp, SortAsc, Loader2, RefreshCw,
-  Instagram, Sparkles,
+  Sparkles, HelpCircle, ArrowRight, ShieldCheck, CheckCircle2,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -14,7 +14,6 @@ import { CreatorCardDesktop } from "@/components/creators/creator-card-desktop"
 import { CreatorCardMobile } from "@/components/creators/creator-card-mobile"
 import { ApplyModal } from "@/components/creators/apply-modal"
 import { CreatorProfileModal } from "@/components/creators/creator-profile-modal"
-import { PartnerProgramSection } from "@/components/creators/partner-program-section"
 import {
   fetchCreatorsFromSheet,
   SheetCreator,
@@ -61,6 +60,29 @@ interface CreatorsClientProps {
   initialCreators?: SheetCreator[]
 }
 
+const faqItems = [
+  {
+    q: "Is listing in the UpForge Creator Registry completely free?",
+    a: "Yes! Profile listing, registry indexing, and daily spotlight rotations are 100% free forever for all Instagram creators. There are no fees or forced purchases required to be part of the community."
+  },
+  {
+    q: "How do I apply for listing or update my profile details?",
+    a: "Click on 'Apply for Listing', fill out the quick verification form with your Instagram handle, full name, and category. Our verification desk reviews handle authenticity typically within 24–48 hours."
+  },
+  {
+    q: "What is the Daily Creator Spotlight?",
+    a: "Every 24 hours, our algorithm selects 5 verified creators from the registry to highlight at the top of the directory with a featured Spotlight badge, giving them maximum visibility across our creator network."
+  },
+  {
+    q: "How can I earn money through the UpForge Partner Program?",
+    a: "Creators looking to monetize their reach can participate in the official UpForge Partner Program. You create authentic video content for featured titles and earn ₹0.01 per verified organic view with weekly payouts. Learn full details on our dedicated Partner Program page."
+  },
+  {
+    q: "How do I contact UpForge support for profile assistance?",
+    a: "You can connect directly with our verification and partner support team via WhatsApp for instant assistance with handle updates, verification status, or collaboration inquiries."
+  }
+]
+
 export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [creators, setCreators] = useState<SheetCreator[]>(initialCreators)
@@ -73,6 +95,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
   const [isMobile, setIsMobile] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
 
   const [suggestions, setSuggestions] = useState<SheetCreator[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -311,46 +334,138 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
         />
       )}
 
-      {/* PARTNER PROGRAM SECTION */}
-      <PartnerProgramSection />
+      {/* HERO SECTION */}
+      <section className="relative border-b border-border bg-gradient-to-b from-amber-500/5 via-background to-background dark:from-amber-500/10 py-12 md:py-16 px-4 md:px-8">
+        <div className="max-w-[1300px] mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 mb-5 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <span className="text-[11px] font-mono font-bold text-amber-800 dark:text-amber-300 uppercase tracking-widest">
+              UpForge Creator Registry
+            </span>
+          </div>
 
-      {/* Action Links */}
-      <div className="flex items-center justify-center gap-3 flex-wrap my-8 px-4">
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4 max-w-4xl mx-auto leading-tight"
+            style={{ fontFamily: "'Georgia', serif" }}
+          >
+            Verified Instagram Creator Community
+          </h1>
 
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider border border-border bg-background hover:bg-muted text-foreground rounded-full transition shadow-sm"
-        >
-          Apply for Listing
-        </button>
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-serif max-w-2xl mx-auto mb-8">
+            An open, trusted registry of verified digital creators. Submit your handle, get featured in the daily spotlight, and discover collaborators.
+          </p>
 
-        <a
-          href={WHATSAPP_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 px-5 py-2.5 text-xs font-bold border border-emerald-300 dark:border-emerald-800/80 bg-emerald-50 dark:bg-emerald-950/30 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 rounded-full transition shadow-sm"
-        >
-          <MessageCircle className="w-3.5 h-3.5" />
-          Partner Support
-        </a>
+          {/* Action CTAs */}
+          <div className="flex items-center justify-center gap-4 flex-wrap mb-10">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-7 py-3 text-xs font-bold uppercase tracking-wider bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 rounded-full transition-all shadow-md active:scale-95"
+            >
+              Apply for Listing
+            </button>
+
+            <Link
+              href="/partner-program"
+              className="inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-wider border border-amber-500/40 bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/50 text-amber-900 dark:text-amber-200 rounded-full transition-all shadow-sm group"
+            >
+              <span>Become a Partner</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-5 py-3 text-xs font-bold border border-emerald-300 dark:border-emerald-800/80 bg-emerald-50 dark:bg-emerald-950/30 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 rounded-full transition shadow-sm"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp Desk</span>
+            </a>
+          </div>
+
+          {/* Key Value Badges */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
+            <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+              <div>
+                <p className="text-xs font-bold text-slate-900 dark:text-white">100% Free Listing</p>
+                <p className="text-[10px] text-muted-foreground">No mandatory fee or purchase</p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm flex items-center gap-2.5">
+              <ShieldCheck className="w-4 h-4 text-amber-500 shrink-0" />
+              <div>
+                <p className="text-xs font-bold text-slate-900 dark:text-white">Verified Handles</p>
+                <p className="text-[10px] text-muted-foreground">Manual record auditing</p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm flex items-center gap-2.5">
+              <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+              <div>
+                <p className="text-xs font-bold text-slate-900 dark:text-white">Daily Spotlight</p>
+                <p className="text-[10px] text-muted-foreground">24h top profile feature</p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm flex items-center gap-2.5">
+              <TrendingUp className="w-4 h-4 text-blue-500 shrink-0" />
+              <div>
+                <p className="text-xs font-bold text-slate-900 dark:text-white">Partner Program</p>
+                <p className="text-[10px] text-muted-foreground">Monetize organic reach</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BECOME A PARTNER CALLOUT BANNER */}
+      <div className="max-w-[1300px] mx-auto px-4 md:px-8 pt-8">
+        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-3xl p-6 md:p-8 border border-slate-700 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="absolute right-0 top-0 translate-x-12 -translate-y-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="space-y-2 text-center md:text-left z-10 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
+              <Sparkles className="w-3 h-3" /> Optional Paid Monetization
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold font-serif text-white">
+              Want to Earn for Your Reach? Join the Partner Program.
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Create genuine video content about featured titles and earn <strong className="text-amber-300 font-mono">₹0.01 per verified view</strong>. Paid weekly with transparent verification rules.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 z-10 w-full md:w-auto">
+            <Link
+              href="/partner-program"
+              className="w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-2xl transition shadow-md flex items-center justify-center gap-2 group"
+            >
+              <span>Explore Partner Program</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
       </div>
 
-      {/* MAIN CONTENT */}
-      <div className="max-w-[1300px] mx-auto px-4 md:px-8">
+      {/* MAIN REGISTRY SEARCH & GRID CONTENT */}
+      <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-8">
 
-        <div className="py-4 border-b border-border space-y-3">
+        {/* Toolbar & Search */}
+        <div className="py-4 border-b border-border space-y-4">
           {(isSearchOpen || !isMobile) && (
             <div ref={searchRef} className="relative max-w-2xl mx-auto">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search verified registry records by name, handle, category..."
+                placeholder="Search creator registry by name, handle, category..."
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 onKeyDown={handleSearchKeyDown}
                 onFocus={() => searchQuery.trim() && suggestions.length > 0 && setShowSuggestions(true)}
-                className="w-full pl-10 pr-10 py-2.5 border border-slate-200 dark:border-slate-800 rounded-2xl text-xs bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-800/30"
+                className="w-full pl-10 pr-10 py-3 border border-slate-200 dark:border-slate-800 rounded-2xl text-xs bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-800/30 shadow-sm"
               />
               {searchQuery && (
                 <button
@@ -419,9 +534,9 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             <div className="flex items-center gap-1.5 flex-wrap">
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-border rounded-full hover:bg-muted transition"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium border border-border rounded-full hover:bg-muted transition"
               >
-                <Filter className="w-3 h-3" />
+                <Filter className="w-3.5 h-3.5" />
                 Filter Category
                 {(selectedNiche !== "all" || followerFilter !== "all") && (
                   <span className="ml-1 w-4 h-4 rounded-full bg-slate-900 text-white text-[9px] flex items-center justify-center font-bold">
@@ -431,7 +546,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               </button>
 
               <div className="flex items-center gap-1.5 ml-2">
-                <SortAsc className="w-3 h-3 text-muted-foreground" />
+                <SortAsc className="w-3.5 h-3.5 text-muted-foreground" />
                 {(["recent", "motivation", "followers", "alpha"] as SortKey[]).map((key) => (
                   <button
                     key={key}
@@ -451,10 +566,10 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             <button
               onClick={loadCreators}
               disabled={isLoading}
-              className="flex items-center gap-1 px-3 py-1.5 text-[10px] border border-border rounded-full hover:bg-muted transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-semibold border border-border rounded-full hover:bg-muted transition"
             >
               <RefreshCw className={`w-3 h-3 ${isLoading ? "animate-spin" : ""}`} />
-              Refresh
+              Refresh Index
             </button>
           </div>
 
@@ -476,7 +591,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                         <button
                           key={niche}
                           onClick={() => setSelectedNiche(niche)}
-                          className={`px-2.5 py-0.5 text-[10px] font-semibold rounded-full border transition ${
+                          className={`px-2.5 py-1 text-[10px] font-semibold rounded-full border transition ${
                             selectedNiche === niche
                               ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-slate-900 dark:border-white"
                               : "border-border hover:bg-muted bg-background text-slate-500"
@@ -497,7 +612,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                         <button
                           key={f}
                           onClick={() => setFollowerFilter(f)}
-                          className={`px-2.5 py-0.5 text-[10px] font-semibold rounded-full border transition ${
+                          className={`px-2.5 py-1 text-[10px] font-semibold rounded-full border transition ${
                             followerFilter === f
                               ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-slate-900 dark:border-white"
                               : "border-border hover:bg-muted bg-background text-slate-500"
@@ -530,35 +645,38 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </span>
             {promotedCreators.length > 0 && (
               <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-semibold text-[10px]">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Spotlight registry members active
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Daily Spotlight Active
               </span>
             )}
           </div>
         </div>
 
+        {/* Loading State */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
-            <Loader2 className="w-8 h-8 animate-spin text-slate-700" />
-            <p className="text-xs text-muted-foreground">Retrieving verified credentials...</p>
+            <Loader2 className="w-8 h-8 animate-spin text-slate-700 dark:text-slate-200" />
+            <p className="text-xs text-muted-foreground">Retrieving verified creator records...</p>
           </div>
         )}
 
+        {/* Error State */}
         {error && !isLoading && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <p className="text-sm text-red-500">{error}</p>
             <button
               onClick={loadCreators}
-              className="px-4 py-2 text-sm border border-border rounded-full hover:bg-muted transition"
+              className="px-4 py-2 text-sm border border-border rounded-full hover:bg-muted transition font-bold"
             >
               Try Again
             </button>
           </div>
         )}
 
+        {/* Empty State */}
         {!isLoading && !error && filteredCreators.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
             <Search className="w-10 h-10 text-muted-foreground/40" />
-            <p className="text-muted-foreground text-xs">No matching verified creator credentials found.</p>
+            <p className="text-muted-foreground text-xs">No matching verified creator records found.</p>
             <button
               onClick={() => { setSearchQuery(""); setSelectedNiche("all"); setFollowerFilter("all") }}
               className="px-4 py-2 text-xs border border-border rounded-full hover:bg-muted transition font-bold"
@@ -568,6 +686,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
+        {/* Mobile Grid */}
         {!isLoading && !error && isMobile && (
           <div className="grid grid-cols-2 gap-3 py-6">
             {displayedCreators.map((creator) => (
@@ -581,6 +700,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
+        {/* Desktop Grid */}
         {!isLoading && !error && !isMobile && (
           <div className="grid grid-cols-4 gap-4 py-8">
             {displayedCreators.map((creator) => (
@@ -594,13 +714,14 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
+        {/* Load More Button */}
         {!isLoading && hasMore && (
           <div className="text-center py-8">
             <button
               onClick={() => setVisibleCount((prev) => prev + LOAD_MORE)}
-              className="group inline-flex items-center gap-2 px-8 py-3 text-xs font-bold border border-slate-300 dark:border-slate-800 bg-background hover:bg-muted text-foreground rounded-full transition-all shadow-sm"
+              className="group inline-flex items-center gap-2 px-8 py-3 text-xs font-bold border border-slate-300 dark:border-slate-800 bg-background hover:bg-muted text-foreground rounded-full transition-all shadow-sm active:scale-95"
             >
-              Load More Registry Records
+              Load More Creators
               <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
             </button>
             <p className="text-[10px] text-muted-foreground mt-2 font-medium">
@@ -609,16 +730,62 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           </div>
         )}
 
-        <div className="text-center py-8 mt-8 border-t border-border/40 bg-muted/20 rounded-xl mb-4">
-          <p className="text-[10px] text-muted-foreground mb-2">
-            The UpForge Creator Registry is an independent database. Identity verification is conducted based on submission compliance, audience footprint, and trust rating scores.
+        {/* CREATOR FAQ SECTION */}
+        <div className="mt-16 pt-12 border-t border-border">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold uppercase tracking-wider mb-2">
+                <HelpCircle className="w-3.5 h-3.5 text-amber-500" />
+                Frequently Asked Questions
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white"
+                style={{ fontFamily: "'Georgia', serif" }}
+              >
+                Creator Registry FAQ
+              </h2>
+            </div>
+
+            <div className="space-y-3">
+              {faqItems.map((faq, idx) => {
+                const isOpen = openFaqIndex === idx
+                return (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition bg-white dark:bg-slate-900 shadow-sm"
+                  >
+                    <button
+                      onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                      className="w-full p-4.5 text-left font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition"
+                    >
+                      <span>{faq.q}</span>
+                      <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    {isOpen && (
+                      <div className="p-4.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Disclaimer */}
+        <div className="text-center py-8 mt-16 border-t border-border/40 bg-muted/20 rounded-2xl mb-4">
+          <p className="text-[10px] text-muted-foreground mb-2 max-w-xl mx-auto">
+            The UpForge Creator Registry is an open, verified database. Identity checks are conducted based on submission data, handle validity, and audience engagement metrics.
           </p>
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-semibold font-mono">
-            © 2026 UpForge Global Registry · Secure ISO Credential Format
+            © 2026 UpForge Global Creator Registry · All Rights Reserved
           </p>
         </div>
+
       </div>
 
+      {/* MODALS */}
       <ApplyModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
