@@ -72,11 +72,6 @@ export function CreatorCardMobile({
         }
       `}</style>
 
-      {isPromoted && !isPartner && (
-        <div className="text-[8px] text-amber-500 font-bold uppercase tracking-wider text-right mb-1.5">
-          Spotlight
-        </div>
-      )}
 
       <div className="flex flex-col items-center text-center">
         {/* Avatar */}
