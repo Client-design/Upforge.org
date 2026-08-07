@@ -5,11 +5,11 @@
  */
 
 export const CREATOR_NETWORK_CONFIG = {
-  // Payout rate used across outreach, contracts, and website UI
-  payoutRatePerViewINR: 0.001,
-  payoutRateText: "₹0.001",
-  payoutRatePerThousandText: "₹1 / 1,000 views",
-  payoutRateDescription: "₹0.001 per verified organic view (equivalent to ₹1 per 1,000 views)",
+  // Payout rate & brand campaign pricing estimation strategy
+  payoutRatePerViewINR: 0.004,
+  payoutRateText: "Contact for Pricing",
+  payoutRatePerThousandText: "~₹3K–₹5K / 1M Reach",
+  payoutRateDescription: "Custom Brand Pricing (~₹3K–₹5K per 1 Million Views • Contact Desk for Quote)",
   payoutCadence: "Weekly",
   payoutMinimumThresholdINR: 500,
 
