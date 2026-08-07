@@ -48,7 +48,7 @@ interface CreatorsClientProps {
 const faqItems = [
   {
     q: "How does startup content distribution work on UpForge?",
-    a: "Startups submit a campaign brief for product launches, hiring pushes, or feature announcements. UpForge matches the brief with verified creators who produce authentic video content. Payouts are based on verified organic views."
+    a: "Startups submit a campaign brief for product launches, hiring pushes, or feature announcements. UpForge matches the brief with verified creators who produce authentic video content. Pricing & payouts are custom per campaign tier."
   },
   {
     q: "How can creators apply to join the network?",
@@ -59,8 +59,8 @@ const faqItems = [
     a: "No. Handle verification and listing in the UpForge Verified Creator Directory are 100% free."
   },
   {
-    q: "What is the creator payout rate and settlement frequency?",
-    a: `Creator partners earn ${CREATOR_NETWORK_CONFIG.payoutRateDescription} with ${CREATOR_NETWORK_CONFIG.payoutCadence.toLowerCase()} payouts processed once reaching the minimum threshold of ₹${CREATOR_NETWORK_CONFIG.payoutMinimumThresholdINR}.`
+    q: "What is the creator payout rate and campaign pricing model?",
+    a: `Brand distribution averages ~₹3K–₹5K per 1 Million organic reach. Payouts are settled weekly upon reaching the minimum threshold of ₹${CREATOR_NETWORK_CONFIG.payoutMinimumThresholdINR}.`
   },
   {
     q: "Which official emails can we reach out to?",
@@ -301,7 +301,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </a>
           </motion.div>
 
-          {/* Clean Focused Stats Strip (Clean & uncluttered) */}
+          {/* Clean Focused Stats Strip */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto text-left">
             <div className="p-4 rounded-2xl border border-border bg-card shadow-sm">
               <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Active Creators</p>
@@ -337,7 +337,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 </h2>
 
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Amplify product debuts, engineering hiring pushes, or feature announcements across a network of <strong className="text-foreground">{liveCreatorCount} verified creators</strong>. Performance payout model ({CREATOR_NETWORK_CONFIG.payoutRateText}/view).
+                  Amplify product debuts, engineering hiring pushes, or feature announcements across a network of <strong className="text-foreground">{liveCreatorCount} verified creators</strong>. Brand distribution pricing averages ~₹3K–₹5K per 1M organic reach.
                 </p>
 
                 {/* Strategic Brand Email 1: founder@upforge.org */}
@@ -358,7 +358,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                   <span>Submit Campaign Brief</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
-                <span className="text-[11px] font-mono text-muted-foreground">Min 10K Views</span>
+                <span className="text-[11px] font-mono text-muted-foreground">Contact for Quote</span>
               </div>
             </div>
 
@@ -375,7 +375,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 </h2>
 
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Get listed in UpForge&apos;s verified creator directory for free. Receive campaign briefs for curated tech products and founder stories. Earn <strong className="text-emerald-600 dark:text-emerald-400">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</strong> with weekly settlements.
+                  Get listed in UpForge&apos;s verified creator directory for free. Receive campaign briefs for curated tech products and founder stories. Earn <strong className="text-emerald-600 dark:text-emerald-400">performance payouts (~₹3K–₹5K per 1M Reach)</strong> with weekly settlements.
                 </p>
 
                 {/* Strategic Brand Email 2: team@upforge.org */}
@@ -446,7 +446,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               </div>
               <h3 className="text-base font-bold text-foreground pt-1">Distribution & Payouts</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Creators post organic video reels. Payouts ({CREATOR_NETWORK_CONFIG.payoutRateText}/view) are settled weekly.
+                Creators post organic video reels. Payouts (~₹3K–₹5K per 1M reach) are settled weekly.
               </p>
             </div>
           </div>
