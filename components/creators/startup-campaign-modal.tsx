@@ -79,10 +79,10 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleReset()}>
-      <DialogContent className="sm:max-w-[540px] p-0 bg-[#09090b] border border-slate-800 text-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[520px] p-0 bg-card border border-border text-foreground rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         <button
           onClick={handleReset}
-          className="absolute right-4 top-4 z-50 p-2 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition"
+          className="absolute right-4 top-4 z-50 p-2 rounded-full bg-accent text-muted-foreground hover:text-foreground border border-border transition"
           aria-label="Close modal"
         >
           <X className="h-4 w-4" />
@@ -101,22 +101,22 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold font-serif text-white mb-2">
+                <h3 className="text-2xl font-bold font-serif text-foreground mb-2">
                   Campaign Brief Received
                 </h3>
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
-                  Thank you, <strong className="text-white">{formData.founderName}</strong>. Our creator desk is reviewing <strong className="text-white">{formData.startupName}</strong>’s distribution request. We will reach out within 24 hours.
+                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
+                  Thank you, <strong className="text-foreground">{formData.founderName}</strong>. Our creator desk is reviewing <strong className="text-foreground">{formData.startupName}</strong>’s distribution request. We will reach out within 24 hours.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-left space-y-2 text-xs">
-                <div className="flex items-center justify-between text-slate-400">
+              <div className="p-4 rounded-2xl bg-accent border border-border text-left space-y-2 text-xs">
+                <div className="flex items-center justify-between text-muted-foreground">
                   <span>Target Organic Views:</span>
-                  <span className="font-mono text-amber-400 font-bold">{formData.targetViews}</span>
+                  <span className="font-mono text-amber-500 font-bold">{formData.targetViews}</span>
                 </div>
-                <div className="flex items-center justify-between text-slate-400">
+                <div className="flex items-center justify-between text-muted-foreground">
                   <span>Payout Rate Model:</span>
-                  <span className="font-mono text-emerald-400 font-bold">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</span>
+                  <span className="font-mono text-emerald-500 font-bold">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</span>
                 </div>
               </div>
 
@@ -133,7 +133,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full sm:w-auto px-6 py-3 rounded-2xl border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold text-xs uppercase tracking-wider transition"
+                  className="w-full sm:w-auto px-6 py-3 rounded-2xl border border-border bg-card hover:bg-accent text-foreground font-bold text-xs uppercase tracking-wider transition"
                 >
                   Close & Return
                 </button>
@@ -148,14 +148,14 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
             >
               {/* Header */}
               <DialogHeader>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider w-fit mb-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-500 text-[10px] font-mono font-bold uppercase tracking-wider w-fit mb-2">
                   <Rocket className="h-3 w-3" />
                   Startup Content Distribution
                 </div>
-                <DialogTitle className="text-2xl font-bold font-serif text-white tracking-tight">
+                <DialogTitle className="text-2xl font-bold font-serif text-foreground tracking-tight">
                   List Your Startup Campaign
                 </DialogTitle>
-                <DialogDescription className="text-slate-400 text-xs leading-relaxed">
+                <DialogDescription className="text-muted-foreground text-xs leading-relaxed">
                   Distribute product announcements, hiring pushes, or founder stories across UpForge’s verified creator network. Performance-based payouts backed by India’s startup registry.
                 </DialogDescription>
               </DialogHeader>
@@ -174,7 +174,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                       placeholder="e.g. Ritesh Agarwal"
                       value={formData.founderName}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                     />
                   </div>
 
@@ -189,7 +189,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                       placeholder="e.g. UpForge / TechCorp"
                       value={formData.startupName}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                     />
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                       placeholder="founder@company.com"
                       value={formData.workEmail}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                     />
                   </div>
 
@@ -221,7 +221,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                       placeholder="https://yourstartup.com"
                       value={formData.website}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                     />
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                       name="campaignType"
                       value={formData.campaignType}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                     >
                       <option value="Product Launch">Product Launch / Feature Release</option>
                       <option value="Hiring Push">Engineering / Talent Hiring Push</option>
@@ -252,7 +252,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                       name="targetViews"
                       value={formData.targetViews}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                     >
                       <option value="10,000 – 50,000 views">10K – 50K Organic Views</option>
                       <option value="50,000 – 200,000 views">50K – 200K Organic Views</option>
@@ -271,7 +271,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                     placeholder="+91 98765 43210"
                     value={formData.phoneWhatsApp}
                     onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                   />
                 </div>
 
@@ -285,17 +285,17 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                     placeholder="Briefly describe what product feature, hiring role, or announcement you want creators to cover..."
                     value={formData.notes}
                     onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                   />
                 </div>
 
                 {/* Trust Footer Notice */}
-                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                <div className="p-3 rounded-xl bg-accent border border-border flex items-center justify-between text-[11px] text-muted-foreground">
                   <div className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
                     <span>Transparent payout model ({CREATOR_NETWORK_CONFIG.payoutRateText}/view)</span>
                   </div>
-                  <span className="text-[10px] font-mono text-amber-400">Verified Desk</span>
+                  <span className="text-[10px] font-mono text-amber-500 font-bold">Verified Desk</span>
                 </div>
 
                 <button
