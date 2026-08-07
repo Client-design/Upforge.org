@@ -80,7 +80,7 @@ Target Organic Reach: ${formData.targetViews}
 Brief / Product Details:
 ${formData.notes || "No additional notes provided."}
 
-Payout Model: ${CREATOR_NETWORK_CONFIG.payoutRateDescription}
+Brand Pricing Model: ~₹3K–₹5K per 1M Reach (Contact Desk for Quote)
 -------------------------------------------
 Sent to: ${CREATOR_NETWORK_CONFIG.emails.team}
 UpForge Creator Network Desk
@@ -125,7 +125,7 @@ UpForge Creator Network Desk
 
       {/* Solid Opaque Theme Modal Container */}
       <div className="relative w-full max-w-[540px] bg-background border-2 border-border text-foreground rounded-3xl shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col my-auto">
-        
+
         {/* Close Button */}
         <button
           onClick={handleReset}
@@ -179,14 +179,14 @@ UpForge Creator Network Desk
                     <span className="font-mono text-amber-600 dark:text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded-full">{formData.targetViews}</span>
                   </div>
                   <div className="flex items-center justify-between text-muted-foreground">
-                    <span className="font-medium">Payout Rate Model:</span>
-                    <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</span>
+                    <span className="font-medium">Brand Pricing Model:</span>
+                    <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">~₹3K–₹5K / 1M Reach (Contact Desk)</span>
                   </div>
                   <div className="flex items-center justify-between text-muted-foreground pt-2 border-t border-border">
                     <span className="font-medium">Confirmation Sent To:</span>
                     <span className="font-mono text-foreground font-semibold flex items-center gap-1">
                       <MailCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      {formData.workEmail}
+                      team@upforge.org ({formData.workEmail})
                     </span>
                   </div>
                 </div>
@@ -227,7 +227,7 @@ UpForge Creator Network Desk
                     List Your Startup Campaign
                   </h2>
                   <p className="text-muted-foreground text-xs leading-relaxed">
-                    Distribute product announcements, hiring pushes, or founder stories across UpForge’s verified creator network. Performance-based payouts backed by India’s startup registry.
+                    Distribute product announcements, hiring pushes, or founder stories across UpForge’s verified creator network. Performance-based distribution backed by India’s startup registry.
                   </p>
                 </div>
 
@@ -364,7 +364,7 @@ UpForge Creator Network Desk
                   <div className="p-3 rounded-xl bg-card border border-border flex items-center justify-between text-[11px] text-muted-foreground shadow-sm">
                     <div className="flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
-                      <span>Transparent payout model ({CREATOR_NETWORK_CONFIG.payoutRateText}/view)</span>
+                      <span>Brand Pricing (~₹3K–₹5K per 1M Reach)</span>
                     </div>
                     <span className="text-[10px] font-mono text-amber-500 font-bold">team@upforge.org</span>
                   </div>
@@ -382,7 +382,7 @@ UpForge Creator Network Desk
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-[var(--accent-gold)]" />
-                        <span>Submit Campaign Brief</span>
+                        <span>Submit Campaign Brief to team@upforge.org</span>
                       </>
                     )}
                   </button>
