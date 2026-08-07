@@ -444,15 +444,11 @@ export function VerifyClient({ totalCount, isOrg }: Props) {
 
         {/* ═══ MASTHEAD ══════════════════════════════════════════════════════ */}
         <header style={{ textAlign:"center", padding:"28px 24px 40px" }}>
-          <div style={{
-            display:"inline-flex", alignItems:"center", gap:6,
-            padding:"5px 13px",
-            background:"var(--vf-invert-bg)", color:"var(--vf-invert-fg)",
-            fontSize:9, fontWeight:700, letterSpacing:"0.26em",
-            textTransform:"uppercase", marginBottom:22,
-            fontFamily:"'Space Mono',monospace"
-          }}>
-            <ShieldCheck size={10}/> UpForge Global Registry · Official Verification
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C59A2E]" />
+            <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+              INDEPENDENT STARTUP INTELLIGENCE
+            </span>
           </div>
 
           <h1 style={{
