@@ -2,18 +2,23 @@
 /**
  * SINGLE SOURCE OF TRUTH for UpForge Creator Network & Startup Distribution.
  * All payout rates, campaign terms, and network parameters MUST reference this file.
- * 
- * Update values here to keep outreach, contracts, and website displays perfectly synchronized.
  */
 
 export const CREATOR_NETWORK_CONFIG = {
   // Payout rate used across outreach, contracts, and website UI
-  payoutRatePerViewINR: 0.01,
-  payoutRateText: "₹0.01",
-  payoutRatePerThousandText: "₹10 / 1,000 views",
-  payoutRateDescription: "₹0.01 per verified organic view (equivalent to ₹10 per 1,000 views)",
+  payoutRatePerViewINR: 0.001,
+  payoutRateText: "₹0.001",
+  payoutRatePerThousandText: "₹1 / 1,000 views",
+  payoutRateDescription: "₹0.001 per verified organic view (equivalent to ₹1 per 1,000 views)",
   payoutCadence: "Weekly",
   payoutMinimumThresholdINR: 500,
+
+  // Dedicated Official Brand Emails (placed strategically across sections)
+  emails: {
+    team: "team@upforge.org",       // For Creator Network & Campaign Briefs
+    founder: "founder@upforge.org", // For Executive Founder Desk & Strategy
+    support: "support@upforge.org", // For Registry Verification & Platform Support
+  },
 
   // Campaign parameters for Startup Founders / Brands
   distribution: {
@@ -45,7 +50,7 @@ export const CREATOR_NETWORK_CONFIG = {
       },
     ],
     contactWhatsApp: "https://wa.link/gmntyi",
-    contactEmail: "creators@upforge.org",
+    contactEmail: "team@upforge.org",
   },
 
   // Trust signals & anchors
