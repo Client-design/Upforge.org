@@ -91,20 +91,6 @@ export default async function AboutPage() {
 
       <div className="bg-background text-foreground min-h-screen font-serif overflow-x-hidden">
         
-        {/* Editorial Masthead Header */}
-        <header className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md w-full">
-          <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
-            <div className="flex items-center gap-2.5">
-              <span className="inline-block w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
-              <span className="font-bold text-foreground uppercase tracking-widest text-[10px] sm:text-[11px]">
-                ABOUT UPFORGE • INSTITUTIONAL REGISTRY
-              </span>
-            </div>
-            <div className="flex items-center gap-4 text-[11px]">
-              <span className="hidden sm:inline font-mono font-bold tracking-wider">EDITORIAL INDEPENDENCE & CREDENTIALS</span>
-            </div>
-          </div>
-        </header>
 
         {/* 1. HERO SECTION */}
         <section className="border-b-2 border-foreground max-w-[1200px] mx-auto px-4 md:px-8 pt-12 pb-12 text-center">
