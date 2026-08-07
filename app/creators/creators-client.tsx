@@ -16,12 +16,12 @@ import {
   HelpCircle,
   ArrowRight,
   ShieldCheck,
-  CheckCircle2,
   Rocket,
-  Zap,
   Building2,
-  ExternalLink,
   Sparkles,
+  Mail,
+  UserCheck,
+  LifeBuoy,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -34,7 +34,6 @@ import {
   fetchCreatorsFromSheet,
   SheetCreator,
   getFollowerBucket,
-  formatFollowerCount,
 } from "@/lib/sheets"
 import { CREATOR_NETWORK_CONFIG } from "@/config/creator-network"
 import { SITE_STATS } from "@/lib/site-stats"
@@ -62,6 +61,10 @@ const faqItems = [
   {
     q: "What is the creator payout rate and settlement frequency?",
     a: `Creator partners earn ${CREATOR_NETWORK_CONFIG.payoutRateDescription} with ${CREATOR_NETWORK_CONFIG.payoutCadence.toLowerCase()} payouts processed once reaching the minimum threshold of ₹${CREATOR_NETWORK_CONFIG.payoutMinimumThresholdINR}.`
+  },
+  {
+    q: "Which official emails can we reach out to?",
+    a: "For campaign briefs contact team@upforge.org, for founder executive desk contact founder@upforge.org, and for registry verification support contact support@upforge.org."
   }
 ]
 
@@ -87,11 +90,8 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
   const [followerFilter, setFollowerFilter] = useState<FollowerFilter>("all")
   const [sortBy, setSortBy] = useState<SortKey>("recent")
 
-  // Dynamic metrics
+  // Dynamic live count
   const liveCreatorCount = creators.length || initialCreators.length || SITE_STATS.verifiedCreatorsCount
-  const liveTotalReach = useMemo(() => {
-    return CREATOR_NETWORK_CONFIG.calculateTotalReach(creators)
-  }, [creators])
 
   const loadCreators = useCallback(async () => {
     setIsLoading(true)
@@ -246,44 +246,12 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
       {/* HERO SECTION */}
       <section className="relative border-b border-border bg-gradient-to-b from-accent/30 via-background to-background pt-14 pb-14 px-4 md:px-8">
         <div className="max-w-[1200px] mx-auto text-center">
-          
-          {/* Trust Badges Strip */}
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-2 mb-6"
-          >
-            <a
-              href={CREATOR_NETWORK_CONFIG.trust.trustpilotUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold hover:bg-emerald-500/20 transition"
-            >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Trustpilot Verified ({CREATOR_NETWORK_CONFIG.trust.trustpilotRating})</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent border border-border text-foreground text-xs font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5 text-[var(--accent-gold)]" />
-              <span>Google Verified Domain</span>
-            </div>
-
-            <Link
-              href="/registry"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-semibold hover:bg-amber-500/20 transition"
-            >
-              <Building2 className="w-3.5 h-3.5" />
-              <span>UpForge Registry ({SITE_STATS.verifiedStartupsCount}+ Companies)</span>
-            </Link>
-          </motion.div>
 
           {/* Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
             className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight mb-4 max-w-4xl mx-auto leading-tight"
             style={{ fontFamily: "'Georgia', serif" }}
           >
@@ -293,7 +261,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8 font-serif"
           >
             Distribution for startups, backed by India&apos;s startup registry. Promote product launches, hiring pushes, and feature updates through verified creators.
@@ -303,7 +271,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="flex items-center justify-center gap-3 flex-wrap mb-10"
           >
             <button
@@ -333,24 +301,12 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </a>
           </motion.div>
 
-          {/* Clean Stats Strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+          {/* Clean Focused Stats Strip (Clean & uncluttered) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto text-left">
             <div className="p-4 rounded-2xl border border-border bg-card shadow-sm">
               <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Active Creators</p>
               <p className="text-xl font-bold font-mono text-foreground">{liveCreatorCount}</p>
               <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">Verified handles</p>
-            </div>
-
-            <div className="p-4 rounded-2xl border border-border bg-card shadow-sm">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Network Reach</p>
-              <p className="text-xl font-bold font-mono text-foreground">{liveTotalReach > 0 ? `${formatFollowerCount(liveTotalReach)}+` : "Growing"}</p>
-              <p className="text-[10px] text-muted-foreground mt-0.5">Follower reach</p>
-            </div>
-
-            <div className="p-4 rounded-2xl border border-border bg-card shadow-sm">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Payout Rate</p>
-              <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">{CREATOR_NETWORK_CONFIG.payoutRateText}</p>
-              <p className="text-[10px] text-muted-foreground mt-0.5">Per verified view</p>
             </div>
 
             <div className="p-4 rounded-2xl border border-border bg-card shadow-sm">
@@ -381,8 +337,17 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 </h2>
 
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Amplify product debuts, engineering hiring pushes, or feature announcements across a network of <strong className="text-foreground">{liveCreatorCount} verified creators</strong>. Pay strictly based on verified organic view performance ({CREATOR_NETWORK_CONFIG.payoutRateText}/view).
+                  Amplify product debuts, engineering hiring pushes, or feature announcements across a network of <strong className="text-foreground">{liveCreatorCount} verified creators</strong>. Performance payout model ({CREATOR_NETWORK_CONFIG.payoutRateText}/view).
                 </p>
+
+                {/* Strategic Brand Email 1: founder@upforge.org */}
+                <div className="pt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                  <UserCheck className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Executive Founder Desk:</span>
+                  <a href="mailto:founder@upforge.org" className="font-mono font-bold text-foreground hover:underline">
+                    founder@upforge.org
+                  </a>
+                </div>
               </div>
 
               <div className="pt-2 flex items-center justify-between border-t border-border">
@@ -412,6 +377,15 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Get listed in UpForge&apos;s verified creator directory for free. Receive campaign briefs for curated tech products and founder stories. Earn <strong className="text-emerald-600 dark:text-emerald-400">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</strong> with weekly settlements.
                 </p>
+
+                {/* Strategic Brand Email 2: team@upforge.org */}
+                <div className="pt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                  <Mail className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>Creator Briefs Desk:</span>
+                  <a href="mailto:team@upforge.org" className="font-mono font-bold text-foreground hover:underline">
+                    team@upforge.org
+                  </a>
+                </div>
               </div>
 
               <div className="pt-2 flex items-center justify-between border-t border-border">
@@ -701,7 +675,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
             </h2>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-2.5 mb-8">
             {faqItems.map((faq, idx) => {
               const isOpen = openFaqIndex === idx
               return (
@@ -725,6 +699,24 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               )
             })}
           </div>
+
+          {/* Strategic Brand Email 3: support@upforge.org in Trust Footer Box */}
+          <div className="p-5 rounded-2xl bg-card border border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left shadow-sm">
+            <div className="flex items-center gap-3">
+              <LifeBuoy className="w-5 h-5 text-blue-500 shrink-0" />
+              <div>
+                <p className="text-xs font-bold text-foreground">Registry Verification Support</p>
+                <p className="text-[11px] text-muted-foreground">Profile updates & general assistance desk</p>
+              </div>
+            </div>
+            <a
+              href="mailto:support@upforge.org"
+              className="px-4 py-2 rounded-full border border-border bg-accent hover:bg-border text-foreground font-mono text-xs font-bold transition"
+            >
+              support@upforge.org
+            </a>
+          </div>
+
         </div>
       </section>
 
