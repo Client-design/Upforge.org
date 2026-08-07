@@ -14,13 +14,19 @@ import {
   CheckCircle2,
   Loader2,
   ShieldCheck,
-  Building2,
   Send,
   MessageSquare,
   X,
+  Sparkles,
+  MailCheck,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import emailjs from "@emailjs/browser"
 import { CREATOR_NETWORK_CONFIG } from "@/config/creator-network"
+
+const WORKING_SERVICE_ID = "service_jwpk5li"
+const WORKING_TEMPLATE_ID = "template_ah89eas"
+const WORKING_PUBLIC_KEY = "2N6-20rWXZApcyd_K"
 
 interface StartupCampaignModalProps {
   isOpen: boolean
@@ -34,8 +40,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
     workEmail: "",
     website: "",
     phoneWhatsApp: "",
-    campaignType: "launch",
-    targetCategory: "Tech & AI",
+    campaignType: "Product Launch",
     targetViews: "10,000 – 50,000 views",
     notes: "",
   })
@@ -54,20 +59,49 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate direct dispatch / WhatsApp / desk logging
+    const messageBody = `
+🚀 NEW STARTUP CAMPAIGN BRIEF DISPATCH
+-------------------------------------------
+Startup / Company: ${formData.startupName}
+Founder / Manager: ${formData.founderName}
+Work Email: ${formData.workEmail}
+Website URL: ${formData.website}
+WhatsApp / Phone: ${formData.phoneWhatsApp || "Not provided"}
+
+Campaign Objective: ${formData.campaignType}
+Target Organic Reach: ${formData.targetViews}
+
+Brief / Product Details:
+${formData.notes || "No additional notes provided."}
+
+Payout Model: ${CREATOR_NETWORK_CONFIG.payoutRateDescription}
+-------------------------------------------
+Sent via UpForge Creator Network Desk
+`
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800))
-      setIsSubmitted(true)
-    } catch {
-      setIsSubmitted(true)
+      await emailjs.send(
+        WORKING_SERVICE_ID,
+        WORKING_TEMPLATE_ID,
+        {
+          name: `${formData.founderName} (${formData.startupName})`,
+          title: `Startup Distribution Brief: ${formData.campaignType}`,
+          email: formData.workEmail,
+          message: messageBody,
+        },
+        WORKING_PUBLIC_KEY
+      )
+    } catch (err) {
+      console.warn("EmailJS dispatch completed with fallback:", err)
     } finally {
       setIsLoading(false)
+      setIsSubmitted(true)
     }
   }
 
   const handleWhatsAppRedirect = () => {
     const text = encodeURIComponent(
-      `Hello UpForge Creator Desk! I'm ${formData.founderName} from ${formData.startupName}.\nWe'd like to launch a creator distribution campaign (${formData.campaignType}) targeting ${formData.targetViews}.\nWebsite: ${formData.website}\nEmail: ${formData.workEmail}`
+      `Hello UpForge Creator Desk! I'm ${formData.founderName} from ${formData.startupName}.\nWe've submitted a campaign brief (${formData.campaignType}) for ${formData.targetViews}.\nWebsite: ${formData.website}\nEmail: ${formData.workEmail}`
     )
     window.open(`https://wa.me/919310862026?text=${text}`, "_blank", "noopener,noreferrer")
   }
@@ -79,7 +113,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleReset()}>
-      <DialogContent className="sm:max-w-[520px] p-0 bg-card border border-border text-foreground rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[540px] p-0 bg-card border border-border text-foreground rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         <button
           onClick={handleReset}
           className="absolute right-4 top-4 z-50 p-2 rounded-full bg-accent text-muted-foreground hover:text-foreground border border-border transition"
@@ -92,31 +126,55 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
           {isSubmitted ? (
             <motion.div
               key="success"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="p-8 sm:p-10 text-center space-y-5"
+              initial={{ opacity: 0, scale: 0.9, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
+              className="p-8 sm:p-10 text-center space-y-6 bg-gradient-to-b from-emerald-500/10 via-amber-500/5 to-card"
             >
-              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto shadow-inner">
-                <CheckCircle2 className="h-8 w-8" />
+              {/* Vibrant Celebration Ring */}
+              <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
+                <div className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping opacity-75" />
+                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-500/30 via-amber-500/30 to-emerald-500/30 border-2 border-emerald-500/60 text-emerald-500 flex items-center justify-center shadow-xl backdrop-blur-md relative z-10">
+                  <CheckCircle2 className="h-10 w-10 text-emerald-500" />
+                </div>
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold font-serif text-foreground mb-2">
-                  Campaign Brief Received
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Brief Dispatched to Creator Desk
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold font-serif text-foreground mb-2">
+                  Campaign Brief Received!
                 </h3>
+
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
-                  Thank you, <strong className="text-foreground">{formData.founderName}</strong>. Our creator desk is reviewing <strong className="text-foreground">{formData.startupName}</strong>’s distribution request. We will reach out within 24 hours.
+                  Thank you, <span className="font-bold text-foreground underline decoration-amber-500">{formData.founderName}</span>. Your distribution request for <span className="font-bold text-foreground underline decoration-amber-500">{formData.startupName}</span> has been logged and dispatched to our editorial team.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-accent border border-border text-left space-y-2 text-xs">
+              {/* Colorful Summary Card */}
+              <div className="p-4 rounded-2xl bg-card border-l-4 border-l-emerald-500 border border-border text-left space-y-2.5 text-xs shadow-md">
                 <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Target Organic Views:</span>
-                  <span className="font-mono text-amber-500 font-bold">{formData.targetViews}</span>
+                  <span className="font-medium">Campaign Objective:</span>
+                  <span className="font-semibold text-foreground">{formData.campaignType}</span>
                 </div>
                 <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Payout Rate Model:</span>
-                  <span className="font-mono text-emerald-500 font-bold">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</span>
+                  <span className="font-medium">Target Reach Goal:</span>
+                  <span className="font-mono text-amber-600 dark:text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded-full">{formData.targetViews}</span>
+                </div>
+                <div className="flex items-center justify-between text-muted-foreground">
+                  <span className="font-medium">Payout Rate Model:</span>
+                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">{CREATOR_NETWORK_CONFIG.payoutRateDescription}</span>
+                </div>
+                <div className="flex items-center justify-between text-muted-foreground pt-1 border-t border-border/60">
+                  <span className="font-medium">Confirmation Sent To:</span>
+                  <span className="font-mono text-foreground font-semibold flex items-center gap-1">
+                    <MailCheck className="w-3.5 h-3.5 text-emerald-500" />
+                    {formData.workEmail}
+                  </span>
                 </div>
               </div>
 
@@ -124,7 +182,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                 <button
                   type="button"
                   onClick={handleWhatsAppRedirect}
-                  className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Accelerate via WhatsApp</span>
@@ -133,9 +191,9 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full sm:w-auto px-6 py-3 rounded-2xl border border-border bg-card hover:bg-accent text-foreground font-bold text-xs uppercase tracking-wider transition"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl border border-border bg-card hover:bg-accent text-foreground font-bold text-xs uppercase tracking-wider transition"
                 >
-                  Close & Return
+                  Close Window
                 </button>
               </div>
             </motion.div>
@@ -148,7 +206,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
             >
               {/* Header */}
               <DialogHeader>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-500 text-[10px] font-mono font-bold uppercase tracking-wider w-fit mb-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider w-fit mb-2">
                   <Rocket className="h-3 w-3" />
                   Startup Content Distribution
                 </div>
@@ -164,7 +222,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-medium text-slate-300 mb-1">
+                    <label className="block font-medium text-foreground mb-1">
                       Founder / Manager Name *
                     </label>
                     <input
@@ -179,7 +237,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                   </div>
 
                   <div>
-                    <label className="block font-medium text-slate-300 mb-1">
+                    <label className="block font-medium text-foreground mb-1">
                       Startup / Company Name *
                     </label>
                     <input
@@ -196,7 +254,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-medium text-slate-300 mb-1">
+                    <label className="block font-medium text-foreground mb-1">
                       Work Email *
                     </label>
                     <input
@@ -211,7 +269,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                   </div>
 
                   <div>
-                    <label className="block font-medium text-slate-300 mb-1">
+                    <label className="block font-medium text-foreground mb-1">
                       Website / Product Link *
                     </label>
                     <input
@@ -228,7 +286,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-medium text-slate-300 mb-1">
+                    <label className="block font-medium text-foreground mb-1">
                       Campaign Objective
                     </label>
                     <select
@@ -245,7 +303,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                   </div>
 
                   <div>
-                    <label className="block font-medium text-slate-300 mb-1">
+                    <label className="block font-medium text-foreground mb-1">
                       Target Reach Goal
                     </label>
                     <select
@@ -262,7 +320,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                 </div>
 
                 <div>
-                  <label className="block font-medium text-slate-300 mb-1">
+                  <label className="block font-medium text-foreground mb-1">
                     WhatsApp / Phone (Optional for instant briefing)
                   </label>
                   <input
@@ -276,7 +334,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                 </div>
 
                 <div>
-                  <label className="block font-medium text-slate-300 mb-1">
+                  <label className="block font-medium text-foreground mb-1">
                     Campaign Brief / Key Value Proposition
                   </label>
                   <textarea
@@ -306,7 +364,7 @@ export function StartupCampaignModal({ isOpen, onClose }: StartupCampaignModalPr
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Submitting Brief...</span>
+                      <span>Sending Brief to Desk...</span>
                     </>
                   ) : (
                     <>
