@@ -23,20 +23,6 @@ export default function BlogIndexPage() {
       <Navbar />
       <div className="min-h-screen bg-background text-foreground">
 
-        {/* Editorial Masthead Header */}
-        <header className="hidden md:block border-b border-border bg-background/95 backdrop-blur-md w-full">
-          <div className="max-w-[1300px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between font-mono text-xs text-muted-foreground">
-            <div className="flex items-center gap-2.5">
-              <span className="inline-block w-2 h-2 rounded-full bg-[#C59A2E] animate-pulse" />
-              <span className="font-bold text-foreground uppercase tracking-widest text-[10px] sm:text-[11px]">
-                UPFORGE JOURNAL • STARTUP INTELLIGENCE
-              </span>
-            </div>
-            <div className="flex items-center gap-4 text-[11px]">
-              <span className="hidden sm:inline font-mono font-bold tracking-wider">MONTHLY EDITORIAL REPORTS & RESEARCH</span>
-            </div>
-          </div>
-        </header>
 
         <section className="border-b-2 border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-4 pb-6 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-3">
