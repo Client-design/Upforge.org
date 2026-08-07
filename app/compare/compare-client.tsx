@@ -4,7 +4,6 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import { ArrowRight, Search, X, ChevronDown } from "lucide-react"
-import { useState as useImageState } from "react"
 
 interface Comparison {
   name: string
@@ -119,6 +118,12 @@ export function CompareClient({ comparisons, categories }: CompareClientProps) {
 
         {/* HEADER */}
         <section className="border-b-[2px] border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-5 pb-6 flex flex-col items-center text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C59A2E]" />
+            <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+              INDEPENDENT STARTUP INTELLIGENCE
+            </span>
+          </div>
           <h1
             className="text-3xl md:text-[44px] lg:text-[54px] font-bold leading-[1.05] text-foreground mb-3 max-w-3xl"
             style={{ fontFamily: "'Georgia', serif" }}
