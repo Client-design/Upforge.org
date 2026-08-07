@@ -156,7 +156,7 @@ UpForge Creator Network Desk
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
                     <Sparkles className="w-3.5 h-3.5" />
-                    Brief Dispatched to team@upforge.org
+                    Brief Dispatched to Founder@upforge.org
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-bold font-serif text-foreground mb-2">
@@ -164,7 +164,7 @@ UpForge Creator Network Desk
                   </h3>
 
                   <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
-                    Thank you, <span className="font-bold text-foreground underline decoration-amber-500">{formData.founderName}</span>. Your distribution request for <span className="font-bold text-foreground underline decoration-amber-500">{formData.startupName}</span> has been logged and sent to <span className="font-mono font-bold text-foreground">team@upforge.org</span>.
+                    Thank you, <span className="font-bold text-foreground underline decoration-amber-500">{formData.founderName}</span>. Your distribution request for <span className="font-bold text-foreground underline decoration-amber-500">{formData.startupName}</span> has been logged and sent to <span className="font-mono font-bold text-foreground">Founder@upforge.org</span>.
                   </p>
                 </div>
 
@@ -366,7 +366,7 @@ UpForge Creator Network Desk
                       <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
                       <span>Brand Pricing (~₹3K–₹5K per 1M Reach)</span>
                     </div>
-                    <span className="text-[10px] font-mono text-amber-500 font-bold">team@upforge.org</span>
+                    <span className="text-[10px] font-mono text-amber-500 font-bold">Founder@upforge.org</span>
                   </div>
 
                   <button
@@ -377,12 +377,12 @@ UpForge Creator Network Desk
                     {isLoading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Sending Brief to team@upforge.org...</span>
+                        <span>Sending Brief to Founder@upforge.org...</span>
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-[var(--accent-gold)]" />
-                        <span>Submit Campaign Brief to team@upforge.org</span>
+                        <span>Submit Campaign Brief to Founder@upforge.org</span>
                       </>
                     )}
                   </button>
