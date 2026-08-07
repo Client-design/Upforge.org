@@ -247,6 +247,14 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
       <section className="relative border-b border-border bg-gradient-to-b from-accent/30 via-background to-background pt-14 pb-14 px-4 md:px-8">
         <div className="max-w-[1200px] mx-auto text-center">
 
+          {/* Top Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C59A2E]" />
+            <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+              INDEPENDENT STARTUP INTELLIGENCE
+            </span>
+          </div>
+
           {/* Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
@@ -279,7 +287,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               className="px-7 py-3 text-xs font-bold uppercase tracking-wider bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all shadow-md active:scale-95 flex items-center gap-2"
             >
               <Rocket className="w-4 h-4 text-[var(--accent-gold)]" />
-              <span>Campaign Inquiry</span>
+              <span>List Your Startup Campaign</span>
             </button>
 
             <button
