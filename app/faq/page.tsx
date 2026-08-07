@@ -278,9 +278,12 @@ export default function FAQPage() {
               HEADER — mirrors registry masthead
           ══════════════════════════════════════ */}
           <section className="border-b-[2px] border-foreground max-w-[1300px] mx-auto px-4 md:px-8 w-full mt-5 pb-6 flex flex-col items-center text-center">
-            <p className="font-mono text-[9px] font-bold uppercase tracking-[0.28em] text-muted-foreground mb-3">
-              UpForge · Global Registry · Help
-            </p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-[#C59A2E]/40 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C59A2E]" />
+              <span className="text-[10px] font-mono font-bold text-[#C59A2E] uppercase tracking-widest">
+                INDEPENDENT STARTUP INTELLIGENCE
+              </span>
+            </div>
             <h1
               className="faq-h1 text-3xl md:text-[44px] lg:text-[54px] font-bold leading-[1.05] text-foreground mb-3 max-w-3xl"
               style={{ fontFamily: "'Georgia', serif" }}
