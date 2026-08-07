@@ -24,9 +24,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import emailjs from "@emailjs/browser"
 import { CREATOR_NETWORK_CONFIG } from "@/config/creator-network"
 
-const WORKING_SERVICE_ID = "service_jwpk5li"
-const WORKING_TEMPLATE_ID = "template_ah89eas"
-const WORKING_PUBLIC_KEY = "2N6-20rWXZApcyd_K"
+const WORKING_SERVICE_ID = "service_9qh1jzr"
+const WORKING_TEMPLATE_ID = "template_gz97n6l"
+const WORKING_PUBLIC_KEY = "26nJ82ErKr_Xjgcyz"
 
 interface StartupCampaignModalProps {
   isOpen: boolean
@@ -76,7 +76,8 @@ ${formData.notes || "No additional notes provided."}
 
 Payout Model: ${CREATOR_NETWORK_CONFIG.payoutRateDescription}
 -------------------------------------------
-Sent via UpForge Creator Network Desk
+Sent to: ${CREATOR_NETWORK_CONFIG.emails.team}
+UpForge Creator Network Desk
 `
 
     try {
@@ -113,7 +114,7 @@ Sent via UpForge Creator Network Desk
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleReset()}>
-      <DialogContent className="sm:max-w-[540px] p-0 bg-card border border-border text-foreground rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[540px] p-0 bg-card border-2 border-border text-foreground rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden max-h-[90vh] overflow-y-auto">
         <button
           onClick={handleReset}
           className="absolute right-4 top-4 z-50 p-2 rounded-full bg-accent text-muted-foreground hover:text-foreground border border-border transition"
@@ -130,12 +131,11 @@ Sent via UpForge Creator Network Desk
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
-              className="p-8 sm:p-10 text-center space-y-6 bg-gradient-to-b from-emerald-500/10 via-amber-500/5 to-card"
+              className="p-8 sm:p-10 text-center space-y-6 bg-card"
             >
-              {/* Vibrant Celebration Ring */}
+              {/* Celebration Ring */}
               <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
-                <div className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping opacity-75" />
-                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-500/30 via-amber-500/30 to-emerald-500/30 border-2 border-emerald-500/60 text-emerald-500 flex items-center justify-center shadow-xl backdrop-blur-md relative z-10">
+                <div className="w-20 h-20 rounded-full bg-emerald-500/10 border-2 border-emerald-500/40 text-emerald-500 flex items-center justify-center shadow-lg relative z-10">
                   <CheckCircle2 className="h-10 w-10 text-emerald-500" />
                 </div>
               </div>
@@ -143,7 +143,7 @@ Sent via UpForge Creator Network Desk
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Brief Dispatched to Creator Desk
+                  Brief Dispatched to team@upforge.org
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-bold font-serif text-foreground mb-2">
@@ -151,12 +151,12 @@ Sent via UpForge Creator Network Desk
                 </h3>
 
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
-                  Thank you, <span className="font-bold text-foreground underline decoration-amber-500">{formData.founderName}</span>. Your distribution request for <span className="font-bold text-foreground underline decoration-amber-500">{formData.startupName}</span> has been logged and dispatched to our editorial team.
+                  Thank you, <span className="font-bold text-foreground underline decoration-amber-500">{formData.founderName}</span>. Your distribution request for <span className="font-bold text-foreground underline decoration-amber-500">{formData.startupName}</span> has been logged and sent to <span className="font-mono font-bold text-foreground">team@upforge.org</span>.
                 </p>
               </div>
 
-              {/* Colorful Summary Card */}
-              <div className="p-4 rounded-2xl bg-card border-l-4 border-l-emerald-500 border border-border text-left space-y-2.5 text-xs shadow-md">
+              {/* Summary Card */}
+              <div className="p-4 rounded-2xl bg-accent/50 border-l-4 border-l-emerald-500 border border-border text-left space-y-2.5 text-xs shadow-sm">
                 <div className="flex items-center justify-between text-muted-foreground">
                   <span className="font-medium">Campaign Objective:</span>
                   <span className="font-semibold text-foreground">{formData.campaignType}</span>
@@ -182,7 +182,7 @@ Sent via UpForge Creator Network Desk
                 <button
                   type="button"
                   onClick={handleWhatsAppRedirect}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-95"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Accelerate via WhatsApp</span>
@@ -202,7 +202,7 @@ Sent via UpForge Creator Network Desk
               key="form"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="p-6 sm:p-8 space-y-6"
+              className="p-6 sm:p-8 space-y-6 bg-card"
             >
               {/* Header */}
               <DialogHeader>
@@ -353,23 +353,23 @@ Sent via UpForge Creator Network Desk
                     <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
                     <span>Transparent payout model ({CREATOR_NETWORK_CONFIG.payoutRateText}/view)</span>
                   </div>
-                  <span className="text-[10px] font-mono text-amber-500 font-bold">Verified Desk</span>
+                  <span className="text-[10px] font-mono text-amber-500 font-bold">team@upforge.org</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-95 disabled:opacity-50"
+                  className="w-full py-3.5 rounded-2xl bg-foreground text-background font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-95 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Sending Brief to Desk...</span>
+                      <span>Sending Brief to team@upforge.org...</span>
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
-                      <span>Submit Campaign for Desk Review</span>
+                      <Send className="w-4 h-4 text-[var(--accent-gold)]" />
+                      <span>Submit Campaign Brief</span>
                     </>
                   )}
                 </button>
