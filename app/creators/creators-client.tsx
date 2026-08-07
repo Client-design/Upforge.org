@@ -287,7 +287,7 @@ export function CreatorsClient({ initialCreators = [] }: CreatorsClientProps) {
               className="px-7 py-3 text-xs font-bold uppercase tracking-wider bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all shadow-md active:scale-95 flex items-center gap-2"
             >
               <Rocket className="w-4 h-4 text-[var(--accent-gold)]" />
-              <span>List Your Startup Campaign</span>
+              <span>Campaign Inquiry</span>
             </button>
 
             <button
