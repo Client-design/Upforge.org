@@ -186,7 +186,7 @@ UpForge Creator Network Desk
                     <span className="font-medium">Confirmation Sent To:</span>
                     <span className="font-mono text-foreground font-semibold flex items-center gap-1">
                       <MailCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      team@upforge.org ({formData.workEmail})
+                      {formData.workEmail}
                     </span>
                   </div>
                 </div>
